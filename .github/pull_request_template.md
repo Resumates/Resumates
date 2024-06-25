@@ -1,4 +1,4 @@
-<!-- [♻️ Refactor /✨ Feature/🚨Bug / 🔧 Fix/ 🌈 Style] PR 제목 -->
+<!-- [🚀 Feat	/ 🔧 Fix / 🎨 Style / 🔥 HOTFIX  / ♻️ Refactor / 📚 Docs] PR 제목 -->
 
 ### 체크리스트!
 - [ ] 🔀 PR 제목의 형식을 잘 작성했나요?
