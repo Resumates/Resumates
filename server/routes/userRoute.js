@@ -6,9 +6,12 @@ const { check } = require('express-validator');
 const router = express.Router();
 
 const usersControllers = require('../controllers/usersController');
+const signupControllers = require('../controllers/signupController');
 
 router.get('/', usersControllers.getUsers);
 
 router.post('/login', usersControllers.login);
+
+router.post('/userIdvaild', signupControllers.userIdvaild);
 
 module.exports = router;
