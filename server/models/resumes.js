@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const resumesSchema = new mongoose.Schema(
   {
+    _id: { type: Schema.Types.ObjectId, require: true },
     name: { type: String, require: true },
-    image: String,
+    image: { type: String, default: '' },
     birth: { type: Date, require: true },
-    gender: { type: String, require: true },
+    gender: { type: String, enum: ['M', 'F'], require: true },
     phone: { type: String, require: true },
     email: { type: String, require: true },
     Stuctrue: {
