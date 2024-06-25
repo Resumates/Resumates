@@ -12,6 +12,8 @@ router.get('/', usersControllers.getUsers);
 
 router.post('/login', usersControllers.login);
 
-router.post('/userIdvaild', signupControllers.userIdvaild);
+router.post('/useridvaild', signupControllers.useridvaild);
+router.post('/emailvalid', signupControllers.emailvalid);
+
 
 module.exports = router;
