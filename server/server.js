@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://SuccessOmen:bnu70pWRAxQN2ufS@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster')
-
 const HttpError = require('./models/http-error');
 
 const userRoutes = require('./routes/userRoute');
@@ -24,4 +22,13 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unkown error occurred!' }); //메세지 프로퍼티 추가
 });
 
-app.listen(5000);
+mongoose
+  .connect(
+    'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
