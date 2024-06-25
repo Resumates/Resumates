@@ -1,5 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://SuccessOmen:bnu70pWRAxQN2ufS@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster')
 
 const HttpError = require('./models/http-error');
 

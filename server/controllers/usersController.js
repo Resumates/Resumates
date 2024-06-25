@@ -7,7 +7,7 @@ const DUMMY_USERS = [
     email: 'tester@tester.com',
   },
 ];
-
+  
 // Get Users
 const getUsers = (req, res, next) => {
   res.json({ users: DUMMY_USERS });

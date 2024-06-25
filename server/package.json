@@ -1,11 +1,14 @@
 {
   "dependencies": {
-    "express": "^4.19.2"
+    "-": "^0.0.1",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.3"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
