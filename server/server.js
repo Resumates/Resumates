@@ -3,9 +3,16 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect(
-  'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
-);
+mongoose
+  .connect(
+    'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const HttpError = require('./models/http-error');
 
@@ -33,5 +40,3 @@ app.use((error, req, res, next) => {
 app.use('/test', function (req, res) {
   res.send('홈입니다.');
 });
-
-app.listen(5000);

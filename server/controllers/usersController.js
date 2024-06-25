@@ -1,45 +1,29 @@
 const HttpError = require('../models/http-error');
+const User = require('../models/user');
 
-const DUMMY_USERS = [
-  {
-    userId: 'test',
-    password: 'testers',
-    email: 'tester@tester.com',
-  },
-];
-  
-// Get Users
 const getUsers = (req, res, next) => {
   res.json({ users: DUMMY_USERS });
 };
 
-// Signup
-const signup = (req, res, next) => {
-  const { userId, password, email } = req.body;
+const login = async (req, res, next) => {
+  const { userId, userPw } = req.body;
 
-  const createdUser = {
-    userId,
-    email,
-    password,
-  };
+  let existingUser;
 
-  DUMMY_USERS.push(createdUser);
-
-  res.status(201).json({ user: createdUser });
-};
-
-// Login
-const login = (req, res, next) => {
-  const { userId, password } = req.body;
-  const identifiedUser = DUMMY_USERS.find((u) => u.userId === userId);
-
-  if (!identifiedUser || identifiedUser.password !== password) {
-    return next(new HttpError('Could not identify user', 401));
+  try {
+    existingUser = await User.findOne({ userId: userId });
+  } catch (err) {
+    const error = new HttpError('Logging in failed, please try again later.', 500);
+    return next(error);
   }
 
-  res.json({ message: 'Login successful!' });
+  if (!existingUser || existingUser.userPw !== userPw) {
+    const error = new HttpError('Invalid credentials, could not log you in.', 401);
+    return next(error);
+  }
+
+  res.json({ message: 'Logged in!' });
 };
 
 exports.getUsers = getUsers;
-exports.signup = signup;
 exports.login = login;

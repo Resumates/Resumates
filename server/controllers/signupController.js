@@ -1,4 +1,4 @@
-const { User } = require('../models/User.js');
+const { User } = require('../models/user.js');
 
 // userIdvaild
 module.exports.userIdvaild = (req, res) => {
