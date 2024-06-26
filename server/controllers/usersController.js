@@ -15,18 +15,12 @@ const login = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ userId: userId });
   } catch (err) {
-    const error = new HttpError(
-      'Logging in failed, please try again later.',
-      500
-    );
+    const error = new HttpError('Logging in failed, please try again later.', 500);
     return next(error);
   }
 
   if (!existingUser) {
-    const error = new HttpError(
-      'Invalid credentials, could not log you in.',
-      401
-    );
+    const error = new HttpError('Invalid credentials, could not log you in.', 401);
     return next(error);
   }
 
@@ -36,16 +30,13 @@ const login = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError(
       'Could not log you in, please check your credentials and try again.',
-      500
+      500,
     );
     return next(error);
   }
 
   if (!isValidPassword) {
-    const error = new HttpError(
-      'Invalid credentials, could not log you in.',
-      401
-    );
+    const error = new HttpError('Invalid credentials, could not log you in.', 401);
     return next(error);
   }
 
@@ -54,20 +45,17 @@ const login = async (req, res, next) => {
     token = jwt.sign(
       { userId: existingUser.userId, email: existingUser.userPw },
       'supersecret_dont_share',
-      { expiresIn: '1h' }
+      { expiresIn: '1h' },
     );
   } catch (err) {
-    const error = new HttpError(
-      'Logging in failed, please try again later.',
-      500
-    );
+    const error = new HttpError('Logging in failed, please try again later.', 500);
     return next(error);
   }
 
   res.json({
     userId: existingUser.userId,
     userPw: existingUser.userPw,
-    token: token
+    token: token,
   });
 };
 
@@ -78,13 +66,14 @@ const useridvaild = async (req, res) => {
 
   try {
     const user = await User.findOne({ userId: userId });
-    if (user) {
-      return res.status(200).json({ valid: false, message: '사용중인 아이디입니다.' });
+    if (!user) {
+      return res.status(200).json({ valid: true, message: '사용 가능한 아이디입니다.' });
+    } else {
+      return res.status(409).json({ valid: false, message: '사용중인 아이디입니다.' });
     }
-    return res.status(200).json({ valid: true, message: '사용 가능한 아이디입니다.' });
   } catch (error) {
-    console.error('서버에러', error);
-    return res.status(500).json({ message: '서버 에러' });
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
   }
 };
 
@@ -94,13 +83,14 @@ const emailvalid = async (req, res) => {
   console.log(email);
   try {
     const validEmail = await User.findOne({ email: email });
-    if (validEmail) {
-      return res.status(200).json({ valid: false, message: '사용중인 이메일입니다.' });
+    if (!validEmail) {
+      return res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.' });
+    } else {
+      return res.status(409).json({ message: '사용중인 이메일입니다.' });
     }
-    return res.status(200).json({ valid: true, message: '이메일로 인증코드가 발송되었습니다.' });
   } catch (error) {
-    console.error('서버에러', error);
-    return res.status(500).json({ message: '서버 에러' });
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
   }
 };
 
@@ -111,16 +101,16 @@ const signup = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: '이미 존재하는 아이디입니다.' });
+      return res.status(409).json({ message: '이미 존재하는 아이디입니다.' });
     }
 
     const user = new User({ userId, userPw, email });
     const savedUser = await user.save();
 
-    return res.status(201).json({ user: savedUser ,message:'회원가입 성공' });
+    return res.status(201).json({ user: savedUser, message: '회원가입 성공' });
   } catch (error) {
-    console.error('서버에러', error);
-    return res.status(500).json({ message: '서버 에러' });
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
   }
 };
 
