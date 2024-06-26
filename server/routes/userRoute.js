@@ -11,6 +11,7 @@ router.get('/', usersControllers.getUsers);
 router.post('/login', usersControllers.login);
 router.post('/useridvaild', usersControllers.useridvaild);
 router.post('/emailvalid', usersControllers.emailvalid);
+router.post('/sendmail', usersControllers.sendmail);
 router.post('/signup', usersControllers.signup);
 
 module.exports = router;

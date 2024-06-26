@@ -21,7 +21,8 @@ export default function Signup() {
     console.log(values);
   };
 
-  const validId = async () => {
+  const validId = async (e) => {
+    e.preventDefault();
     console.log('중복확인 클릭');
     const { userId } = values;
     if (userId === '') {
@@ -34,12 +35,13 @@ export default function Signup() {
       });
       console.log(data);
     } catch (error) {
-      console.error('ID 검증오류:', error);
-      console.log('서버 error');
+      console.log('서버 error', error);
+      console.log('ID 검증오류:', error.response.status);
     }
   };
 
-  const validEmail = async () => {
+  const validEmail = async (e) => {
+    e.preventDefault();
     console.log('인증하기 클릭');
     const { email } = values;
     if (email === '') {
@@ -52,8 +54,8 @@ export default function Signup() {
       });
       console.log(data);
     } catch (error) {
-      console.error('이메일 검증 오류:', error);
-      console.log('서버 error');
+      console.log('서버 error', error);
+      console.log('이메일 검증오류:', error.response.status);
     }
   };
 
@@ -73,8 +75,8 @@ export default function Signup() {
       });
       console.log(data);
     } catch (error) {
-      console.error('회원가입오류', error);
       console.log('서버 error');
+      console.error('회원가입오류', error);
     }
   };
 
