@@ -4,6 +4,7 @@ import AppRoutes from './router/AppRoutes';
 import GlobalStyle from './style/GlobalStyle';
 
 function App() {
+  
   return (
     <div>
       <BrowserRouter>
