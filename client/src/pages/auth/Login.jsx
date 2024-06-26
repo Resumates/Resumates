@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Input from '../../components/common/input';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from '../../utill/validator';
 import { useForm } from '../../hooks/FormHook';
+import { AuthContext } from '../../components/common/context/auth-context';
 export default function Login() {
+  const auth = useContext(AuthContext);
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -20,6 +22,7 @@ export default function Login() {
   const authSubmitHandler = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
+    auth.login();
   };
 
   return (
