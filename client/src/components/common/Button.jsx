@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { createShouldForwardProp } from '@styled-system/should-forward-prop';
 
-const StyledButton = styled.button`
+const shouldForwardProp = createShouldForwardProp(['color', 'padding', 'fontSize', 'disabled']);
+
+const StyledButton = styled('button').withConfig({
+  shouldForwardProp,
+})`
   background-color: ${(props) => (props.disabled ? '#D9D9D9' : props.color || '#04438B')};
   color: ${(props) => (props.disabled ? 'black' : 'white')};
   padding: ${(props) => props.padding || '10px 20px'};
@@ -33,14 +38,6 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   disdisabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  cocolor: '#04438B',
-  ppadding: '10px 20px',
-  fontSize: '16px',
-  onClick: () => {},
-  disabled: false,
 };
 
 export default Button;
