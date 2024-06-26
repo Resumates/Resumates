@@ -91,7 +91,13 @@ export default function Signup() {
               autoComplete='username'
             />
           </label>
-          <Button type='button' onClick={validId}>
+          <Button
+            type='button'
+            onClick={validId}
+            color='#04438B'
+            padding='18px 24px'
+            fontSize='16px'
+          >
             중복확인
           </Button>
           {isIdValue ? <p>아이디를 입력해주세요.</p> : null}
@@ -117,16 +123,26 @@ export default function Signup() {
             이메일
             <input type='email' name='email' onChange={(e) => hadleChange(e)} />
           </label>
-          <button type='button' onClick={validEmail}>
+          <Button
+            type='button'
+            onClick={validEmail}
+            color='#04438B'
+            padding='18px 24px'
+            fontSize='16px'
+          >
             인증코드받기
-          </button>
+          </Button>
           {isEmailValue ? <p>이메일을 입력해주세요.</p> : null}
           <label>
             인증코드
             <input type='text' name='code' onChange={(e) => hadleChange(e)} />
           </label>
-          <button type='button'>인증하기</button>
-          <button>가입하기</button>
+          <Button type='button' color='#04438B' padding='18px 24px' fontSize='16px'>
+            인증하기
+          </Button>
+          <Button color='#04438B' padding='18px 24px' fontSize='16px' disabled='ture'>
+            가입하기
+          </Button>
         </form>
       </Container>
     </>

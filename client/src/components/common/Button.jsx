@@ -3,18 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledButton = styled.button`
-  background-color: ${(props) => (props.disabled ? '#d3d3d3' : props.color || '#04438B')};
-  color: ${(props) => (props.disabled ? '#a9a9a9' : 'white')};
+  background-color: ${(props) => (props.disabled ? '#D9D9D9' : props.color || '#04438B')};
+  color: ${(props) => (props.disabled ? 'black' : 'white')};
   padding: ${(props) => props.padding || '10px 20px'};
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   font-size: ${(props) => props.fontSize || '16px'};
   opacity: ${(props) => (props.disabled ? '0.6' : '1')};
-
-  &:hover {
-    opacity: ${(props) => (props.disabled ? '0.6' : '0.8')};
-  }
 `;
 const Button = ({ color, padding, fontSize, children, onClick, disabled }) => {
   return (
