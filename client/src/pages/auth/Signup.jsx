@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 // import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH } from '../../util/validator';
 import { Container } from '../../style/Container';
+import Button from '../../components/common/Button';
 
 export default function Signup() {
   const [values, setValues] = useState({
@@ -90,9 +91,9 @@ export default function Signup() {
               autoComplete='username'
             />
           </label>
-          <button type='button' onClick={validId}>
+          <Button type='button' onClick={validId}>
             중복확인
-          </button>
+          </Button>
           {isIdValue ? <p>아이디를 입력해주세요.</p> : null}
           <label>
             비밀번호
