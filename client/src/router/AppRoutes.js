@@ -11,18 +11,35 @@ import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
 
 export default function AppRoutes() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
 
-  const login = useCallback(() => {
+  const login = useCallback((token) => {
+    setToken(token);
     setLoggedIn(true);
   }, []);
 
   const logout = useCallback(() => {
+    setToken(null);
     setLoggedIn(false);
   }, []);
 
+  let routes;
+
+  if (token) {
+    routes = <Route path='/mypage'></Route>;
+  } else {
+    routes = <Route path='/lgoin'></Route>;
+  }
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token:token,
+        login: login,
+        logout: logout,
+      }}
+    >
       <MainNavigation />
       <Routes>
         {/* 회원가입 */}
