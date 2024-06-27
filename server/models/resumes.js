@@ -13,7 +13,7 @@ const resumesSchema = new mongoose.Schema(
     structure: {
       title: String,
       template_type: String,
-      user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+      // user_id: { type: Schema.Types.ObjectId, ref: 'User' },
       content: {
         work_experience: [
           {
