@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const { Resumes } = require('../models/resumes');
 
 const resumeController = {
@@ -13,33 +14,56 @@ const resumeController = {
     };
 
     try {
-      if (!name) return res.status(400).send({ err: 'name is required' });
+      if (!req.body.name) return res.status(400).send({ err: 'name is required' });
       const newResume = new Resumes(req.body);
       await newResume.save();
       return res.send({ '이력서 저장 성공': newResume });
-    } catch (error) {
-      return res.status(500).send({ '이력서 저장 실패': error.message });
+    } catch (err) {
+      return res.status(500).send({ '이력서 저장 실패': err.message });
     }
   },
 
   // 이력서 수정
   async editResume(req, res) {
-    const { resumeId } = req.params;
+    try {
+      const { resumeId } = req.params;
+      if (!mongoose.isValidObjectId(resumeId))
+        return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
+      const { name, image, gender, phone } = req.body;
+      if (!name && !image && !gender && !phone)
+        return res.status(400).send({ err: '정보를 수정하지 않았습니다.' });
 
-    res.send('이력서 수정');
+      let updateBody = {};
+      if (name) updateBody.name = name;
+      if (image) updateBody.image = image;
+      if (gender) updateBody.gender = gender;
+      if (phone) updateBody.phone = phone;
+
+      const resume = await Resumes.findByIdAndUpdate(resumeId, updateBody, { new: true });
+      return res.send({ '이력서 수정': resume });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send({ '이력서 수정 실패': err.message });
+    }
   },
 
+  // 이력서 삭제
   async deleteResume(req, res) {
     try {
       const { resumeId } = req.params;
-
-      await Resumes.deleteOne({
+      if (!mongoose.isValidObjectId(resumeId))
+        return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
+      // deleteOne
+      const resume = await Resumes.findOneAndDelete({
         _id: resumeId,
-      }).exec();
-      res.send('이력서 삭제');
-    } catch (error) {
-      console.log('error: ', error);
-      res.status(500).send({ message: 'server Error' });
+      }).collation({
+        locale: 'en',
+        strength: 2,
+      });
+      return res.send({ '이력서 삭제': resume });
+    } catch (err) {
+      console.log('error: ', err);
+      return res.status(500).send({ err: err.message });
     }
   },
 };
