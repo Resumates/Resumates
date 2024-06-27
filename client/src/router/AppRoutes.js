@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
-import MainHeader from '../components/Navigation/MainHeader';
+import MainNavigation from '../components/Navigation/MainNavigation';
+import { AuthContext } from '../components/common/context/auth-context';
 
 export default function AppRoutes() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const login = useCallback(() => {
+    setLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setLoggedIn(false);
+  }, []);
+
   return (
-    <Routes>
-      {/* 회원가입 */}
-      <Route path='/user/signup' element={<Signup />}></Route>
-      <Route path='/user/login' element={<Login />}></Route>
-      <Route path='/user/mainHeader' element={<MainHeader />}></Route>
-    </Routes>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+      <MainNavigation />
+      <Routes>
+        <Route path='/user/signup' element={<Signup />} />
+        <Route path='/user/login' element={<Login />} />
+      </Routes>
+    </AuthContext.Provider>
   );
 }

@@ -1,40 +1,15 @@
-import {
-  MainHeaderContainer,
-  LogoContainer,
-  StyledImage,
-  Subtract1,
-  Subtract2,
-  Subtract3,
-  ResumatesText,
-  Vectors,
-  Vector,
-  Button,
-  Icon,
-} from './MainHeaderStyle';
+import React from 'react';
+import { MainHeaderContainer, LogoContainer, StyledImage, Button } from './MainHeaderStyle';
 import logo from '../../asset/images/logo.png';
-export const MainHeader = () => {
+
+const MainHeader = ({ children }) => {
   return (
-    <div className='MainContainer'>
-      <MainHeaderContainer>
-        <LogoContainer>
-          <StyledImage img src={logo} alt='Resumates Logo' />
-          <Subtract1 />
-          <Subtract2 />
-          <Subtract3 />
-          <Vectors>
-            <Vector />
-            <Vector />
-            <Vector />
-            <Vector />
-            <Vector />
-            <Vector />
-            <Vector />
-            <Vector />
-          </Vectors>
-        </LogoContainer>
-        <Button>이력서 만들기 체험하기</Button>
-      </MainHeaderContainer>
-    </div>
+    <MainHeaderContainer>
+      {children}
+      <LogoContainer>
+        <StyledImage src={logo} alt='Resumates Logo' />
+      </LogoContainer>
+    </MainHeaderContainer>
   );
 };
 

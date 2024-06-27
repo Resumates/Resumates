@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
 import Input from '../../components/common/input';
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from '../../utill/validator';
+import { VALIDATOR_MINLENGTH } from '../../utils/validator';
 import { useForm } from '../../hooks/FormHook';
 import { AuthContext } from '../../components/common/context/auth-context';
+
 export default function Login() {
   const auth = useContext(AuthContext);
   const [formState, inputHandler] = useForm(
     {
-      email: {
+      userId: {
         value: '',
         isValid: false,
       },
-      password: {
+      userPw: {
         value: '',
         isValid: false,
       },
@@ -21,19 +22,19 @@ export default function Login() {
 
   const authSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
+    console.log('Form State Inputs:', formState.inputs);
     auth.login();
   };
 
   return (
     <>
       <h2>Login Required</h2>
-      <hr />
+
       <form onSubmit={authSubmitHandler}>
         <Input
           element='input'
           id='userId'
-          type='id'
+          type='text'
           label='아이디'
           validators={[VALIDATOR_MINLENGTH(6)]}
           errorText='유효한 아이디 형식을 입력해주세요'
@@ -45,7 +46,7 @@ export default function Login() {
           type='password'
           label='비밀번호'
           validators={[VALIDATOR_MINLENGTH(6)]}
-          errorText='6자이상의 비밀번호를 입력해주세요.'
+          errorText='6자 이상의 비밀번호를 입력해주세요.'
           onInput={inputHandler}
         />
         <button type='submit' disabled={!formState.isValid}>
