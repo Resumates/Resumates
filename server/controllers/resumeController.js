@@ -13,17 +13,19 @@ const resumeController = {
     };
 
     try {
-      const newResume = new Resumes(data);
+      if (!name) return res.status(400).send({ err: 'name is required' });
+      const newResume = new Resumes(req.body);
       await newResume.save();
-      res.send('이력서 저장 성공');
+      return res.send({ '이력서 저장 성공': newResume });
     } catch (error) {
-      res.status(500).send('이력서 저장 실패:' + error.message);
+      return res.status(500).send({ '이력서 저장 실패': error.message });
     }
   },
 
   // 이력서 수정
   async editResume(req, res) {
-    // const {resumeId} = req.params;
+    const { resumeId } = req.params;
+
     res.send('이력서 수정');
   },
 
