@@ -1,7 +1,17 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodeMailer = require('nodemailer');
+
+const SENDMAIL_ID = process.env.ADMIN_EMAIL;
+const SENDMAIL_PW = process.env.ADMIN_PW;
+
+if (!SENDMAIL_ID || !SENDMAIL_PW) {
+  console.error('Missing environment variables for email configuration.');
+}
 
 const getUsers = (req, res, next) => {
   res.json({ users: DUMMY_USERS });
@@ -97,70 +107,72 @@ const emailvalid = async (req, res) => {
 };
 
 // 메일 인증
-const sendmail = () => async (req, res) => {
+const sendmail = async (req, res) => {
   const { email } = req.body;
 
   if (validation(email)) {
     try {
-      const result = await send(email);
-
-      res.send({ message: '인증 메일을 발송했습니다.', result });
-    } catch (e) {
-      res.send({ e });
+      const code = generateCode();
+      console.log('코드', code);
+      console.log('이메일', email);
+      console.log(SENDMAIL_ID);
+      console.log(SENDMAIL_PW);
+      const result = await sendcode(email, code);
+      console.log('결과', result);
+      res.status(200).json({ message: '인증 메일을 발송했습니다.', result });
+    } catch (error) {
+      return res.status(409).json({ error });
     }
   } else {
-    res.send({ message: '메일 전송에 실패했습니다.', data });
+    return res.status(500).json({ message: '메일 전송에 실패했습니다.', data });
   }
 };
 
-const send = async (data) => {
+const sendcode = async (recipientEmail, code) => {
+  console.log('메일보내기', SENDMAIL_ID);
+  console.log(SENDMAIL_PW);
+
+  // 메일을 보내기 위한 송신객체를 createTransport를 사용하여 생성
   const transporter = nodeMailer.createTransport({
     service: 'naver',
     host: 'smtp.naver.com',
     port: 587,
     auth: {
-      user: `${process.env.ADMIN_EMAIL}`,
-      pass: `${process.env.ADMIN_PW}`,
+      user: `${SENDMAIL_ID}`,
+      pass: `${SENDMAIL_PW}`,
     },
   });
 
-  const sendNotification = async (recipientEmail, code) => {
-    // 발신자, 수신자와 전송할 이메일 내용 설정
-    const BUSINESS_NAME = 'Resumates';
-    const mailOptions = {
-      from: `${BUSINESS_NAME} <${process.env.ADMIN_EMAIL}>`,
-      to: recipientEmail, // 수신자
-      subject: `${BUSINESS_NAME} : 회원가입 이메일 인증 메일입니다.`, // 제목
-      text: '', // 이메일 내용
-      html: `
-    <div>
-      <p>${BUSINESS_NAME}</p>
-      <p>Confirmation Code : ${code}</p>
-    </div>
-    `, // 이메일 본문에 html을 담아 전송
-    };
-    try {
-      await transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('error occured sending email:', error);
-        } else {
-          console.log('success:', info.response);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  // 발신자, 수신자와 전송할 이메일 내용 설정
+  const BUSINESS_NAME = 'Resumates';
+  const mailOptions = {
+    from: `${SENDMAIL_ID}`,
+    to: recipientEmail, // 수신자
+    subject: `${BUSINESS_NAME} : 회원가입 인증 메일입니다.`, // 제목
+    html: `
+  <div style="font-size:16px;">
+    <h2 style="font-size:24px; color:#04438B;">${BUSINESS_NAME}</h2>
+    <p>${BUSINESS_NAME} 회원가입 인증 코드입니다.</p>
+    <p>인증코드 : <span style="color:#04438B; font-weight:bold">${code}</span></p>
+  </div>
+  `, // 이메일 본문에 html을 담아 전송
   };
+
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const validation = (data) => {
-  return (
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-      data.email,
-    ) &&
-    data.title != undefined &&
-    data.message != undefined
+const validation = (email) => {
+  return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email,
   );
+};
+
+const generateCode = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString(); // 6자리 랜덤 코드 생성
 };
 
 // 회원가입
