@@ -59,6 +59,19 @@ export default function Signup() {
     }
   };
 
+  const sendMail = async (e) => {
+    e.preventDefault();
+    const { email } = values;
+    try {
+      const { data } = await axios.post('http://localhost:5000/api/users/sendmail', {
+        email,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log('이메일 인증 오류:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -127,7 +140,7 @@ export default function Signup() {
           </label>
           <Button
             type='button'
-            onClick={validEmail}
+            onClick={sendMail}
             color='#04438B'
             padding='18px 24px'
             fontSize='16px'
@@ -139,7 +152,13 @@ export default function Signup() {
             인증코드
             <input type='text' name='code' onChange={(e) => hadleChange(e)} />
           </label>
-          <Button type='button' color='#04438B' padding='18px 24px' fontSize='16px'>
+          <Button
+            type='button'
+            onClick={validEmail}
+            color='#04438B'
+            padding='18px 24px'
+            fontSize='16px'
+          >
             인증하기
           </Button>
           <Button color='#04438B' padding='18px 24px' fontSize='16px' disabled='ture'>
