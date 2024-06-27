@@ -21,6 +21,14 @@ export default function AppRoutes() {
     setLoggedIn(false);
   }, []);
 
+  let routes;
+
+  if (isLoggedIn) {
+    routes = <Route path='/mypage'></Route>;
+  } else {
+    routes = <Route path='/lgoin'></Route>;
+  }
+
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
       <MainNavigation />

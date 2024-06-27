@@ -21,12 +21,14 @@ const login = async (req, res, next) => {
   const { userId, userPw } = req.body;
 
   let existingUser;
-
   try {
-    existingUser = await User.findOne({ userId: userId });
+    existingUser = await User.findOne({ userId });
   } catch (err) {
     const error = new HttpError('Logging in failed, please try again later.', 500);
     return next(error);
+  }
+  if (existingUser) {
+    console.log('로그인에 성공하셨습니다');
   }
 
   if (!existingUser) {
@@ -53,7 +55,7 @@ const login = async (req, res, next) => {
   let token;
   try {
     token = jwt.sign(
-      { userId: existingUser.userId, email: existingUser.userPw },
+      { userId: existingUser.userId, email: existingUser.email },
       'supersecret_dont_share',
       { expiresIn: '1h' },
     );
@@ -64,7 +66,7 @@ const login = async (req, res, next) => {
 
   res.json({
     userId: existingUser.userId,
-    userPw: existingUser.userPw,
+    email: existingUser.email,
     token: token,
   });
 };
