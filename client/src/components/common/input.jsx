@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { validate } from '../../utill/validator'; // 올바른 경로로 수정하세요
+import { validate } from '../../utils/validator'; // 올바른 경로로 수정하세요
 
 const inputReducer = (state, action) => {
   switch (action.type) {
