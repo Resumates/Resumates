@@ -27,7 +27,9 @@ app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 �
 app.use(cors());
 
 //미들웨어 등록
+app.use('/', commonRouter);
 app.use('/api/users', userRoutes);
+app.use('/resume', resumeRouter);
 
 app.use((error, req, res, next) => {
   // 오류가 일어야만 실행되는 함수
