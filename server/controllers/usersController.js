@@ -13,6 +13,8 @@ if (!SENDMAIL_ID || !SENDMAIL_PW) {
   console.error('Missing environment variables for email configuration.');
 }
 
+const getUsers = async (req, res) => {};
+
 const login = async (req, res, next) => {
   const { userId, userPw } = req.body;
 
