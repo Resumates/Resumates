@@ -12,7 +12,7 @@ const StyledButton = styled('button').withConfig({
   color: ${(props) => (props.disabled ? 'black' : 'white')};
   padding: ${(props) => props.padding || '10px 20px'};
   margin-left: ${(props) => props.marginLeft || '0px'};
-  margin-top: ${(props) => props.marginTop || '0px'};
+  margin-top: ${(props) => props.margintop || '0px'};
   border: none;
   border-radius: 10px;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -23,7 +23,7 @@ const Button = ({
   color,
   padding,
   marginLeft,
-  marginTop,
+  margintop,
   fontSize,
   children,
   onClick,
@@ -34,7 +34,7 @@ const Button = ({
       color={color}
       padding={padding}
       marginLeft={marginLeft}
-      marginTop={marginTop}
+      margintop={margintop}
       fontSize={fontSize}
       onClick={!disabled ? onClick : undefined}
       disabled={disabled}
