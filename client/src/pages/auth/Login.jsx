@@ -42,8 +42,8 @@ const Login = () => {
         throw new Error(responseData.message || '로그인에 실패했습니다.');
       }
 
-      auth.login(responseData.userId, responseData.token);
-      navigate('/mypage'); // 로그인 성공 시 mypage로 리다이렉트
+      auth.login(responseData.token);
+      navigate('/mainLogin'); // 로그인 성공 시 mypage로 리다이렉트
     } catch (err) {
       console.error(err.message || 'Something went wrong, please try again.');
       // 에러 상태를 설정하거나 사용자에게 메시지를 보여주는 로직 추가 가능
