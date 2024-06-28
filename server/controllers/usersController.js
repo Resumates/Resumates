@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
   let token;
   try {
     token = jwt.sign(
-      { userId: existingUser.userId, userPw : existingUser.userPw  },
+      { userId: existingUser.userId, userPw: existingUser.userPw },
       'supersecret_dont_share',
       { expiresIn: '1h' },
     );
@@ -96,13 +96,13 @@ const emailvalid = async (req, res) => {
   try {
     const validEmail = await User.findOne({ email: email });
     if (!validEmail) {
-      return res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.' });
+      res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.', valid: true });
     } else {
-      return res.status(409).json({ message: '사용중인 이메일입니다.' });
+      res.status(409).json({ message: '사용중인 이메일입니다.', valid: false });
     }
   } catch (error) {
     console.error('서버 연결 에러', error);
-    return res.status(500).json({ message: '서버 연결 실패' });
+    res.status(500).json({ message: '서버 연결 실패' });
   }
 };
 
@@ -119,12 +119,12 @@ const sendmail = async (req, res) => {
       console.log(SENDMAIL_PW);
       const result = await sendcode(email, code);
       console.log('결과', result);
-      res.status(200).json({ message: '인증 메일을 발송했습니다.', result });
+      res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.', code });
     } catch (error) {
       return res.status(409).json({ error });
     }
   } else {
-    return res.status(500).json({ message: '메일 전송에 실패했습니다.', data });
+    return res.status(500).json({ message: '메일 전송에 실패했습니다.', result });
   }
 };
 

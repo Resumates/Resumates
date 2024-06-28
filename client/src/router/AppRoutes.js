@@ -15,12 +15,12 @@ export default function AppRoutes() {
 
   const login = useCallback((token) => {
     setToken(token);
-    setLoggedIn(true);
+    // setLoggedIn(true);
   }, []);
 
   const logout = useCallback(() => {
     setToken(null);
-    setLoggedIn(false);
+    // setLoggedIn(false);
   }, []);
 
   let routes;
@@ -35,7 +35,7 @@ export default function AppRoutes() {
     <AuthContext.Provider
       value={{
         isLoggedIn: !!token,
-        token:token,
+        token: token,
         login: login,
         logout: logout,
       }}

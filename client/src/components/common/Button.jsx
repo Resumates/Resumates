@@ -11,17 +11,30 @@ const StyledButton = styled('button').withConfig({
   background-color: ${(props) => (props.disabled ? '#D9D9D9' : props.color || '#04438B')};
   color: ${(props) => (props.disabled ? 'black' : 'white')};
   padding: ${(props) => props.padding || '10px 20px'};
+  margin-left: ${(props) => props.marginLeft || '0px'};
+  margin-top: ${(props) => props.margintop || '0px'};
   border: none;
   border-radius: 10px;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   font-size: ${(props) => props.fontSize || '16px'};
   opacity: ${(props) => (props.disabled ? '0.6' : '1')};
 `;
-const Button = ({ color, padding, fontSize, children, onClick, disabled }) => {
+const Button = ({
+  color,
+  padding,
+  marginLeft,
+  margintop,
+  fontSize,
+  children,
+  onClick,
+  disabled,
+}) => {
   return (
     <StyledButton
       color={color}
       padding={padding}
+      marginLeft={marginLeft}
+      margintop={margintop}
       fontSize={fontSize}
       onClick={!disabled ? onClick : undefined}
       disabled={disabled}
