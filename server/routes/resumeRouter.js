@@ -4,8 +4,8 @@ const { resumeController } = require('../controllers');
 // 이력서 작성
 router.post('/', resumeController.insertResume);
 // 이력서 수정
-router.patch('/edit/:id', resumeController.editResume);
+router.put('/edit/:resumeId', resumeController.editResume);
 // 이력서 삭제
-router.delete('/:id', resumeController.deleteResume);
+router.delete('/:resumeId', resumeController.deleteResume);
 
 module.exports = router;

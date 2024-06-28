@@ -9,6 +9,8 @@ router.get('/intro', commonController.intro);
 router.get('/list', commonController.templateList);
 // 이력서 작성
 router.get('/resume', commonController.writeResume);
+// 이력서 상세
+router.get('/resume/:resumeId', commonController.detailResume);
 // 마이페이지
 router.get('/mypage', commonController.mypage);
 
