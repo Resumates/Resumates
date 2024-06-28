@@ -66,7 +66,7 @@ const useSignup = () => {
     }
     if (!validateId(userId)) return;
     try {
-      const { data } = await axios.post('http://localhost:5000/api/users/userIdvaild', {
+      const { data } = await axios.post('http://localhost:5000/user/userIdvaild', {
         userId,
       });
       console.log(data);
@@ -85,13 +85,13 @@ const useSignup = () => {
       return;
     }
     try {
-      const { data: validData } = await axios.post('http://localhost:5000/api/users/emailvalid', {
+      const { data: validData } = await axios.post('http://localhost:5000/user/emailvalid', {
         email,
       });
       console.log(validData);
       if (validData.valid) {
         try {
-          const { data } = await axios.post('http://localhost:5000/api/users/sendmail', {
+          const { data } = await axios.post('http://localhost:5000/user/sendmail', {
             email,
           });
           console.log(data);
@@ -136,7 +136,7 @@ const useSignup = () => {
     }
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/users/signup', {
+      const { data } = await axios.post('http://localhost:5000/user/signup', {
         userId,
         userPw,
         email,

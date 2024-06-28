@@ -188,7 +188,6 @@ const signup = async (req, res) => {
   }
 };
 
-exports.getUsers = getUsers;
 exports.login = login;
 exports.useridvaild = useridvaild;
 exports.emailvalid = emailvalid;

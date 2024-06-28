@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { commonRouter, resumeRouter } = require('./routes');
+require('dotenv').config();
+const { PORT, MONGO_URL } = process.env;
 
 mongoose
-  .connect(
-    'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
-  )
+  .connect(MONGO_URL)
   .then(() => {
-    app.listen(5000);
+    app.listen(PORT);
+    console.log(`Connecting MongoDB ${PORT}포트 실행`);
   })
   .catch((err) => {
     console.log(err);
@@ -25,7 +27,9 @@ app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 �
 app.use(cors());
 
 //미들웨어 등록
-app.use('/api/users', userRoutes);
+app.use('/', commonRouter);
+app.use('/user', userRoutes);
+app.use('/resume', resumeRouter);
 
 app.use((error, req, res, next) => {
   // 오류가 일어야만 실행되는 함수

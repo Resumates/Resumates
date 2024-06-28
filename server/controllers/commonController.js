@@ -16,6 +16,10 @@ exports.templateList = async (req, res) => {
   res.send('템플릿 목록 페이지');
 };
 
+// 유저 데이터
+exports.getUsers = (req, res) => {
+  res.json({ users: DUMMY_USERS });
+};
 // 이력서 작성
 exports.writeResume = async (req, res) => {
   res.send('이력서 작성');
