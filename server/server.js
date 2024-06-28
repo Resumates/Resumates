@@ -3,16 +3,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { commonRouter, resumeRouter } = require('./routes');
-const MongoURL =
-  'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster';
-const port = 5000;
+require('dotenv').config();
+const { PORT, MONGO_URL } = process.env;
 
 // 데이터 베이스 연결
 mongoose
-  .connect(MongoURL)
+  .connect(MONGO_URL)
   .then(() => {
-    app.listen(port);
-    console.log(`Connecting MongoDB ${port}포트 실행`);
+    app.listen(PORT);
+    console.log(`Connecting MongoDB ${PORT}포트 실행`);
   })
   .catch((err) => {
     console.log(err);
