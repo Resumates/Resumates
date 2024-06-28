@@ -107,13 +107,15 @@ const useSignup = () => {
     } catch (error) {
       console.log('서버 error', error);
       console.log('이메일 검증오류:', error.response.status);
-      setEmailErrorMsg('이미 가입된 이메일입니다.');
+      setEmailErrorMsg('');
     }
   };
-  const validCode = () => {
+  const validCode = (e) => {
+    e.preventDefault();
+
     const { code } = values;
 
-    if (code !== correctCode) {
+    if (code !== correctCode || code === '') {
       setCodeError('인증 코드가 올바르지 않습니다.');
       return;
     } else {
