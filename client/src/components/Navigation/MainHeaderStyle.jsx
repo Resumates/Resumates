@@ -1,120 +1,72 @@
 import styled from 'styled-components';
 
-export const MainContainer = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 9.5rem;
-  background: #ffffff;
-`;
-
 export const MainHeaderContainer = styled.header`
-  position: relative;
-  max-width: 1320px;
-  width: 100%;
-  height: 95px;
-  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
 `;
 
 export const LogoContainer = styled.div`
-  position: absolute;
-  left: 0%;
-  right: 88.74%;
-  top: 30.53%;
-  bottom: 31.58%;
+  display: flex;
+  align-items: center;
 `;
+
 export const StyledImage = styled.img`
   width: 14.8rem;
   height: 3.6rem;
-`;
-export const Subtract1 = styled.div`
-  position: absolute;
-  left: 1.98%;
-  right: 96.43%;
-  top: 30.53%;
-  bottom: 42.3%;
-  background: #04438b;
-  transform: matrix(-1, 0, 0, 1, 0, 0);
+  margin-right: 1rem;
 `;
 
-export const Subtract2 = styled.div`
-  position: absolute;
-  left: 1.06%;
-  right: 97.35%;
-  top: 36.96%;
-  bottom: 35.87%;
-  background: #8d9fb5;
-`;
-
-export const Subtract3 = styled.div`
-  position: absolute;
-  left: 1.59%;
-  right: 96.82%;
-  top: 41.25%;
-  bottom: 31.58%;
-  background: #3d79bf;
-  transform: matrix(-1, 0, 0, 1, 0, 0);
-`;
-
-export const ResumatesText = styled.div`
-  position: absolute;
-  left: 3.18%;
-  right: 88.74%;
-  top: 41.52%;
-  bottom: 42.44%;
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export const Vector = styled.div`
-  position: absolute;
-  background: #3d79bf;
-`;
-
-export const Vectors = styled.div`
-  position: absolute;
-  top: 41.52%;
-  bottom: 42.67%;
+export const Nav = styled.nav`
   display: flex;
-  left: 4.16%;
-  right: 88.74%;
-
-  & > div {
-    margin-right: 0.1rem;
-    width: 1.5%;
-  }
-`;
-
-export const Button = styled.button`
-  position: absolute;
-  left: 85.23%;
-  right: 0%;
-  top: 28.42%;
-  bottom: 27.37%;
-  background: #04438b;
-  border-radius: 10px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  border: none;
-  padding: 10px 20px;
-`;
-
-export const Icon = styled.div`
-  position: absolute;
-  left: 97.27%;
-  right: 1.81%;
-  top: 43.66%;
-  bottom: 42.78%;
-  background: #ffffff;
-  display: flex;
-  flex-direction: row;
   align-items: center;
+  gap: 2rem;
+`;
 
-  & > div {
-    margin-right: 0.1rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: #ffffff;
-  }
+export const NavList = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export const NavItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+// export const Button = styled.button`
+//   background-color: #04438b;
+//   color: #fff;
+//   border: none;
+//   padding: 0.5rem 1rem;
+//   border-radius: 5px;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: #033369;
+//   }
+
+//   a {
+//     color: inherit;
+//     text-decoration: none;
+//   }
+// `;
+
+export const UserIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #04438b;
+  cursor: pointer;
 `;

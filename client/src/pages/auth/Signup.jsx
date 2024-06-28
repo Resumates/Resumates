@@ -1,151 +1,120 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-// import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH } from '../../util/validator';
+import React from 'react';
 import { Container } from '../../style/Container';
 import Button from '../../components/common/Button';
+import Input from '../../components/InputBox';
+import resumes from '../../asset/images/resumes.png';
+import {
+  H2,
+  Label,
+  InputDiv,
+  SignupForm,
+  SignupContainer,
+  ResumeImg,
+  SignupBtn,
+  Text,
+} from '../../style/SignupStyle';
+
+import useSignup from '../../hooks/useSignup';
 
 export default function Signup() {
-  const [values, setValues] = useState({
-    userId: '',
-    userPw: '',
-    confirmPw: '',
-    email: '',
-    code: '',
-  });
-
-  const [isIdValue, setIsIdValue] = useState(false);
-  const [isEmailValue, setIsEmailValue] = useState(false);
-
-  const hadleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
-  };
-
-  const validId = async (e) => {
-    e.preventDefault();
-    console.log('중복확인 클릭');
-    const { userId } = values;
-    if (userId === '') {
-      setIsIdValue(true);
-      return;
-    }
-    try {
-      const { data } = await axios.post('http://localhost:5000/api/users/userIdvaild', {
-        userId,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log('서버 error', error);
-      console.log('ID 검증오류:', error.response.status);
-    }
-  };
-
-  const validEmail = async (e) => {
-    e.preventDefault();
-    console.log('인증하기 클릭');
-    const { email } = values;
-    if (email === '') {
-      setIsEmailValue(true);
-      return;
-    }
-    try {
-      const { data } = await axios.post('http://localhost:5000/api/users/emailvalid', {
-        email,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log('서버 error', error);
-      console.log('이메일 검증오류:', error.response.status);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { userId, email, userPw, confirmPw } = values;
-    if (userPw !== confirmPw) {
-      console.log('비밀번호를 확인해주세요.');
-      return;
-    }
-    try {
-      const { data } = await axios.post('http://localhost:5000/api/users/signup', {
-        userId,
-        userPw,
-        email,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log('서버 error');
-      console.error('회원가입오류', error);
-    }
-  };
+  const {
+    isIdValue,
+    isEmailValue,
+    idError,
+    pwError,
+    confirmPwError,
+    emailErrorMsg,
+    codeError,
+    handleChange,
+    validId,
+    validCode,
+    sendMail,
+    handleSubmit,
+  } = useSignup();
 
   return (
     <>
       <Container>
-        <form onSubmit={handleSubmit}>
-          <label>
-            아이디
-            <input
-              type='text'
-              name='userId'
-              onChange={(e) => hadleChange(e)}
-              autoComplete='username'
-            />
-          </label>
-          <Button
-            type='button'
-            onClick={validId}
-            color='#04438B'
-            padding='18px 24px'
-            fontSize='16px'
-          >
-            중복확인
-          </Button>
-          {isIdValue ? <p>아이디를 입력해주세요.</p> : null}
-          <label>
-            비밀번호
-            <input
-              type='password'
-              name='userPw'
-              onChange={(e) => hadleChange(e)}
-              autoComplete='new-password'
-            />
-          </label>
-          <label>
-            비밀번호 확인
-            <input
-              type='password'
-              name='confirmPw'
-              onChange={(e) => hadleChange(e)}
-              autoComplete='new-password'
-            />
-          </label>
-          <label>
-            이메일
-            <input type='email' name='email' onChange={(e) => hadleChange(e)} />
-          </label>
-          <Button
-            type='button'
-            onClick={validEmail}
-            color='#04438B'
-            padding='18px 24px'
-            fontSize='16px'
-          >
-            인증코드받기
-          </Button>
-          {isEmailValue ? <p>이메일을 입력해주세요.</p> : null}
-          <label>
-            인증코드
-            <input type='text' name='code' onChange={(e) => hadleChange(e)} />
-          </label>
-          <Button type='button' color='#04438B' padding='18px 24px' fontSize='16px'>
-            인증하기
-          </Button>
-          <Button color='#04438B' padding='18px 24px' fontSize='16px' disabled='ture'>
-            가입하기
-          </Button>
-        </form>
+        <SignupContainer>
+          <ResumeImg src={resumes} alt='이력서 양식' />
+          <SignupForm onSubmit={handleSubmit}>
+            <H2>회원가입</H2>
+            <Label>아이디</Label>
+            <InputDiv>
+              <Input
+                width='40.7rem'
+                type='text'
+                name='userId'
+                onChange={handleChange}
+                autoComplete='username'
+              />
+              <Button
+                type='button'
+                onClick={validId}
+                color='#04438B'
+                padding='1.8rem 2.4rem'
+                marginLeft='1.2rem'
+                fontSize='1.6rem'
+              >
+                중복확인
+              </Button>
+              {isIdValue ? <Text>아이디를 입력해주세요.</Text> : null}
+              {idError && <Text>{idError}</Text>}
+            </InputDiv>
+            <Label>비밀번호</Label>
+            <InputDiv>
+              <Input
+                type='password'
+                name='userPw'
+                onChange={handleChange}
+                autoComplete='new-password'
+              />
+              {pwError && <Text>{pwError}</Text>}
+            </InputDiv>
+            <Label>비밀번호 확인</Label>
+            <InputDiv>
+              <Input
+                type='password'
+                name='confirmPw'
+                onChange={handleChange}
+                autoComplete='new-password'
+              />
+              {confirmPwError && <Text>{confirmPwError}</Text>}
+            </InputDiv>
+            <Label>이메일</Label>
+            <InputDiv>
+              <Input type='email' name='email' width='40.7rem' onChange={handleChange} />
+              <Button
+                type='button'
+                onClick={sendMail}
+                color='#04438B'
+                padding='1.8rem 1rem'
+                marginLeft='1.2rem'
+                fontSize='1.6rem'
+              >
+                인증코드받기
+              </Button>
+              {isEmailValue && <Text>이메일을 입력해주세요.</Text>}
+              {emailErrorMsg && <Text>{emailErrorMsg}</Text>}
+            </InputDiv>
+            <Label>인증코드</Label>
+            <InputDiv>
+              <Input type='text' name='code' width='40.7rem' onChange={handleChange} />
+              <Button
+                type='button'
+                onClick={validCode}
+                color='#04438B'
+                padding='1.8rem 2.4rem'
+                marginLeft='1.2rem'
+                fontSize='1.6rem'
+              >
+                인증하기
+              </Button>
+              {codeError && <Text>{codeError}</Text>}
+            </InputDiv>
+            <SignupBtn>가입하기</SignupBtn>
+          </SignupForm>
+        </SignupContainer>
       </Container>
     </>
   );
