@@ -113,18 +113,13 @@ const sendmail = async (req, res) => {
   if (validation(email)) {
     try {
       const code = generateCode();
-      console.log('코드', code);
-      console.log('이메일', email);
-      console.log(SENDMAIL_ID);
-      console.log(SENDMAIL_PW);
       const result = await sendcode(email, code);
-      console.log('결과', result);
       res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.', code });
     } catch (error) {
       return res.status(409).json({ error });
     }
   } else {
-    return res.status(500).json({ message: '메일 전송에 실패했습니다.', result });
+    return res.status(500).json({ message: '메일 전송에 실패했습니다.', status: 500 });
   }
 };
 

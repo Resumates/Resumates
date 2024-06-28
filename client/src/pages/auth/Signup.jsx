@@ -11,6 +11,7 @@ import {
   SignupContainer,
   ResumeImg,
   SignupBtn,
+  Text,
 } from '../../style/SignupStyle';
 
 import useSignup from '../../hooks/useSignup';
@@ -57,8 +58,8 @@ export default function Signup() {
               >
                 중복확인
               </Button>
-              {isIdValue ? <p>아이디를 입력해주세요.</p> : null}
-              {idError && <p>{idError}</p>}
+              {isIdValue ? <Text>아이디를 입력해주세요.</Text> : null}
+              {idError && <Text>{idError}</Text>}
             </InputDiv>
             <Label>비밀번호</Label>
             <InputDiv>
@@ -68,7 +69,7 @@ export default function Signup() {
                 onChange={handleChange}
                 autoComplete='new-password'
               />
-              {pwError && <p>{pwError}</p>}
+              {pwError && <Text>{pwError}</Text>}
             </InputDiv>
             <Label>비밀번호 확인</Label>
             <InputDiv>
@@ -78,7 +79,7 @@ export default function Signup() {
                 onChange={handleChange}
                 autoComplete='new-password'
               />
-              {confirmPwError && <p>{confirmPwError}</p>}
+              {confirmPwError && <Text>{confirmPwError}</Text>}
             </InputDiv>
             <Label>이메일</Label>
             <InputDiv>
@@ -93,8 +94,8 @@ export default function Signup() {
               >
                 인증코드받기
               </Button>
-              {isEmailValue && <p>이메일을 입력해주세요.</p>}
-              {emailErrorMsg && <p>{emailErrorMsg}</p>}
+              {isEmailValue && <Text>이메일을 입력해주세요.</Text>}
+              {emailErrorMsg && <Text>{emailErrorMsg}</Text>}
             </InputDiv>
             <Label>인증코드</Label>
             <InputDiv>
@@ -109,7 +110,7 @@ export default function Signup() {
               >
                 인증하기
               </Button>
-              {codeError && <p>{codeError}</p>}
+              {codeError && <Text>{codeError}</Text>}
             </InputDiv>
             <SignupBtn>가입하기</SignupBtn>
           </SignupForm>

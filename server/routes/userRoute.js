@@ -13,5 +13,6 @@ router.post('/useridvaild', usersControllers.useridvaild);
 router.post('/emailvalid', usersControllers.emailvalid);
 router.post('/sendmail', usersControllers.sendmail);
 router.post('/signup', usersControllers.signup);
+// router.get('/settings', usersControllers.settings);
 
 module.exports = router;

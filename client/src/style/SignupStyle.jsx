@@ -12,7 +12,7 @@ export const Label = styled.label`
 
 export const InputDiv = styled.div`
   margin-top: 0.8rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
 `;
 
 export const SignupContainer = styled.div`
@@ -38,4 +38,11 @@ export const SignupBtn = styled.button`
   border-radius: 10px;
   cursor: pointer;
   font-size: 1.6rem;
+`;
+
+export const Text = styled.p`
+  font-size: 1.6rem;
+  padding-top: 0.6rem;
+  padding-left: 0.6rem;
+  color: #e00000;
 `;

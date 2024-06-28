@@ -2,17 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { commonRouter, resumeRouter } = require('./routes');
-const MongoURL =
-  'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster';
-const port = 5000;
 
-// 데이터 베이스 연결
 mongoose
-  .connect(MongoURL)
+  .connect(
+    'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
+  )
   .then(() => {
-    app.listen(port);
-    console.log(`Connecting MongoDB ${port}포트 실행`);
+    app.listen(5000);
   })
   .catch((err) => {
     console.log(err);
@@ -29,9 +25,7 @@ app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 �
 app.use(cors());
 
 //미들웨어 등록
-app.use('/', commonRouter);
 app.use('/api/users', userRoutes);
-app.use('/resume', resumeRouter);
 
 app.use((error, req, res, next) => {
   // 오류가 일어야만 실행되는 함수
