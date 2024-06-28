@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainNavigation from '../components/Navigation/MainNavigation';
 import { AuthContext } from '../components/common/context/auth-context';
@@ -13,15 +13,30 @@ import Account from '../pages/user/Account';
 export default function AppRoutes() {
   const [token, setToken] = useState(false);
 
-  const login = useCallback((token) => {
+  const login = useCallback((token, expirationDate) => {
     setToken(token);
-    // setLoggedIn(true);
+    const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({
+        token: token,
+        expiration: tokenExpirationDate.toISOString(),
+      }),
+    );
   }, []);
 
   const logout = useCallback(() => {
     setToken(null);
-    // setLoggedIn(false);
+    localStorage.removeItem('userData');
   }, []);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (storedData && storedData.token && new Date(storedData.expiration) > new Date()
+    ) {
+      login(storedData.token, new Date(storedData.expiration));
+    }
+  }, [login]);
 
   let routes;
 

@@ -38,25 +38,26 @@ export const NavList = styled.ul`
 export const NavItem = styled.li`
   display: flex;
   align-items: center;
+  font-size: 16px;
 `;
 
-export const Button = styled.button`
-  background-color: #04438b;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
+// export const Button = styled.button`
+//   background-color: #04438b;
+//   color: #fff;
+//   border: none;
+//   padding: 0.5rem 1rem;
+//   border-radius: 5px;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: #033369;
-  }
+//   &:hover {
+//     background-color: #033369;
+//   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
+//   a {
+//     color: inherit;
+//     text-decoration: none;
+//   }
+// `;
 
 export const UserIcon = styled.div`
   width: 40px;
