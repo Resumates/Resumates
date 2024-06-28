@@ -7,6 +7,8 @@ router.get('/', commonController.main);
 router.get('/intro', commonController.intro);
 // 템플릿 목록
 router.get('/list', commonController.templateList);
+// 유저 데이터
+router.get('/user', commonController.getUsers);
 // 이력서 작성
 router.get('/resume', commonController.writeResume);
 // 이력서 상세

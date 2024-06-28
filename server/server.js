@@ -28,7 +28,7 @@ app.use(cors());
 
 //미들웨어 등록
 app.use('/', commonRouter);
-app.use('/api/users', userRoutes);
+app.use('/user', userRoutes);
 app.use('/resume', resumeRouter);
 
 app.use((error, req, res, next) => {
