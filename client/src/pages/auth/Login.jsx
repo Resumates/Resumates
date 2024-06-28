@@ -42,7 +42,7 @@ const Login = () => {
         throw new Error(responseData.message || '로그인에 실패했습니다.');
       }
 
-      auth.login(responseData.token);
+      auth.login(responseData.userId, responseData.token);
       navigate('/mainLogin'); // 로그인 성공 시 mypage로 리다이렉트
     } catch (err) {
       console.error(err.message || 'Something went wrong, please try again.');
