@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainHeaderContainer, LogoContainer, StyledImage, Button } from './MainHeaderStyle';
+import { MainHeaderContainer, LogoContainer, StyledImage } from './MainHeaderStyle';
 import logo from '../../asset/images/logo.png';
 
 const MainHeader = ({ children }) => {
