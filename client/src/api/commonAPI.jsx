@@ -5,7 +5,7 @@ import { getUserAccount } from './APIRoutes';
 export const getUserData = async (userId) => {
   try {
     const { data } = await axios.get(`${getUserAccount}/${userId}`);
-    console.log(data);
+    return data.user;
   } catch (error) {
     console.log('서버 error');
     console.error('불러오기 오류', error);
