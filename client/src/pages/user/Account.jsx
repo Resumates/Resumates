@@ -30,10 +30,10 @@ export default function Account() {
       <AccountCont>
         <H2>계정관리</H2>
         <Tab>
-          <TabButton active={tab === 'userEmail'} onClick={() => setTab('userEmail')}>
+          <TabButton $active={tab === 'userEmail'} onClick={() => setTab('userEmail')}>
             회원 정보 수정
           </TabButton>
-          <TabButton active={tab === 'userPw'} onClick={() => setTab('userPw')}>
+          <TabButton $active={tab === 'userPw'} onClick={() => setTab('userPw')}>
             비밀 번호 변경
           </TabButton>
         </Tab>

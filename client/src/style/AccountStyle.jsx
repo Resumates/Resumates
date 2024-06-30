@@ -25,9 +25,9 @@ export const Tab = styled.div`
 export const TabButton = styled.button`
   width: 38rem;
   font-size: 1.6rem;
-  background-color: ${(props) => (props.active ? '#04438B' : '#f8f9fa')};
-  color: ${(props) => (props.active ? '#fff' : '#04438B')};
-  border: 1px solid ${(props) => (props.active ? '#04438B' : '#ACACAC')};
+  background-color: ${(props) => (props.$active ? '#04438B' : '#f8f9fa')};
+  color: ${(props) => (props.$active ? '#fff' : '#04438B')};
+  border: 1px solid ${(props) => (props.$active ? '#04438B' : '#ACACAC')};
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 1rem;
