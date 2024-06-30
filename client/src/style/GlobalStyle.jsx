@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-
 const GlobalStyle = createGlobalStyle`
 ${reset};
 :root{
   --bgColor: #EFF2F6;
+	--mainColor:#04438B;
 	--buttonMain:#04438B;
 	--buttonSub:#3D79BF;
 	--buttonDisable: #D9D9D9;

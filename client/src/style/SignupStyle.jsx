@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const H2 = styled.h2`
-  font-size: 2.4rem;
-  text-align: center;
-  margin-bottom: 4rem;
-`;
-
 export const Label = styled.label`
   font-size: 1.6rem;
 `;
@@ -31,8 +25,8 @@ export const SignupForm = styled.form``;
 
 export const SignupBtn = styled.button`
   width: 52.3rem;
-  background-color: #d9d9d9;
-  color: black;
+  background-color: var(--buttonMain);
+  color: white;
   padding: 2rem 0;
   margin-top: 3.8rem;
   border-radius: 10px;

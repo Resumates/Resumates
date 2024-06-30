@@ -3,8 +3,8 @@ import { Container } from '../../style/Container';
 import Button from '../../components/common/Button';
 import Input from '../../components/InputBox';
 import resumes from '../../asset/images/resumes.png';
+import { H2 } from '../../style/CommonStyle';
 import {
-  H2,
   Label,
   InputDiv,
   SignupForm,
