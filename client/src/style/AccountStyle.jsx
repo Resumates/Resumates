@@ -14,7 +14,7 @@ export const EditCont = styled.div`
   box-sizing: border-box;
   background-color: white;
   border-radius: 1rem;
-  padding: 10rem;
+  padding: 6rem 10rem;
 `;
 
 export const Tab = styled.div`
@@ -28,7 +28,7 @@ export const TabButton = styled.button`
   background-color: ${(props) => (props.$active ? '#04438B' : '#f8f9fa')};
   color: ${(props) => (props.$active ? '#fff' : '#04438B')};
   border: 1px solid ${(props) => (props.$active ? '#04438B' : '#ACACAC')};
-  padding: 10px 20px;
+  padding: 1.4rem 2rem;
   cursor: pointer;
   border-radius: 1rem;
   &:focus {

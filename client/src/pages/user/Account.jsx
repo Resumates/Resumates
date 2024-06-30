@@ -7,7 +7,7 @@ import { Container } from '../../style/Container';
 import { AccountCont, EditCont, Tab, TabButton } from '../../style/AccountStyle';
 
 export default function Account() {
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [tab, setTab] = useState('userEmail');
   const userId = window.localStorage.getItem('userId');
 
@@ -15,7 +15,6 @@ export default function Account() {
     const fetchUserData = async () => {
       try {
         const data = await getUserData(userId);
-        console.log(data);
         setUserInfo(data);
       } catch (error) {
         console.error('유저데이터 조회 실패', error);
