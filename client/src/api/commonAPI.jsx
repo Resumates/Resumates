@@ -7,7 +7,6 @@ export const getUserData = async (userId) => {
     const { data } = await axios.get(`${getUserAccount}/${userId}`);
     return data.user;
   } catch (error) {
-    console.log('서버 error');
-    console.error('불러오기 오류', error);
+    console.error('유저 데이터 불러오기 오류', error);
   }
 };
