@@ -11,7 +11,6 @@ import {
 
 export default function EditUserInfo({ userInfo }) {
   const { userId, email } = userInfo;
-  console.log(userId, email);
   return (
     <>
       <UserInfoSet>
@@ -22,7 +21,7 @@ export default function EditUserInfo({ userInfo }) {
         <InfoItem>
           <InfoLabel>이메일</InfoLabel>
           <InfoBox>{email}</InfoBox>
-          <Button padding={'16px 14px'}>변경하기</Button>
+          <Button padding='16px 14px'>변경하기</Button>
         </InfoItem>
       </UserInfoSet>
       <DeleteBtn>계정 삭제</DeleteBtn>

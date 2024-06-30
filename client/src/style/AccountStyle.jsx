@@ -10,7 +10,7 @@ export const AccountCont = styled.div`
 
 export const EditCont = styled.div`
   width: 77rem;
-  height: 40rem;
+  min-height: 40rem;
   box-sizing: border-box;
   background-color: white;
   border-radius: 1rem;

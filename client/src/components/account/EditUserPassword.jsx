@@ -1,20 +1,48 @@
 import React from 'react';
+import check from '../../asset/images/icon-check.png';
+import Button from '../common/Button';
+import {
+  UserInfoSet,
+  InfoItem,
+  InfoLabel,
+  InfoBox,
+  BtnCont,
+  PasswordLabel,
+  InputPassword,
+  CheckBox,
+  CheckImg,
+  CheckBoxText,
+} from './EditAccountStyle';
 
 export default function EditUserPassword({ userInfo }) {
-  const { userPw } = userInfo;
-  console.log(userPw);
+  const { userId, userPw } = userInfo;
   return (
-    <div>
-      <div>
-        <label>현재비밀번호</label><input type="password" />
-      </div>
-      <div>
-        <label>새 비밀번호</label><input type="password" />
-      </div>
-      <div>
-        <label>새 비밀번호 확인</label><input type="password" />
-      </div>
-      <p>비밀번호보기</p><button>변경하기</button>
-    </div>
+    <UserInfoSet>
+      <InfoItem>
+        <PasswordLabel>아이디</PasswordLabel>
+        <InfoBox>{userId}</InfoBox>
+      </InfoItem>
+      <InfoItem>
+        <PasswordLabel>현재비밀번호</PasswordLabel>
+        <InputPassword type='password' autoComplete='new-password' />
+      </InfoItem>
+      <InfoItem>
+        <PasswordLabel>새 비밀번호</PasswordLabel>
+        <InputPassword type='password' autoComplete='new-password' />
+      </InfoItem>
+      <InfoItem>
+        <PasswordLabel>새 비밀번호 확인</PasswordLabel>
+        <InputPassword type='password' autoComplete='new-password' />
+      </InfoItem>
+      <BtnCont>
+        <CheckBox>
+          <CheckImg src={check} alt='체크' />
+          <CheckBoxText>비밀번호보기</CheckBoxText>
+        </CheckBox>
+        <Button padding='16px 14px' marginLeft='18rem'>
+          변경하기
+        </Button>
+      </BtnCont>
+    </UserInfoSet>
   );
 }
