@@ -104,7 +104,18 @@ export const SkillsSection = styled.div`
 `;
 
 export const ExperienceSection = styled.div`
-  color: blue;
+  ul {
+    li {
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+      h2 {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      h3 {
+      }
+    }
+  }
 `;
 export const EducationSection = styled.div`
   color: green;
