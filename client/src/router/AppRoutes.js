@@ -3,6 +3,7 @@ import Header from '../components/Header/Header';
 import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
 import Main from '../pages/home/Main';
+import MainLogin from '../pages/home/MainLogin';
 import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
@@ -21,6 +22,9 @@ export default function AppRoutes() {
 
         {/* 메인 */}
         <Route path='/' element={<Main />} />
+
+        {/* 메인 로그인*/}
+        <Route path='/mainLogin' element={<MainLogin />} />
 
         {/* 템플릿 목록 */}
         <Route path='/list' element={<TemplateList />} />
