@@ -37,7 +37,7 @@ export default function NavLinks() {
           </NavItem>
           <NavItem>
             <UserIcon type='button'>{id}</UserIcon>
-            <ModalUser />
+            {/* <ModalUser /> */}
           </NavItem>
         </>
       )}
