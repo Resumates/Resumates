@@ -8,6 +8,7 @@ import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
+import ResumeDetail from '../pages/resume/ResumeDetail';
 
 export default function AppRoutes() {
   return (
@@ -32,11 +33,14 @@ export default function AppRoutes() {
         {/* 이력서 작성 */}
         <Route path='/resume' element={<CreateResume />} />
 
+        {/* 이력서 상세 */}
+        <Route path='/resume/:id' element={<ResumeDetail />} />
+
         {/* 마이페이지 */}
         <Route path='/mypage' element={<Mypage />} />
 
         {/* 계정 설정 */}
-        <Route path='/user/settings' element={<Account />} />
+        <Route path='/user/settings/:id' element={<Account />} />
       </Routes>
     </>
   );

@@ -12,10 +12,10 @@ export const getUserData = async (userId) => {
 };
 
 // 이력서 상세
-export const getResumeDetail = async (userId) => {
+export const getResumeDetail = async (resumeId) => {
   try {
-    const { data } = await axios.get(`${resumeDetail}/${userId}`);
-    return data.resume;
+    const { data } = await axios.get(`${resumeDetail}/${resumeId}`);
+    return data.detail;
   } catch (error) {
     console.error('이력서 상세 불러오기 오류', error);
   }
