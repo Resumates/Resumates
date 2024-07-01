@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../common/context/auth-context';
 import { NavList, NavItem, UserIcon } from './HeaderStyle';
 import Button from '../common/Button';
+import ModalUser from '../Modal/ModalUser';
 
 export default function NavLinks() {
   const token = localStorage.getItem('token');
@@ -36,9 +36,8 @@ export default function NavLinks() {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/user/account'>
-              <UserIcon type='button'>{id}</UserIcon>
-            </NavLink>
+            <UserIcon type='button'>{id}</UserIcon>
+            <ModalUser />
           </NavItem>
         </>
       )}

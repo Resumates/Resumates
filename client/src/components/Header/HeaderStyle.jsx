@@ -21,6 +21,7 @@ export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 2rem;
 `;
 
 export const StyledImage = styled.img`
