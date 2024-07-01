@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { signupAPI, vaildIdAPI, validEmailAPI, sendEmailAPI } from '../api/authAPI';
 
 const useSignup = () => {
   const [values, setValues] = useState({
@@ -64,15 +64,11 @@ const useSignup = () => {
       setIsIdValue(true);
       return;
     }
-    if (!validateId(userId)) return;
-    try {
-      const { data } = await axios.post('http://localhost:5000/user/userIdvaild', {
-        userId,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log('서버 error', error);
-      console.log('ID 검증오류:', error.response.status);
+    const idStatus = await vaildIdAPI(userId);
+    if (idStatus) {
+      if (!validateId(userId)) return;
+    } else {
+      setIdError('이미 사용중인 아이디입니다.');
     }
   };
 
@@ -84,32 +80,22 @@ const useSignup = () => {
       setIsEmailValue(true);
       return;
     }
-    try {
-      const { data: validData } = await axios.post('http://localhost:5000/user/emailvalid', {
-        email,
-      });
-      console.log(validData);
-      if (validData.valid) {
-        try {
-          const { data } = await axios.post('http://localhost:5000/user/sendmail', {
-            email,
-          });
-          console.log(data);
-          console.log(data.message);
-          setEmailErrorMsg(data.message);
-          setCorrectCode(data.code);
-        } catch (error) {
-          console.log('이메일 인증 오류:', error);
-        }
+
+    const validData = await validEmailAPI(email);
+    console.log(validData);
+    if (validData.valid) {
+      const sendEmail = await sendEmailAPI(email);
+      if (sendEmail) {
+        setEmailErrorMsg(sendEmail.message);
+        setCorrectCode(sendEmail.code);
       } else {
         setEmailErrorMsg(validData.message);
       }
-    } catch (error) {
-      console.log('서버 error', error);
-      console.log('이메일 검증오류:', error.response.status);
+    } else {
       setEmailErrorMsg('');
     }
   };
+
   const validCode = (e) => {
     e.preventDefault();
 
@@ -134,19 +120,8 @@ const useSignup = () => {
     ) {
       return;
     }
-
-    try {
-      const { data } = await axios.post('http://localhost:5000/user/signup', {
-        userId,
-        userPw,
-        email,
-      });
-      console.log(data);
-      navigate('/');
-    } catch (error) {
-      console.log('서버 error');
-      console.error('회원가입오류', error);
-    }
+    const result = signupAPI(userId, userPw, email);
+    if (result) navigate('/');
   };
 
   return {
