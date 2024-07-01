@@ -7,7 +7,7 @@ import ModalUser from '../Modal/ModalUser';
 export default function NavLinks() {
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
-  const id = userId.slice(0, 2);
+  const id = userId?.slice(0, 2);
 
   return (
     <NavList>
@@ -20,7 +20,7 @@ export default function NavLinks() {
           </NavLink>
         </NavItem>
       )}
-      {token && (
+      {token && id && (
         <>
           <NavItem>
             <NavLink to='/mypage'>이력서 템플릿 보기</NavLink>
@@ -37,7 +37,7 @@ export default function NavLinks() {
           </NavItem>
           <NavItem>
             <UserIcon type='button'>{id}</UserIcon>
-            <ModalUser />
+            {/* <ModalUser /> */}
           </NavItem>
         </>
       )}
