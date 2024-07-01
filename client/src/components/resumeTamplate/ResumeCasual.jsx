@@ -6,18 +6,17 @@ import {
   Title,
   ProfileInfo,
   ContactInfo,
-} from './CasualResumeStyle.jsx';
+} from './ResumeCasualStyle.jsx';
 import profileImg from '../../asset/profile/blank-profile.webp';
 import CasualLine from './CasualLine.jsx';
 
-export default function CasualResume() {
+export default function CasualResume({ resumeDetail }) {
+  console.log(resumeDetail);
+
   const profileDetails = {
     image: '',
-    email: 'kosta@gmail.com',
-    phone: '010-1234-5678',
 
     structure: {
-      title: '지원자 홍길동 입니다.',
       content: {
         intro: `안녕하세요, 저는 최신 웹 기술에 열정을 가진 신입 개발자입니다. 팀과의 협업을 통해 문제를
         해결하고, 사용자의 경험을 개선하는 것을 즐깁니다. 지속적인 학습을 통해 성장하며, 혁신적인
@@ -61,26 +60,26 @@ export default function CasualResume() {
         <ProfileHeader>
           <ProfileImage src={profileImg} alt='프로필 이미지' />
           <ProfileInfo>
-            <Title>{profileDetails.structure.title}</Title>
+            <Title>{resumeDetail.structure.title}</Title>
             <ContactInfo>
               <p>
                 <span>✉️</span>
-                {profileDetails.email}
+                {resumeDetail.email}
               </p>
               <br />
               <p>
                 <span>📞</span>
-                {profileDetails.phone}
+                {resumeDetail.phone}
               </p>
             </ContactInfo>
           </ProfileInfo>
         </ProfileHeader>
         <br></br>
         <CasualLine title={'자기소개'} content={profileDetails.structure.content.intro} />
-        <CasualLine title={'기술스택'} content={profileDetails.structure.content.skills} />
-        <CasualLine title={'경력사항'} />
+        <CasualLine title={'기술스택'} content={resumeDetail.structure.content.skills} />
+        <CasualLine title={'경력사항'} content={resumeDetail.structure.content.workExperience} />
         <CasualLine title={'학력'} />
-        <CasualLine title={'포트폴리오'} content={profileDetails.structure.content.portfolio} />
+        <CasualLine title={'포트폴리오'} content={resumeDetail.structure.content.portfolio.url} />
       </A4Container>
     </>
   );
