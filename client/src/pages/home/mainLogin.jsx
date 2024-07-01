@@ -9,7 +9,7 @@ import {
   Sections,
   ImageContainer,
   TitleTwo,
-  TitleSetion,
+  TitleThree,
   NumberContainer,
   IConContainer,
   StepContainer,
@@ -18,6 +18,7 @@ import {
   StepOneDes,
   StepTwo,
   StepThree,
+  SectDiv,
 } from '../../style/MainLoginStyle';
 import Button from '../../components/common/Button';
 
@@ -50,33 +51,46 @@ export default function MainLogin() {
         </ImageContainer>
       </Section>
       <Sections>
-        <IConContainer>
-          <Image src={CordingIcon} alt='Resumates Example Resumes' />
-        </IConContainer>
-        <StepContainer>
-          <StepOne>
-            <NumberContainer>
-              <Number>1</Number>
-              <StepOneDes>이력서에 넣을 정보를 입력하세요.</StepOneDes>
-            </NumberContainer>
-          </StepOne>
-          <StepTwo>
-            <NumberContainer>
-              <Number>2</Number>
-              <StepOneDes>원하는 템플릿 양식을 골라 적용하세요.</StepOneDes>
-            </NumberContainer>
-          </StepTwo>
-          <StepThree>
-            <NumberContainer>
-              <Number>3.</Number>
-              <StepOneDes>저장 및 인쇄를 통해 이력서를 제출하세요!</StepOneDes>
-            </NumberContainer>
-          </StepThree>
-          <Button type='button' color='#04438B' width='2rem' height='2rem'>
-            내 이력서 만들기
-          </Button>
-          {/* 버튼을 추가하여 맨 아래에 배치 */}
-        </StepContainer>
+        <SectDiv>
+          <TitleTwo>Resumate &nbsp;</TitleTwo>
+          <TitleThree> 에서 이력서 작성하기</TitleThree>
+        </SectDiv>
+        <SectDiv>
+          <IConContainer>
+            <Image src={CordingIcon} alt='Resumates Example Resumes' />
+          </IConContainer>
+          <StepContainer>
+            <StepOne>
+              <NumberContainer>
+                <Number>1</Number>
+                <StepOneDes>이력서에 넣을 정보를 입력하세요.</StepOneDes>
+              </NumberContainer>
+            </StepOne>
+            <StepTwo>
+              <NumberContainer>
+                <Number>2</Number>
+                <StepOneDes>원하는 템플릿 양식을 골라 적용하세요.</StepOneDes>
+              </NumberContainer>
+            </StepTwo>
+            <StepThree>
+              <NumberContainer>
+                <Number>3</Number>
+                <StepOneDes>저장 및 인쇄를 통해 이력서를 제출하세요!</StepOneDes>
+              </NumberContainer>
+            </StepThree>
+            {/* 버튼을 추가하여 맨 아래에 배치 */}
+          </StepContainer>
+        </SectDiv>
+        <Button
+          type='button'
+          color='#04438B'
+          padding='1.8rem 2.4rem'
+          fontSize='1.8rem'
+          fontWeight='bold'
+          margin-top='20rem'
+        >
+          내 이력서 만들기
+        </Button>
       </Sections>
     </>
   );
