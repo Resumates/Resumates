@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const MainContainer = styled.div`
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #eff2f6;
-`;
-
 export const Section = styled.section`
   display: flex;
   justify-content: center;
@@ -14,6 +8,7 @@ export const Section = styled.section`
   background-color: #eff2f6;
   padding: 20px;
   border-radius: 10px;
+  height: 880px;
   max-width: 1200px;
   margin: 50px auto;
 `;
@@ -50,24 +45,38 @@ export const Image = styled.img`
   margin-left: 20px;
 `;
 
-export const Sections = styled.section`
+export const Sections = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #e2ecfa;
+  height: 880px;
   padding: 20px;
+`;
+
+export const SectDiv = styled.div`
+  display: flex;
+`;
+
+export const TitleTwo = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1e81ce;
+`;
+
+export const TitleThree = styled.h1`
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000000;
 `;
 
 export const IConContainer = styled.div`
   text-align: left;
   margin-right: 50px;
   max-width: 515px;
-`;
-
-export const TitleTwo = styled.div`
-  font-size: 2.4rem;
-  font-weight: bold;
-  margin-bottom: 20px;
 `;
 
 export const StepContainer = styled.div`
@@ -83,7 +92,7 @@ export const StepOne = styled.div`
   height: 11.2rem;
   background-color: #fff;
   border-radius: 20px;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 export const NumberContainer = styled.div`
   display: flex;
@@ -109,7 +118,7 @@ export const StepTwo = styled.div`
   background-color: #d4e6ff;
   border-radius: 20px;
   margin-left: 60px;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 export const StepThree = styled.div`
@@ -118,5 +127,5 @@ export const StepThree = styled.div`
   background-color: #a3c9ff;
   border-radius: 20px;
   margin-left: 100px;
+  margin-bottom: 3rem;
 `;
-
