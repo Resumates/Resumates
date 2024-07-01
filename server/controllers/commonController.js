@@ -19,7 +19,7 @@ exports.templateList = async (req, res) => {
 
 // 유저 데이터
 exports.userInfo = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   try {
     const user = await User.findOne({ userId: userId });
     if (!user) {
