@@ -26,9 +26,7 @@ export default function NavLinks() {
             <NavLink to='/mypage'>이력서 템플릿 보기</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/mypage' cla>
-              마이페이지
-            </NavLink>
+            <NavLink to='/mypage'>마이페이지</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to='/createResume'>
