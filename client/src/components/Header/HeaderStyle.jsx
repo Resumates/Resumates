@@ -1,22 +1,32 @@
 import styled from 'styled-components';
 
-export const MainHeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
+export const BgCont = styled.div`
+  width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
+  height: 9.5rem;
 `;
 
-export const LogoContainer = styled.div`
+export const MainHeaderContainer = styled.header`
+  max-width: 1320px;
+  height: 9.5rem;
+  margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+`;
+
+export const HeaderInner = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
 `;
 
 export const StyledImage = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 14.8rem;
+  height: 3.6rem;
   margin-right: 1rem;
 `;
 
@@ -38,30 +48,13 @@ export const NavList = styled.ul`
 export const NavItem = styled.li`
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 500;
 `;
 
-// export const Button = styled.button`
-//   background-color: #04438b;
-//   color: #fff;
-//   border: none;
-//   padding: 0.5rem 1rem;
-//   border-radius: 5px;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: #033369;
-//   }
-
-//   a {
-//     color: inherit;
-//     text-decoration: none;
-//   }
-// `;
-
-export const UserIcon = styled.div`
-  width: 40px;
-  height: 40px;
+export const UserIcon = styled.button`
+  width: 4.2rem;
+  height: 4.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,4 +63,5 @@ export const UserIcon = styled.div`
   font-size: 1.5rem;
   color: #04438b;
   cursor: pointer;
+  font-weight: 700;
 `;
