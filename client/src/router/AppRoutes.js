@@ -4,13 +4,13 @@ import MainNavigation from '../components/Navigation/MainNavigation';
 import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
 import Main from '../pages/home/Main';
+import MainLogin from '../pages/home/MainLogin';
 import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
 import { AuthContext } from '../components/common/context/auth-context';
 import { useAuth } from '../hooks/hookAuth';
-
 export default function AppRoutes() {
   const { token, login, logout, userId } = useAuth();
 
@@ -34,6 +34,9 @@ export default function AppRoutes() {
 
         {/* 메인 */}
         <Route path='/' element={<Main />} />
+
+        {/* 메인 로그인*/}
+        <Route path='/mainLogin' element={<MainLogin />} />
 
         {/* 템플릿 목록 */}
         <Route path='/list' element={<TemplateList />} />
