@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  // max-width: 1500px;
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--bgColor);
+  max-width: var(--large);
+`;
+
 export const ResumeWrap = styled.div`
-  /* max-width: 1320px; */
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
-  margin: 70px 0 0;
+  margin-top: 70px;
 `;
 
 export const InfoContainer = styled.div`
@@ -34,16 +47,24 @@ export const InfoList = styled.div`
   }
 `;
 
+// 이력서 작성 전체 틀
 export const ResumeContainer = styled.div`
-  width: 45.54%;
+  display: flex;
+  flex-direction: column;
+`;
+
+// 인적사항, 경력, 스킬, 경험/활동/교육, 자격/어학/수상, 포트폴리오 세션
+export const ResumeSection = styled.div`
+  width: 40%;
   height: max-content;
   margin: 0 2.8rem 0;
   padding: 3rem 3.5rem;
   background-color: #ffffff;
+  border-radius: 10px;
 `;
 
 export const TemplateContainer = styled.div`
-  width: 39.2%;
+  width: 44%;
 `;
 export const Template = styled.div`
   background-color: #ffff;
@@ -89,9 +110,10 @@ export const LabeledInput = styled.div`
 
   label {
     margin-left: 2px;
+    color: #acacac;
   }
   input {
-    margin-top: 5px;
+    margin-top: 7px;
     font-size: 1.6rem;
     color: #000000;
     font-weight: 600;
@@ -102,11 +124,20 @@ export const LabeledInput = styled.div`
   }
 `;
 
+export const GenderSelect = styled.select`
+  margin: 0;
+  padding: 10px 8px 10px;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+  border: 1px solid #acacac;
+`;
+
 export const UserProfile = styled.div`
   display: grid;
   grid-template-columns: 18.25% 32.85% 32.85% 16.06%;
   grid-template-rows: 60px 60px 60px;
-  margin-top: 1.5rem;
+  margin-top: 15px;
   font-size: 1.2rem;
   gap: 12px;
   margin-right: 36px;
