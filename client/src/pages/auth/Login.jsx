@@ -3,7 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/common/input';
 import { VALIDATOR_MINLENGTH } from '../../utils/validator';
 import { useForm } from '../../hooks/FormHook';
+import Resumes from '../../asset/images/resumes.png';
 import { AuthContext } from '../../components/common/context/auth-context';
+import {
+  LoginPage,
+  LoginContainer,
+  LoginImage,
+  LoginForm,
+  Title,
+  StyledForm,
+  StyledButton,
+  SocialLoginButton,
+} from '../../style/LoginStyle';
+import Button from '../../components/common/Button';
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -52,31 +64,67 @@ const Login = () => {
 
   return (
     <>
-      <h2>Login Required</h2>
-
-      <form onSubmit={authSubmitHandler}>
-        <Input
-          element='input'
-          id='userId'
-          type='text'
-          label='아이디'
-          validators={[VALIDATOR_MINLENGTH(6)]}
-          errorText='유효한 아이디 형식을 입력해주세요'
-          onInput={inputHandler}
-        />
-        <Input
-          element='input'
-          id='userPw'
-          type='password'
-          label='비밀번호'
-          validators={[VALIDATOR_MINLENGTH(6)]}
-          errorText='6자 이상의 비밀번호를 입력해주세요.'
-          onInput={inputHandler}
-        />
-        <button type='submit' disabled={!formState.isValid}>
-          LOGIN
-        </button>
-      </form>
+      <LoginPage>
+        <LoginContainer>
+          <LoginImage>
+            <img src={Resumes} alt='Login illustration' />
+          </LoginImage>
+          <LoginForm>
+            <Title>로그인</Title>
+            <StyledForm onSubmit={authSubmitHandler}>
+              <Input
+                element='input'
+                id='userId'
+                type='text'
+                label='아이디'
+                validators={[VALIDATOR_MINLENGTH(6)]}
+                errorText='유효한 아이디 형식을 입력해주세요'
+                onInput={inputHandler}
+              />
+              <Input
+                element='input'
+                id='userPw'
+                type='password'
+                label='비밀번호'
+                validators={[VALIDATOR_MINLENGTH(6)]}
+                errorText='6자 이상의 비밀번호를 입력해주세요.'
+                onInput={inputHandler}
+              />
+              <Button
+                color='#04438B'
+                padding='1.8rem 2.4rem'
+                fontSize='1.8rem'
+                fontWeight='bold'
+                margin-top='20rem'
+                type='submit'
+                disabled={!formState.isValid}
+              >
+                로그인
+              </Button>
+            </StyledForm>
+            <Button
+              color='Yellow'
+              padding='1.8rem 2.4rem'
+              margintop='1rem'
+              fontSize='1.8rem'
+              fontWeight='bold'
+              className='kakao'
+            >
+              카카오 계정으로 로그인
+            </Button>
+            <Button
+              color='#04438B'
+              padding='1.8rem 2.4rem'
+              margintop='1rem'
+              fontSize='1.8rem'
+              fontWeight='bold'
+              className='google'
+            >
+              구글 계정으로 로그인
+            </Button>
+          </LoginForm>
+        </LoginContainer>
+      </LoginPage>
     </>
   );
 };

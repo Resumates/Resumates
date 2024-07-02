@@ -6,6 +6,7 @@ import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
 import Main from '../pages/home/Main';
 import MainLogin from '../pages/home/MainLogin';
+import NormalResume from '../components/common/resume/NormalResume';
 import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
@@ -52,7 +53,7 @@ export default function AppRoutes() {
         <Route path='/mypage' element={<Mypage />} />
 
         {/* 계정 설정 */}
-        <Route path='/user/settings/:id' element={<Account />} />
+        <Route path='/user/settings' element={<Account />} />
       </Routes>
     </AuthContext.Provider>
   );

@@ -13,6 +13,7 @@ export default function ResumeSimple({ resumeDetail }) {
   console.log('portfolio', portfolio);
   console.log('skills', skills);
   console.log('work_experience', workExperience);
+  console.log('work_experience', workExperience);
 
   return (
     <TemplateCont>
