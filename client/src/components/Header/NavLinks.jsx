@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavList, NavItem, UserIcon } from './HeaderStyle';
 import Button from '../common/Button';
 import ModalUser from '../Modal/ModalUser';
+import { getUserData } from '../../api/commonAPI';
 
 export default function NavLinks() {
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
   const id = userId?.slice(0, 2);
+  const [userInfo, setUserInfo] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getUserData(userId);
+        setUserInfo(data);
+      } catch (error) {
+        console.error('유저데이터 조회 실패', error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId, token]);
 
   return (
     <NavList>
@@ -36,8 +52,10 @@ export default function NavLinks() {
             </NavLink>
           </NavItem>
           <NavItem>
-            <UserIcon type='button'>{id}</UserIcon>
-            {/* <ModalUser /> */}
+            <UserIcon type='button' onClick={() => setModalOpen(!modalOpen)}>
+              {id}
+            </UserIcon>
+            {modalOpen && <ModalUser userInfo={userInfo} closeModal={setModalOpen} />}
           </NavItem>
         </>
       )}

@@ -50,9 +50,10 @@ export const NavItem = styled.li`
   align-items: center;
   font-size: 1.6rem;
   font-weight: 500;
+  position: relative;
 `;
 
-export const UserIcon = styled.button`
+export const UserIcon = styled.div`
   width: 4.2rem;
   height: 4.2rem;
   display: flex;

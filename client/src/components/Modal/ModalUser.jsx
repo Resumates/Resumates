@@ -1,20 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import logOut from '../../asset/images/icon-logout.png';
+import userSet from '../../asset/images/icon-userset.png';
+import ModalLogout from './ModalLogout';
 
-export default function ModalUser() {
+export default function ModalUser({ userInfo }) {
+  const { userId, email } = userInfo;
+  const userName = userId?.slice(0, 2);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <UserModal>
       <UserInfo>
-        <UserIcon />
+        <UserIcon>{userName}</UserIcon>
         <div>
-          <p></p>
-          <p></p>
+          <UserId>{userId}</UserId>
+          <UserEmail>{email}</UserEmail>
         </div>
       </UserInfo>
       <UserBtn>
-        <AccountBtn></AccountBtn>
-        <LogoutBtn></LogoutBtn>
+        <Btncont>
+          <BtnIconImg src={userSet} alt='' width='20px' />
+          <p>계정관리</p>
+        </Btncont>
+        <Btncont>
+          <BtnIconImg src={logOut} alt='' width='16px' />
+          <p onClick={() => setModalOpen(!modalOpen)}>로그아웃</p>
+          {modalOpen && <ModalLogout setModalOpen={setModalOpen} />}
+        </Btncont>
       </UserBtn>
     </UserModal>
   );
@@ -23,14 +36,71 @@ export default function ModalUser() {
 const UserModal = styled.div`
   width: 320px;
   height: 144px;
+  border: 2px solid #ddd;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  box-sizing: border-box;
 `;
 
-const UserInfo = styled.div``;
+const UserInfo = styled.div`
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+`;
 
-const UserBtn = styled.div``;
+const UserId = styled.p`
+  color: var(--mainColor);
+  margin-bottom: 0.4rem;
+`;
+const UserEmail = styled.p`
+  color: #acacac;
+  font-size: 1.2rem;
+`;
 
-const UserIcon = styled.div``;
+const UserIcon = styled.div`
+  width: 4.2rem;
+  height: 4.2rem;
+  text-align: center;
+  line-height: 4.2rem;
+  font-size: 1.6rem;
+  color: var(--mainColor);
+  font-weight: 700;
+  background-color: #eff2f6;
+  border-radius: 100%;
+  border: 2px solid #ddd;
+`;
 
-const AccountBtn = styled.button``;
+const UserBtn = styled.div`
+  height: 42px;
+  border-top: 2px solid #ddd;
+  display: flex;
+`;
 
-const LogoutBtn = styled.button``;
+const BtnIconImg = styled.img`
+  padding-right: 0.8rem;
+`;
+
+const Btncont = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  width: 150px;
+  &:first-child {
+    border-right: 2px solid #ddd;
+  }
+  p {
+    color: #3482a9;
+    &:hover {
+      font-weight: 700;
+    }
+  }
+`;
