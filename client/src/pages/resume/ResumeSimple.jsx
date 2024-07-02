@@ -6,13 +6,13 @@ export default function ResumeSimple({ resumeDetail }) {
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
-  const { activity, certificate, portfolio, skills, work_experience } = content;
+  const { activity, certificate, portfolio, skills, workExperience } = content;
   // console.log(resumeDetail.structure.title);
   console.log('activity', activity);
   console.log('certificate', certificate);
   console.log('portfolio', portfolio);
   console.log('skills', skills);
-  console.log('work_experience', work_experience);
+  console.log('work_experience', workExperience);
 
   return (
     <TemplateCont>
@@ -30,7 +30,7 @@ export default function ResumeSimple({ resumeDetail }) {
       <ContentDiv>
         <h4>경력사항</h4>
         <ul>
-          {work_experience.map((itme) => (
+          {workExperience.map((itme) => (
             <li key={itme._id}>
               <p>{itme.duration}</p>
               <p>{itme.company}</p>
