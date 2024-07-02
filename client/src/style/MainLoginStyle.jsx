@@ -31,6 +31,7 @@ export const Paragraph = styled.p`
   color: #04438b;
   font-weight: bold;
   margin-bottom: 2rem;
+  line-height: 1.5;
 `;
 
 export const ImageContainer = styled.div`

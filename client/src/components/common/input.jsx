@@ -1,5 +1,12 @@
 import React, { useReducer, useEffect } from 'react';
-import { validate } from '../../utils/validator'; // 올바른 경로로 수정하세요
+import {
+  StyledInput,
+  StyledTextarea,
+  StyledFormControl,
+  StyledLabel,
+  StyledErrorText,
+} from '../../style/InputStyle';
+import { validate } from '../../utils/validator';
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -50,7 +57,7 @@ const Input = (props) => {
 
   const element =
     props.element === 'input' ? (
-      <input
+      <StyledInput
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
@@ -59,7 +66,7 @@ const Input = (props) => {
         value={inputState.value}
       />
     ) : (
-      <textarea
+      <StyledTextarea
         id={props.id}
         rows={props.rows || 3}
         onChange={changeHandler}
@@ -69,13 +76,15 @@ const Input = (props) => {
     );
 
   return (
-    <div
+    <StyledFormControl
       className={`form-control ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}
     >
-      <label htmlFor={props.id}>{props.label}</label>
+      <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
       {element}
-      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
-    </div>
+      {!inputState.isValid && inputState.isTouched && (
+        <StyledErrorText>{props.errorText}</StyledErrorText>
+      )}
+    </StyledFormControl>
   );
 };
 
