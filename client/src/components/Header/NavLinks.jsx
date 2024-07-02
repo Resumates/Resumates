@@ -55,7 +55,7 @@ export default function NavLinks() {
             <UserIcon type='button' onClick={() => setModalOpen(!modalOpen)}>
               {id}
             </UserIcon>
-            {modalOpen && <ModalUser userInfo={userInfo} closeModal={setModalOpen} />}
+            {modalOpen && <ModalUser userInfo={userInfo} />}
           </NavItem>
         </>
       )}

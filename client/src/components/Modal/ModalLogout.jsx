@@ -12,6 +12,7 @@ export default function ModalLogout({ setModalOpen }) {
     auth.logout();
     setModalOpen(false);
     navigate('/user/login');
+    window.location.reload();
   };
 
   return (

@@ -23,9 +23,9 @@ export default function ModalUser({ userInfo }) {
           <BtnIconImg src={userSet} alt='' width='20px' />
           <p>계정관리</p>
         </Btncont>
-        <Btncont>
+        <Btncont onClick={() => setModalOpen(!modalOpen)}>
           <BtnIconImg src={logOut} alt='' width='16px' />
-          <p onClick={() => setModalOpen(!modalOpen)}>로그아웃</p>
+          <p>로그아웃</p>
           {modalOpen && <ModalLogout setModalOpen={setModalOpen} />}
         </Btncont>
       </UserBtn>
@@ -46,6 +46,7 @@ const UserModal = styled.div`
   flex-direction: column;
   padding-top: 2rem;
   box-sizing: border-box;
+  z-index: 10;
 `;
 
 const UserInfo = styled.div`
@@ -94,6 +95,7 @@ const Btncont = styled.div`
   justify-content: center;
   height: 54px;
   width: 150px;
+  cursor: pointer;
   &:first-child {
     border-right: 2px solid #ddd;
   }
