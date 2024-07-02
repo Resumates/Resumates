@@ -13,6 +13,7 @@ export default function ResumeSimple({ resumeDetail }) {
   console.log('portfolio', portfolio);
   console.log('skills', skills);
   console.log('work_experience', workExperience);
+  console.log('work_experience', workExperience);
 
   return (
     <TemplateCont>
@@ -30,15 +31,15 @@ export default function ResumeSimple({ resumeDetail }) {
       <ContentDiv>
         <h4>경력사항</h4>
         <ul>
-          {workExperience.map((itme) => (
-            <li key={itme._id}>
-              <p>{itme.duration}</p>
-              <p>{itme.company}</p>
-              <p>{itme.department}</p>
-              <p>{itme.position}</p>
-              <p>{itme.desc}</p>
+          {workExperience.map((item, index) => (
+            <li key={index}>
+              <p>{item.duration}</p>
+              <p>{item.company}</p>
+              <p>{item.department}</p>
+              <p>{item.position}</p>
+              <p>{item.desc}</p>
               <p>연봉</p>
-              <p>{itme.salary}</p>
+              <p>{item.salary}</p>
             </li>
           ))}
         </ul>
