@@ -15,6 +15,7 @@ export const EditCont = styled.div`
   background-color: white;
   border-radius: 1rem;
   padding: 6rem 10rem;
+  position: relative;
 `;
 
 export const Tab = styled.div`
