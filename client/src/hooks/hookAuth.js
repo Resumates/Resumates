@@ -20,7 +20,9 @@ export const useAuth = () => {
     setToken(null);
     setTokenExpirationDate(null);
     setUserId(null);
-    localStorage.removeItem('userData');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expiration');
   }, []);
 
   useEffect(() => {
