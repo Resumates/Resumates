@@ -49,7 +49,7 @@ export default function AppRoutes() {
         <Route path='/resume/:id' element={<ResumeDetail />} />
 
         {/* 마이페이지 */}
-        <Route path='/mypage' element={<Mypage />} />
+        <Route path='/mypage/:id' element={<Mypage />} />
 
         {/* 계정 설정 */}
         <Route path='/user/settings' element={<Account />} />

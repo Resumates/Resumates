@@ -6,11 +6,13 @@ const { check } = require('express-validator');
 const router = express.Router();
 
 const usersControllers = require('../controllers/usersController');
+const mypageController = require('../controllers/mypageController');
 
 router.post('/login', usersControllers.login);
 router.post('/useridvaild', usersControllers.useridvaild);
 router.post('/emailvalid', usersControllers.emailvalid);
 router.post('/sendmail', usersControllers.sendmail);
 router.post('/signup', usersControllers.signup);
+router.get('/resume/:userId', mypageController.getByIdMyPage);
 
 module.exports = router;
