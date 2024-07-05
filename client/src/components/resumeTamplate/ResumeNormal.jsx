@@ -14,8 +14,8 @@ import {
   ExperienceDetail,
   List,
   ListItem,
-} from '../../style/ResumeNormalStyle';
-import { A4Container } from '../../style/ResumeNormalStyle';
+} from './ResumeNormalStyle';
+import { A4Container } from './ResumeNormalStyle';
 
 export default function ResumeNormal({ resumeDetail }) {
   console.log(resumeDetail);
