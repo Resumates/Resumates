@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getResumeDetail } from '../../api/commonAPI';
 import { useParams } from 'react-router-dom';
 import ResumeSimple from './ResumeSimple';
-import ResumeNormal from './ResumeNormal';
+//import ResumeNormal from './ResumeNormal';
 
 export default function ResumeDetail() {
   const { id } = useParams();
@@ -26,8 +26,7 @@ export default function ResumeDetail() {
   return (
     <div>
       ResumeDetail
-      {resumeDetail && <ResumeNormal resumeDetail={resumeDetail} />}
-     
+      {resumeDetail && <ResumeSimple   resumeDetail={resumeDetail} />}
     </div>
   );
 }
