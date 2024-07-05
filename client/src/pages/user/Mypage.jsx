@@ -30,7 +30,7 @@ export default function Mypage() {
     if (userId) {
       fetchResume();
     } else {
-      console.error('User ID not found in local storage');
+      console.error('UserID를 찾을수 없습니다');
     }
   }, [userId]);
 
