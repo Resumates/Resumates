@@ -4,6 +4,8 @@ import Button from '../common/Button';
 import close from '../../asset/images/icon-close.png';
 import PropTypes from 'prop-types';
 import { EditCont } from '../../style/AccountStyle';
+import { confirmPasswordAPI } from '../../api/authAPI';
+import { useNavigate } from 'react-router-dom';
 
 ModalPasswordConfirm.propTypes = {
   email: PropTypes.string,
@@ -13,9 +15,26 @@ ModalPasswordConfirm.propTypes = {
 
 export default function ModalPasswordConfirm({ email, setModalOpen, modalOpen }) {
   const [passwordValue, setPasswordValue] = useState('');
+  const [confirmErrorMsg, SetConfirmErrorMsg] = useState('');
+  const navigate = useNavigate();
 
   const closeModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const handleChange = (e) => {
+    setPasswordValue(e.target.value);
+    SetConfirmErrorMsg('');
+  };
+
+  const confirmPassword = async () => {
+    const confirmData = await confirmPasswordAPI(email, passwordValue);
+
+    if (confirmData.valid) {
+      navigate('/user/settings/email');
+    } else {
+      SetConfirmErrorMsg(confirmData.message);
+    }
   };
 
   return (
@@ -32,14 +51,15 @@ export default function ModalPasswordConfirm({ email, setModalOpen, modalOpen })
           <PasswordInput
             type='password'
             placeholder='비밀번호를 입력해주세요.'
-            onChange={(e) => setPasswordValue(e.target.value)}
+            onChange={handleChange}
           />
+          {confirmErrorMsg && <PasswordConfirmMsg>{confirmErrorMsg}</PasswordConfirmMsg>}
           {passwordValue ? (
-            <Button color='#04438B' padding='14px 180px'>
+            <Button color='#04438B' padding='14px 180px' margintop='30px' onClick={confirmPassword}>
               확인
             </Button>
           ) : (
-            <Button color='#D9D9D9' padding='14px 180px'>
+            <Button color='#D9D9D9' padding='14px 180px' margintop='30px'>
               확인
             </Button>
           )}
@@ -118,7 +138,6 @@ const PasswordInput = styled.input`
   margin-top: 1.4rem;
   padding: 0.4rem 0.4rem 1.4rem;
   border-bottom: 1px solid #3d79bf;
-  margin-bottom: 50px;
 
   &:placeholder-shown {
     padding-left: 0.4rem;
@@ -127,4 +146,10 @@ const PasswordInput = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const PasswordConfirmMsg = styled.p`
+  margin-top: 12px;
+  text-align: left;
+  color: #e00000;
 `;

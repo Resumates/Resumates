@@ -16,7 +16,7 @@ export const sendMailRoute = `${host}/user/sendmail`;
 export const validEmailRoute = `${host}/user/emailvalid`;
 
 // 아이디 검증
-export const validIdRoute = `${host}/user/userIdvaild`;
+export const validIdRoute = `${host}/user/useridvaild`;
 
 // 이력서 작성
 export const createResume = `${host}/resume`;
@@ -33,13 +33,16 @@ export const deleteResume = `${host}/resume/delete`;
 // 회원 정보
 export const getUserAccount = `${host}/user/settings`;
 
+// 비밀번호 확인
+export const confirmPassword = `${host}/user/userpwvaild`;
+
 // 회원 정보 수정
 export const setUserAccount = `${host}/user/edit`;
 
 // 이메일 재설정
 export const setUserEmail = `${host}/user/email-reset`;
 
-// 이메일 재설정
+// 비밀번호 재설정
 export const setUserPassword = `${host}/user/password-resett`;
 
 // 회원 탈퇴
