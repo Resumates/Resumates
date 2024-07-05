@@ -16,8 +16,8 @@ export default function Account() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const data = await getUserData(userId);
-        setUserInfo(data);
+        const { user } = await getUserData(userId);
+        setUserInfo(user);
       } catch (error) {
         console.error('유저데이터 조회 실패', error);
       }

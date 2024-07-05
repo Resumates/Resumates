@@ -21,7 +21,7 @@ export default function Mypage() {
   useEffect(() => {
     const fetchResume = async () => {
       try {
-        const response = await axios.get(`/user/resume/${userId}`);
+        const response = await axios.get(`http://localhost:5000/user/resume/${userId}`);
         setResume(response.data);
       } catch (error) {
         console.error('Error fetching resume:', error);
