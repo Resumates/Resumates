@@ -21,10 +21,14 @@ exports.templateList = async (req, res) => {
 exports.userInfo = async (req, res) => {
   const { userId } = req.params;
   try {
-    const user = await User.findOne({ userId: userId });
-    if (!user) {
+    const findUser = await User.findOne({ userId: userId });
+    if (!findUser) {
       return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
     }
+    const user = {
+      userId: findUser.userId,
+      email: findUser.email,
+    };
     return res.status(200).json({ user });
   } catch (error) {
     console.error('서버 연결 에러', error);

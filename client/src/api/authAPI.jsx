@@ -63,9 +63,10 @@ export const signupAPI = async (userId, userPw, email) => {
 };
 
 // 비밀번호 확인
-export const confirmPasswordAPI = async (userPw) => {
+export const confirmPasswordAPI = async (email, userPw) => {
   try {
     const { data } = await axios.post(confirmPassword, {
+      email,
       userPw,
     });
     return data;

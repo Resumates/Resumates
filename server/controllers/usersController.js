@@ -188,10 +188,15 @@ const signup = async (req, res) => {
 
 // 비밀번호 확인
 const userpwvaild = async (req, res) => {
-  const { userPw } = req.body;
-  console.log(userPw);
+  const { email, userPw } = req.body;
   try {
-    if (userPw) return res.status(200).json({ userPw: userPw });
+    const user = await User.findOne({ email: email });
+    const match = await bcrypt.compare(userPw, user.userPw);
+    if (match) {
+      return res.status(200).json({ message: '비밀번호가 일치합니다.', valid: true });
+    } else {
+      return res.status(200).json({ message: '비밀번호가 일치하지 않습니다.', valid: false });
+    }
   } catch (error) {
     console.error('서버 연결 에러', error);
     return res.status(500).json({ message: '서버 연결 실패' });

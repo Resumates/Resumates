@@ -6,12 +6,12 @@ import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
 import Main from '../pages/home/Main';
 import MainLogin from '../pages/home/MainLogin';
-import NormalResume from '../components/common/resume/NormalResume';
 import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
 import ResumeDetail from '../pages/resume/ResumeDetail';
+import SetEmail from '../pages/user/SetEmail';
 
 export default function AppRoutes() {
   const { token, login, logout, userId } = useAuth();
@@ -54,6 +54,9 @@ export default function AppRoutes() {
 
         {/* 계정 설정 */}
         <Route path='/user/settings' element={<Account />} />
+
+        {/* 이메일 설정 */}
+        <Route path='/user/settings/email' element={<SetEmail />} />
       </Routes>
     </AuthContext.Provider>
   );
