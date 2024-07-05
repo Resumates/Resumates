@@ -29,7 +29,12 @@ export const validEmailAPI = async (email) => {
     return data;
   } catch (error) {
     console.log('서버 error', error);
+    console.log('서버 error', error.response.data);
+
     console.log('이메일 검증오류:', error.response.status);
+    if (error.response.status === 409) {
+      return error.response.data;
+    }
   }
 };
 

@@ -30,6 +30,12 @@ export const BtnCont = styled.div`
   justify-content: end;
 `;
 
+export const EmailLabel = styled.label`
+  color: var(--mainColor);
+  font-weight: 600;
+  width: 10rem;
+`;
+
 export const InfoLabel = styled.label`
   color: var(--mainColor);
   font-weight: 600;
@@ -39,6 +45,14 @@ export const PasswordLabel = styled.label`
   color: var(--mainColor);
   font-weight: 600;
   width: 17rem;
+`;
+
+export const InputBox = styled.input`
+  width: 26rem;
+  padding: 1.5rem;
+  background-color: #f4f4f4;
+  border: 1px solid #acacac;
+  border-radius: 1rem;
 `;
 
 export const InfoBox = styled.div`
