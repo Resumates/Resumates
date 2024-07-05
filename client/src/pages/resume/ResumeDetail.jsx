@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getResumeDetail } from '../../api/commonAPI';
 import { useParams } from 'react-router-dom';
+import ResumeNormal from '../../components/resumeTamplate/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/ResumeSimple';
 
 export default function ResumeDetail() {
