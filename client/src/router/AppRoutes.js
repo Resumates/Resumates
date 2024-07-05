@@ -6,7 +6,6 @@ import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
 import Main from '../pages/home/Main';
 import MainLogin from '../pages/home/MainLogin';
-import NormalResume from '../components/common/resume/NormalResume';
 import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
