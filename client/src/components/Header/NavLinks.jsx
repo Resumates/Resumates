@@ -16,7 +16,7 @@ export default function NavLinks() {
     const fetchUserData = async () => {
       try {
         const data = await getUserData(userId);
-        setUserInfo(data);
+        setUserInfo(data.user);
       } catch (error) {
         console.error('유저데이터 조회 실패', error);
       }
@@ -42,7 +42,7 @@ export default function NavLinks() {
             <NavLink to='/mypage'>이력서 템플릿 보기</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/mypage'>마이페이지</NavLink>
+            <NavLink to={`/mypage/${userId}`}>마이페이지</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to='/createResume'>

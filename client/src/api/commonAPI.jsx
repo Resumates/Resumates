@@ -5,9 +5,9 @@ import { getUserAccount, resumeDetail } from './APIRoutes';
 export const getUserData = async (userId) => {
   try {
     const { data } = await axios.get(`${getUserAccount}/${userId}`);
-    return data.user;
+    return data;
   } catch (error) {
-    console.error('유저 데이터 불러오기 오류', error);
+    console.log('유저 데이터 불러오기 오류', error);
   }
 };
 

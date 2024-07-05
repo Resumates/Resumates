@@ -31,7 +31,7 @@ export const editResume = `${host}/resume/edit`;
 export const deleteResume = `${host}/resume/delete`;
 
 // 회원 정보
-export const getUserAccount = `${host}/user/settings`;
+export const getUserAccount = `${host}/user/account`;
 
 // 비밀번호 확인
 export const confirmPassword = `${host}/user/userpwvaild`;

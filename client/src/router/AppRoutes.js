@@ -50,10 +50,10 @@ export default function AppRoutes() {
         <Route path='/resume/:id' element={<ResumeDetail />} />
 
         {/* 마이페이지 */}
-        <Route path='/mypage/:id' element={<Mypage />} />
+        <Route path='/mypage/:userId' element={<Mypage />} />
 
         {/* 계정 설정 */}
-        <Route path='/user/settings' element={<Account />} />
+        <Route path='/user/account/:userId' element={<Account />} />
 
         {/* 이메일 설정 */}
         <Route path='/user/settings/email' element={<SetEmail />} />

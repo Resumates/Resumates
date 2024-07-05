@@ -11,7 +11,7 @@ export default function ModalUser({ userInfo }) {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const moveUserSet = () => {
-    navigate('/user/settings');
+    navigate(`/user/account/${userId}`);
     window.location.reload();
   };
 

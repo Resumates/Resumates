@@ -60,6 +60,21 @@ exports.detailResume = async (req, res) => {
   }
 };
 
+// 마이페이지
 exports.mypage = async (req, res) => {
-  res.send('마이페이지');
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+
+    // 여기서 에러 발생 (resume 값 얻을 수 없음)
+    const resume = await Resumes.find({ user_id : userId });
+    console.log(resume);
+    if (!resume) {
+      return res.status(404).send('이력서가 존재하지 않습니다.');
+    }
+    res.json(resume);
+  } catch (err) {
+    console.log('서버에러');
+    res.status(500).send(err.message);
+  }
 };
