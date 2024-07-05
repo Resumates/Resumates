@@ -1,59 +1,41 @@
 import styled from 'styled-components';
 
-export const MainBg = styled.div`
-  position: absolute;
-  displat: flex;
-  width: 132rem;
-  height: auto;
-  left: 0px;
-  top: 95px;
-  background: #eff2f6;
+export const ResumeCont = styled.div`
+  margin: 0 auto;
+  display: flex;
+  justify-items: center;
+  gap: 2rem;
+  flex-direction: column;
 `;
 
 export const ResumeSection = styled.div`
-  position: absolute;
   border: 1px solid #acacac;
-  width: 39rem;
-  height: 140rem;
-  left: 300px;
-  top: 230px;
+  height: 20rem;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
   padding-top: 20px;
 `;
 
-export const Title = styled.h2`
-  position: absolute;
-  right: 0rem;
-  top: 18rem;
+export const MyTitle = styled.h2`
+  text-align: center;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 28px;
   color: #04438b;
-`;
-
-export const MyTitle = styled.h2`
-  position: absolute;
-  left: 80px;
-  // top: 0px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 28px;
-  color: #000000;
+  margin-top: 70px;
+  margin-bottom: 36px;
 `;
 
 export const ImageContainer = styled.div`
   position: relative;
-  width: 252px;
-  height: 340px;
-  margin-top: 40px;
+  width: 120px;
+  height: 161px;
   background: url(${(props) => props.src});
   background-size: cover;
   border: 1px solid #acacac;
@@ -64,15 +46,12 @@ export const ImageContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 180px;
-  height: 50px;
+  width: 100px;
+  height: 30px;
   background: #ffffff;
   border-radius: 10px;
   border: 1px solid #04438b;
   cursor: pointer;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
   font-size: 16px;
   line-height: 19px;
   color: #04438b;
@@ -81,25 +60,22 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: absolute;
-  top: 20px;
+  padding: 10px 0;
 `;
 
 export const LargeButton = styled(Button)`
   background: #04438b;
   color: #ffffff;
   border: none;
-  position: relative;
-  margin: 20px 10px;
+  padding: 20px 0;
+  margin: 0;
 `;
 
 export const TemplateSection = styled.div`
-  position: absolute;
-  width: 898px;
+  position: relative;
+  width: 566px;
   border: 1px solid #acacac;
-  height: 1332px;
-  left: 820px;
-  top: 230px;
+  height: 752px;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -110,10 +86,9 @@ export const TemplateSection = styled.div`
 
 export const ButtonContainer = styled.div`
   position: absolute;
-  width: 898px;
-  left: 830px;
-  top: 1520px;
+  width: 300px;
+  top: 765px;
+  right: 0;
   display: flex;
-  justify-content: right;
-  margin-top: 20px;
+  gap: 2rem;
 `;
