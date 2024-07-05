@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const EditCont = styled.div`
+  width: 77rem;
+  min-height: 40rem;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 6rem 10rem;
+  position: relative;
+`;
+
 export const UserInfoSet = styled.form`
   display: flex;
   flex-direction: column;
