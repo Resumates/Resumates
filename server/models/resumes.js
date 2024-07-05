@@ -4,18 +4,20 @@ const Schema = mongoose.Schema;
 const resumesSchema = new mongoose.Schema(
   {
     // _id: { type: Schema.Types.ObjectId, require: true },
+    user_id: { type: Schema.Types.ObjectId, ref: 'User', require: true },
     name: { type: String, require: true },
     image: { type: String, default: '' },
     birth: { type: Date, require: true },
     gender: { type: String, enum: ['M', 'F'], require: true },
     phone: { type: String, require: true },
     email: { type: String, require: true },
+    address: { type: String, require: true },
     structure: {
       title: String,
       template_type: String,
-      // user_id: { type: Schema.Types.ObjectId, ref: 'User', require:true },
+
       content: {
-        work_experience: [
+        workExperience: [
           {
             company: String,
             department: String,
@@ -29,8 +31,8 @@ const resumesSchema = new mongoose.Schema(
         skills: Array,
         activity: [
           {
-            Category: String,
-            Organization: String,
+            category: String,
+            organization: String,
             duration: String,
             desc: String,
           },
@@ -39,7 +41,7 @@ const resumesSchema = new mongoose.Schema(
           {
             category: String,
             subject: String,
-            Organization: String,
+            organization: String,
             getDate: String,
             rank: String,
             score: String,
