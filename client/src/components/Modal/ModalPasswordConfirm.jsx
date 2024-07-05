@@ -28,9 +28,8 @@ export default function ModalPasswordConfirm({ email, setModalOpen, modalOpen })
   };
 
   const confirmPassword = async () => {
-
     const confirmData = await confirmPasswordAPI(email, passwordValue);
-    
+
     if (confirmData.valid) {
       navigate('/user/settings/email');
     } else {
