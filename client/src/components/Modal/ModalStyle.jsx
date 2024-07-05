@@ -25,6 +25,7 @@ export const Modal = styled.div`
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
+  z-index: 999;
 `;
 
 export const ModalTitle = styled.h2`

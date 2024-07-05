@@ -186,8 +186,21 @@ const signup = async (req, res) => {
   }
 };
 
+// 비밀번호 확인
+const userpwvaild = async (req, res) => {
+  const { userPw } = req.body;
+  console.log(userPw);
+  try {
+    if (userPw) return res.status(200).json({ userPw: userPw });
+  } catch (error) {
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
+  }
+};
+
 exports.login = login;
 exports.useridvaild = useridvaild;
 exports.emailvalid = emailvalid;
 exports.sendmail = sendmail;
 exports.signup = signup;
+exports.userpwvaild = userpwvaild;

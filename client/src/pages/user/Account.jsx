@@ -43,6 +43,7 @@ export default function Account() {
         ) : tab !== 'userPw' ? (
           <ModalPasswordConfirm
             email={userInfo.email}
+            userPw={userInfo.userPw}
             setModalOpen={setModalOpen}
             modalOpen={modalOpen}
           />

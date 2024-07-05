@@ -4,18 +4,28 @@ import Button from '../common/Button';
 import close from '../../asset/images/icon-close.png';
 import PropTypes from 'prop-types';
 import { EditCont } from '../../style/AccountStyle';
+import { confirmPasswordAPI } from '../../api/authAPI';
 
 ModalPasswordConfirm.propTypes = {
   email: PropTypes.string,
+  userPw: PropTypes.string,
   setModalOpen: PropTypes.func,
   modalOpen: PropTypes.bool,
 };
 
-export default function ModalPasswordConfirm({ email, setModalOpen, modalOpen }) {
+export default function ModalPasswordConfirm({ email, userPw, setModalOpen, modalOpen }) {
   const [passwordValue, setPasswordValue] = useState('');
+  console.log(userPw);
 
   const closeModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const confirmPassword = async () => {
+    console.log(passwordValue);
+
+    const result = await confirmPasswordAPI(passwordValue);
+    console.log(result);
   };
 
   return (
@@ -35,7 +45,7 @@ export default function ModalPasswordConfirm({ email, setModalOpen, modalOpen })
             onChange={(e) => setPasswordValue(e.target.value)}
           />
           {passwordValue ? (
-            <Button color='#04438B' padding='14px 180px'>
+            <Button color='#04438B' padding='14px 180px' onClick={confirmPassword}>
               확인
             </Button>
           ) : (

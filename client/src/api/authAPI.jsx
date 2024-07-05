@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { signupRoute, validIdRoute, validEmailRoute, sendMailRoute } from './APIRoutes';
+import {
+  signupRoute,
+  validIdRoute,
+  validEmailRoute,
+  sendMailRoute,
+  confirmPassword,
+} from './APIRoutes';
 
 // 아이디 검증
 export const vaildIdAPI = async (userId) => {
@@ -53,5 +59,18 @@ export const signupAPI = async (userId, userPw, email) => {
   } catch (error) {
     console.log('서버 error');
     console.error('회원가입오류', error);
+  }
+};
+
+// 비밀번호 확인
+export const confirmPasswordAPI = async (userPw) => {
+  try {
+    const { data } = await axios.post(confirmPassword, {
+      userPw,
+    });
+    return data;
+  } catch (error) {
+    console.log('서버 error');
+    console.error('비밀번호 확인 오류', error);
   }
 };

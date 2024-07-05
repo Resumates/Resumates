@@ -40,7 +40,3 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500); // 응답이 아직 전송되지 않은경우 상태 코드 설정 다른 미들웨어 중에서 발생한 오류 객체 상태 코드를 설정할수 있게함
   res.json({ message: error.message || 'An unkown error occurred!' }); //메세지 프로퍼티 추가
 });
-
-app.use('/test', function (req, res) {
-  res.send('홈입니다.');
-});
