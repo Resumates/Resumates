@@ -3,11 +3,17 @@ import styled from 'styled-components';
 import logOut from '../../asset/images/icon-logout.png';
 import userSet from '../../asset/images/icon-userset.png';
 import ModalLogout from './ModalLogout';
+import { useNavigate } from 'react-router-dom';
 
 export default function ModalUser({ userInfo }) {
   const { userId, email } = userInfo;
   const userName = userId?.slice(0, 2);
   const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const moveUserSet = () => {
+    navigate('/user/settings');
+    window.location.reload();
+  };
 
   return (
     <UserModal>
@@ -19,7 +25,7 @@ export default function ModalUser({ userInfo }) {
         </div>
       </UserInfo>
       <UserBtn>
-        <Btncont>
+        <Btncont onClick={moveUserSet}>
           <BtnIconImg src={userSet} alt='' width='20px' />
           <p>계정관리</p>
         </Btncont>
