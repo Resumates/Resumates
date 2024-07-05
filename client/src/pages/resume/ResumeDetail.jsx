@@ -27,7 +27,7 @@ export default function ResumeDetail() {
   return (
     <div>
       ResumeDetail
-      {resumeDetail && <ResumeSimple   resumeDetail={resumeDetail} />}
+      {/* {resumeDetail && <ResumeSimple   resumeDetail={resumeDetail} />} */}
     </div>
   );
 }
