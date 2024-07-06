@@ -15,10 +15,8 @@ export default function EditEmail() {
   };
 
   const changeEmail = async () => {
-    console.log('버튼클릭');
     if (correctCode === values.code) {
       const resetEmail = await resetEmailAPI(userId, values.email);
-      console.log(resetEmail);
       if (resetEmail) navigate(`/user/account/${userId}`);
       window.alert('이메일 변경이 완료되었습니다.');
     }

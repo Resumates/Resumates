@@ -45,8 +45,6 @@ export const sendEmailAPI = async (email) => {
     const { data } = await axios.post(sendMailRoute, {
       email,
     });
-    console.log(data);
-    console.log(data.message);
     return data;
   } catch (error) {
     console.log('이메일 인증 오류:', error);

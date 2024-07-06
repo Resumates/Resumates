@@ -78,7 +78,6 @@ const useSignup = () => {
   };
 
   const sendMail = async (e) => {
-    console.log('메일발송');
     e.preventDefault();
     setIsEmailValue(false);
     const { email } = values;
