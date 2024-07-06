@@ -14,5 +14,7 @@ router.post('/emailvalid', usersControllers.emailvalid);
 router.post('/sendmail', usersControllers.sendmail);
 router.post('/signup', usersControllers.signup);
 router.post('/userpwvaild', usersControllers.userpwvaild);
+router.post('/emailreset', usersControllers.emailreset);
+router.post('/passwordreset', usersControllers.passwordreset);
 
 module.exports = router;
