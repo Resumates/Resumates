@@ -145,6 +145,7 @@ const useSignup = () => {
     confirmPwError,
     emailErrorMsg,
     codeError,
+    correctCode,
     handleChange,
     validId,
     validCode,

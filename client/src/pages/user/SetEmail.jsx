@@ -5,7 +5,6 @@ import EditUserPassword from '../../components/account/EditUserPassword';
 import { H2 } from '../../style/CommonStyle';
 import { Container } from '../../style/Container';
 import { AccountCont, Tab, TabButton } from '../../style/AccountStyle';
-import ModalPasswordConfirm from '../../components/Modal/ModalPasswordConfirm';
 import { useNavigate } from 'react-router-dom';
 
 export default function SetEmail() {
@@ -39,7 +38,7 @@ export default function SetEmail() {
             비밀 번호 변경
           </TabButton>
         </Tab>
-        {tab === 'userEmail' && <EditEmail userInfo={userInfo} />}
+        {tab === 'userEmail' && <EditEmail />}
 
         {tab === 'userPw' && <EditUserPassword userInfo={userInfo} />}
       </AccountCont>

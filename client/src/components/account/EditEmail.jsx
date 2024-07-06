@@ -2,17 +2,26 @@ import React from 'react';
 import Button from '../common/Button';
 import { EditCont, UserInfoSet, InfoItem, EmailLabel, InputBox } from './EditAccountStyle';
 import useSignup from '../../hooks/useSignup';
-import PropTypes from 'prop-types';
+import { resetEmailAPI } from '../../api/authAPI';
+import { useNavigate } from 'react-router-dom';
 
-EditEmail.propTypes = {
-  userInfo: PropTypes.object,
-};
-
-export default function EditEmail({ userInfo }) {
-  const { values, emailErrorMsg, codeError, setValues, sendMail, validCode } = useSignup();
-  // const { email } = userInfo;
+export default function EditEmail() {
+  const navigate = useNavigate();
+  const { values, emailErrorMsg, codeError, correctCode, setValues, sendMail, validCode } =
+    useSignup();
+  const userId = localStorage.getItem('userId');
   const handleChange = (e) => {
     return setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const changeEmail = async () => {
+    console.log('버튼클릭');
+    if (correctCode === values.code) {
+      const resetEmail = await resetEmailAPI(userId, values.email);
+      console.log(resetEmail);
+      if (resetEmail) navigate(`/user/account/${userId}`);
+      window.alert('이메일 변경이 완료되었습니다.');
+    }
   };
 
   return (
@@ -36,7 +45,7 @@ export default function EditEmail({ userInfo }) {
           </InfoItem>
           <p>{codeError}</p>
         </UserInfoSet>
-        <Button type='button' padding='16px 14px'>
+        <Button type='button' padding='16px 14px' onClick={changeEmail}>
           이메일 변경하기
         </Button>
       </EditCont>

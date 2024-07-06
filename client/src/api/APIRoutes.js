@@ -40,10 +40,10 @@ export const confirmPassword = `${host}/user/userpwvaild`;
 export const setUserAccount = `${host}/user/edit`;
 
 // 이메일 재설정
-export const setUserEmail = `${host}/user/email-reset`;
+export const setUserEmail = `${host}/user/emailreset`;
 
 // 비밀번호 재설정
-export const setUserPassword = `${host}/user/password-resett`;
+export const setUserPassword = `${host}/user/passwordreset`;
 
 // 회원 탈퇴
 export const userDelete = `${host}/user/`;
