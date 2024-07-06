@@ -1,15 +1,24 @@
 import React from 'react';
 import Button from '../common/Button';
-import { EditCont, UserInfoSet, InfoItem, EmailLabel, InputBox } from './EditAccountStyle';
+import {
+  EditCont,
+  UserInfoSet,
+  InfoItem,
+  EmailLabel,
+  InputBox,
+  NoticeText,
+  ButtonCont,
+} from './EditAccountStyle';
 import useSignup from '../../hooks/useSignup';
 import { resetEmailAPI } from '../../api/authAPI';
 import { useNavigate } from 'react-router-dom';
 
 export default function EditEmail() {
+  const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
   const { values, emailErrorMsg, codeError, correctCode, setValues, sendMail, validCode } =
     useSignup();
-  const userId = localStorage.getItem('userId');
+
   const handleChange = (e) => {
     return setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -33,7 +42,7 @@ export default function EditEmail() {
               인증 메일 발송
             </Button>
           </InfoItem>
-          <p>{emailErrorMsg}</p>
+          <NoticeText>{emailErrorMsg}</NoticeText>
           <InfoItem>
             <EmailLabel>인증코드입력</EmailLabel>
             <InputBox type='text' name='code' onChange={handleChange}></InputBox>
@@ -41,11 +50,13 @@ export default function EditEmail() {
               인증하기
             </Button>
           </InfoItem>
-          <p>{codeError}</p>
+          <NoticeText>{codeError}</NoticeText>
         </UserInfoSet>
-        <Button type='button' padding='16px 14px' onClick={changeEmail}>
-          이메일 변경하기
-        </Button>
+        <ButtonCont>
+          <Button type='button' padding='16px 32px' onClick={changeEmail}>
+            변경하기
+          </Button>
+        </ButtonCont>
       </EditCont>
     </>
   );
