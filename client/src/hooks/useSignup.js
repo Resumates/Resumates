@@ -7,6 +7,7 @@ const useSignup = () => {
     userId: '',
     userPw: '',
     confirmPw: '',
+    currentPw: '',
     email: '',
     code: '',
   });

@@ -1,5 +1,6 @@
 import React from 'react';
 import check from '../../asset/images/icon-check.png';
+import useSignup from '../../hooks/useSignup';
 import Button from '../common/Button';
 import {
   EditCont,
@@ -13,10 +14,24 @@ import {
   CheckImg,
   CheckBoxText,
 } from './EditAccountStyle';
+import { resetPasswordAPI } from '../../api/authAPI';
 
 export default function EditUserPassword({ userInfo }) {
-  const { userId, userPw } = userInfo;
-  console.log(userPw);
+  const { values, setValues } = useSignup();
+  const { userId } = userInfo;
+  const { currentPw, userPw, confirmPw } = values;
+
+  const handleChange = (e) => {
+    return setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const changePassword = async (e) => {
+    e.preventDefault();
+    // confirmPasswordAPI(userPw, confirmPw);
+    const res = await resetPasswordAPI(userId, currentPw, userPw, confirmPw);
+    console.log(res);
+    console.log(res.message);
+  };
   return (
     <EditCont>
       <UserInfoSet>
@@ -26,22 +41,37 @@ export default function EditUserPassword({ userInfo }) {
         </InfoItem>
         <InfoItem>
           <PasswordLabel>현재비밀번호</PasswordLabel>
-          <InputPassword type='password' autoComplete='new-password' />
+          <InputPassword
+            name='currentPw'
+            type='password'
+            autoComplete='new-password'
+            onChange={handleChange}
+          />
         </InfoItem>
         <InfoItem>
           <PasswordLabel>새 비밀번호</PasswordLabel>
-          <InputPassword type='password' autoComplete='new-password' />
+          <InputPassword
+            name='userPw'
+            type='password'
+            autoComplete='new-password'
+            onChange={handleChange}
+          />
         </InfoItem>
         <InfoItem>
           <PasswordLabel>새 비밀번호 확인</PasswordLabel>
-          <InputPassword type='password' autoComplete='new-password' />
+          <InputPassword
+            name='confirmPw'
+            type='password'
+            autoComplete='new-password'
+            onChange={handleChange}
+          />
         </InfoItem>
         <BtnCont>
           <CheckBox>
             <CheckImg src={check} alt='체크' />
             <CheckBoxText>비밀번호보기</CheckBoxText>
           </CheckBox>
-          <Button padding='16px 14px' marginLeft='18rem'>
+          <Button padding='16px 14px' marginLeft='18rem' onClick={changePassword}>
             변경하기
           </Button>
         </BtnCont>

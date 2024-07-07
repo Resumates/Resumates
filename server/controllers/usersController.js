@@ -224,8 +224,31 @@ const emailreset = async (req, res) => {
 
 // 비밀번호 재설정
 const passwordreset = async (req, res) => {
-  const { userPw } = req.body;
-  console.log(userPw);
+  const { userId, currentPw, userPw, confirmPw } = req.body;
+  console.log(userId);
+  console.log('현재 비밀번호', currentPw);
+  console.log('새 비밀번호', userPw);
+  console.log('새 비밀번호 확인', confirmPw);
+  try {
+    const user = await User.findOne({ userId: userId });
+    console.log(user);
+    console.log(user.userPw);
+    const match = await bcrypt.compare(currentPw, user.userPw);
+    console.log(match);
+    if (match) {
+      if (userPw === confirmPw) {
+        const hashPw = await bcrypt.hash(userPw, 10);
+        console.log(hashPw);
+        await User.updateOne({ userId: user.userId }, { $set: { userPw: hashPw } });
+        return res.status(200).json({ message: '비밀번호 변경 성공' });
+      }
+    } else {
+      res.status(401).json({ message: '사용자 비밀번호가 일치하지 않습니다.', valid: false });
+    }
+  } catch (error) {
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
+  }
 };
 
 exports.login = login;
