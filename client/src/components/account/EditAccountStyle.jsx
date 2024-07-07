@@ -48,7 +48,7 @@ export const PasswordLabel = styled.label`
 `;
 
 export const InputBox = styled.input`
-  width: 26rem;
+  width: 27rem;
   padding: 1.5rem;
   background-color: #f4f4f4;
   border: 1px solid #acacac;
@@ -93,4 +93,18 @@ export const CheckImg = styled.img`
 
 export const CheckBoxText = styled.p`
   padding-left: 0.8rem;
+`;
+
+export const NoticeText = styled.p`
+  color: #e00000;
+  font-size: 1.2rem;
+  padding-left: 12rem;
+  margin-top: -2rem;
+  margin-bottom: 3rem;
+`;
+
+export const ButtonCont = styled.div`
+  text-align: center;
+  padding-right: 0.8rem;
+  margin-top: 5rem;
 `;

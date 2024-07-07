@@ -31,7 +31,10 @@ export default function SetEmail() {
       <AccountCont>
         <H2>계정관리</H2>
         <Tab>
-          <TabButton $active={tab === 'userEmail'} onClick={() => navigate('/user/settings')}>
+          <TabButton
+            $active={tab === 'userEmail'}
+            onClick={() => navigate(`/user/account/${userId}`)}
+          >
             회원 정보 수정
           </TabButton>
           <TabButton $active={tab === 'userPw'} onClick={() => setTab('userPw')}>
