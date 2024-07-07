@@ -14,14 +14,14 @@ import {
 } from '../../style/MyPageStyle';
 
 export default function Mypage() {
-  const [resume, setResume] = useState(null);
+  const [resume, setResume] = useState('');
   const userId = window.localStorage.getItem('userId');
   console.log(userId);
 
   useEffect(() => {
     const fetchResume = async () => {
       try {
-        const response = await axios.get(`/user/resume/${userId}`);
+        const response = await axios.get(`http://localhost:5000/user/resume/${userId}`);
         setResume(response.data);
       } catch (error) {
         console.error('Error fetching resume:', error);
