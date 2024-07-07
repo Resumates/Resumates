@@ -31,7 +31,7 @@ export const editResume = `${host}/resume/edit`;
 export const deleteResume = `${host}/resume/delete`;
 
 // 회원 정보
-export const getUserAccount = `${host}/user/settings`;
+export const getUserAccount = `${host}/user/account`;
 
 // 비밀번호 확인
 export const confirmPassword = `${host}/user/userpwvaild`;
@@ -40,10 +40,10 @@ export const confirmPassword = `${host}/user/userpwvaild`;
 export const setUserAccount = `${host}/user/edit`;
 
 // 이메일 재설정
-export const setUserEmail = `${host}/user/email-reset`;
+export const setUserEmail = `${host}/user/emailreset`;
 
 // 비밀번호 재설정
-export const setUserPassword = `${host}/user/password-resett`;
+export const setUserPassword = `${host}/user/passwordreset`;
 
 // 회원 탈퇴
 export const userDelete = `${host}/user/`;

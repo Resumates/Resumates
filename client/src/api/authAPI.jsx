@@ -5,6 +5,7 @@ import {
   validEmailRoute,
   sendMailRoute,
   confirmPassword,
+  setUserEmail,
 } from './APIRoutes';
 
 // 아이디 검증
@@ -29,7 +30,12 @@ export const validEmailAPI = async (email) => {
     return data;
   } catch (error) {
     console.log('서버 error', error);
+    console.log('서버 error', error.response.data);
+
     console.log('이메일 검증오류:', error.response.status);
+    if (error.response.status === 409) {
+      return error.response.data;
+    }
   }
 };
 
@@ -73,5 +79,19 @@ export const confirmPasswordAPI = async (email, userPw) => {
   } catch (error) {
     console.log('서버 error');
     console.error('비밀번호 확인 오류', error);
+  }
+};
+
+// 이메일 재설정
+export const resetEmailAPI = async (userId, email) => {
+  console.log(userId);
+  try {
+    const { data } = await axios.post(setUserEmail, {
+      userId,
+      email,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };

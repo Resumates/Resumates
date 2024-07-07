@@ -25,6 +25,11 @@ const useSignup = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const validateId = (id) => {
     if (id.length < 6) {
       setIdError('아이디는 최소 6자 이상이어야 합니다.');
@@ -73,17 +78,23 @@ const useSignup = () => {
   };
 
   const sendMail = async (e) => {
+    console.log('메일발송');
     e.preventDefault();
     setIsEmailValue(false);
     const { email } = values;
     if (email === '') {
       setIsEmailValue(true);
+      setEmailErrorMsg('');
+      return;
+    }
+    if (!validateEmail(email)) {
+      setEmailErrorMsg('이메일 형식이 올바르지 않습니다.');
       return;
     }
 
     const validData = await validEmailAPI(email);
     console.log(validData);
-    if (validData.valid) {
+    if (validData.valid === true) {
       const sendEmail = await sendEmailAPI(email);
       if (sendEmail) {
         setEmailErrorMsg(sendEmail.message);
@@ -92,7 +103,7 @@ const useSignup = () => {
         setEmailErrorMsg(validData.message);
       }
     } else {
-      setEmailErrorMsg('');
+      setEmailErrorMsg(validData.message);
     }
   };
 
@@ -126,6 +137,7 @@ const useSignup = () => {
 
   return {
     values,
+    setValues,
     isIdValue,
     isEmailValue,
     idError,
@@ -133,6 +145,7 @@ const useSignup = () => {
     confirmPwError,
     emailErrorMsg,
     codeError,
+    correctCode,
     handleChange,
     validId,
     validCode,
