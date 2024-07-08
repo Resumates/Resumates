@@ -51,16 +51,17 @@ export const InfoList = styled.div`
 export const ResumeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 40%;
+  height: max-content;
+  margin: 0 25px 0;
 `;
 
 // 인적사항, 경력, 스킬, 경험/활동/교육, 자격/어학/수상, 포트폴리오 세션
 export const ResumeSection = styled.div`
-  width: 40%;
-  height: max-content;
-  margin: 0 2.8rem 0;
   padding: 3rem 3.5rem;
   background-color: #ffffff;
   border-radius: 10px;
+  margin-bottom: 28px;
 `;
 
 export const TemplateContainer = styled.div`
@@ -129,18 +130,46 @@ export const GenderSelect = styled.select`
   padding: 10px 8px 10px;
   border-radius: 5px;
   display: flex;
-  text-align: center;
   border: 1px solid #acacac;
 `;
 
 export const UserProfile = styled.div`
   display: grid;
-  grid-template-columns: 18.25% 32.85% 32.85% 16.06%;
-  grid-template-rows: 60px 60px 60px;
+  grid-template-columns: ${({ id }) =>
+    id === 'personalInfo'
+      ? '20% 27% 33% 13%;'
+      : id === 'career'
+        ? '27% 18% 16% 16% 14%;'
+        : id === 'skills'
+          ? '100%;'
+          : id === 'activity'
+            ? '24% 37% 16% 16%;'
+            : id === 'qualification'
+              ? '18.25% 32.85% 32.85% 16.06%;'
+              : id === 'portfolio'
+                ? '100%;'
+                : 'auto;'}
+
+  grid-template-rows: ${({ id }) =>
+    id === 'personalInfo'
+      ? '60px 60px 60px;'
+      : id === 'career'
+        ? '60px 60px 60px;'
+        : id === 'skills'
+          ? '188px 60px;'
+          : id === 'activity'
+            ? '60px 120px;'
+            : id === 'qualification'
+              ? '60px 60px 60px;'
+              : id === 'portfolio'
+                ? '79px;'
+                : '60px 60px 60px;'}
+
   margin-top: 15px;
   font-size: 1.2rem;
   gap: 12px;
-  margin-right: 36px;
+
+  // 인적사항
   .photo {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -183,4 +212,115 @@ export const UserProfile = styled.div`
     grid-row-start: 3;
     grid-row-end: 4;
   }
+
+  // 경력
+  .company {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .department {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 60%;
+  }
+  .position {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .salary {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .employmentStartDate{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .employmentEndDate{
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .workStatus {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .taskDescription {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    grid-row-end: 4;
+  }
+
+  .skillsBox{
+  grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .skill {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  // 경험 & 활동 & 교육
+  .category{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .desc{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .startDate{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+  }
+  .endDate {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .description{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  // 자격 & 어학 & 수상
+
+
+  // 포트폴리오
+.portfolioURL{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
 `;
