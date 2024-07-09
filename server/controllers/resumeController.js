@@ -64,7 +64,7 @@ const resumeController = {
       // deleteOne
       const resume = await Resumes.findOneAndDelete({
         _id: resumeId,
-      }).collation({
+      }).collection({
         locale: 'en',
         strength: 2,
       });

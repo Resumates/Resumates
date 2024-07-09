@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   ResumeContainer,
+  A4Container,
   Header,
   Name,
   ContactInfo,
@@ -15,8 +16,8 @@ import {
   List,
   ListItem,
 } from './ResumeNormalStyle';
-import { A4Container } from './ResumeNormalStyle';
 
+import { ProfileImage } from './ResumeCasualStyle';
 export default function ResumeNormal({ resumeDetail }) {
   console.log(resumeDetail);
   const { name, birth, email, phone, address } = resumeDetail;
@@ -33,6 +34,7 @@ export default function ResumeNormal({ resumeDetail }) {
   return (
     <A4Container>
       <Header>
+        <ProfileImage src='' alt='프로필 이미지' />
         <Name>
           <img src='' alt='' />
           {name}
