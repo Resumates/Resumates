@@ -1,23 +1,28 @@
 import React from 'react';
-import { GenderSelect, LabeledInput } from '../../style/CreateResumeStyle';
+import { LabeledSelect, LabeledInput } from '../../style/CreateResumeStyle';
 
 export function InputField({ label, type, name, placeholder, required }) {
   return (
     <LabeledInput className={name}>
-      {label !== 'photo' && label !== 'skillsBox' && <label htmlFor={name}>{label}</label>}
+      {/* {label !== 'photo' && label !== 'skillsBox' && <label htmlFor={name}>{label}</label>} */}
+      {label !== 'skillsBox' && <label htmlFor={name}>{label}</label>}
+
       <input type={type} name={name} placeholder={placeholder} required={required}></input>
     </LabeledInput>
   );
 }
 
-export function SelectField({ name, required, data }) {
+export function SelectField({ label, name, required, data }) {
   return (
-    <GenderSelect className={name} name={name} required={required}>
-      {data.map((option) => (
-        <option key={option.id} value={option.id}>
-          {option.name}
-        </option>
-      ))}
-    </GenderSelect>
+    <LabeledSelect className={name}>
+      <p>{label}</p>
+      <select name={name} id={name} required={required}>
+        {data.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
+      </select>
+    </LabeledSelect>
   );
 }
