@@ -240,10 +240,12 @@ const passwordreset = async (req, res) => {
         const hashPw = await bcrypt.hash(userPw, 10);
         console.log(hashPw);
         await User.updateOne({ userId: user.userId }, { $set: { userPw: hashPw } });
-        return res.status(200).json({ message: '비밀번호 변경 성공' });
+        return res.status(200).json({ message: '비밀번호 변경 성공', valid: true });
+      } else {
+        return res.status(401).json({ message: '비밀번호가 일치하지 않습니다.', valid: false });
       }
     } else {
-      res.status(401).json({ message: '사용자 비밀번호가 일치하지 않습니다.', valid: false });
+      res.status(401).json({ message: '사용자 비밀번호가 올바르지 않습니다.', valid: false });
     }
   } catch (error) {
     console.error('서버 연결 에러', error);
