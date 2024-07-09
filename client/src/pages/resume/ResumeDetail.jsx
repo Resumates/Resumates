@@ -3,7 +3,8 @@ import { getResumeDetail } from '../../api/commonAPI';
 import { useParams } from 'react-router-dom';
 import ResumeNormal from '../../components/resumeTamplate/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/ResumeSimple';
-
+import ResumeCasual from '../../components/resumeTamplate/ResumeCasual';
+import { ButtonContainer, TemplateSection, LargeButton } from '../../style/MyPageStyle';
 export default function ResumeDetail() {
   const { id } = useParams();
   const [resumeDetail, setResumeDetail] = useState(null);
@@ -25,8 +26,28 @@ export default function ResumeDetail() {
 
   return (
     <div>
-      ResumeDetail
-      {resumeDetail && <ResumeSimple resumeDetail={resumeDetail} />}
+      <div>
+        <TemplateSection>
+          {resumeDetail && (
+            <div>
+              {resumeDetail.structure.template_type === 'normal' && (
+                <ResumeNormal resumeDetail={resumeDetail} />
+              )}
+              {resumeDetail.structure.template_type === 'simple' && (
+                <ResumeSimple resumeDetail={resumeDetail} />
+              )}
+              {resumeDetail.structure.template_type === 'casual' && (
+                <ResumeCasual resumeDetail={resumeDetail} />
+              )}
+            </div>
+          )}
+          <ButtonContainer>
+            <LargeButton>수정하기</LargeButton>
+            <LargeButton>삭제하기</LargeButton>
+            <LargeButton>인쇄하기</LargeButton>
+          </ButtonContainer>
+        </TemplateSection>
+      </div>
     </div>
   );
 }
