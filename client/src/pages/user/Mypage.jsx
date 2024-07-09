@@ -29,6 +29,13 @@ export default function Mypage() {
   const userId = window.localStorage.getItem('userId');
   console.log(userId);
 
+  const [selectedResume, setSelectedResume] = useState('');
+
+  const handleClickResum = (item) => {
+    setSelectedResume(item);
+    console.log('클릭한 selected', item);
+  };
+
   useEffect(() => {
     const fetchResume = async () => {
       try {
@@ -74,14 +81,14 @@ export default function Mypage() {
           <List>
             {resume?.map((item) => {
               const resumeType = item.structure.template_type;
-              console.log(item); //item.structure
               if (resumeType === 'simple') {
                 return (
                   <ListItem key={item._id}>
                     <ImageContainer
-                      onClick={(e) => {
-                        navigate(`/resume/${e.target.id}`);
-                      }}
+                      // onClick={(e) => {
+                      //   navigate(`/resume/${e.target.id}`);
+                      // }}
+                      onClick={() => handleClickResum(item)}
                       src={simple}
                       id={item._id}
                     />
@@ -114,6 +121,12 @@ export default function Mypage() {
             })}
           </List>
         </ImgContanierSection>
+        {selectedResume && (
+          <div style={{ width: '100%', height: '50%', border: '1px soilid black' }}>
+            <h2>sdsdsd</h2>
+            <p>{selectedResume.address}</p>
+          </div>
+        )}
       </ResumeCont>
     </Container>
   );

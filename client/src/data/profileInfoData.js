@@ -3,7 +3,7 @@ export const profileInfo = [
     id: 'personalInfo',
     label: '인적사항',
     content: [
-      { label: 'photo', type: 'file', name: 'photo', placeholder: '', required: 'required' },
+      { label: '사진 추가', type: 'file', name: 'photo', placeholder: '', required: 'required' },
       { label: '이름', type: 'text', name: 'name', placeholder: '홍길동', required: 'required' },
       {
         label: '생년월일',

@@ -116,7 +116,7 @@ export const LabeledInput = styled.div`
     margin-top: 7px;
     font-size: 1.6rem;
     color: #000000;
-    font-weight: 600;
+    font-weight: 500;
   }
   input:focus {
     outline: none;
