@@ -26,6 +26,7 @@ import ModalUser from '../../components/Modal/ModalUser';
 export default function Mypage() {
   const [resume, setResume] = useState(null);
   const navigate = useNavigate();
+
   const userId = window.localStorage.getItem('userId');
   console.log(userId);
 
@@ -70,6 +71,7 @@ export default function Mypage() {
     <Container>
       <MyTitle path='/mypage'>마이페이지</MyTitle>
       <ResumeCont>
+       
         <ImgContanierSection>
           <List>
             {resume?.map((item) => {
@@ -84,6 +86,7 @@ export default function Mypage() {
                       }}
                       src={simple}
                       id={item._id}
+          
                     />
                   </ListItem>
                 );
