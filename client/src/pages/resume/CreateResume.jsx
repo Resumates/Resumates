@@ -14,10 +14,26 @@ import {
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
-// import { Container } from '../../style/Container';
 import { InputField, SelectField } from '../../components/resumeForm/InputField';
 import { profileInfo } from '../../data/profileInfoData';
+import { useRef } from 'react';
+import { AddButton } from '../../components/common/AddButton';
 export default function CreateResume() {
+  // 각 profileInfo 항목에 대한 ref를 생성
+  const refs = useRef(
+    profileInfo.reduce((acc, info) => {
+      acc[info.id] = React.createRef();
+      return acc;
+    }, {}),
+  );
+
+  // 특정 스크롤로 이동
+  const scrollToItem = (id) => {
+    if (refs.current[id] && refs.current[id].current) {
+      refs.current[id].current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <ResumeWrap>
       <InfoContainer>
@@ -28,7 +44,7 @@ export default function CreateResume() {
           <ul>
             {profileInfo.map((info) => (
               <li key={info.id}>
-                <a>{info.label}</a>
+                <a onClick={() => scrollToItem(info.id)}>{info.label}</a>
               </li>
             ))}
           </ul>
@@ -36,13 +52,14 @@ export default function CreateResume() {
       </InfoContainer>
       <ResumeContainer>
         {profileInfo.map((info) => (
-          <ResumeSection key={info.id}>
+          <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
             <UserProfile id={info.id}>
               {info.content?.map((field) =>
-                field.name === 'gender' ? (
+                field.name === 'gender' || field.name === 'category' ? (
                   <SelectField
                     key={field.name}
+                    label={field.label}
                     name={field.name}
                     required={field.required}
                     data={field.data}
@@ -59,6 +76,7 @@ export default function CreateResume() {
                 ),
               )}
             </UserProfile>
+            {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
           </ResumeSection>
         ))}
       </ResumeContainer>

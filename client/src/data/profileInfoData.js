@@ -3,7 +3,7 @@ export const profileInfo = [
     id: 'personalInfo',
     label: '인적사항',
     content: [
-      { label: 'photo', type: 'file', name: 'photo', placeholder: '', required: 'required' },
+      { label: '사진 추가', type: 'file', name: 'photo', placeholder: '', required: 'required' },
       { label: '이름', type: 'text', name: 'name', placeholder: '홍길동', required: 'required' },
       {
         label: '생년월일',
@@ -19,7 +19,7 @@ export const profileInfo = [
         placeholder: '남성/여성',
         required: 'required',
         data: [
-          { id: '', name: '성별' },
+          { id: '', name: '선택' },
           { id: 'M', name: '남성' },
           { id: 'F', name: '여성' },
         ],
@@ -140,6 +140,12 @@ export const profileInfo = [
         name: 'category',
         placeholder: '교육',
         required: 'required',
+        data: [
+          { id: '', name: '구분' },
+          { id: 'experience', name: '경험' },
+          { id: 'activity', name: '활동' },
+          { id: 'education', name: '교육' },
+        ],
       },
       {
         label: '기관 / 장소명',
@@ -171,7 +177,46 @@ export const profileInfo = [
       },
     ],
   },
-  { id: 'qualification', label: '자격/어학/수상' },
+  {
+    id: 'qualification',
+    label: '자격 / 어학 / 수상',
+    content: [
+      {
+        label: '활동구분선택',
+        type: 'text',
+        name: 'category',
+        placeholder: '자격증',
+        required: 'required',
+        data: [
+          { id: '', name: '구분' },
+          { id: 'certification', name: '자격증' },
+          { id: 'languageTest', name: '어학시험' },
+          { id: 'wards', name: '수상내역' },
+        ],
+      },
+      {
+        label: '자격증명',
+        type: 'text',
+        name: 'certificateName',
+        placeholder: '정보처리기사',
+        required: 'required',
+      },
+      {
+        label: '발행처 / 기관',
+        type: 'text',
+        name: 'organization',
+        placeholder: '한국산업인력공단',
+        required: 'required',
+      },
+      {
+        label: '취득년월',
+        type: 'text',
+        name: 'getDate',
+        placeholder: '2021.03',
+        required: 'required',
+      },
+    ],
+  },
   {
     id: 'portfolio',
     label: '포트폴리오',
