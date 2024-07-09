@@ -21,6 +21,14 @@ export const Header = styled.header`
   margin-bottom: 20px;
 `;
 
+export const ImagePro = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  background-color: whilte;
+  justify-content: space-between;
+`;
+
 export const Name = styled.h1`
   margin: 0;
   font-size: 2em;

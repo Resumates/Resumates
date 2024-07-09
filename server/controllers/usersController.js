@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ userId });
   } catch (err) {
-    const error = new HttpError('Logging in failed, please try again later.', 500);
+    const error = new HttpError('로그인에 실패하셨습니다 다시 시도해주세요.', 500);
     return next(error);
   }
   if (existingUser) {
@@ -28,7 +28,7 @@ const login = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    const error = new HttpError('Invalid credentials, could not log you in.', 401);
+    const error = new HttpError('유효하지 않은 계정입니다.', 401);
     return next(error);
   }
 
@@ -36,15 +36,12 @@ const login = async (req, res, next) => {
   try {
     isValidPassword = await bcrypt.compare(userPw, existingUser.userPw);
   } catch (err) {
-    const error = new HttpError(
-      'Could not log you in, please check your credentials and try again.',
-      500,
-    );
+    const error = new HttpError('올바른 비밀번호가 아닙니다. 다시 시도해 주세요', 500);
     return next(error);
   }
 
   if (!isValidPassword) {
-    const error = new HttpError('Invalid credentials, could not log you in.', 401);
+    const error = new HttpError('올바른 비밀번호가 아닙니다. 다시 시도해 주세요', 401);
     return next(error);
   }
 

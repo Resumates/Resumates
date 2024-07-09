@@ -46,7 +46,7 @@ exports.detailResume = async (req, res) => {
     const { resumeId } = req.params;
     if (!mongoose.isValidObjectId(resumeId))
       return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
-    const resume = await Resumes.findOne({ _id: resumeId }).collation({
+    const resume = await Resumes.findOne({ _id: resumeId }).collection({
       locale: 'en',
       strength: 2,
     });
@@ -67,7 +67,8 @@ exports.mypage = async (req, res) => {
     console.log(userId);
 
     // 여기서 에러 발생 (resume 값 얻을 수 없음)
-    const resume = await Resumes.find({ user_id : userId });
+
+    const resume = await Resumes.find({ userId: userId });
     console.log(resume);
     if (!resume) {
       return res.status(404).send('이력서가 존재하지 않습니다.');
@@ -78,3 +79,22 @@ exports.mypage = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
+//마이페이지 deleteResume
+// export const deleteResume = async (req, res) => {
+//   try {
+//     const { resumeId } = req.params;
+//     if (!mongoose.Types.ObjectId.isValid(resumeId)) {
+//       return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
+//     }
+
+//     const resume = await Resumes.findOneAndDelete({ _id: resumeId });
+//     if (!resume) {
+//       return res.status(404).send({ err: '이력서를 찾을 수 없습니다.' });
+//     }
+
+//     return res.send({ message: '이력서가 삭제되었습니다.', resume });
+//   } catch (err) {
+//     console.log('error: ', err);
+//     return res.status(500).send({ err: err.message });
+//   }
+// };
