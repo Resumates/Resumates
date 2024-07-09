@@ -1,5 +1,5 @@
 import React from 'react';
-import { GenderSelect, LabeledInput } from '../../style/CreateResumeStyle';
+import { LabeledSelect, LabeledInput } from '../../style/CreateResumeStyle';
 
 export function InputField({ label, type, name, placeholder, required }) {
   return (
@@ -10,14 +10,17 @@ export function InputField({ label, type, name, placeholder, required }) {
   );
 }
 
-export function SelectField({ name, required, data }) {
+export function SelectField({ label, name, required, data }) {
   return (
-    <GenderSelect className={name} name={name} required={required}>
-      {data.map((option) => (
-        <option key={option.id} value={option.id}>
-          {option.name}
-        </option>
-      ))}
-    </GenderSelect>
+    <LabeledSelect className={name}>
+      <p>{label}</p>
+      <select name={name} id={name} required={required}>
+        {data.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
+      </select>
+    </LabeledSelect>
   );
 }

@@ -14,7 +14,6 @@ import {
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
-// import { Container } from '../../style/Container';
 import { InputField, SelectField } from '../../components/resumeForm/InputField';
 import { profileInfo } from '../../data/profileInfoData';
 export default function CreateResume() {
@@ -40,9 +39,10 @@ export default function CreateResume() {
             <InfoTitle>{info.label}</InfoTitle>
             <UserProfile id={info.id}>
               {info.content?.map((field) =>
-                field.name === 'gender' ? (
+                field.name === 'gender' || field.name === 'category' ? (
                   <SelectField
                     key={field.name}
+                    label={field.label}
                     name={field.name}
                     required={field.required}
                     data={field.data}
@@ -59,6 +59,40 @@ export default function CreateResume() {
                 ),
               )}
             </UserProfile>
+            <button
+              style={{
+                display: 'flex',
+                width: '53px',
+                flexDirection: 'row',
+                textAlign: 'center',
+                fontSize: '1.6rem',
+                fontWeight: 'bold',
+                color: '#04438B',
+                alignItems: 'center',
+                margin: '30px auto 0',
+              }}
+            >
+              <div
+                style={{
+                  position: 'relative',
+                  width: '15px',
+                  height: '16px',
+                  border: '1px solid #04438B',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  textAlign: 'center',
+                  marginRight: '6px',
+                }}
+              >
+                &#43;
+              </div>
+              추가
+            </button>
           </ResumeSection>
         ))}
       </ResumeContainer>

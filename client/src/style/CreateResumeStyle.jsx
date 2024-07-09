@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 export const Container = styled.div`
   margin: 0 auto;
   width: 100%;
@@ -61,7 +60,7 @@ export const ResumeSection = styled.div`
   padding: 3rem 3.5rem;
   background-color: #ffffff;
   border-radius: 10px;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 `;
 
 export const TemplateContainer = styled.div`
@@ -123,21 +122,79 @@ export const LabeledInput = styled.div`
     outline: none;
     background-color: transparent;
   }
+
+  // input 태그 자동완성시 배경색
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 `;
 
-export const GenderSelect = styled.select`
+export const LabeledSelect = styled.div`
   margin: 0;
   padding: 10px 8px 10px;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
   border: 1px solid #acacac;
+  border-radius: 4px;
+  p {
+    margin-left: 4px;
+    color: #acacac;
+  }
+  select {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    margin-top: 7px;
+    border: 0px solid #8491a7;
+    border-radius: 7px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    /* font-weight: 600; */
+    cursor: pointer;
+    -webkit-appearance: none; /* 크롬 화살표 없애기 */
+    -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
+    appearance: none;
+    padding: 3px;
+
+    // 화살표
+    background: url('https://img.icons8.com/ios-filled/50/sort-down.png');
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    background-size: 1rem;
+  }
+  select:hover {
+    color: black;
+    background-color: #f4f6fa;
+  }
+`;
+
+// 추가 버튼 컴포넌트 예정
+export const addButton = styled.button`
+  display: 'flex';
+  width: 53px;
+  flex-direction: 'row';
+  text-align: 'center';
+  font-size: 1.6rem;
+  color: '#04438B';
+  align-items: center;
+  margin: '30px auto 0';
 `;
 
 export const UserProfile = styled.div`
   display: grid;
+  font-size: 1.2rem;
+  gap: 12px;
+
   grid-template-columns: ${({ id }) =>
     id === 'personalInfo'
-      ? '20% 27% 33% 13%;'
+      ? '20% 27% 32% 14%;'
       : id === 'career'
         ? '27% 18% 16% 16% 14%;'
         : id === 'skills'
@@ -145,7 +202,7 @@ export const UserProfile = styled.div`
           : id === 'activity'
             ? '24% 37% 16% 16%;'
             : id === 'qualification'
-              ? '18.25% 32.85% 32.85% 16.06%;'
+              ? '24% 37% 16% 16%;'
               : id === 'portfolio'
                 ? '100%;'
                 : 'auto;'}
@@ -166,8 +223,6 @@ export const UserProfile = styled.div`
                 : '60px 60px 60px;'}
 
   margin-top: 15px;
-  font-size: 1.2rem;
-  gap: 12px;
 
   // 인적사항
   .photo {
@@ -240,13 +295,13 @@ export const UserProfile = styled.div`
     grid-row-start: 2;
     grid-row-end: 3;
   }
-  .employmentStartDate{
+  .employmentStartDate {
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
   }
-  .employmentEndDate{
+  .employmentEndDate {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 2;
@@ -265,8 +320,8 @@ export const UserProfile = styled.div`
     grid-row-end: 4;
   }
 
-  .skillsBox{
-  grid-column-start: 1;
+  .skillsBox {
+    grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
@@ -279,26 +334,25 @@ export const UserProfile = styled.div`
   }
 
   // 경험 & 활동 & 교육
-  .category{
+  .category {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
   }
 
-  .desc{
+  .desc {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
   }
 
-  .startDate{
+  .startDate {
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
-
   }
   .endDate {
     grid-column-start: 4;
@@ -306,7 +360,7 @@ export const UserProfile = styled.div`
     grid-row-start: 1;
     grid-row-end: 2;
   }
-  .description{
+  .description {
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 2;
@@ -314,13 +368,30 @@ export const UserProfile = styled.div`
   }
 
   // 자격 & 어학 & 수상
-
+.certificateName{
+  grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.organization{
+  grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.getDate{
+  grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
 
   // 포트폴리오
-.portfolioURL{
+  .portfolioURL {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
-}
+  }
 `;
