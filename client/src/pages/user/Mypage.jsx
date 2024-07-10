@@ -26,7 +26,6 @@ import ModalUser from '../../components/Modal/ModalUser';
 export default function Mypage() {
   const [resume, setResume] = useState(null);
   const navigate = useNavigate();
-
   const userId = window.localStorage.getItem('userId');
   console.log(userId);
 
@@ -78,7 +77,6 @@ export default function Mypage() {
     <Container>
       <MyTitle path='/mypage'>마이페이지</MyTitle>
       <ResumeCont>
-       
         <ImgContanierSection>
           <List>
             {resume?.map((item) => {
@@ -90,10 +88,9 @@ export default function Mypage() {
                       // onClick={(e) => {
                       //   navigate(`/resume/${e.target.id}`);
                       // }}
-                      onClick={() => handleClickResum(item)}
+                      onClick={(e) => handleClickResum(item)}
                       src={simple}
                       id={item._id}
-          
                     />
                   </ListItem>
                 );
@@ -124,6 +121,7 @@ export default function Mypage() {
             })}
           </List>
         </ImgContanierSection>
+
         {selectedResume && (
           <div style={{ width: '100%', height: '50%', border: '1px soilid black' }}>
             <h2>sdsdsd</h2>
