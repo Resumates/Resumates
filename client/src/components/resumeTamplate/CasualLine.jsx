@@ -8,6 +8,7 @@ import {
   SkillsSection,
   ExperienceSection,
   PortfolioSection,
+  ExperienceDesc,
 } from './ResumeCasualStyle.jsx';
 
 export default function CasualLine({ title, content }) {
@@ -34,9 +35,9 @@ export default function CasualLine({ title, content }) {
             {content.map((experience, index) => (
               <li key={index}>
                 <h2>{experience.company}</h2>
-                <h3>{experience.department}</h3>
-                <p>{experience.duration}</p>
-                <p>{experience.desc}</p>
+                <ExperienceDesc>{experience.department}</ExperienceDesc>
+                <ExperienceDesc>{experience.duration}</ExperienceDesc>
+                <ExperienceDesc>{experience.desc}</ExperienceDesc>
               </li>
             ))}
           </ul>
