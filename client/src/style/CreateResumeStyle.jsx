@@ -14,6 +14,7 @@ export const Container = styled.div`
 
 export const ResumeWrap = styled.div`
   max-width: 1500px;
+  height: max-content;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -25,8 +26,14 @@ export const ResumeWrap = styled.div`
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 15.24%;
   width: 220px;
+  // position: ${({ isFixed }) => (isFixed ? 'sticky' : 'static')};
+  // top: ${({ isFixed }) => (isFixed ? '70px' : 'auto')};
+
+  float: left;
+  position: sticky;
+  height: max-content;
+  top: 70px;
 `;
 
 export const InfoList = styled.div`
@@ -65,6 +72,10 @@ export const ResumeSection = styled.div`
 
 export const TemplateContainer = styled.div`
   width: 44%;
+  float: right;
+  height: max-content;
+  top: 70px;
+  position: sticky;
 `;
 export const Template = styled.div`
   background-color: #ffff;
@@ -200,12 +211,18 @@ export const UserProfile = styled.div`
         : id === 'skills'
           ? '100%;'
           : id === 'activity'
-            ? '24% 37% 16% 16%;'
+            ? '18% 43% 16% 16%;'
             : id === 'qualification'
               ? '24% 37% 16% 16%;'
-              : id === 'portfolio'
-                ? '100%;'
-                : 'auto;'}
+              : id === 'qualification certification'
+                ? '18% 41% 18% 16%;'
+                : id === 'qualification languageTest'
+                  ? '18% 41% 18% 16%;'
+                  : id === 'qualification wards'
+                    ? '20% 39% 18% 16%;'
+                    : id === 'portfolio'
+                      ? '100%;'
+                      : 'auto;'}
 
   grid-template-rows: ${({ id }) =>
     id === 'personalInfo'
@@ -218,9 +235,15 @@ export const UserProfile = styled.div`
             ? '60px 120px;'
             : id === 'qualification'
               ? '60px 60px 60px;'
-              : id === 'portfolio'
-                ? '79px;'
-                : '60px 60px 60px;'}
+              : id === 'qualification certification'
+                ? '60px 60px 60px;'
+                : id === 'qualification languageTest'
+                  ? '60px 60px 60px;'
+                  : id === 'qualification wards'
+                    ? '60px 60px 60px;'
+                    : id === 'portfolio'
+                      ? '79px;'
+                      : '60px 60px 60px;'}
 
   margin-top: 15px;
 

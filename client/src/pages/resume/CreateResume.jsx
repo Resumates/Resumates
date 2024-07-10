@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   InfoContainer,
   InfoTitle,
@@ -19,6 +19,28 @@ import { profileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
 export default function CreateResume() {
+  // const [content, setContent] = useState([]);
+  // // 정보 추가
+  // const handleClickAddContent = () =>{
+  //   // 새로운 객체 생성
+  //   const newContent = {
+  //     // 새로운 고유한 id 생성
+  //   }
+  // }
+
+  const [selectedOptionId, setSelectedOptionId] = useState('');
+  const handleOptionSelect = (optionId) => {
+    setSelectedOptionId(optionId);
+  };
+
+  // 아이디 추가
+  const getUserProfileId = (info) => {
+    if (info.id === 'qualification' && selectedOptionId) {
+      return `${info.id} ${selectedOptionId}`;
+    }
+    return info.id;
+  };
+
   // 각 profileInfo 항목에 대한 ref를 생성
   const refs = useRef(
     profileInfo.reduce((acc, info) => {
@@ -54,7 +76,7 @@ export default function CreateResume() {
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
-            <UserProfile id={info.id}>
+            <UserProfile id={getUserProfileId(info)}>
               {info.content?.map((field) =>
                 field.name === 'gender' || field.name === 'category' ? (
                   <SelectField
@@ -63,6 +85,8 @@ export default function CreateResume() {
                     name={field.name}
                     required={field.required}
                     data={field.data}
+                    InfoId={info.id}
+                    onOptionSelect={handleOptionSelect}
                   />
                 ) : (
                   <InputField
