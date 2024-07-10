@@ -88,7 +88,7 @@ export default function Mypage() {
                       // onClick={(e) => {
                       //   navigate(`/resume/${e.target.id}`);
                       // }}
-                      onClick={() => handleClickResum(item)}
+                      onClick={(e) => handleClickResum(item)}
                       src={simple}
                       id={item._id}
                     />
@@ -121,6 +121,7 @@ export default function Mypage() {
             })}
           </List>
         </ImgContanierSection>
+
         {selectedResume && (
           <div style={{ width: '100%', height: '50%', border: '1px soilid black' }}>
             <h2>sdsdsd</h2>

@@ -37,10 +37,10 @@ export const ImgContanierSection = styled.div`
   justify-content: center; /* 수평 정렬 */
   width: 566px;
   border: 1px solid #acacac;
-  height: 752px;
+  height: 300px;
   background: #ffffff;
   border-radius: 10px;
-  padding-top: 20px;
+  padding-top: 50px;
 `;
 
 export const ImageContainer = styled.div`
@@ -55,6 +55,7 @@ export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
 `;
 
 export const List = styled.ul`
