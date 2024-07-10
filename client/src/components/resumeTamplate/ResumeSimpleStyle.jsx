@@ -85,9 +85,9 @@ export const SalaryCont = styled.div`
 
 export const H3 = styled.h3`
   color: #3482a9;
-  font-size: 3rem;
+  font-size: 2.4rem;
   padding: 0 40px;
-  padding-top: 70px;
+  padding-top: 60px;
 `;
 
 export const H4 = styled.h4`
@@ -103,6 +103,7 @@ export const ProfileImg = styled.img`
   border-radius: 100%;
   position: absolute;
   right: 0;
+  top: 10rem;
   transform: translate(-50%, 0);
 `;
 

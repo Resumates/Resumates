@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const A4Container = styled.form`
   width: 566px;
-  height: 752px;
-  /* width: 794px;
-  height: 1123px; */
+  min-height: 752px;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 2rem;
   background-color: #fff;
@@ -21,7 +20,8 @@ export const ProfileImage = styled.img`
 `;
 
 export const Title = styled.h2`
-  font-size: 3.9rem;
+  font-size: 2.4rem;
+  line-height: 1.3;
   font-weight: bold;
   color: #637dcb;
 `;
@@ -86,7 +86,7 @@ export const ThinLine = styled.div`
 export const ContentSection = styled.section`
   /* color: #d9d9d9; */
   font-size: 1.4rem;
-  line-height: 1.5;
+  line-height: 1.3;
 `;
 
 export const SkillsSection = styled.div`
@@ -122,4 +122,9 @@ export const EducationSection = styled.div`
 `;
 export const PortfolioSection = styled.div`
   font-size: 1.4rem;
+`;
+
+export const ExperienceDesc = styled.p`
+  margin-top: 0.5rem;
+  padding-left: 0.6rem;
 `;

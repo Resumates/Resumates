@@ -55,32 +55,30 @@ export default function CasualResume({ resumeDetail }) {
   };
 
   return (
-    <>
-      <A4Container>
-        <ProfileHeader>
-          <ProfileImage src={profileImg} alt='프로필 이미지' />
-          <ProfileInfo>
-            <Title>{resumeDetail.structure.title}</Title>
-            <ContactInfo>
-              <p>
-                <span>✉️</span>
-                {resumeDetail.email}
-              </p>
-              <br />
-              <p>
-                <span>📞</span>
-                {resumeDetail.phone}
-              </p>
-            </ContactInfo>
-          </ProfileInfo>
-        </ProfileHeader>
-        <br></br>
-        <CasualLine title={'자기소개'} content={profileDetails.structure.content.intro} />
-        <CasualLine title={'기술스택'} content={resumeDetail.structure.content.skills} />
-        <CasualLine title={'경력사항'} content={resumeDetail.structure.content.workExperience} />
-        <CasualLine title={'학력'} />
-        <CasualLine title={'포트폴리오'} content={resumeDetail.structure.content.portfolio.url} />
-      </A4Container>
-    </>
+    <A4Container>
+      <ProfileHeader>
+        <ProfileImage src={profileImg} alt='프로필 이미지' />
+        <ProfileInfo>
+          <Title>{resumeDetail.structure.title}</Title>
+          <ContactInfo>
+            <p>
+              <span>✉️</span>
+              {resumeDetail.email}
+            </p>
+            <br />
+            <p>
+              <span>📞</span>
+              {resumeDetail.phone}
+            </p>
+          </ContactInfo>
+        </ProfileInfo>
+      </ProfileHeader>
+      <br></br>
+      <CasualLine title={'자기소개'} content={profileDetails.structure.content.intro} />
+      <CasualLine title={'기술스택'} content={resumeDetail.structure.content.skills} />
+      <CasualLine title={'경력사항'} content={resumeDetail.structure.content.workExperience} />
+      <CasualLine title={'학력'} />
+      <CasualLine title={'포트폴리오'} content={resumeDetail.structure.content.portfolio.url} />
+    </A4Container>
   );
 }

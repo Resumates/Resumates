@@ -10,7 +10,6 @@ import TemplateList from '../pages/resume/TemplateList';
 import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
-import ResumeDetail from '../pages/resume/ResumeDetail';
 import SetEmail from '../pages/user/SetEmail';
 
 export default function AppRoutes() {
@@ -45,9 +44,6 @@ export default function AppRoutes() {
 
         {/* 이력서 작성 */}
         <Route path='/resume' element={<CreateResume />} />
-
-        {/* 이력서 상세 */}
-        <Route path='/resume/:id' element={<ResumeDetail />} />
 
         {/* 마이페이지 */}
         <Route path='/mypage/:userId' element={<Mypage />} />
