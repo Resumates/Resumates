@@ -5,7 +5,6 @@ export const AccountCont = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding-top: 7rem;
 `;
 
 export const EditCont = styled.div`

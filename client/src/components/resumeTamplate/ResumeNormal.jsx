@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import profileImg from '../../asset/profile/blank-profile.webp';
 import {
   ResumeContainer,
   A4Container,
@@ -34,7 +35,7 @@ export default function ResumeNormal({ resumeDetail }) {
   return (
     <A4Container>
       <Header>
-        <ProfileImage src='' alt='프로필 이미지' />
+        <ProfileImage src={profileImg} alt='프로필 이미지' />
         <Name>
           <img src='' alt='' />
           {name}

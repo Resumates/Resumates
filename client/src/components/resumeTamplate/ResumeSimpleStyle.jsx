@@ -5,6 +5,7 @@ export const TemplateCont = styled.div`
   background-color: white;
   border: 1px solid #eee;
   box-sizing: border-box;
+  margin: 0 auto;
 `;
 
 export const TitleCont = styled.div`
