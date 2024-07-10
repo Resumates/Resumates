@@ -97,10 +97,10 @@ export const LargeButton = styled(Button)`
 `;
 
 export const TemplateSection = styled.div`
+  margin: 10rem auto;
   position: relative;
   width: 566px;
-  border: 1px solid #acacac;
-  height: 752px;
+  height: 100%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -112,7 +112,7 @@ export const TemplateSection = styled.div`
 export const ButtonContainer = styled.div`
   position: absolute;
   width: 300px;
-  top: 765px;
+  top: 820px;
   right: 0;
   display: flex;
   gap: 2rem;

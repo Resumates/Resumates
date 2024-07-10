@@ -39,7 +39,7 @@ export default function NavLinks() {
       {token && id && (
         <>
           <NavItem>
-            <NavLink to='/mypage'>이력서 템플릿 보기</NavLink>
+            <NavLink to='/list'>이력서 템플릿 보기</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to={`/mypage/${userId}`}>마이페이지</NavLink>

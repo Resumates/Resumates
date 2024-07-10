@@ -13,7 +13,7 @@ export const SignupContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 20.8rem;
-  margin-top: 10rem;
+  margin-top: 3rem;
 `;
 
 export const ResumeImg = styled.img`
