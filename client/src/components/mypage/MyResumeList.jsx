@@ -7,6 +7,7 @@ import { createShouldForwardProp } from '@styled-system/should-forward-prop';
 export default function MyResumeList({ resume, setSelectedResume }) {
   const handleClickResum = (item) => {
     setSelectedResume(item);
+    window.scrollTo(0, 0);
   };
   return (
     <MyResumeListCont>
@@ -83,10 +84,15 @@ const MyResume = styled.p`
 `;
 
 const TemplateType = styled.p`
+  letter-spacing: 0.3rem;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.3;
   color: white;
+`;
+const ResumeTitle = styled(TemplateType)`
+  letter-spacing: 0.1rem;
+
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
@@ -95,7 +101,6 @@ const TemplateType = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
-const ResumeTitle = styled(TemplateType)``;
 
 const ResumePriveiwBtn = styled.button`
   font-size: 1.6rem;

@@ -3,8 +3,23 @@ import styled from 'styled-components';
 import ResumeNormal from '../../components/resumeTamplate/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/ResumeCasual';
+import { deleteResumeAPI } from '../../api/resumeAPI';
 
-export default function ResumePreview({ resume }) {
+export default function ResumePreview({ resume, setSelectedResume }) {
+  const resumeId = resume._id;
+  console.log(resumeId);
+
+  const handleDelete = async () => {
+    console.log('실행');
+    const deleteResume = await deleteResumeAPI(resumeId);
+    if (deleteResume) {
+      alert('이력서가 삭제되었습니다.');
+      setSelectedResume(null);
+      window.scrollTo(0, 0);
+    }
+    console.log(deleteResume);
+  };
+
   return (
     <>
       {resume && (
@@ -14,7 +29,7 @@ export default function ResumePreview({ resume }) {
           {resume.structure.template_type === 'casual' && <ResumeCasual resumeDetail={resume} />}
           <ButtonContainer>
             <LargeButton>수정하기</LargeButton>
-            <LargeButton>삭제하기</LargeButton>
+            <LargeButton onClick={handleDelete}>삭제하기</LargeButton>
             <LargeButton>인쇄하기</LargeButton>
           </ButtonContainer>
         </ResumeDetail>

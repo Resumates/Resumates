@@ -17,15 +17,17 @@ export default function Mypage() {
       setResume(myResumeList);
     };
     fetchResume();
-  }, [userId]);
+  }, [userId, resume]);
 
   return (
     <Container>
       <ResumeCont>
-        <H2 path='/mypage'>마이페이지</H2>
+        <H2>마이페이지</H2>
         <MyResumeList resume={resume} setSelectedResume={setSelectedResume} />
         <TemplateSection>
-          {selectedResume && <ResumePreview resume={selectedResume} />}
+          {selectedResume && (
+            <ResumePreview resume={selectedResume} setSelectedResume={setSelectedResume} />
+          )}
         </TemplateSection>
       </ResumeCont>
     </Container>
