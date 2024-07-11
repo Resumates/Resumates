@@ -29,7 +29,7 @@ export default function NavLinks() {
     <NavList>
       {!token && (
         <NavItem>
-          <NavLink to='/'>
+          <NavLink to={`/resume/sample`}>
             <Button type='button' color='#04438B' padding='14px 23px' fontSize='16px'>
               이력서 만들기 체험하기
             </Button>
