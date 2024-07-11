@@ -36,6 +36,7 @@ const Login = () => {
     false,
   );
 
+  
   const authSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -76,10 +77,10 @@ const Login = () => {
     if (token) {
       localStorage.setItem('accessToken', token);
       console.log('Token set in localStorage:', localStorage.getItem('accessToken')); // 추가 콘솔 로그
-      navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리다이렉트
+      auth.login(params.get('userId'), token); // 로그인 상태 업데이트
+      navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리디렉트
     }
-  }, [location, navigate]);
-
+  }, [location, navigate, auth]);
   return (
     <>
       <LoginPage>
