@@ -7,7 +7,6 @@ export const deleteResumeAPI = async (resumeId) => {
     const { data } = await axios.delete(`${deleteResume}/${resumeId}`, {
       data: { resumeId },
     });
-    console.log('이력서 삭제', data);
     return data;
   } catch (error) {
     console.error('이력서 삭제 오류', error);

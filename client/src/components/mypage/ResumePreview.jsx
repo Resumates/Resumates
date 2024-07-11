@@ -1,23 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
 import ResumeNormalA4 from '../../components/resumeTamplate/A4/ResumeNormalA4';
 import ResumeSimpleA4 from '../../components/resumeTamplate/A4/ResumeSimpleA4';
 import ResumeCasualA4 from '../../components/resumeTamplate/A4/ResumeCasualA4';
-import { deleteResumeAPI } from '../../api/resumeAPI';
+import ModalDelete from '../Modal/ModalDelete';
 
 export default function ResumePreview({ resume, setSelectedResume }) {
   const componentRef = useRef(null);
   const resumeId = resume._id;
-
-  const handleDelete = async () => {
-    const deleteResume = await deleteResumeAPI(resumeId);
-    if (deleteResume) {
-      alert('이력서가 삭제되었습니다.');
-      setSelectedResume(null);
-      window.scrollTo(0, 0);
-    }
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
@@ -36,12 +28,19 @@ export default function ResumePreview({ resume, setSelectedResume }) {
           </div>
           <ButtonContainer>
             <LargeButton>수정하기</LargeButton>
-            <LargeButton onClick={handleDelete}>삭제하기</LargeButton>
+            <LargeButton onClick={() => setModalOpen(!modalOpen)}>삭제하기</LargeButton>
             <ReactToPrint
-              trigger={() => <LargeButton type='button'>인쇄하기</LargeButton>}
+              trigger={() => <LargeButton type='button'>저장/인쇄하기</LargeButton>}
               content={() => componentRef.current}
               pageStyle='@page { size: A4; ratio:100%; }'
             />
+            {modalOpen && (
+              <ModalDelete
+                resumeId={resumeId}
+                setModalOpen={setModalOpen}
+                setSelectedResume={setSelectedResume}
+              />
+            )}
           </ButtonContainer>
         </ResumeDetail>
       )}
@@ -58,7 +57,6 @@ const ResumeDetail = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  width: 300px;
   right: 0;
   display: flex;
   gap: 2rem;
@@ -66,28 +64,14 @@ const ButtonContainer = styled.div`
   padding-bottom: 10rem;
 `;
 
-const Button = styled.button`
-  width: 100px;
-  height: 30px;
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #04438b;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 19px;
-  color: #04438b;
+const LargeButton = styled.button`
   margin: 5px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 10px 0;
-`;
-
-const LargeButton = styled(Button)`
-  background: #04438b;
+  background: var(--mainColor);
   color: #ffffff;
   border: none;
-  padding: 20px 0;
-  margin: 0;
+  padding: 20px;
+  vertical-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
 `;
