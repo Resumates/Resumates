@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema(
     userPw: { type: String },
     snsId: { type: String }, // 소셜 로그인 사용자 ID
     provider: { type: String, default: 'local' }, // 제공자 정보 (local, naver 등)
+    accessToken: { type: String },
   },
   {
     versionKey: false,
