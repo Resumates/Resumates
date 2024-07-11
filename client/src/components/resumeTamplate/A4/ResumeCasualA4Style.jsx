@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const A4Container = styled.form`
-  width: 566px;
-  min-height: 752px;
+  width: 800px;
+  min-height: 1130px;
   box-sizing: border-box;
   margin: 0 auto;
   padding: 2rem;
