@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavList, NavItem, UserIcon } from './HeaderStyle';
 import Button from '../common/Button';
@@ -11,6 +11,7 @@ export default function NavLinks() {
   const id = userId?.slice(0, 2);
   const [userInfo, setUserInfo] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -24,6 +25,24 @@ export default function NavLinks() {
 
     fetchUserData();
   }, [userId, token]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setModalOpen(false);
+      }
+    };
+
+    if (modalOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalOpen]);
 
   return (
     <NavList>
@@ -55,7 +74,11 @@ export default function NavLinks() {
             <UserIcon type='button' onClick={() => setModalOpen(!modalOpen)}>
               {id}
             </UserIcon>
-            {modalOpen && <ModalUser userInfo={userInfo} />}
+            {modalOpen && (
+              <div ref={modalRef}>
+                <ModalUser userInfo={userInfo} />
+              </div>
+            )}
           </NavItem>
         </>
       )}
