@@ -11,6 +11,7 @@ import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
 import SetEmail from '../pages/user/SetEmail';
+import EditResume from '../pages/resume/EditResume';
 
 export default function AppRoutes() {
   const { token, login, logout, userId } = useAuth();
@@ -44,6 +45,9 @@ export default function AppRoutes() {
 
         {/* 이력서 작성 */}
         <Route path='/resume' element={<CreateResume />} />
+
+        {/* 이력서 수정 */}
+        <Route path='/resume/edit/:resumeId' element={<EditResume />} />
 
         {/* 마이페이지 */}
         <Route path='/mypage/:userId' element={<Mypage />} />

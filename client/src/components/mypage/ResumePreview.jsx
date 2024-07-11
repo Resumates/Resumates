@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
 import ResumeNormalA4 from '../../components/resumeTamplate/A4/ResumeNormalA4';
@@ -10,6 +11,7 @@ export default function ResumePreview({ resume, setSelectedResume }) {
   const componentRef = useRef(null);
   const resumeId = resume._id;
   const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate('');
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function ResumePreview({ resume, setSelectedResume }) {
             )}
           </div>
           <ButtonContainer>
-            <LargeButton>수정하기</LargeButton>
+            <LargeButton onClick={() => navigate(`/resume/edit/${resumeId}`)}>수정하기</LargeButton>
             <LargeButton onClick={() => setModalOpen(!modalOpen)}>삭제하기</LargeButton>
             <ReactToPrint
               trigger={() => <LargeButton type='button'>저장/인쇄하기</LargeButton>}
