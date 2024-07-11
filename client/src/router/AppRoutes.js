@@ -11,6 +11,7 @@ import CreateResume from '../pages/resume/CreateResume';
 import Mypage from '../pages/user/Mypage';
 import Account from '../pages/user/Account';
 import SetEmail from '../pages/user/SetEmail';
+import Error from '../pages/error/Error';
 
 export default function AppRoutes() {
   const { token, login, logout, userId } = useAuth();
@@ -53,6 +54,8 @@ export default function AppRoutes() {
 
         {/* 이메일 설정 */}
         <Route path='/user/settings/email' element={<SetEmail />} />
+
+        <Route path='/error' element={<Error />} />
       </Routes>
     </AuthContext.Provider>
   );

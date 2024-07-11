@@ -13,6 +13,7 @@ module.exports = () => {
       async (accessToken, refreshToken, profile, done) => {
         console.log('naver profile : ', profile);
         console.log('Access Token: ', accessToken); // 액세스 토큰 출력
+
         try {
           let user = await User.findOne({ snsId: profile.id, provider: 'naver' });
 
@@ -26,7 +27,7 @@ module.exports = () => {
               nick: profile.name,
               snsId: profile.id,
               provider: 'naver',
-              accessToken, // Access Token을 user 객체에 추가
+              accessToken: accessToken, // Access Token을 user 객체에 추가
             });
             await user.save(); // 사용자 객체를 MongoDB에 저장
             done(null, user);
