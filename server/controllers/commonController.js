@@ -64,12 +64,7 @@ exports.detailResume = async (req, res) => {
 exports.mypage = async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log(userId);
-
-    // 여기서 에러 발생 (resume 값 얻을 수 없음)
-
     const resume = await Resumes.find({ userId: userId });
-    console.log(resume);
     if (!resume) {
       return res.status(404).send('이력서가 존재하지 않습니다.');
     }
@@ -79,6 +74,7 @@ exports.mypage = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
+
 //마이페이지 deleteResume
 // export const deleteResume = async (req, res) => {
 //   try {

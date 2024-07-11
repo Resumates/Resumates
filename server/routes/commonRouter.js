@@ -15,7 +15,5 @@ router.get('/resume', commonController.writeResume);
 router.get('/resume/:resumeId', commonController.detailResume);
 // 마이페이지
 router.get('/user/resume/:userId', commonController.mypage);
-// 마이페이지
-//router.get('/resume/:userId', mypageController.getByIdMyPage);
 
 module.exports = router;

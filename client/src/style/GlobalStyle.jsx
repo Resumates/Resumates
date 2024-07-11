@@ -6,6 +6,7 @@ ${reset};
 :root{
   --bgColor: #EFF2F6;
 	--mainColor:#04438B;
+	--subColor:#3D79BF;
 	--buttonMain:#04438B;
 	--buttonSub:#3D79BF;
 	--buttonDisable: #D9D9D9;

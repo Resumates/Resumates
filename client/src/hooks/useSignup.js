@@ -142,7 +142,9 @@ const useSignup = () => {
     isEmailValue,
     idError,
     pwError,
+    setPwError,
     confirmPwError,
+    setConfirmPwError,
     emailErrorMsg,
     codeError,
     correctCode,
@@ -151,6 +153,8 @@ const useSignup = () => {
     validCode,
     sendMail,
     handleSubmit,
+    validateConfirmPassword,
+    validatePassword,
   };
 };
 

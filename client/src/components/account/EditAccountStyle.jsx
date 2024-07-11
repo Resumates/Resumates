@@ -103,6 +103,15 @@ export const NoticeText = styled.p`
   margin-bottom: 3rem;
 `;
 
+export const PwAlertText = styled(NoticeText)`
+  padding-left: 20rem;
+`;
+
+export const PwNoticeText = styled(NoticeText)`
+  color: #000;
+  padding-left: 20rem;
+`;
+
 export const ButtonCont = styled.div`
   text-align: center;
   padding-right: 0.8rem;

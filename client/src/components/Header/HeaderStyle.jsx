@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const BgCont = styled.div`
-  width: 100%;
   background-color: #fff;
   height: 9.5rem;
 `;

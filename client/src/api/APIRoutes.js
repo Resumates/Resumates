@@ -30,6 +30,9 @@ export const editResume = `${host}/resume/edit`;
 // 이력서 삭제
 export const deleteResume = `${host}/resume/delete`;
 
+// 작성 이력서 목록
+export const myResumeList = `${host}/user/resume`;
+
 // 회원 정보
 export const getUserAccount = `${host}/user/account`;
 

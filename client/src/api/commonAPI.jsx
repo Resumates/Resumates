@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getUserAccount, resumeDetail } from './APIRoutes';
+import { getUserAccount, myResumeList, resumeDetail } from './APIRoutes';
 
 // 유저 데이터
 export const getUserData = async (userId) => {
@@ -18,5 +18,15 @@ export const getResumeDetail = async (resumeId) => {
     return data.detail;
   } catch (error) {
     console.error('이력서 상세 불러오기 오류', error);
+  }
+};
+
+// 작성 이력서 목록
+export const getMyResumeList = async (userId) => {
+  try {
+    const { data } = await axios.get(`${myResumeList}/${userId}`);
+    return data;
+  } catch (error) {
+    console.error('작성 이력서 목록 불러오기 오류', error);
   }
 };

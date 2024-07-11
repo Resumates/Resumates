@@ -3,6 +3,7 @@ import birthImg from '../../asset/images/icon-birth.png';
 import EmailImg from '../../asset/images/icon-email.png';
 import PhoneImg from '../../asset/images/icon-phone.png';
 import HomeImg from '../../asset/images/icon-home.png';
+import profileImg from '../../asset/profile/blank-profile.webp';
 import {
   TemplateCont,
   TitleCont,
@@ -33,7 +34,6 @@ import {
 } from './ResumeSimpleStyle';
 
 export default function ResumeSimple({ resumeDetail }) {
-  console.log(resumeDetail);
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
@@ -45,7 +45,7 @@ export default function ResumeSimple({ resumeDetail }) {
     <TemplateCont>
       <TitleCont>
         <H3>{structure.title}</H3>
-        <ProfileImg src='' alt='프로필이미지' />
+        <ProfileImg src={profileImg} alt='프로필이미지' />
       </TitleCont>
       <InfoCont>
         <H4>{name}</H4>

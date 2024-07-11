@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const TemplateCont = styled.div`
-  width: 566px;
+  width: 800px;
+  min-height: 1130px;
   background-color: white;
   border: 1px solid #eee;
   box-sizing: border-box;
+  margin: 0 auto;
 `;
 
 export const TitleCont = styled.div`
@@ -84,9 +86,9 @@ export const SalaryCont = styled.div`
 
 export const H3 = styled.h3`
   color: #3482a9;
-  font-size: 3rem;
+  font-size: 2.4rem;
   padding: 0 40px;
-  padding-top: 70px;
+  padding-top: 60px;
 `;
 
 export const H4 = styled.h4`
@@ -102,6 +104,7 @@ export const ProfileImg = styled.img`
   border-radius: 100%;
   position: absolute;
   right: 0;
+  top: 10rem;
   transform: translate(-50%, 0);
 `;
 
