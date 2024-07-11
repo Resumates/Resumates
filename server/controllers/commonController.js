@@ -83,7 +83,7 @@ exports.mypage = async (req, res) => {
 // export const deleteResume = async (req, res) => {
 //   try {
 //     const { resumeId } = req.params;
-//     if (!mongoose.Types.ObjectId.isValid(resumeId)) {
+//     if (!mongoose.Types.ObjectId.isValid(resumeId)) {b
 //       return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
 //     }
 

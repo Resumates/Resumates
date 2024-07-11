@@ -18,12 +18,12 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledInput = styled.input`
-  width: 30rem;
-  height: 2rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font: inherit;
+  width: 40.7rem;
+  padding: 1.8rem 0.8rem;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 1rem;
+  font-size: 1.6rem;
 `;
 
 export const StyledTextarea = styled.textarea`
