@@ -14,6 +14,7 @@ export const Container = styled.div`
 
 export const ResumeWrap = styled.div`
   max-width: 1500px;
+  height: max-content;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -25,8 +26,14 @@ export const ResumeWrap = styled.div`
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 15.24%;
   width: 220px;
+  // position: ${({ isFixed }) => (isFixed ? 'sticky' : 'static')};
+  // top: ${({ isFixed }) => (isFixed ? '70px' : 'auto')};
+
+  float: left;
+  position: sticky;
+  height: max-content;
+  top: 70px;
 `;
 
 export const InfoList = styled.div`
@@ -65,6 +72,10 @@ export const ResumeSection = styled.div`
 
 export const TemplateContainer = styled.div`
   width: 44%;
+  float: right;
+  height: max-content;
+  top: 70px;
+  position: sticky;
 `;
 export const Template = styled.div`
   background-color: #ffff;
@@ -200,12 +211,18 @@ export const UserProfile = styled.div`
         : id === 'skills'
           ? '100%;'
           : id === 'activity'
-            ? '24% 37% 16% 16%;'
+            ? '18% 43% 16% 16%;'
             : id === 'qualification'
-              ? '24% 37% 16% 16%;'
-              : id === 'portfolio'
-                ? '100%;'
-                : 'auto;'}
+              ? '20% 37% 16% 16%;'
+              : id === 'qualification certification'
+                ? '20% 39% 18% 16%;'
+                : id === 'qualification languageTest'
+                  ? '20% 15% 20% 9% 9% 15%;'
+                  : id === 'qualification wards'
+                    ? '20% 39% 18% 16%;'
+                    : id === 'portfolio'
+                      ? '100%;'
+                      : 'auto;'}
 
   grid-template-rows: ${({ id }) =>
     id === 'personalInfo'
@@ -217,10 +234,16 @@ export const UserProfile = styled.div`
           : id === 'activity'
             ? '60px 120px;'
             : id === 'qualification'
-              ? '60px 60px 60px;'
-              : id === 'portfolio'
-                ? '79px;'
-                : '60px 60px 60px;'}
+              ? '60px;'
+              : id === 'qualification certification'
+                ? '60px;'
+                : id === 'qualification languageTest'
+                  ? '60px;'
+                  : id === 'qualification wards'
+                    ? '60px;'
+                    : id === 'portfolio'
+                      ? '79px;'
+                      : '60px 60px 60px;'}
 
   margin-top: 15px;
 
@@ -386,6 +409,60 @@ export const UserProfile = styled.div`
     grid-row-start: 1;
     grid-row-end: 2;
 }
+
+
+//어학시험
+
+.language{
+  grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.testName{
+  grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.level{
+  grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.score{
+  grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.getyear{
+  grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+// 수상내역
+.awardName{
+  grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.issuer{
+  grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.awardDate{
+  grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
 
   // 포트폴리오
   .portfolioURL {
