@@ -125,7 +125,6 @@ export default function ResumeSimpleA4({ resumeDetail }) {
       <ContentDiv>
         <H4>포트폴리오</H4>
         <ul>
-          {/* {portfolio.map((item, index) => ( */}
           <ContentItem>
             <CategoryText>
               <a href={portfolio.url} target='blank'>
@@ -133,7 +132,6 @@ export default function ResumeSimpleA4({ resumeDetail }) {
               </a>
             </CategoryText>
           </ContentItem>
-          {/* ))} */}
         </ul>
       </ContentDiv>
     </TemplateCont>
