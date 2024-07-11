@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import profileImg from '../../asset/profile/blank-profile.webp';
+import { ProfileImage } from './ResumeCasualStyle';
 import {
-  ResumeContainer,
   A4Container,
   Header,
   Name,
@@ -14,23 +14,13 @@ import {
   ExperienceList,
   ExperienceItem,
   ExperienceDetail,
-  List,
-  ListItem,
 } from './ResumeNormalStyle';
 
-import { ProfileImage } from './ResumeCasualStyle';
 export default function ResumeNormal({ resumeDetail }) {
-  console.log(resumeDetail);
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
   const { activity, certificate, portfolio, skills, workExperience } = content;
-  // console.log(resumeDetail.structure.title);
-  console.log('activity', activity);
-  console.log('certificate', certificate);
-  console.log('portfolio', portfolio);
-  console.log('skills', skills);
-  console.log('work_experience', workExperience);
 
   return (
     <A4Container>
@@ -39,7 +29,7 @@ export default function ResumeNormal({ resumeDetail }) {
         <Name>
           <img src='' alt='' />
           {name}
-          <h1>{structure.title}</h1>
+          <p>{structure.title}</p>
         </Name>
         <ContactInfo>
           <div>{phone}</div>
@@ -107,7 +97,3 @@ export default function ResumeNormal({ resumeDetail }) {
     </A4Container>
   );
 }
-
-const ContentDiv = styled.div`
-  margin-bottom: 60px;
-`;

@@ -3,10 +3,7 @@ import styled from 'styled-components';
 export const A4Container = styled.form`
   width: 566px;
   height: 752px;
-  /* width: 794px;
-  height: 1123px; */
   margin: 0 auto;
-  // padding: 2rem;
   background-color: #fff;
 `;
 
@@ -29,7 +26,7 @@ export const ImagePro = styled.div`
   justify-content: space-between;
 `;
 
-export const Name = styled.h1`
+export const Name = styled.h2`
   margin: 0;
   font-size: 2em;
   line-height: 2;
@@ -85,10 +82,10 @@ export const ExperienceItem = styled.li`
   background-color: #f9f9f9;
 `;
 export const ExperienceDetail = styled.p`
-  margin: 0 10px 0 0; /* Right margin for spacing between items */
+  margin: 0 10px 0 0;
   font-size: 0.9em;
   color: #555;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
 `;
 export const List = styled.ul`
   list-style: none;

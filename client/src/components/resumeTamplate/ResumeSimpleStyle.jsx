@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const TemplateCont = styled.div`
-  width: 566px;
+  width: 800px;
+  min-height: 1130px;
   background-color: white;
   border: 1px solid #eee;
   box-sizing: border-box;

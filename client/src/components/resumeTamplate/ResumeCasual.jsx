@@ -11,8 +11,6 @@ import profileImg from '../../asset/profile/blank-profile.webp';
 import CasualLine from './CasualLine.jsx';
 
 export default function CasualResume({ resumeDetail }) {
-  console.log(resumeDetail);
-
   const profileDetails = {
     image: '',
 

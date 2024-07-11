@@ -34,7 +34,6 @@ import {
 } from './ResumeSimpleStyle';
 
 export default function ResumeSimple({ resumeDetail }) {
-  console.log(resumeDetail);
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;

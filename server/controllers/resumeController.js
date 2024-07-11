@@ -58,7 +58,7 @@ const resumeController = {
   // 이력서 삭제
   async deleteResume(req, res) {
     try {
-      const { resumeId } = req.params;
+      const { resumeId } = req.body;
       if (!mongoose.isValidObjectId(resumeId))
         return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
       // deleteOne
@@ -68,7 +68,7 @@ const resumeController = {
         locale: 'en',
         strength: 2,
       });
-      return res.send({ '이력서 삭제': resume });
+      return res.status(200).send({ '이력서 삭제': resume });
     } catch (err) {
       console.log('error: ', err);
       return res.status(500).send({ err: err.message });
