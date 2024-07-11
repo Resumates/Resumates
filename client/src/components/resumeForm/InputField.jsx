@@ -11,10 +11,13 @@ export function InputField({ label, type, name, placeholder, required }) {
 }
 
 export function SelectField({ label, name, required, data, onOptionSelect, InfoId }) {
+  // const [selectedOption, setSelectedOPtion] = useState(null);
+
   const handleChange = (event) => {
     const selectedOption = event.target.value;
     if (InfoId === 'qualification') {
       onOptionSelect(selectedOption);
+      console.log('selectedOption', selectedOption);
     }
   };
 
@@ -28,9 +31,6 @@ export function SelectField({ label, name, required, data, onOptionSelect, InfoI
           </option>
         ))}
       </select>
-      {/* {InfoId =='qualification' && 
-       <InputField />
-      } */}
     </LabeledSelect>
   );
 }

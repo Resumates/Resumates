@@ -19,15 +19,6 @@ import { profileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
 export default function CreateResume() {
-  // const [content, setContent] = useState([]);
-  // // 정보 추가
-  // const handleClickAddContent = () =>{
-  //   // 새로운 객체 생성
-  //   const newContent = {
-  //     // 새로운 고유한 id 생성
-  //   }
-  // }
-
   const [selectedOptionId, setSelectedOptionId] = useState('');
   const handleOptionSelect = (optionId) => {
     setSelectedOptionId(optionId);
@@ -99,6 +90,23 @@ export default function CreateResume() {
                   />
                 ),
               )}
+              {info.id == 'qualification' &&
+                info.content.map((field) =>
+                  field.data.map(
+                    (items) =>
+                      items.id === selectedOptionId &&
+                      items.detail?.map((item) => (
+                        <InputField
+                          key={item.name}
+                          label={item.label}
+                          type={item.type}
+                          name={item.name}
+                          placeholder={item.placeholder}
+                          required={item.required}
+                        />
+                      )),
+                  ),
+                )}
             </UserProfile>
             {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
           </ResumeSection>
