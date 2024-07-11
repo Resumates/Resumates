@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
-import ResumeNormalA4 from '../../components/resumeTamplate/A4/ResumeNormalA4';
-import ResumeSimpleA4 from '../../components/resumeTamplate/A4/ResumeSimpleA4';
-import ResumeCasualA4 from '../../components/resumeTamplate/A4/ResumeCasualA4';
+import ResumeNormal from '../../components/resumeTamplate/ResumeNormal';
+import ResumeSimple from '../../components/resumeTamplate/ResumeSimple';
+import ResumeCasual from '../../components/resumeTamplate/ResumeCasual';
 import { deleteResumeAPI } from '../../api/resumeAPI';
 
 export default function ResumePreview({ resume, setSelectedResume }) {
@@ -24,15 +24,9 @@ export default function ResumePreview({ resume, setSelectedResume }) {
       {resume && (
         <ResumeDetail>
           <div ref={componentRef}>
-            {resume.structure.template_type === 'normal' && (
-              <ResumeNormalA4 resumeDetail={resume} />
-            )}
-            {resume.structure.template_type === 'simple' && (
-              <ResumeSimpleA4 resumeDetail={resume} />
-            )}
-            {resume.structure.template_type === 'casual' && (
-              <ResumeCasualA4 resumeDetail={resume} />
-            )}
+            {resume.structure.template_type === 'normal' && <ResumeNormal resumeDetail={resume} />}
+            {resume.structure.template_type === 'simple' && <ResumeSimple resumeDetail={resume} />}
+            {resume.structure.template_type === 'casual' && <ResumeCasual resumeDetail={resume} />}
           </div>
           <ButtonContainer>
             <LargeButton>수정하기</LargeButton>
@@ -52,7 +46,7 @@ export default function ResumePreview({ resume, setSelectedResume }) {
 const ResumeDetail = styled.div`
   width: 800px;
   min-height: 1130px;
-  background-color: #ffffff;
+  background-color: #ab8888;
   position: relative;
 `;
 
