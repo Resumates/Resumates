@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/common/input';
 import { VALIDATOR_MINLENGTH } from '../../utils/validator';
@@ -68,11 +68,14 @@ const Login = () => {
     window.location.href = 'http://localhost:5000/auth/naver';
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('useEffect executed'); // useEffect 실행 확인
     const params = new URLSearchParams(location.search);
     const token = params.get('token');
+    console.log('Token from URL:', token); // 콘솔 로그 추가
     if (token) {
       localStorage.setItem('accessToken', token);
+      console.log('Token set in localStorage:', localStorage.getItem('accessToken')); // 추가 콘솔 로그
       navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리다이렉트
     }
   }, [location, navigate]);

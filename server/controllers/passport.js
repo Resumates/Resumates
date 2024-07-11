@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy: NaverStrategy } = require('passport-naver-v2');
-const User = require('../models/user');
+const User = require('../models/user'); // User 모델을 가져옵니다.
 
 module.exports = () => {
   passport.use(
@@ -14,21 +14,22 @@ module.exports = () => {
         console.log('naver profile : ', profile);
         console.log('Access Token: ', accessToken); // 액세스 토큰 출력
         try {
-          const exUser = await User.findOne({
-            where: { snsId: profile.id, provider: 'naver' },
-          });
-          if (exUser) {
-            exUser.accessToken = accessToken; // Access Token을 user 객체에 추가
-            done(null, exUser);
+          let user = await User.findOne({ snsId: profile.id, provider: 'naver' });
+
+          if (user) {
+            user.accessToken = accessToken; // Access Token을 user 객체에 추가
+            await user.save(); // 사용자 객체를 MongoDB에 저장
+            done(null, user);
           } else {
-            const newUser = await User.create({
+            user = new User({
               email: profile.email,
               nick: profile.name,
               snsId: profile.id,
               provider: 'naver',
+              accessToken, // Access Token을 user 객체에 추가
             });
-            newUser.accessToken = accessToken; // Access Token을 user 객체에 추가
-            done(null, newUser);
+            await user.save(); // 사용자 객체를 MongoDB에 저장
+            done(null, user);
           }
         } catch (error) {
           console.error(error);
@@ -42,7 +43,12 @@ module.exports = () => {
     done(null, user.id);
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id);
+      done(null, user);
+    } catch (error) {
+      done(error, null);
+    }
   });
 };
