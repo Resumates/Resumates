@@ -131,9 +131,7 @@ export default function CreateResume() {
                 )}
             </UserProfile>
 
-            {info.id !== 'personalInfo' && info.id !== 'skills' && (
-              <AddButton onClick={() => addProfile(info.id)} />
-            )}
+            {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
           </ResumeSection>
         ))}
       </ResumeContainer>

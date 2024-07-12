@@ -111,6 +111,7 @@ export const InfoTitle = styled.h2`
   font-weight: bold;
   color: #04438b;
 `;
+
 export const LabeledInput = styled.div`
   margin: 0;
   padding: 10px 8px 10px;
@@ -350,8 +351,7 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .skill {
-      display: flex;
-    flex-direction: row;
+  height: max-content;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
