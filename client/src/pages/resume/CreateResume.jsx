@@ -18,18 +18,39 @@ import { InputField, SelectField } from '../../components/resumeForm/InputField'
 import { profileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
+
 export default function CreateResume() {
+  // 상태 관리
   const [selectedOptionId, setSelectedOptionId] = useState('');
+  const [profiles, setProfiles] = useState(profileInfo);
+
   const handleOptionSelect = (optionId) => {
     setSelectedOptionId(optionId);
   };
 
-  // 아이디 추가
+  // 아이디 추가 함수
   const getUserProfileId = (info) => {
     if (info.id === 'qualification' && selectedOptionId) {
       return `${info.id} ${selectedOptionId}`;
     }
     return info.id;
+  };
+
+  // 프로필 추가 함수
+  const addProfile = (id) => {
+    console.log('추가버튼 클릭!!', id);
+
+    setProfiles((prevProfiles) =>
+      prevProfiles.map((info) =>
+        info.id === id
+          ? {
+              ...info,
+              content: [...info.content, { id: `${id} ${info.content.length + 1}`, field: [] }],
+            }
+          : // console.log('infofofo  ', { ...info.content })
+            info,
+      ),
+    );
   };
 
   // 각 profileInfo 항목에 대한 ref를 생성
@@ -67,6 +88,7 @@ export default function CreateResume() {
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
+
             <UserProfile id={getUserProfileId(info)}>
               {info.content?.map((field) =>
                 field.name === 'gender' || field.name === 'category' ? (
@@ -108,7 +130,10 @@ export default function CreateResume() {
                   ),
                 )}
             </UserProfile>
-            {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
+
+            {info.id !== 'personalInfo' && info.id !== 'skills' && (
+              <AddButton onClick={() => addProfile(info.id)} />
+            )}
           </ResumeSection>
         ))}
       </ResumeContainer>

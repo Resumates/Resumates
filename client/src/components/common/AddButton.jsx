@@ -9,9 +9,10 @@ const Icon = styled.div`
   align-items: center;
 `;
 
-export function AddButton() {
+export function AddButton({ onClick }) {
   return (
     <button
+      onClick={onClick}
       style={{
         display: 'flex',
         width: '53px',

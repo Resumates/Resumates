@@ -350,6 +350,8 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .skill {
+      display: flex;
+    flex-direction: row;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
