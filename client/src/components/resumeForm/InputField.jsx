@@ -6,11 +6,18 @@ export function InputField({ label, type, name, placeholder, required }) {
   return (
     <LabeledInput className={name}>
       {label !== 'skillsBox' && <label htmlFor={name}>{label}</label>}
-      <input type={type} name={name} placeholder={placeholder} required={required}></input>
+
+      {name !== 'skill' && (
+        <input type={type} name={name} placeholder={placeholder} required={required}></input>
+      )}
+
       {name == 'skill' && (
-        <Button type='button' padding='9px 8px' fontSize='16px'>
-          추가
-        </Button>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <input type={type} name={name} placeholder={placeholder} required={required}></input>
+          <Button type='button' padding='8px 8px' fontSize='16px'>
+            추가
+          </Button>
+        </div>
       )}
     </LabeledInput>
   );
