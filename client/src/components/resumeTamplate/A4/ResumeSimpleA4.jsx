@@ -20,7 +20,6 @@ import {
   WorkItem,
   DurationText,
   CompanyCont,
-  CompanyItem,
   DescText,
   SalaryCont,
   SkillList,
@@ -31,6 +30,7 @@ import {
   GetDateText,
   CertificateText,
   ScoreText,
+  LastText,
 } from './ResumeSimpleA4Style';
 
 export default function ResumeSimpleA4({ resumeDetail }) {
@@ -74,15 +74,13 @@ export default function ResumeSimpleA4({ resumeDetail }) {
               <DurationText>{item.duration}</DurationText>
               <CompanyCont>
                 <Text>{item.company}</Text>
-                <CompanyItem>
-                  <Text>{item.department}</Text>
-                  <Text>{item.position}</Text>
-                </CompanyItem>
+                <Text>{item.department}</Text>
+                <Text>{item.position}</Text>
               </CompanyCont>
               <DescText>{item.desc}</DescText>
               <SalaryCont>
-                <Text>연봉</Text>
-                <Text>{item.salary}만원</Text>
+                <LastText>연봉</LastText>
+                <LastText>{item.salary}만원</LastText>
               </SalaryCont>
             </WorkItem>
           ))}
@@ -99,29 +97,41 @@ export default function ResumeSimpleA4({ resumeDetail }) {
       <ContentDiv>
         <H4>경험/활동/교육</H4>
         <ul>
-          {activity.map((itme) => (
-            <ContentItem key={itme._id}>
-              <CategoryText>{itme.category}</CategoryText>
-              <OrganizationText>{itme.organization}</OrganizationText>
-              <DescText>{itme.desc}</DescText>
-              <GetDateText>{itme.duration}</GetDateText>
+          {activity.map((item) => (
+            <ContentItem key={item._id}>
+              <CategoryText>{item.category}</CategoryText>
+              <OrganizationText>{item.organization}</OrganizationText>
+              <DescText>{item.desc}</DescText>
+              <LastText>{item.duration}</LastText>
             </ContentItem>
           ))}
         </ul>
       </ContentDiv>
       <ContentDiv>
-        <H4>자격 어학 수상</H4>
+        <H4>자격/어학/수상</H4>
         <ul>
-          {certificate.map((itme) => (
-            <ContentItem key={itme._id}>
-              <CategoryText>{itme.category}</CategoryText>
-              <CertificateText>{itme.subject}</CertificateText>
-              <OrganizationText>{itme.organization}</OrganizationText>
-              <ScoreText>{itme.score}</ScoreText>
-              <ScoreText>{itme.rank}</ScoreText>
-              <GetDateText>{itme.getDate}</GetDateText>
+          {certificate.map((item) => (
+            <ContentItem key={item._id}>
+              <CategoryText>{item.category}</CategoryText>
+              <CertificateText>{item.subject}</CertificateText>
+              <OrganizationText>{item.organization}</OrganizationText>
+              <ScoreText>{item.score}</ScoreText>
+              <ScoreText>{item.rank}</ScoreText>
+              <GetDateText>{item.getDate}</GetDateText>
             </ContentItem>
           ))}
+        </ul>
+      </ContentDiv>
+      <ContentDiv>
+        <H4>포트폴리오</H4>
+        <ul>
+          <ContentItem>
+            <CategoryText>
+              <a href={portfolio.url} target='blank'>
+                {portfolio.url}
+              </a>
+            </CategoryText>
+          </ContentItem>
         </ul>
       </ContentDiv>
     </TemplateCont>

@@ -14,17 +14,4 @@ router.get(
   },
 );
 
-router.get('/user', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.query.email }); // 이메일로 사용자 조회
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json({ accessToken: user.accessToken });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
 module.exports = router;
