@@ -5,13 +5,23 @@ import logo from '../../asset/images/logo.png';
 import NavLinks from './NavLinks';
 
 export default function Header() {
+  const userToken = localStorage.getItem('token');
+  console.log(userToken);
+
   return (
     <BgCont>
       <MainHeaderContainer>
         <HeaderInner>
-          <NavLink to='/'>
-            <StyledImage src={logo} alt='Resumates Logo' />
-          </NavLink>
+          {userToken ? (
+            <NavLink to='/mainLogin'>
+              <StyledImage src={logo} alt='Resumates Logo' />
+            </NavLink>
+          ) : (
+            <NavLink to='/'>
+              <StyledImage src={logo} alt='Resumates Logo' />
+            </NavLink>
+          )}
+
           <Nav>
             <NavLinks />
           </Nav>
