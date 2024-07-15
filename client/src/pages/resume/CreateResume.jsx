@@ -24,6 +24,16 @@ export default function CreateResume() {
   const [selectedOptionId, setSelectedOptionId] = useState('');
   const [profiles, setProfiles] = useState(profileInfo);
 
+  const [skill, setSkill] = useState('');
+  const [skillsBox, setSkillsBox] = useState('');
+
+  const handleAddSkill = () => {
+    if (skill.trim() && setSkillsBox) {
+      setSkillsBox((prev) => (prev ? `${prev}, ${skill}` : skill));
+      setSkill('');
+    }
+  };
+
   const handleOptionSelect = (optionId) => {
     setSelectedOptionId(optionId);
   };
@@ -100,6 +110,20 @@ export default function CreateResume() {
                     data={field.data}
                     InfoId={info.id}
                     onOptionSelect={handleOptionSelect}
+                  />
+                ) : field.name === 'skill' || field.name === 'skillsBox' ? (
+                  <InputField
+                    key={field.name}
+                    label={field.label}
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    required={field.required}
+                    skill={field.name === 'skill' ? skill : undefined}
+                    setSkill={field.name === 'skill' ? setSkill : undefined}
+                    skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
+                    setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
+                    handleAddSkill={handleAddSkill}
                   />
                 ) : (
                   <InputField
