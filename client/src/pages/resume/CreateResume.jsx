@@ -21,11 +21,16 @@ import { AddButton } from '../../components/common/AddButton';
 
 export default function CreateResume() {
   // 상태 관리
+  // const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
   const [selectedOptionId, setSelectedOptionId] = useState('');
-  const [profiles, setProfiles] = useState(profileInfo);
-
   const [skill, setSkill] = useState('');
   const [skillsBox, setSkillsBox] = useState('');
+
+  // const handleAddProfile = (id) => {
+  //     const newInfo ={
+
+  //     }
+  // };
 
   const handleAddSkill = () => {
     if (skill.trim() && setSkillsBox) {
@@ -44,23 +49,6 @@ export default function CreateResume() {
       return `${info.id} ${selectedOptionId}`;
     }
     return info.id;
-  };
-
-  // 프로필 추가 함수
-  const addProfile = (id) => {
-    console.log('추가버튼 클릭!!', id);
-
-    setProfiles((prevProfiles) =>
-      prevProfiles.map((info) =>
-        info.id === id
-          ? {
-              ...info,
-              content: [...info.content, { id: `${id} ${info.content.length + 1}`, field: [] }],
-            }
-          : // console.log('infofofo  ', { ...info.content })
-            info,
-      ),
-    );
   };
 
   // 각 profileInfo 항목에 대한 ref를 생성
@@ -88,56 +76,68 @@ export default function CreateResume() {
           <ul>
             {profileInfo.map((info) => (
               <li key={info.id}>
-                <a onClick={() => scrollToItem(info.id)}>{info.label}</a>
+                <a href='#!' onClick={() => scrollToItem(info.id)}>
+                  {info.label}
+                </a>
               </li>
             ))}
           </ul>
         </InfoList>
       </InfoContainer>
+
       <ResumeContainer>
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
+            {/* 
+          {
+            info.content.map(()=>(
 
-            <UserProfile id={getUserProfileId(info)}>
-              {info.content?.map((field) =>
-                field.name === 'gender' || field.name === 'category' ? (
-                  <SelectField
-                    key={field.name}
-                    label={field.label}
-                    name={field.name}
-                    required={field.required}
-                    data={field.data}
-                    InfoId={info.id}
-                    onOptionSelect={handleOptionSelect}
-                  />
-                ) : field.name === 'skill' || field.name === 'skillsBox' ? (
-                  <InputField
-                    key={field.name}
-                    label={field.label}
-                    type={field.type}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    required={field.required}
-                    skill={field.name === 'skill' ? skill : undefined}
-                    setSkill={field.name === 'skill' ? setSkill : undefined}
-                    skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
-                    setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
-                    handleAddSkill={handleAddSkill}
-                  />
-                ) : (
-                  <InputField
-                    key={field.name}
-                    label={field.label}
-                    type={field.type}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    required={field.required}
-                  />
-                ),
-              )}
-              {info.id == 'qualification' &&
-                info.content.map((field) =>
+              
+            ))
+          } */}
+            <UserProfile className={getUserProfileId(info)}>
+              {
+                info.content?.map((field) => console.log('fieldfield', field))
+
+                //   field.name === 'gender' || field.name === 'category' ? (
+                //     <SelectField
+                //       key={field.name}
+                //       label={field.label}
+                //       name={field.name}
+                //       required={field.required}
+                //       data={field.data}
+                //       InfoId={info.id}
+                //       onOptionSelect={handleOptionSelect}
+                //     />
+                //   ) : field.name === 'skill' || field.name === 'skillsBox' ? (
+                //     <InputField
+                //       key={field.name}
+                //       label={field.label}
+                //       type={field.type}
+                //       name={field.name}
+                //       placeholder={field.placeholder}
+                //       required={field.required}
+                //       skill={field.name === 'skill' ? skill : undefined}
+                //       setSkill={field.name === 'skill' ? setSkill : undefined}
+                //       skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
+                //       setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
+                //       handleAddSkill={handleAddSkill}
+                //     />
+                //   ) : (
+                //     <InputField
+                //       key={field.name}
+                //       label={field.label}
+                //       type={field.type}
+                //       name={field.name}
+                //       placeholder={field.placeholder}
+                //       required={field.required}
+                //     />
+                //   ),
+                // )
+              }
+              {/* {info.id === 'qualification' &&
+                info.content.fields.map((field) =>
                   field.data.map(
                     (items) =>
                       items.id === selectedOptionId &&
@@ -152,7 +152,7 @@ export default function CreateResume() {
                         />
                       )),
                   ),
-                )}
+                )} */}
             </UserProfile>
 
             {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
