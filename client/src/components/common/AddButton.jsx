@@ -2,16 +2,19 @@ import React from 'react';
 import { ReactComponent as AddCircle } from '../../asset/images/icon-addCircle.svg';
 import styled from 'styled-components';
 
-const Icon = styled.div`
-  margin-right: 3px;
-  text-align: center;
+export const Icon = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
+  ${({ $marginRight }) => $marginRight && `margin-right: ${$marginRight};`}
+  ${({ $marginBottom }) => $marginBottom && `margin-bottom: ${$marginBottom};`}
+  ${({ $flexDirection }) => $flexDirection && `flex-direction: ${$flexDirection};`}
 `;
 
-export function AddButton() {
+export function AddButton({ onClick }) {
   return (
     <button
+      onClick={onClick}
       style={{
         display: 'flex',
         width: '53px',
@@ -23,7 +26,7 @@ export function AddButton() {
         margin: '30px auto 0',
       }}
     >
-      <Icon>
+      <Icon $marginRight='3px'>
         <AddCircle width='20px' height='20px' fill='#04438B' />
       </Icon>
       <span style={{ fontWeight: '600' }}>추가</span>

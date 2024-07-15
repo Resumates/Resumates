@@ -111,6 +111,7 @@ export const InfoTitle = styled.h2`
   font-weight: bold;
   color: #04438b;
 `;
+
 export const LabeledInput = styled.div`
   margin: 0;
   padding: 10px 8px 10px;
@@ -143,6 +144,15 @@ export const LabeledInput = styled.div`
     -webkit-box-shadow: 0 0 0px 1000px #fff inset;
     box-shadow: 0 0 0px 1000px #fff inset;
     transition: background-color 5000s ease-in-out 0s;
+  }
+  #photo {
+    display: none;
+  }
+`;
+
+export const StyledLabel = styled.label`
+  &.photo {
+    cursor: pointer;
   }
 `;
 
@@ -183,6 +193,10 @@ export const LabeledSelect = styled.div`
   select:hover {
     color: black;
     background-color: #f4f6fa;
+  }
+
+  // 사진업로드
+  .btn-upload {
   }
 `;
 
@@ -253,6 +267,10 @@ export const UserProfile = styled.div`
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 3;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .name {
     grid-column-start: 2;
@@ -350,6 +368,7 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .skill {
+  height: max-content;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
