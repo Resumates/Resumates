@@ -6,9 +6,9 @@ export const Icon = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  ${({ marginRight }) => marginRight && `margin-right: ${marginRight};`}
-  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`}
-  ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
+  ${({ $marginRight }) => $marginRight && `margin-right: ${$marginRight};`}
+  ${({ $marginBottom }) => $marginBottom && `margin-bottom: ${$marginBottom};`}
+  ${({ $flexDirection }) => $flexDirection && `flex-direction: ${$flexDirection};`}
 `;
 
 export function AddButton({ onClick }) {
@@ -26,7 +26,7 @@ export function AddButton({ onClick }) {
         margin: '30px auto 0',
       }}
     >
-      <Icon marginRight='3px'>
+      <Icon $marginRight='3px'>
         <AddCircle width='20px' height='20px' fill='#04438B' />
       </Icon>
       <span style={{ fontWeight: '600' }}>추가</span>

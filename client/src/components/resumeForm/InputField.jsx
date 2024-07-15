@@ -4,13 +4,24 @@ import Button from '../common/Button';
 import { ReactComponent as AddCircle } from '../../asset/images/icon-addCircle.svg';
 import { Icon } from '../common/AddButton';
 
-export function InputField({ label, type, name, placeholder, required }) {
+export function InputField({
+  label,
+  type,
+  name,
+  placeholder,
+  required,
+  skill,
+  setSkill,
+  skillsBox,
+  setSkillsBox,
+  handleAddSkill,
+}) {
   return (
     <LabeledInput className={name}>
       {label !== 'skillsBox' && (
         <StyledLabel htmlFor={name} className={name}>
           {name === 'photo' && (
-            <Icon marginBottom='10px' flexDirection='column'>
+            <Icon $marginBottom='10px' $flexDirection='column'>
               <AddCircle width='20px' height='20px' fill='#acacac' />
             </Icon>
           )}
@@ -18,7 +29,7 @@ export function InputField({ label, type, name, placeholder, required }) {
         </StyledLabel>
       )}
 
-      {name !== 'skill' && (
+      {name !== 'skill' && name !== 'skillsBox' && (
         <input
           type={type}
           name={name}
@@ -28,13 +39,31 @@ export function InputField({ label, type, name, placeholder, required }) {
         ></input>
       )}
 
-      {name == 'skill' && (
+      {name === 'skill' && (
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <input type={type} name={name} placeholder={placeholder} required={required}></input>
-          <Button type='button' padding='8px 8px' fontSize='16px'>
+          <input
+            type={type}
+            name={name}
+            value={skill}
+            placeholder={placeholder}
+            required={required}
+            onChange={(e) => setSkill(e.target.value)}
+          ></input>
+          <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddSkill}>
             추가
           </Button>
         </div>
+      )}
+
+      {name === 'skillsBox' && (
+        <input
+          type={type}
+          name={name}
+          value={skillsBox}
+          placeholder={placeholder}
+          required={required}
+          readOnly
+        ></input>
       )}
     </LabeledInput>
   );
