@@ -17,7 +17,7 @@ export default function ModalUser({ userInfo }) {
 
   return (
     <UserModal>
-      <UserInfo>
+      <UserInfo onClick={moveUserSet}>
         <UserIcon>{userName}</UserIcon>
         <div>
           <UserId>{userId}</UserId>
