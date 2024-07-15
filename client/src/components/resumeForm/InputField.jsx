@@ -1,14 +1,31 @@
 import React from 'react';
-import { LabeledSelect, LabeledInput } from '../../style/CreateResumeStyle';
+import { LabeledSelect, LabeledInput, StyledLabel } from '../../style/CreateResumeStyle';
 import Button from '../common/Button';
+import { ReactComponent as AddCircle } from '../../asset/images/icon-addCircle.svg';
+import { Icon } from '../common/AddButton';
 
 export function InputField({ label, type, name, placeholder, required }) {
   return (
     <LabeledInput className={name}>
-      {label !== 'skillsBox' && <label htmlFor={name}>{label}</label>}
+      {label !== 'skillsBox' && (
+        <StyledLabel htmlFor={name} className={name}>
+          {name === 'photo' && (
+            <Icon marginBottom='10px' flexDirection='column'>
+              <AddCircle width='20px' height='20px' fill='#acacac' />
+            </Icon>
+          )}
+          {label}
+        </StyledLabel>
+      )}
 
       {name !== 'skill' && (
-        <input type={type} name={name} placeholder={placeholder} required={required}></input>
+        <input
+          type={type}
+          name={name}
+          id={name}
+          placeholder={placeholder}
+          required={required}
+        ></input>
       )}
 
       {name == 'skill' && (
