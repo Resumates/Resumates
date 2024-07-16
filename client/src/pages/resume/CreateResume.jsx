@@ -6,18 +6,17 @@ import {
   ResumeSection,
   ResumeWrap,
   TemplateContainer,
-  InfoList,
-  UserProfile,
   Template,
   TemplateText,
   TemplateBtn,
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
-import { InputField, SelectField } from '../../components/resumeForm/InputField';
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
+import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
+import { ContentItem } from '../../components/resumeForm/ContentItem';
 
 export default function CreateResume() {
   // 상태 관리
@@ -95,17 +94,7 @@ export default function CreateResume() {
         <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
           작성 내용 불러오기
         </Button>
-        <InfoList>
-          <ul>
-            {profileInfo.map((info) => (
-              <li key={info.id}>
-                <a href='#!' onClick={() => scrollToItem(info.id)}>
-                  {info.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </InfoList>
+        <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
 
       <ResumeContainer>
@@ -113,74 +102,19 @@ export default function CreateResume() {
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
             {info.content.map((contentItem) => (
-              <UserProfile key={contentItem.id} className={getUserProfileId(info, contentItem.id)}>
-                {contentItem.fields.map((field) => {
-                  if (field.name === 'gender' || field.name === 'category') {
-                    return (
-                      <SelectField
-                        key={field.name}
-                        label={field.label}
-                        name={field.name}
-                        required={field.required}
-                        data={field.data}
-                        InfoId={info.id}
-                        onOptionSelect={(optionId) =>
-                          handleOptionSelect(info.id, contentItem.id, optionId)
-                        }
-                      />
-                    );
-                  } else if (field.name === 'skill' || field.name === 'skillsBox') {
-                    return (
-                      <InputField
-                        key={field.name}
-                        label={field.label}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                        skill={field.name === 'skill' ? skill : undefined}
-                        setSkill={field.name === 'skill' ? setSkill : undefined}
-                        skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
-                        setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
-                        handleAddSkill={handleAddSkill}
-                      />
-                    );
-                  } else {
-                    return (
-                      <InputField
-                        key={field.name}
-                        label={field.label}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                      />
-                    );
-                  }
-                })}
-
-                {info.id === 'qualification' &&
-                  contentItem.fields.map((field) =>
-                    field.data?.map((items) => {
-                      if (items.id === selectedOptions[info.id]?.[contentItem.id]) {
-                        console.log('items', items);
-                        return items.detail?.map((detail) =>
-                          detail.item.map((item) => (
-                            <InputField
-                              key={item.name}
-                              label={item.label}
-                              type={item.type}
-                              name={item.name}
-                              placeholder={item.placeholder}
-                              required={item.required}
-                            />
-                          )),
-                        );
-                      }
-                      return null;
-                    }),
-                  )}
-              </UserProfile>
+              <ContentItem
+                key={contentItem.id}
+                info={info}
+                contentItem={contentItem}
+                getUserProfileId={getUserProfileId}
+                handleOptionSelect={handleOptionSelect}
+                selectedOptions={selectedOptions}
+                skill={skill}
+                setSkill={setSkill}
+                skillsBox={skillsBox}
+                setSkillsBox={setSkillsBox}
+                handleAddSkill={handleAddSkill}
+              />
             ))}
 
             {info.id !== 'personalInfo' && info.id !== 'skills' && (

@@ -53,6 +53,7 @@ export function InputField({
             placeholder={placeholder}
             required={required}
             onChange={(e) => setSkill(e.target.value)}
+            style={{ width: 'calc(100% - 48px)' }}
           ></input>
           <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddSkill}>
             추가
