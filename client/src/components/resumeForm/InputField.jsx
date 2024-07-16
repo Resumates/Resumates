@@ -77,6 +77,7 @@ export function InputField({
 export function SelectField({ label, name, required, data, onOptionSelect, InfoId }) {
   const handleChange = (event) => {
     const selectedOption = event.target.value;
+    console.log('타켓', selectedOption);
     if (InfoId === 'qualification') {
       onOptionSelect(selectedOption);
     }
