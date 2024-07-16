@@ -32,9 +32,13 @@ export default function ModalCropImg() {
 }
 
 const ImgCropModal = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 100;
   margin: 5rem auto;
-  width: 556px;
-  height: 710px;
+  width: 650px;
   padding: 3rem;
   background-color: white;
   border: 1px solid #eee;
@@ -49,6 +53,7 @@ const H2 = styled.h2`
   text-align: center;
   font-size: 16px;
   margin: 2rem 0 3rem;
+  color: #000;
 `;
 
 const CropNoticeText = styled.p`
@@ -56,11 +61,12 @@ const CropNoticeText = styled.p`
   font-size: 1.4rem;
   color: #51586e;
   margin-top: 0.4rem;
+  text-align: left;
 `;
 
 const ImgCont = styled.div`
   background-color: var(--bgColor);
-  min-height: 340px;
+  min-height: 300px;
   margin: 1rem 0;
 `;
 
@@ -87,6 +93,7 @@ const Btncont = styled.div`
   gap: 2rem;
   justify-content: center;
   margin-top: 3rem;
+  margin-bottom: 2rem;
 `;
 
 const BtnCancle = styled(BtnSelectImg)`
