@@ -15,23 +15,40 @@ import {
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
 import { InputField, SelectField } from '../../components/resumeForm/InputField';
-import { profileInfo } from '../../data/profileInfoData';
+import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
 
 export default function CreateResume() {
   // 상태 관리
-  // const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
-  const [selectedOptionId, setSelectedOptionId] = useState('');
+  const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [skill, setSkill] = useState('');
   const [skillsBox, setSkillsBox] = useState('');
 
-  // const handleAddProfile = (id) => {
-  //     const newInfo ={
+  // 콘텐츠 추가
+  const handleAddContent = (sectionId) => {
+    setProfileInfo((prevData) =>
+      prevData.map((section) => {
+        if (section.id === sectionId) {
+          console.log('sectionId', sectionId);
+          return {
+            ...section,
+            content: [
+              ...section.content,
+              {
+                id: section.content.length + 1,
+                fields: section.content[0].fields.map((field) => ({ ...field })),
+              },
+            ],
+          };
+        }
+        return section;
+      }),
+    );
+  };
 
-  //     }
-  // };
-
+  // 스킬 추가
   const handleAddSkill = () => {
     if (skill.trim() && setSkillsBox) {
       setSkillsBox((prev) => (prev ? `${prev}, ${skill}` : skill));
@@ -39,14 +56,20 @@ export default function CreateResume() {
     }
   };
 
-  const handleOptionSelect = (optionId) => {
-    setSelectedOptionId(optionId);
+  const handleOptionSelect = (sectionId, contentId, optionId) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [sectionId]: {
+        ...prevOptions[sectionId],
+        [contentId]: optionId,
+      },
+    }));
   };
 
   // 아이디 추가 함수
-  const getUserProfileId = (info) => {
-    if (info.id === 'qualification' && selectedOptionId) {
-      return `${info.id} ${selectedOptionId}`;
+  const getUserProfileId = (info, contentId) => {
+    if (info.id === 'qualification' && selectedOptions[info.id]?.[contentId]) {
+      return `${info.id} ${selectedOptions[info.id][contentId]}`;
     }
     return info.id;
   };
@@ -89,73 +112,80 @@ export default function CreateResume() {
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
-            {/* 
-          {
-            info.content.map(()=>(
+            {info.content.map((contentItem) => (
+              <UserProfile key={contentItem.id} className={getUserProfileId(info, contentItem.id)}>
+                {contentItem.fields.map((field) => {
+                  if (field.name === 'gender' || field.name === 'category') {
+                    return (
+                      <SelectField
+                        key={field.name}
+                        label={field.label}
+                        name={field.name}
+                        required={field.required}
+                        data={field.data}
+                        InfoId={info.id}
+                        onOptionSelect={(optionId) =>
+                          handleOptionSelect(info.id, contentItem.id, optionId)
+                        }
+                      />
+                    );
+                  } else if (field.name === 'skill' || field.name === 'skillsBox') {
+                    return (
+                      <InputField
+                        key={field.name}
+                        label={field.label}
+                        type={field.type}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        required={field.required}
+                        skill={field.name === 'skill' ? skill : undefined}
+                        setSkill={field.name === 'skill' ? setSkill : undefined}
+                        skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
+                        setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
+                        handleAddSkill={handleAddSkill}
+                      />
+                    );
+                  } else {
+                    return (
+                      <InputField
+                        key={field.name}
+                        label={field.label}
+                        type={field.type}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        required={field.required}
+                      />
+                    );
+                  }
+                })}
 
-              
-            ))
-          } */}
-            <UserProfile className={getUserProfileId(info)}>
-              {
-                info.content?.map((field) => console.log('fieldfield', field))
+                {info.id === 'qualification' &&
+                  contentItem.fields.map((field) =>
+                    field.data?.map((items) => {
+                      if (items.id === selectedOptions[info.id]?.[contentItem.id]) {
+                        console.log('items', items);
+                        return items.detail?.map((detail) =>
+                          detail.item.map((item) => (
+                            <InputField
+                              key={item.name}
+                              label={item.label}
+                              type={item.type}
+                              name={item.name}
+                              placeholder={item.placeholder}
+                              required={item.required}
+                            />
+                          )),
+                        );
+                      }
+                      return null;
+                    }),
+                  )}
+              </UserProfile>
+            ))}
 
-                //   field.name === 'gender' || field.name === 'category' ? (
-                //     <SelectField
-                //       key={field.name}
-                //       label={field.label}
-                //       name={field.name}
-                //       required={field.required}
-                //       data={field.data}
-                //       InfoId={info.id}
-                //       onOptionSelect={handleOptionSelect}
-                //     />
-                //   ) : field.name === 'skill' || field.name === 'skillsBox' ? (
-                //     <InputField
-                //       key={field.name}
-                //       label={field.label}
-                //       type={field.type}
-                //       name={field.name}
-                //       placeholder={field.placeholder}
-                //       required={field.required}
-                //       skill={field.name === 'skill' ? skill : undefined}
-                //       setSkill={field.name === 'skill' ? setSkill : undefined}
-                //       skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
-                //       setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
-                //       handleAddSkill={handleAddSkill}
-                //     />
-                //   ) : (
-                //     <InputField
-                //       key={field.name}
-                //       label={field.label}
-                //       type={field.type}
-                //       name={field.name}
-                //       placeholder={field.placeholder}
-                //       required={field.required}
-                //     />
-                //   ),
-                // )
-              }
-              {/* {info.id === 'qualification' &&
-                info.content.fields.map((field) =>
-                  field.data.map(
-                    (items) =>
-                      items.id === selectedOptionId &&
-                      items.detail?.map((item) => (
-                        <InputField
-                          key={item.name}
-                          label={item.label}
-                          type={item.type}
-                          name={item.name}
-                          placeholder={item.placeholder}
-                          required={item.required}
-                        />
-                      )),
-                  ),
-                )} */}
-            </UserProfile>
-
-            {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
+            {info.id !== 'personalInfo' && info.id !== 'skills' && (
+              <AddButton onClick={() => handleAddContent(info.id)} />
+            )}
           </ResumeSection>
         ))}
       </ResumeContainer>
