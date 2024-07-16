@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LabeledSelect, LabeledInput, StyledLabel } from '../../style/CreateResumeStyle';
 import Button from '../common/Button';
 import { ReactComponent as AddCircle } from '../../asset/images/icon-addCircle.svg';
 import { Icon } from '../common/AddButton';
+import ModalCropImg from '../Modal/ModalCropImg';
 
 export function InputField({
   label,
@@ -16,14 +17,18 @@ export function InputField({
   setSkillsBox,
   handleAddSkill,
 }) {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <LabeledInput className={name}>
       {label !== 'skillsBox' && (
-        <StyledLabel htmlFor={name} className={name}>
+        <StyledLabel htmlFor={name} className={name} onClick={() => setModalOpen(!modalOpen)}>
           {name === 'photo' && (
-            <Icon $marginBottom='10px' $flexDirection='column'>
-              <AddCircle width='20px' height='20px' fill='#acacac' />
-            </Icon>
+            <>
+              <Icon $marginBottom='10px' $flexDirection='column'>
+                <AddCircle width='20px' height='20px' fill='#acacac' />
+              </Icon>
+              {modalOpen && <ModalCropImg />}
+            </>
           )}
           {label}
         </StyledLabel>
