@@ -15,5 +15,7 @@ router.get('/resume', commonController.writeResume);
 router.get('/resume/:resumeId', commonController.detailResume);
 // 마이페이지
 router.get('/user/resume/:userId', commonController.mypage);
+// 이미지 업로드
+router.post('/upload', commonController.uploadImg);
 
 module.exports = router;

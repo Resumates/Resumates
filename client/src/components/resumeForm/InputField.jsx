@@ -3,7 +3,7 @@ import { LabeledSelect, LabeledInput, StyledLabel } from '../../style/CreateResu
 import Button from '../common/Button';
 import { ReactComponent as AddCircle } from '../../asset/images/icon-addCircle.svg';
 import { Icon } from '../common/AddButton';
-import ModalCropImg from '../Modal/ModalCropImg';
+import ModalCrop from '../Modal/ModalCrop';
 
 export function InputField({
   label,
@@ -22,12 +22,12 @@ export function InputField({
     <LabeledInput className={name}>
       {label !== 'skillsBox' && (
         <StyledLabel htmlFor={name} className={name} onClick={() => setModalOpen(!modalOpen)}>
-          {name === 'photo' && (
+          {name === 'image' && (
             <>
               <Icon $marginBottom='10px' $flexDirection='column'>
                 <AddCircle width='20px' height='20px' fill='#acacac' />
               </Icon>
-              {modalOpen && <ModalCropImg />}
+              {modalOpen && <ModalCrop />}
             </>
           )}
           {label}
