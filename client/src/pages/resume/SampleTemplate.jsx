@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
+import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import ModalCrop from '../../components/Modal/ModalCrop';
 
 export default function SampleTemplate() {
@@ -9,14 +9,14 @@ export default function SampleTemplate() {
   return (
     <div>
       <div>SampleTemplate</div>
-      {/* <ChangeTemplate /> */}
-      {modalOpen && (
+      <ChangeTemplate />
+      {/* {modalOpen && (
         <ModalCrop
           croppedImage={croppedImage}
           setModalOpen={setModalOpen}
           setCroppedImage={setCroppedImage}
         />
-      )}
+      )} */}
     </div>
   );
 }

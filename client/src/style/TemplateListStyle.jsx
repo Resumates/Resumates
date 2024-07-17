@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TemplateCont = styled.div`
   box-sizing: border-box;
-  max-width: 86rem;
+  max-width: 100rem;
   background-color: white;
   margin: 7rem auto;
   padding: 10rem 5rem;
@@ -21,7 +21,7 @@ export const ListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 4rem;
 `;
 
 export const ListItem = styled.button`
@@ -32,6 +32,8 @@ export const ListItem = styled.button`
   &:hover {
     cursor: pointer;
     background-color: var(--bgColor);
+    transform: scale(1.05);
+    transition: all 0.2s;
   }
 `;
 
@@ -53,7 +55,7 @@ export const SimpleTemplate = styled(CasualTemplate)`
 `;
 
 export const TemplateImg = styled.img`
-  width: 18rem;
-  height: 24.3rem;
+  width: 20rem;
+  object-fit: contain;
   border: 1px solid #dddddd;
 `;
