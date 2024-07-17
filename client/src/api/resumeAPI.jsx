@@ -37,11 +37,13 @@ export const deleteResumeAPI = async (resumeId) => {
   }
 };
 
-// 이력서 프로필 이미지 등록
-export const uploadImageAPI = async (ImgSrc) => {
+// 프로필 이미지 업로드
+export const uploadImageAPI = async (formData) => {
   try {
-    const { data } = await axios.post(`${uploadImage}`, {
-      data: { ImgSrc },
+    const { data } = await axios.post(`${uploadImage}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return data;
   } catch (error) {

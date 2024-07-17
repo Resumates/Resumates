@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ImageCropper from '../../utils/ImageCropper';
 import getCroppedImg from '../../utils/getCrop';
-import axios from 'axios';
+import { uploadImageAPI } from '../../api/resumeAPI';
 
 export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage }) {
   const fileInputRef = useRef(null);
@@ -47,23 +47,11 @@ export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage 
   const handleCropImage = async (e) => {
     e.preventDefault();
     if (!croppedImage) return;
-    try {
-      const cropped = await getCroppedImg(croppedImage, croppedAreaPixels);
-      setCroppedImageUrl(cropped);
-
-      const formData = new FormData();
-      formData.append('image', dataURLtoFile(cropped, 'profileImg.png'));
-
-      const res = await axios.post('http://localhost:5000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return res.data;
-    } catch (err) {
-      console.log(err);
-      console.log('서버오류');
-    }
+    const cropped = await getCroppedImg(croppedImage, croppedAreaPixels);
+    setCroppedImageUrl(cropped);
+    const formData = new FormData();
+    formData.append('image', dataURLtoFile(cropped, 'profileImg.png'));
+    await uploadImageAPI(formData);
   };
 
   const handleCancel = () => {
