@@ -24,7 +24,7 @@ export default function ChangeTemplate() {
     navigate(`/resume/${type}`);
   };
   return (
-    <TemplateCont>
+    <>
       <TemplateText>이력서 템플릿을 선택해 이력서를 작성해보세요!</TemplateText>
       <ListContainer>
         <ListItem onClick={handleClick} data-name='casual'>
@@ -40,7 +40,7 @@ export default function ChangeTemplate() {
           <TemplateImg data-name='simple' src={simple} alt='simple template' />
         </ListItem>
       </ListContainer>
-    </TemplateCont>
+    </>
   );
 }
 

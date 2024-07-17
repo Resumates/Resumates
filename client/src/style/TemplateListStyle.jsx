@@ -2,18 +2,31 @@ import styled from 'styled-components';
 
 export const TemplateCont = styled.div`
   box-sizing: border-box;
-  max-width: 100rem;
+  max-width: 120rem;
   background-color: white;
   margin: 7rem auto;
-  padding: 10rem 5rem;
+  padding: 5rem 5rem;
   border-radius: 1rem;
 `;
 
+export const ModalCont = styled(TemplateCont)`
+  position: fixed;
+  width: 1000px;
+  z-index: 999;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  border: 1px solid #eee;
+  box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
+`;
+
 export const TemplateText = styled.p`
-  margin-bottom: 7rem;
+  margin-bottom: 5rem;
   text-align: center;
   font-size: 2rem;
-  padding-bottom: 7rem;
+  padding-bottom: 5rem;
   border-bottom: 2px solid var(--subColor);
 `;
 
@@ -21,7 +34,7 @@ export const ListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4rem;
+  gap: 6rem;
 `;
 
 export const ListItem = styled.button`
@@ -55,7 +68,7 @@ export const SimpleTemplate = styled(CasualTemplate)`
 `;
 
 export const TemplateImg = styled.img`
-  width: 20rem;
+  max-width: 20rem;
   object-fit: contain;
   border: 1px solid #dddddd;
 `;
