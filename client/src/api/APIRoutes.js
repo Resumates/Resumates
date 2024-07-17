@@ -21,6 +21,9 @@ export const validIdRoute = `${host}/user/useridvaild`;
 // 이력서 작성
 export const createResume = `${host}/resume`;
 
+// 프로필 이미지 등록
+export const uploadImage = `${host}/resume/image`;
+
 // 이력서 상세
 export const resumeDetail = `${host}/resume`;
 

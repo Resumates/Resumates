@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { deleteResume, createResume, editResume } from './APIRoutes';
+import { deleteResume, createResume, editResume, uploadImage } from './APIRoutes';
 
 // 이력서 작성
 export const createResumeAPI = async () => {
@@ -34,5 +34,17 @@ export const deleteResumeAPI = async (resumeId) => {
     return data;
   } catch (error) {
     console.error('이력서 삭제 오류', error);
+  }
+};
+
+// 이력서 프로필 이미지 등록
+export const uploadImageAPI = async (ImgSrc) => {
+  try {
+    const { data } = await axios.post(`${uploadImage}`, {
+      data: { ImgSrc },
+    });
+    return data;
+  } catch (error) {
+    console.error('프로필 이미지 등록 오류', error);
   }
 };

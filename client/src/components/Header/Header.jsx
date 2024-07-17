@@ -6,7 +6,6 @@ import NavLinks from './NavLinks';
 
 export default function Header() {
   const userToken = localStorage.getItem('token');
-  console.log(userToken);
 
   return (
     <BgCont>
