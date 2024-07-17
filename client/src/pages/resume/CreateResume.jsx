@@ -17,6 +17,8 @@ import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
+import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
+import { ModalCont } from '../../style/TemplateListStyle';
 
 export default function CreateResume() {
   // 상태 관리
@@ -24,6 +26,7 @@ export default function CreateResume() {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [skill, setSkill] = useState('');
   const [skillsBox, setSkillsBox] = useState('');
+  const [openTemplateList, setOpenTemplateList] = useState(false);
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
@@ -127,7 +130,14 @@ export default function CreateResume() {
       <TemplateContainer>
         <Template></Template>
         <TemplateBtn>
-          <TemplateChangeBtn>⎌ 템플릿 변경</TemplateChangeBtn>
+          <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
+            ⎌ 템플릿 변경
+          </TemplateChangeBtn>
+          {openTemplateList && (
+            <ModalCont>
+              <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
+            </ModalCont>
+          )}
           <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
             저장
           </Button>
