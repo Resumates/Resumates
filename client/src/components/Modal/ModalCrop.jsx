@@ -101,8 +101,11 @@ export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage 
             ref={fileInputRef}
             onChange={handleFileChange}
           />
-          <FileName>{fileName || '파일명'}</FileName>
+          <FileName>{fileName || '이미지 파일을 선택해주세요.'}</FileName>
         </FileCont>
+        <CropNoticeText>
+          * 사진 파일은 10MB 미만의 JPG, JPEG,PNG, GIF 파일만 업로드 가능합니다.
+        </CropNoticeText>
         <ImgCont>
           <Cropper>
             <ImageCropper croppedImage={croppedImage} setCroppedAreaPixels={setCroppedAreaPixels} />
@@ -119,10 +122,6 @@ export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage 
             </PriviewArea>
           )}
         </ImgCont>
-
-        <CropNoticeText>
-          * 사진 파일은 10MB 미만의 JPG, JPEG,PNG, GIF 파일만 업로드 가능합니다.
-        </CropNoticeText>
         <Btncont>
           <BtnCancle type='button' onClick={handleCancel}>
             취소
