@@ -7,10 +7,11 @@ require('dotenv').config();
 const { PORT, MONGO_URL } = process.env;
 
 //네이버 로그인
-const authRoutes = require('./routes/authRoutes');
-require('./controllers/passport')();
-const session = require('express-session');
-const passport = require('passport');
+// const authRoutes = require('./routes/authRoutes');
+// require('./controllers/passport')();
+// const session = require('express-session');
+// const cookieParser = require('cookie-parser');
+// const passport = require('passport');
 
 mongoose
   .connect(MONGO_URL)
@@ -38,13 +39,13 @@ app.use('/user', userRoutes);
 app.use('/resume', resumeRouter);
 
 //네이버 로그인
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use('/auth', authRoutes);
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(cookieParser());
+// app.use('/auth', authRoutes);
 
 mongoose.connect(
   'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',

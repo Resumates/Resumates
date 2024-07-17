@@ -13,8 +13,8 @@ import {
   LoginForm,
   Title,
   StyledForm,
-  StyledButton,
-  SocialLoginButton,
+  KaKaoButton,
+  GoogleButton,
 } from '../../style/LoginStyle';
 import Button from '../../components/common/Button';
 
@@ -36,7 +36,6 @@ const Login = () => {
     false,
   );
 
-  
   const authSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -65,22 +64,28 @@ const Login = () => {
     }
   };
 
-  const handleNaverLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/naver';
-  };
+  // const handleNaverLogin = () => {
+  //   window.location.href = 'http://localhost:5000/auth/naver';
+  // };
 
-  useEffect(() => {
-    console.log('useEffect executed'); // useEffect 실행 확인
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
-    console.log('Token from URL:', token); // 콘솔 로그 추가
-    if (token) {
-      localStorage.setItem('accessToken', token);
-      console.log('Token set in localStorage:', localStorage.getItem('accessToken')); // 추가 콘솔 로그
-      auth.login(params.get('userId'), token); // 로그인 상태 업데이트
-      navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리디렉트
-    }
-  }, [location, navigate, auth]);
+  // useEffect(() => {
+  //   console.log('useEffect executed'); // useEffect 실행 확인
+  //   const params = new URLSearchParams(location.search);
+  //   const token = params.get('token');
+  //   console.log('Token from URL:', token); // 콘솔 로그 추가
+  //   if (token) {
+  //     localStorage.setItem('accessToken', token);
+  //     console.log('Token set in localStorage:', localStorage.getItem('accessToken')); // 추가 콘솔 로그
+  //     auth.login(null, token); // auth context에도 로그인 상태 업데이트
+  //     navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리다이렉트
+  //   }
+  // }, [location, navigate, auth]);
+
+  // 네이버 로그인
+
+  // const NaverLogin =({setGetToke,setUserInfo}) =>
+  //   {}
+
   return (
     <>
       <LoginPage>
@@ -121,8 +126,7 @@ const Login = () => {
                 로그인
               </Button>
             </StyledForm>
-            <Button
-              color='Yellow'
+            <KaKaoButton
               padding='1.8rem 2.4rem'
               margintop='1rem'
               fontSize='1.8rem'
@@ -130,9 +134,8 @@ const Login = () => {
               className='kakao'
             >
               카카오 계정으로 로그인
-            </Button>
-            <Button
-              color='#04438B'
+            </KaKaoButton>
+            <GoogleButton
               padding='1.8rem 2.4rem'
               margintop='1rem'
               fontSize='1.8rem'
@@ -140,15 +143,15 @@ const Login = () => {
               className='google'
             >
               구글 계정으로 로그인
-            </Button>
+            </GoogleButton>
             <Button
-              color='#04438B'
+              color='#03c75a'
               padding='1.8rem 2.4rem'
               margintop='1rem'
               fontSize='1.8rem'
               fontWeight='bold'
               className='Naver'
-              onClick={handleNaverLogin}
+              // onClick={handleNaverLogin}
             >
               네이버 계정으로 로그인
             </Button>

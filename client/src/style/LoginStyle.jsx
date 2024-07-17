@@ -50,37 +50,39 @@ export const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-export const StyledButton = styled.button`
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1.25rem;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+export const KakaoButton = styled.form`
+    padding='1.8rem 2.4rem'
+    margintop='1rem'
+    fontSize='1.8rem'
+    fontWeight='bold'
+    className='kakao'
+    border='1px solid yellow'
 `;
 
-export const SocialLoginButton = styled.button`
-  margin-top: 1rem;
-  padding: 0.75rem;
+export const KaKaoButton = styled.button`
+  background-color: ${(props) => (props.disabled ? '' : props.color || '#fff')};
+  color: ${(props) => (props.disabled ? 'black' : 'black')};
+  padding: ${(props) => props.padding || '10px 20px'};
+  margin-left: ${(props) => props.marginLeft || '0px'};
+  margin-top: ${(props) => props.margintop || '0px'};
   border: none;
-  border-radius: 4px;
-  font-size: 1.25rem;
-  cursor: pointer;
+  border-radius: 10px;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  font-size: ${(props) => props.fontSize || '16px'};
+  opacity: ${(props) => (props.disabled ? '0.6' : '1')};
+  border: 1px solid yellow;
+`;
 
-  &.kakao {
-    background-color: #fee500;
-    color: #3c1e1e;
-  }
-
-  &.google {
-    background-color: #4285f4;
-    color: white;
-  }
+export const GoogleButton = styled.button`
+  background-color: ${(props) => (props.disabled ? '' : props.color || '#fff')};
+  color: ${(props) => (props.disabled ? 'black' : 'black')};
+  padding: ${(props) => props.padding || '10px 20px'};
+  margin-left: ${(props) => props.marginLeft || '0px'};
+  margin-top: ${(props) => props.margintop || '0px'};
+  border: none;
+  border-radius: 10px;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  font-size: ${(props) => props.fontSize || '16px'};
+  opacity: ${(props) => (props.disabled ? '0.6' : '1')};
+  border: 1px solid #04438b;
 `;
