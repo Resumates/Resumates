@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import addImg from '../../asset/images/icon-addCircle.svg';
 import ModalCrop from '../Modal/ModalCrop';
-import { InfoTitle, ResumeSection } from '../../style/CreateResumeStyle';
+import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
 
 export default function UserInfo({ setFormData, formData, setResumeDetail }) {
@@ -16,7 +16,6 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
     email: '',
     address: '',
   });
-  console.log(information);
 
   const handleChange = (e) => {
     setInfomation({ ...information, [e.target.name]: e.target.value });
@@ -32,47 +31,45 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
 
   return (
     <>
-      <ResumeSection>
-        <InfoTitle>인적사항</InfoTitle>
-        <InfoCont>
-          <ProfileImgArea onClick={() => setModalOpen(!modalOpen)}>
-            {croppedImage ? (
-              <img src={croppedImage} alt='추가' className='profileImg' />
-            ) : (
-              <>
-                <img src={addImg} alt='추가' className='defaultImg' />
-                <p>사진등록하기</p>
-              </>
-            )}
-          </ProfileImgArea>
-          <Info>
-            <InputArea className='name'>
-              <UserLabel htmlFor='name'>이름</UserLabel>
-              <UserInput type='text' id='name' name='name' onChange={handleChange} />
-            </InputArea>
-            <InputArea className='birth'>
-              <UserLabel htmlFor='birth'>생년월일</UserLabel>
-              <UserInput type='text' id='birth' name='birth' onChange={handleChange} />
-            </InputArea>
-            <InputArea className='gender'>
-              <UserLabel htmlFor='gender'>성별</UserLabel>
-              <UserInput type='text' id='gender' name='gender' onChange={handleChange} />
-            </InputArea>
-            <InputArea className='phone'>
-              <UserLabel htmlFor='phone'>휴대폰 번호</UserLabel>
-              <UserInput type='text' id='phone' name='phone' onChange={handleChange} />
-            </InputArea>
-            <InputArea className='email'>
-              <UserLabel htmlFor='email'>이메일</UserLabel>
-              <UserInput type='email' id='email' name='email' onChange={handleChange} />
-            </InputArea>
-            <InputArea className='address'>
-              <UserLabel htmlFor='address'>주소</UserLabel>
-              <UserInput type='text' id='address' name='address' onChange={handleChange} />
-            </InputArea>
-          </Info>
-        </InfoCont>
-      </ResumeSection>
+      <InfoTitle id='info'>인적사항</InfoTitle>
+      <InfoCont>
+        <ProfileImgArea onClick={() => setModalOpen(!modalOpen)}>
+          {croppedImage ? (
+            <img src={croppedImage} alt='추가' className='profileImg' />
+          ) : (
+            <>
+              <img src={addImg} alt='추가' className='defaultImg' />
+              <p>사진등록하기</p>
+            </>
+          )}
+        </ProfileImgArea>
+        <Info>
+          <InputArea className='name'>
+            <UserLabel htmlFor='name'>이름</UserLabel>
+            <UserInput type='text' id='name' name='name' onChange={handleChange} />
+          </InputArea>
+          <InputArea className='birth'>
+            <UserLabel htmlFor='birth'>생년월일</UserLabel>
+            <UserInput type='text' id='birth' name='birth' onChange={handleChange} />
+          </InputArea>
+          <InputArea className='gender'>
+            <UserLabel htmlFor='gender'>성별</UserLabel>
+            <UserInput type='text' id='gender' name='gender' onChange={handleChange} />
+          </InputArea>
+          <InputArea className='phone'>
+            <UserLabel htmlFor='phone'>휴대폰 번호</UserLabel>
+            <UserInput type='text' id='phone' name='phone' onChange={handleChange} />
+          </InputArea>
+          <InputArea className='email'>
+            <UserLabel htmlFor='email'>이메일</UserLabel>
+            <UserInput type='email' id='email' name='email' onChange={handleChange} />
+          </InputArea>
+          <InputArea className='address'>
+            <UserLabel htmlFor='address'>주소</UserLabel>
+            <UserInput type='text' id='address' name='address' onChange={handleChange} />
+          </InputArea>
+        </Info>
+      </InfoCont>
       {modalOpen && (
         <ModalCrop
           croppedImage={croppedImage}
