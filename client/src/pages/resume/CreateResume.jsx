@@ -129,6 +129,7 @@ export default function CreateResume() {
         },
       },
     }));
+    setResumeDetail(formData);
   };
 
   return (
@@ -141,7 +142,7 @@ export default function CreateResume() {
       </InfoContainer>
 
       <ResumeContainer>
-        <UserInfo />
+        <UserInfo formData={formData} setFormData={setFormData} />
         {profileInfo.map((info) => (
           <>
             {info.id !== 'personalInfo' ? (
@@ -182,10 +183,10 @@ export default function CreateResume() {
 
       <TemplateContainer>
         <Template>
-          {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={resumeDetail} />}
-          {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={resumeDetail} />}
-          {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={resumeDetail} />}
-          <div>
+          {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={formData} />}
+          {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={formData} />}
+          {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={formData} />}
+          {/* <div>
             {Object.entries(formData).map(([sectionId, sectionData]) => (
               <div key={sectionId}>
                 <h3>{sectionId}</h3>
@@ -198,7 +199,7 @@ export default function CreateResume() {
                 ))}
               </div>
             ))}
-          </div>
+          </div> */}
         </Template>
         <TemplateBtn>
           <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
