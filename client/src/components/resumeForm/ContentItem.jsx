@@ -13,7 +13,14 @@ export function ContentItem({
   skillsBox,
   setSkillsBox,
   handleAddSkill,
+  handleInputChange,
+  formData,
 }) {
+  const handleChange = (e, field) => {
+    const { name, value } = e.target;
+    handleInputChange(info.id, contentItem, name, value);
+  };
+
   return (
     <UserProfile key={contentItem.id} className={getUserProfileId(info, contentItem.id)}>
       {contentItem.fields.map((field) => {
@@ -43,6 +50,8 @@ export function ContentItem({
               skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
               setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
               handleAddSkill={handleAddSkill}
+              value={formData[info.id]?.[contentItem.id]?.[field.name] || ''}
+              handleChange={handleChange}
             />
           );
         } else {
@@ -54,6 +63,8 @@ export function ContentItem({
               name={field.name}
               placeholder={field.placeholder}
               required={field.required}
+              value={formData[info.id]?.[contentItem.id]?.[field.name] || ''}
+              handleChange={handleChange}
             />
           );
         }
@@ -73,6 +84,8 @@ export function ContentItem({
                     name={item.name}
                     placeholder={item.placeholder}
                     required={item.required}
+                    value={formData[info.id]?.[contentItem.id]?.[item.name] || ''}
+                    handleChange={handleChange}
                   />
                 )),
               );
