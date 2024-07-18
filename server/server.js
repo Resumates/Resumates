@@ -1,17 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const cors = require('cors');
 const { commonRouter, resumeRouter } = require('./routes');
 const path = require('path');
 require('dotenv').config();
 const { PORT, MONGO_URL } = process.env;
-
-//네이버 로그인
-const authRoutes = require('./routes/authRoutes');
-require('./controllers/passport')();
-const session = require('express-session');
-const passport = require('passport');
 
 mongoose
   .connect(MONGO_URL)

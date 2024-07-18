@@ -15,8 +15,8 @@ export function InputField({
   skillsBox,
   setSkillsBox,
   handleAddSkill,
-  value,
   handleChange,
+  value,
 }) {
   return (
     <LabeledInput className={name}>
@@ -63,6 +63,7 @@ export function InputField({
           placeholder={placeholder}
           required={required}
           readOnly
+          onChange={handleChange}
         ></input>
       )}
     </LabeledInput>

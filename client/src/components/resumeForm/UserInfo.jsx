@@ -13,6 +13,7 @@ export default function UserInfo() {
   const [modalOpen, setModalOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
   console.log(croppedImage);
+  const [formData, setFormData] = useState({});
 
   const handleOptionSelect = (sectionId, contentId, optionId) => {
     setSelectedOptions((prevOptions) => ({
@@ -40,8 +41,17 @@ export default function UserInfo() {
     }, {}),
   );
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const handleInputChange = (sectionId, contentId, fieldName, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [sectionId]: {
+        ...prevData[sectionId],
+        [contentId]: {
+          ...prevData[sectionId]?.[contentId],
+          [fieldName]: value,
+        },
+      },
+    }));
   };
 
   return (
@@ -68,7 +78,8 @@ export default function UserInfo() {
                 getUserProfileId={getUserProfileId}
                 handleOptionSelect={handleOptionSelect}
                 selectedOptions={selectedOptions}
-                handleChange={handleChange}
+                handleInputChange={handleInputChange}
+                formData={formData}
               />
             </div>
           ))}
