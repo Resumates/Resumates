@@ -36,8 +36,8 @@ export default function CreateResume() {
   const { type } = useParams();
   console.log(type);
   const [resumeDetail, setResumeDetail] = useState(null);
-
   const [formData, setFormData] = useState({});
+  console.log(formData);
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
@@ -130,6 +130,7 @@ export default function CreateResume() {
       },
     }));
     setResumeDetail(formData);
+    console.log(sectionId);
   };
 
   return (
@@ -142,7 +143,7 @@ export default function CreateResume() {
       </InfoContainer>
 
       <ResumeContainer>
-        <UserInfo formData={formData} setFormData={setFormData} />
+        <UserInfo formData={formData} setFormData={setFormData} setResumeDetail={setResumeDetail} />
         {profileInfo.map((info) => (
           <>
             {info.id !== 'personalInfo' ? (
