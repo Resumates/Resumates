@@ -15,7 +15,7 @@ export function ContentItem({
   handleAddSkill,
 }) {
   return (
-    <diV style={{ marginTop: '20px' }}>
+    <div style={{ marginTop: '20px' }}>
       <UserProfile key={contentItem.id} className={getUserProfileId(info, contentItem.id)}>
         {contentItem.fields.map((field) => {
           if (field.name === 'gender' || field.name === 'category') {
@@ -82,6 +82,6 @@ export function ContentItem({
             }),
           )}
       </UserProfile>
-    </diV>
+    </div>
   );
 }

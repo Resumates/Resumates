@@ -214,9 +214,13 @@ export const UserProfile = styled.div`
   font-size: 1.2rem;
   gap: 12px;
 
+  width: ${({ className }) => (className === 'personalInfo' ? '350px' : null)};
+
+  justify-content: ${({ className }) => (className === 'personalInfo' ? 'end' : null)};
+
   grid-template-columns: ${({ className }) =>
     className === 'personalInfo'
-      ? ''
+      ? '18% 17% 29% 24%;'
       : className === 'career'
         ? '27% 18% 16% 16% 14%;'
         : className === 'skills'
@@ -233,7 +237,7 @@ export const UserProfile = styled.div`
                     ? '20% 39% 18% 16%;'
                     : className === 'portfolio'
                       ? '100%;'
-                      : 'auto;'}
+                      : 'auto;'};
 
   grid-template-rows: ${({ className }) =>
     className === 'personalInfo'
@@ -254,11 +258,9 @@ export const UserProfile = styled.div`
                     ? '60px;'
                     : className === 'portfolio'
                       ? '79px;'
-                      : '60px 60px 60px;'}
-
-
+                      : '60px 60px 60px;'};
   // 인적사항
-  .photo {
+  .image {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -269,7 +271,7 @@ export const UserProfile = styled.div`
     justify-content: center;
   }
   .name {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
@@ -287,7 +289,7 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .phone {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 2;
@@ -299,7 +301,7 @@ export const UserProfile = styled.div`
     grid-row-end: 3;
   }
   .address {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 3;
     grid-row-end: 4;
@@ -364,7 +366,7 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .skill {
-  height: max-content;
+    height: max-content;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
@@ -406,78 +408,76 @@ export const UserProfile = styled.div`
   }
 
   // 자격 & 어학 & 수상
-.certificateName{
-  grid-column-start: 2;
+  .certificateName {
+    grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.organization{
-  grid-column-start: 3;
+  }
+  .organization {
+    grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.getDate{
-  grid-column-start: 4;
+  }
+  .getDate {
+    grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
-}
+  }
 
+  //어학시험
 
-//어학시험
-
-.language{
-  grid-column-start: 2;
+  .language {
+    grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.testName{
-  grid-column-start: 3;
+  }
+  .testName {
+    grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.level{
-  grid-column-start: 4;
+  }
+  .level {
+    grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.score{
-  grid-column-start: 5;
+  }
+  .score {
+    grid-column-start: 5;
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.getyear{
-  grid-column-start: 6;
+  }
+  .getyear {
+    grid-column-start: 6;
     grid-column-end: 7;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-// 수상내역
-.awardName{
-  grid-column-start: 2;
+  }
+  // 수상내역
+  .awardName {
+    grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.issuer{
-  grid-column-start: 3;
+  }
+  .issuer {
+    grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-.awardDate{
-  grid-column-start: 4;
+  }
+  .awardDate {
+    grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-
+  }
 
   // 포트폴리오
   .portfolioURL {
