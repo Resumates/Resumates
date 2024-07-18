@@ -23,6 +23,7 @@ import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
+import { DeleteButton } from '../../components/common/DeleteButton';
 
 export default function CreateResume() {
   // 상태 관리
@@ -50,6 +51,22 @@ export default function CreateResume() {
                 fields: section.content[0].fields.map((field) => ({ ...field })),
               },
             ],
+          };
+        }
+        return section;
+      }),
+    );
+  };
+
+  // 콘텐츠 삭제
+
+  const handleDeleteContent = (sectionId, contentId) => {
+    setProfileInfo((preveData) =>
+      preveData.map((section) => {
+        if (section.id === sectionId) {
+          return {
+            ...section,
+            content: section.content.filter((content) => content.id !== contentId),
           };
         }
         return section;
@@ -111,20 +128,27 @@ export default function CreateResume() {
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
-            {info.content.map((contentItem) => (
-              <ContentItem
-                key={contentItem.id}
-                info={info}
-                contentItem={contentItem}
-                getUserProfileId={getUserProfileId}
-                handleOptionSelect={handleOptionSelect}
-                selectedOptions={selectedOptions}
-                skill={skill}
-                setSkill={setSkill}
-                skillsBox={skillsBox}
-                setSkillsBox={setSkillsBox}
-                handleAddSkill={handleAddSkill}
-              />
+
+            {info.content.map((contentItem, index) => (
+              <div key={contentItem.id} style={{ marginTop: '20px' }}>
+                {index > 0 && (
+                  <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
+                )}
+
+                <ContentItem
+                  key={contentItem.id}
+                  info={info}
+                  contentItem={contentItem}
+                  getUserProfileId={getUserProfileId}
+                  handleOptionSelect={handleOptionSelect}
+                  selectedOptions={selectedOptions}
+                  skill={skill}
+                  setSkill={setSkill}
+                  skillsBox={skillsBox}
+                  setSkillsBox={setSkillsBox}
+                  handleAddSkill={handleAddSkill}
+                />
+              </div>
             ))}
 
             {info.id !== 'personalInfo' && info.id !== 'skills' && (
