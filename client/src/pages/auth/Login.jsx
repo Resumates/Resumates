@@ -5,7 +5,8 @@ import { VALIDATOR_MINLENGTH } from '../../utils/validator';
 import { useForm } from '../../hooks/FormHook';
 import Resumes from '../../asset/images/resumes.png';
 import { AuthContext } from '../../components/common/context/auth-context';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import Error from '../error/Error';
 import {
   LoginPage,
   LoginContainer,
@@ -13,15 +14,15 @@ import {
   LoginForm,
   Title,
   StyledForm,
-  StyledButton,
-  SocialLoginButton,
+  KaKaoButton,
+  GoogleButton,
 } from '../../style/LoginStyle';
 import Button from '../../components/common/Button';
 
 const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const [formState, inputHandler] = useForm(
     {
       userId: {
@@ -36,7 +37,6 @@ const Login = () => {
     false,
   );
 
-  
   const authSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -64,23 +64,13 @@ const Login = () => {
       // 에러 상태를 설정하거나 사용자에게 메시지를 보여주는 로직 추가 가능
     }
   };
-
-  const handleNaverLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/naver';
+  const handleClick = () => {
+    navigate('/user/signup');
   };
 
-  useEffect(() => {
-    console.log('useEffect executed'); // useEffect 실행 확인
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
-    console.log('Token from URL:', token); // 콘솔 로그 추가
-    if (token) {
-      localStorage.setItem('accessToken', token);
-      console.log('Token set in localStorage:', localStorage.getItem('accessToken')); // 추가 콘솔 로그
-      auth.login(params.get('userId'), token); // 로그인 상태 업데이트
-      navigate('/mainLogin'); // 토큰이 있을 경우 mainLogin으로 리디렉트
-    }
-  }, [location, navigate, auth]);
+  if (auth.isLoggedIn) {
+    return <Error message='이미 로그인된 상태입니다.' />;
+  }
   return (
     <>
       <LoginPage>
@@ -122,35 +112,14 @@ const Login = () => {
               </Button>
             </StyledForm>
             <Button
-              color='Yellow'
               padding='1.8rem 2.4rem'
               margintop='1rem'
               fontSize='1.8rem'
               fontWeight='bold'
-              className='kakao'
+              className='signUp'
+              onClick={handleClick}
             >
-              카카오 계정으로 로그인
-            </Button>
-            <Button
-              color='#04438B'
-              padding='1.8rem 2.4rem'
-              margintop='1rem'
-              fontSize='1.8rem'
-              fontWeight='bold'
-              className='google'
-            >
-              구글 계정으로 로그인
-            </Button>
-            <Button
-              color='#04438B'
-              padding='1.8rem 2.4rem'
-              margintop='1rem'
-              fontSize='1.8rem'
-              fontWeight='bold'
-              className='Naver'
-              onClick={handleNaverLogin}
-            >
-              네이버 계정으로 로그인
+              회원가입
             </Button>
           </LoginForm>
         </LoginContainer>

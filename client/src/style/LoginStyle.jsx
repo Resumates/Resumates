@@ -49,38 +49,3 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
-
-export const StyledButton = styled.button`
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1.25rem;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-`;
-
-export const SocialLoginButton = styled.button`
-  margin-top: 1rem;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.25rem;
-  cursor: pointer;
-
-  &.kakao {
-    background-color: #fee500;
-    color: #3c1e1e;
-  }
-
-  &.google {
-    background-color: #4285f4;
-    color: white;
-  }
-`;

@@ -8,12 +8,9 @@ const Schema = mongoose.Schema;
 const userSchema = mongoose.Schema(
   {
     // type  string , required: true 필수 항목
-    userId: { type: String },
+    userId: { type: String, required: true },
     email: { type: String, required: true },
-    userPw: { type: String },
-    snsId: { type: String }, // 소셜 로그인 사용자 ID
-    provider: { type: String, default: 'local' }, // 제공자 정보 (local, naver 등)
-    accessToken: { type: String },
+    userPw: { type: String, required: true },
   },
   {
     versionKey: false,
