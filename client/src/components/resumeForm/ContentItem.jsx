@@ -36,6 +36,10 @@ export function ContentItem({
               data={field.data}
               InfoId={info.id}
               onOptionSelect={(optionId) => handleOptionSelect(info.id, contentItem.id, optionId)}
+              value={formData[info.id]?.[contentItem.id]?.[field.name] || ''}
+              handleChange={(e) =>
+                handleInputChange(info.id, contentItem.id, field.name, e.target.value)
+              }
             />
           );
         } else if (field.name === 'skill' || field.name === 'skillsBox') {
@@ -53,7 +57,9 @@ export function ContentItem({
               setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
               handleAddSkill={handleAddSkill}
               value={formData[info.id]?.[contentItem.id]?.[field.name] || ''}
-              handleChange={handleChange}
+              handleChange={(e) =>
+                handleInputChange(info.id, contentItem.id, field.name, e.target.value)
+              }
             />
           );
         } else {
@@ -87,7 +93,9 @@ export function ContentItem({
                     placeholder={item.placeholder}
                     required={item.required}
                     value={formData[info.id]?.[contentItem.id]?.[item.name] || ''}
-                    handleChange={handleChange}
+                    handleChange={(e) =>
+                      handleInputChange(info.id, contentItem.id, field.name, e.target.value)
+                    }
                   />
                 )),
               );

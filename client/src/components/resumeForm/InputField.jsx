@@ -70,19 +70,29 @@ export function InputField({
   );
 }
 
-export function SelectField({ label, name, required, data, onOptionSelect, InfoId }) {
-  const handleChange = (event) => {
+export function SelectField({
+  label,
+  name,
+  required,
+  data,
+  onOptionSelect,
+  InfoId,
+  handleChange,
+  value,
+}) {
+  const handleSelectChange = (event) => {
     const selectedOption = event.target.value;
     console.log('타켓', selectedOption);
     if (InfoId === 'qualification') {
       onOptionSelect(selectedOption);
     }
+    handleChange(event);
   };
 
   return (
     <LabeledSelect className={name}>
       <p>{label}</p>
-      <select name={name} id={name} required={required} onChange={handleChange}>
+      <select name={name} id={name} required={required} value={value} onChange={handleSelectChange}>
         {data.map((option) => (
           <option key={option.id} value={option.id}>
             {option.name}
