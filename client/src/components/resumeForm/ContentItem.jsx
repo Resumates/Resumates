@@ -13,6 +13,8 @@ export function ContentItem({
   skillsBox,
   setSkillsBox,
   handleAddSkill,
+  handleChange,
+  value,
 }) {
   return (
     <div style={{ marginTop: '20px' }}>
@@ -44,6 +46,8 @@ export function ContentItem({
                 skillsBox={field.name === 'skillsBox' ? skillsBox : undefined}
                 setSkillsBox={field.name === 'skillsBox' ? setSkillsBox : undefined}
                 handleAddSkill={handleAddSkill}
+                handleChange={handleChange}
+                value={value}
               />
             );
           } else {

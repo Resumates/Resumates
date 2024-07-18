@@ -3,14 +3,7 @@ import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
 import addImg from '../../asset/images/icon-addCircle.svg';
 import ModalCrop from '../Modal/ModalCrop';
-import {
-  InfoTitle,
-  ResumeContainer,
-  ResumeSection,
-  ResumeWrap,
-  InfoCont,
-  ProfileImgArea,
-} from '../../style/CreateResumeStyle';
+import { InfoTitle, ResumeSection, InfoCont, ProfileImgArea } from '../../style/CreateResumeStyle';
 
 export default function UserInfo() {
   // 상태 관리
@@ -47,37 +40,40 @@ export default function UserInfo() {
     }, {}),
   );
 
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
-    <ResumeWrap>
-      <ResumeContainer>
-        <ResumeSection key={info.id} ref={refs.current[info.id]}>
-          <InfoTitle>{info.label}</InfoTitle>
-          <InfoCont>
-            <ProfileImgArea onClick={() => setModalOpen(!modalOpen)}>
-              {croppedImage ? (
-                <img src={croppedImage} alt='추가' className='profileImg' />
-              ) : (
-                <>
-                  <img src={addImg} alt='추가' className='defaultImg' />
-                  <p>사진등록하기</p>
-                </>
-              )}
-            </ProfileImgArea>
-            {info.content.map((contentItem) => (
-              <div style={{ marginTop: '-20px' }} key={contentItem.id}>
-                <ContentItem
-                  key={contentItem.id}
-                  info={info}
-                  contentItem={contentItem}
-                  getUserProfileId={getUserProfileId}
-                  handleOptionSelect={handleOptionSelect}
-                  selectedOptions={selectedOptions}
-                />
-              </div>
-            ))}
-          </InfoCont>
-        </ResumeSection>
-      </ResumeContainer>
+    <>
+      <ResumeSection key={info.id} ref={refs.current[info.id]}>
+        <InfoTitle>{info.label}</InfoTitle>
+        <InfoCont>
+          <ProfileImgArea onClick={() => setModalOpen(!modalOpen)}>
+            {croppedImage ? (
+              <img src={croppedImage} alt='추가' className='profileImg' />
+            ) : (
+              <>
+                <img src={addImg} alt='추가' className='defaultImg' />
+                <p>사진등록하기</p>
+              </>
+            )}
+          </ProfileImgArea>
+          {info.content.map((contentItem) => (
+            <div style={{ marginTop: '-20px' }} key={contentItem.id}>
+              <ContentItem
+                key={contentItem.id}
+                info={info}
+                contentItem={contentItem}
+                getUserProfileId={getUserProfileId}
+                handleOptionSelect={handleOptionSelect}
+                selectedOptions={selectedOptions}
+                handleChange={handleChange}
+              />
+            </div>
+          ))}
+        </InfoCont>
+      </ResumeSection>
       {modalOpen && (
         <ModalCrop
           croppedImage={croppedImage}
@@ -85,6 +81,6 @@ export default function UserInfo() {
           setCroppedImage={setCroppedImage}
         />
       )}
-    </ResumeWrap>
+    </>
   );
 }
