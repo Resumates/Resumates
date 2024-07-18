@@ -1,17 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const cors = require('cors');
 const { commonRouter, resumeRouter } = require('./routes');
+const path = require('path');
 require('dotenv').config();
 const { PORT, MONGO_URL } = process.env;
-
-//네이버 로그인
-// const authRoutes = require('./routes/authRoutes');
-// require('./controllers/passport')();
-// const session = require('express-session');
-// const cookieParser = require('cookie-parser');
-// const passport = require('passport');
 
 mongoose
   .connect(MONGO_URL)
@@ -28,32 +23,16 @@ const HttpError = require('./models/http-error');
 const userRoutes = require('./routes/userRoute');
 const app = express();
 
-app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 파싱하고, 본문에 있는 JSON 데이터를 추출해서 객체나 배열과 같이 일반적인 JavaScript 데이터 구조로 반환 한다.
-
 // CORS 허용 미들웨어
 app.use(cors());
 
-//미들웨어 등록
+app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 파싱하고, 본문에 있는 JSON 데이터를 추출해서 객체나 배열과 같이 일반적인 JavaScript 데이터 구조로 반환 한다.
+
+// 라우터 등록
 app.use('/', commonRouter);
 app.use('/user', userRoutes);
 app.use('/resume', resumeRouter);
-
-//네이버 로그인
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(cookieParser());
-// app.use('/auth', authRoutes);
-
-mongoose.connect(
-  'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-);
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 app.use((error, req, res, next) => {
   // 오류가 일어야만 실행되는 함수

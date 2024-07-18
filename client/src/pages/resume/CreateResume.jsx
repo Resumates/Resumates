@@ -6,28 +6,72 @@ import {
   ResumeSection,
   ResumeWrap,
   TemplateContainer,
-  InfoList,
-  UserProfile,
   Template,
   TemplateText,
   TemplateBtn,
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
-import { InputField, SelectField } from '../../components/resumeForm/InputField';
-import { profileInfo } from '../../data/profileInfoData';
+import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
+import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
+import { ContentItem } from '../../components/resumeForm/ContentItem';
+import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
+import { ModalCont } from '../../style/TemplateListStyle';
+
 export default function CreateResume() {
-  const [selectedOptionId, setSelectedOptionId] = useState('');
-  const handleOptionSelect = (optionId) => {
-    setSelectedOptionId(optionId);
+  // 상태 관리
+  const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [skill, setSkill] = useState('');
+  const [skillsBox, setSkillsBox] = useState('');
+  const [openTemplateList, setOpenTemplateList] = useState(false);
+
+  // 콘텐츠 추가
+  const handleAddContent = (sectionId) => {
+    setProfileInfo((prevData) =>
+      prevData.map((section) => {
+        if (section.id === sectionId) {
+          console.log('sectionId', sectionId);
+          return {
+            ...section,
+            content: [
+              ...section.content,
+              {
+                id: section.content.length + 1,
+                fields: section.content[0].fields.map((field) => ({ ...field })),
+              },
+            ],
+          };
+        }
+        return section;
+      }),
+    );
   };
 
-  // 아이디 추가
-  const getUserProfileId = (info) => {
-    if (info.id === 'qualification' && selectedOptionId) {
-      return `${info.id} ${selectedOptionId}`;
+  // 스킬 추가
+  const handleAddSkill = () => {
+    if (skill.trim() && setSkillsBox) {
+      setSkillsBox((prev) => (prev ? `${prev}, ${skill}` : skill));
+      setSkill('');
+    }
+  };
+
+  const handleOptionSelect = (sectionId, contentId, optionId) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [sectionId]: {
+        ...prevOptions[sectionId],
+        [contentId]: optionId,
+      },
+    }));
+  };
+
+  // 아이디 추가 함수
+  const getUserProfileId = (info, contentId) => {
+    if (info.id === 'qualification' && selectedOptions[info.id]?.[contentId]) {
+      return `${info.id} ${selectedOptions[info.id][contentId]}`;
     }
     return info.id;
   };
@@ -53,62 +97,32 @@ export default function CreateResume() {
         <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
           작성 내용 불러오기
         </Button>
-        <InfoList>
-          <ul>
-            {profileInfo.map((info) => (
-              <li key={info.id}>
-                <a onClick={() => scrollToItem(info.id)}>{info.label}</a>
-              </li>
-            ))}
-          </ul>
-        </InfoList>
+        <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
+
       <ResumeContainer>
         {profileInfo.map((info) => (
           <ResumeSection key={info.id} ref={refs.current[info.id]}>
             <InfoTitle>{info.label}</InfoTitle>
-            <UserProfile id={getUserProfileId(info)}>
-              {info.content?.map((field) =>
-                field.name === 'gender' || field.name === 'category' ? (
-                  <SelectField
-                    key={field.name}
-                    label={field.label}
-                    name={field.name}
-                    required={field.required}
-                    data={field.data}
-                    InfoId={info.id}
-                    onOptionSelect={handleOptionSelect}
-                  />
-                ) : (
-                  <InputField
-                    key={field.name}
-                    label={field.label}
-                    type={field.type}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    required={field.required}
-                  />
-                ),
-              )}
-              {info.id == 'qualification' &&
-                info.content.map((field) =>
-                  field.data.map(
-                    (items) =>
-                      items.id === selectedOptionId &&
-                      items.detail?.map((item) => (
-                        <InputField
-                          key={item.name}
-                          label={item.label}
-                          type={item.type}
-                          name={item.name}
-                          placeholder={item.placeholder}
-                          required={item.required}
-                        />
-                      )),
-                  ),
-                )}
-            </UserProfile>
-            {info.id !== 'personalInfo' && info.id !== 'skills' && <AddButton />}
+            {info.content.map((contentItem) => (
+              <ContentItem
+                key={contentItem.id}
+                info={info}
+                contentItem={contentItem}
+                getUserProfileId={getUserProfileId}
+                handleOptionSelect={handleOptionSelect}
+                selectedOptions={selectedOptions}
+                skill={skill}
+                setSkill={setSkill}
+                skillsBox={skillsBox}
+                setSkillsBox={setSkillsBox}
+                handleAddSkill={handleAddSkill}
+              />
+            ))}
+
+            {info.id !== 'personalInfo' && info.id !== 'skills' && (
+              <AddButton onClick={() => handleAddContent(info.id)} />
+            )}
           </ResumeSection>
         ))}
       </ResumeContainer>
@@ -116,7 +130,14 @@ export default function CreateResume() {
       <TemplateContainer>
         <Template></Template>
         <TemplateBtn>
-          <TemplateChangeBtn>⎌ 템플릿 변경</TemplateChangeBtn>
+          <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
+            ⎌ 템플릿 변경
+          </TemplateChangeBtn>
+          {openTemplateList && (
+            <ModalCont>
+              <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
+            </ModalCont>
+          )}
           <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
             저장
           </Button>

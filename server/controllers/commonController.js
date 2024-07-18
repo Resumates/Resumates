@@ -1,6 +1,8 @@
 const { default: mongoose } = require('mongoose');
 const { Resumes } = require('../models/resumes');
 const User = require('../models/user');
+const multer = require('multer');
+const path = require('path');
 
 // 메인
 exports.main = async (req, res) => {
@@ -75,22 +77,53 @@ exports.mypage = async (req, res) => {
   }
 };
 
-//마이페이지 deleteResume
-// export const deleteResume = async (req, res) => {
-//   try {
-//     const { resumeId } = req.params;
-//     if (!mongoose.Types.ObjectId.isValid(resumeId)) {b
-//       return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
-//     }
+// 이미지 업로드
+const storage = multer.diskStorage({
+  destination: './upload/',
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 
-//     const resume = await Resumes.findOneAndDelete({ _id: resumeId });
-//     if (!resume) {
-//       return res.status(404).send({ err: '이력서를 찾을 수 없습니다.' });
-//     }
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).single('image');
 
-//     return res.send({ message: '이력서가 삭제되었습니다.', resume });
-//   } catch (err) {
-//     console.log('error: ', err);
-//     return res.status(500).send({ err: err.message });
-//   }
-// };
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb('이미지만 등록 가능합니다.');
+  }
+}
+
+exports.uploadImg = async (req, res) => {
+  try {
+    await new Promise((resolve, reject) => {
+      upload(req, res, (err) => {
+        if (err) {
+          reject(err);
+        } else if (req.file === undefined) {
+          reject('파일이 선택되지 않았습니다.');
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    res.status(200).json({
+      message: '파일 업로드 성공',
+      file: `upload/${req.file.filename}`,
+    });
+  } catch (err) {
+    res.status(400).json({ msg: err });
+  }
+};

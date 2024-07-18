@@ -111,6 +111,7 @@ export const InfoTitle = styled.h2`
   font-weight: bold;
   color: #04438b;
 `;
+
 export const LabeledInput = styled.div`
   margin: 0;
   padding: 10px 8px 10px;
@@ -143,6 +144,15 @@ export const LabeledInput = styled.div`
     -webkit-box-shadow: 0 0 0px 1000px #fff inset;
     box-shadow: 0 0 0px 1000px #fff inset;
     transition: background-color 5000s ease-in-out 0s;
+  }
+  #photo {
+    display: none;
+  }
+`;
+
+export const StyledLabel = styled.label`
+  &.photo {
+    cursor: pointer;
   }
 `;
 
@@ -184,6 +194,10 @@ export const LabeledSelect = styled.div`
     color: black;
     background-color: #f4f6fa;
   }
+
+  // 사진업로드
+  .btn-upload {
+  }
 `;
 
 // 추가 버튼 컴포넌트 예정
@@ -203,45 +217,45 @@ export const UserProfile = styled.div`
   font-size: 1.2rem;
   gap: 12px;
 
-  grid-template-columns: ${({ id }) =>
-    id === 'personalInfo'
+  grid-template-columns: ${({ className }) =>
+    className === 'personalInfo'
       ? '20% 27% 32% 14%;'
-      : id === 'career'
+      : className === 'career'
         ? '27% 18% 16% 16% 14%;'
-        : id === 'skills'
+        : className === 'skills'
           ? '100%;'
-          : id === 'activity'
+          : className === 'activity'
             ? '18% 43% 16% 16%;'
-            : id === 'qualification'
+            : className === 'qualification'
               ? '20% 37% 16% 16%;'
-              : id === 'qualification certification'
+              : className === 'qualification certification'
                 ? '20% 39% 18% 16%;'
-                : id === 'qualification languageTest'
+                : className === 'qualification languageTest'
                   ? '20% 15% 20% 9% 9% 15%;'
-                  : id === 'qualification wards'
+                  : className === 'qualification wards'
                     ? '20% 39% 18% 16%;'
-                    : id === 'portfolio'
+                    : className === 'portfolio'
                       ? '100%;'
                       : 'auto;'}
 
-  grid-template-rows: ${({ id }) =>
-    id === 'personalInfo'
+  grid-template-rows: ${({ className }) =>
+    className === 'personalInfo'
       ? '60px 60px 60px;'
-      : id === 'career'
+      : className === 'career'
         ? '60px 60px 60px;'
-        : id === 'skills'
+        : className === 'skills'
           ? '188px 60px;'
-          : id === 'activity'
+          : className === 'activity'
             ? '60px 120px;'
-            : id === 'qualification'
+            : className === 'qualification'
               ? '60px;'
-              : id === 'qualification certification'
+              : className === 'qualification certification'
                 ? '60px;'
-                : id === 'qualification languageTest'
+                : className === 'qualification languageTest'
                   ? '60px;'
-                  : id === 'qualification wards'
+                  : className === 'qualification wards'
                     ? '60px;'
-                    : id === 'portfolio'
+                    : className === 'portfolio'
                       ? '79px;'
                       : '60px 60px 60px;'}
 
@@ -253,6 +267,10 @@ export const UserProfile = styled.div`
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 3;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .name {
     grid-column-start: 2;
@@ -350,6 +368,7 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
   .skill {
+  height: max-content;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
