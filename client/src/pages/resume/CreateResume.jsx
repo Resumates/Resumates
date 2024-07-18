@@ -25,6 +25,7 @@ import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
+import WorkExperience from '../../components/resumeForm/WorkExperience';
 
 export default function CreateResume() {
   // 상태 관리
@@ -34,10 +35,8 @@ export default function CreateResume() {
   const [skillsBox, setSkillsBox] = useState('');
   const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
-  console.log(type);
   const [resumeDetail, setResumeDetail] = useState(null);
   const [formData, setFormData] = useState({});
-  console.log(formData);
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
@@ -143,7 +142,20 @@ export default function CreateResume() {
       </InfoContainer>
 
       <ResumeContainer>
-        <UserInfo formData={formData} setFormData={setFormData} setResumeDetail={setResumeDetail} />
+        <ResumeSection>
+          <UserInfo
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+        <ResumeSection>
+          <WorkExperience
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
         {profileInfo.map((info) => (
           <>
             {info.id !== 'personalInfo' ? (

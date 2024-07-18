@@ -1,139 +1,139 @@
 export const profileInfo = [
-  {
-    id: 'personalInfo',
-    label: '인적사항',
-    content: [
-      {
-        id: 1,
-        fields: [
-          // {
-          //   label: '사진 추가',
-          //   type: 'file',
-          //   name: 'photo',
-          //   placeholder: '',
-          //   required: 'required',
-          // },
-          {
-            label: '이름',
-            type: 'text',
-            name: 'name',
-            placeholder: '',
-            required: 'required',
-          },
-          {
-            label: '생년월일',
-            type: 'text',
-            name: 'birth',
-            placeholder: '',
-            required: 'required',
-          },
-          {
-            label: '성별',
-            type: 'text',
-            name: 'gender',
-            placeholder: '남성/여성',
-            required: 'required',
-            data: [
-              { id: '', name: '선택' },
-              { id: 'M', name: '남성' },
-              { id: 'F', name: '여성' },
-            ],
-          },
-          {
-            label: '휴대폰 번호',
-            type: 'text',
-            name: 'phone',
-            placeholder: '',
-            required: 'required',
-          },
-          {
-            label: '이메일',
-            type: 'email',
-            name: 'email',
-            placeholder: '',
-            required: 'required',
-          },
-          {
-            label: '주소',
-            type: 'text',
-            name: 'address',
-            placeholder: '',
-            required: 'required',
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   id: 'personalInfo',
+  //   label: '인적사항',
+  //   content: [
+  //     {
+  //       id: 1,
+  //       fields: [
+  //         // {
+  //         //   label: '사진 추가',
+  //         //   type: 'file',
+  //         //   name: 'photo',
+  //         //   placeholder: '',
+  //         //   required: 'required',
+  //         // },
+  //         {
+  //           label: '이름',
+  //           type: 'text',
+  //           name: 'name',
+  //           placeholder: '',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '생년월일',
+  //           type: 'text',
+  //           name: 'birth',
+  //           placeholder: '',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '성별',
+  //           type: 'text',
+  //           name: 'gender',
+  //           placeholder: '남성/여성',
+  //           required: 'required',
+  //           data: [
+  //             { id: '', name: '선택' },
+  //             { id: 'M', name: '남성' },
+  //             { id: 'F', name: '여성' },
+  //           ],
+  //         },
+  //         {
+  //           label: '휴대폰 번호',
+  //           type: 'text',
+  //           name: 'phone',
+  //           placeholder: '',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '이메일',
+  //           type: 'email',
+  //           name: 'email',
+  //           placeholder: '',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '주소',
+  //           type: 'text',
+  //           name: 'address',
+  //           placeholder: '',
+  //           required: 'required',
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 
   // 경력
-  {
-    id: 'career',
-    label: '경력',
-    content: [
-      {
-        id: 1,
-        fields: [
-          {
-            label: '회사명',
-            type: 'text',
-            name: 'company',
-            placeholder: '코스타회사',
-            required: 'required',
-          },
-          {
-            label: '부서명',
-            type: 'text',
-            name: 'department',
-            placeholder: '온라인사업부',
-            required: 'required',
-          },
-          {
-            label: '직급/직책',
-            type: 'text',
-            name: 'position',
-            placeholder: '주임',
-            required: 'required',
-          },
-          {
-            label: '연봉',
-            type: 'text',
-            name: 'salary',
-            placeholder: '4000만원',
-            required: 'required',
-          },
-          {
-            label: '입사년월',
-            type: 'text',
-            name: 'employmentStartDate',
-            placeholder: '2021.03',
-            required: 'required',
-          },
-          {
-            label: '퇴사년월',
-            type: 'text',
-            name: 'employmentEndDate',
-            placeholder: '2023.08',
-            required: 'required',
-          },
-          {
-            label: '재직여부',
-            type: 'text',
-            name: 'workStatus',
-            placeholder: '재직중',
-            required: 'required',
-          },
+  // {
+  //   id: 'career',
+  //   label: '경력',
+  //   content: [
+  //     {
+  //       id: 1,
+  //       fields: [
+  //         {
+  //           label: '회사명',
+  //           type: 'text',
+  //           name: 'company',
+  //           placeholder: '코스타회사',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '부서명',
+  //           type: 'text',
+  //           name: 'department',
+  //           placeholder: '온라인사업부',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '직급/직책',
+  //           type: 'text',
+  //           name: 'position',
+  //           placeholder: '주임',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '연봉',
+  //           type: 'text',
+  //           name: 'salary',
+  //           placeholder: '4000만원',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '입사년월',
+  //           type: 'text',
+  //           name: 'employmentStartDate',
+  //           placeholder: '2021.03',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '퇴사년월',
+  //           type: 'text',
+  //           name: 'employmentEndDate',
+  //           placeholder: '2023.08',
+  //           required: 'required',
+  //         },
+  //         {
+  //           label: '재직여부',
+  //           type: 'text',
+  //           name: 'workStatus',
+  //           placeholder: '재직중',
+  //           required: 'required',
+  //         },
 
-          {
-            label: '담당업무',
-            type: 'text',
-            name: 'taskDescription',
-            placeholder: '어쩌구 어쩌구 업무를 담당',
-            required: 'required',
-          },
-        ],
-      },
-    ],
-  },
+  //         {
+  //           label: '담당업무',
+  //           type: 'text',
+  //           name: 'taskDescription',
+  //           placeholder: '어쩌구 어쩌구 업무를 담당',
+  //           required: 'required',
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 
   // 스킬
   {

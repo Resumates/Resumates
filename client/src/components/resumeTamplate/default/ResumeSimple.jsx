@@ -35,12 +35,9 @@ import {
 
 export default function ResumeSimple({ resumeDetail }) {
   console.log(resumeDetail);
-  const { name, birth, email, image, phone, address } = resumeDetail;
-  const structure = resumeDetail.structure || {};
-  const content = structure.content || {};
-  const { activity = [], certificate = [], skills = [], career = [] } = resumeDetail;
-  console.log(resumeDetail);
-  console.log(resumeDetail.image);
+  const { name, birth, email, image, phone, address, structure } = resumeDetail;
+  const content = structure?.content || {};
+  const { activity = [], certificate = [], skills = [], workExperience = [] } = resumeDetail;
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -48,7 +45,7 @@ export default function ResumeSimple({ resumeDetail }) {
     <TemplateCont>
       <TitleCont>
         {structure && <H3>{structure?.title}</H3>}
-        {image? (
+        {image ? (
           <ProfileImg src={image} alt='프로필이미지' />
         ) : (
           <ProfileImg src={profileImg} alt='프로필이미지' />
@@ -73,12 +70,12 @@ export default function ResumeSimple({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      {career?.length > 0 && (
+      {workExperience.length > 0 && (
         <ContentDiv>
           <H4>경력사항</H4>
           {content && (
             <ul>
-              {career?.map((item, index) => (
+              {workExperience.map((item, index) => (
                 <WorkItem key={index}>
                   <DurationText>{item.duration}</DurationText>
                   <CompanyCont>
@@ -99,7 +96,7 @@ export default function ResumeSimple({ resumeDetail }) {
           )}
         </ContentDiv>
       )}
-      {skills?.length > 0 && (
+      {skills.length > 0 && (
         <ContentDiv>
           <H4>스킬</H4>
           <SkillList>
@@ -109,7 +106,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </SkillList>
         </ContentDiv>
       )}
-      {activity?.length > 0 && (
+      {activity.length > 0 && (
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
@@ -124,7 +121,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate?.length > 0 && (
+      {certificate.length > 0 && (
         <ContentDiv>
           <H4>자격 어학 수상</H4>
           <ul>
