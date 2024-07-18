@@ -19,6 +19,10 @@ import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import { ModalCont } from '../../style/TemplateListStyle';
+import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
+import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
+import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
+import { useParams } from 'react-router-dom';
 
 export default function CreateResume() {
   // 상태 관리
@@ -27,6 +31,9 @@ export default function CreateResume() {
   const [skill, setSkill] = useState('');
   const [skillsBox, setSkillsBox] = useState('');
   const [openTemplateList, setOpenTemplateList] = useState(false);
+  const { type } = useParams();
+  console.log(type);
+  const [resumeDetail, setResumeDetail] = useState(null);
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
@@ -128,7 +135,11 @@ export default function CreateResume() {
       </ResumeContainer>
 
       <TemplateContainer>
-        <Template></Template>
+        <Template>
+          {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={resumeDetail} />}
+          {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={resumeDetail} />}
+          {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={resumeDetail} />}
+        </Template>
         <TemplateBtn>
           <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
             ⎌ 템플릿 변경

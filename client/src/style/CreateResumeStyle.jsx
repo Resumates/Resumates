@@ -2,7 +2,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin: 0 auto;
   width: 100%;
-  // max-width: 1500px;
   flex: 1;
   height: 100vh;
   display: flex;
@@ -13,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const ResumeWrap = styled.div`
-  max-width: 1500px;
+  width: 1500px;
   height: max-content;
   margin: 0 auto;
   display: flex;
@@ -21,6 +20,7 @@ export const ResumeWrap = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
   margin-top: 70px;
+  padding: 0 10px;
 `;
 
 export const InfoContainer = styled.div`
@@ -29,8 +29,6 @@ export const InfoContainer = styled.div`
   width: 220px;
   // position: ${({ isFixed }) => (isFixed ? 'sticky' : 'static')};
   // top: ${({ isFixed }) => (isFixed ? '70px' : 'auto')};
-
-  float: left;
   position: sticky;
   height: max-content;
   top: 70px;
@@ -57,7 +55,7 @@ export const InfoList = styled.div`
 export const ResumeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 600px;
   height: max-content;
   margin: 0 25px 0;
 `;
@@ -71,8 +69,7 @@ export const ResumeSection = styled.div`
 `;
 
 export const TemplateContainer = styled.div`
-  width: 44%;
-  float: right;
+  width: 566px;
   height: max-content;
   top: 70px;
   position: sticky;
@@ -219,7 +216,7 @@ export const UserProfile = styled.div`
 
   grid-template-columns: ${({ className }) =>
     className === 'personalInfo'
-      ? '20% 27% 32% 14%;'
+      ? ''
       : className === 'career'
         ? '27% 18% 16% 16% 14%;'
         : className === 'skills'
@@ -259,7 +256,6 @@ export const UserProfile = styled.div`
                       ? '79px;'
                       : '60px 60px 60px;'}
 
-  margin-top: 15px;
 
   // 인적사항
   .photo {

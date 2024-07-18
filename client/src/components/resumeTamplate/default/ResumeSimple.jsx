@@ -1,9 +1,9 @@
 import React from 'react';
-import birthImg from '../../asset/images/icon-birth.png';
-import EmailImg from '../../asset/images/icon-email.png';
-import PhoneImg from '../../asset/images/icon-phone.png';
-import HomeImg from '../../asset/images/icon-home.png';
-import profileImg from '../../asset/profile/blank-profile.webp';
+import birthImg from '../../../asset/images/icon-birth.png';
+import EmailImg from '../../../asset/images/icon-email.png';
+import PhoneImg from '../../../asset/images/icon-phone.png';
+import HomeImg from '../../../asset/images/icon-home.png';
+import profileImg from '../../../asset/profile/blank-profile.webp';
 import {
   TemplateCont,
   TitleCont,
