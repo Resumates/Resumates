@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
+import { ContentItem } from '../../components/resumeForm/ContentItem';
+import addImg from '../../asset/images/icon-addCircle.svg';
+import ModalCrop from '../Modal/ModalCrop';
 import {
   InfoTitle,
   ResumeContainer,
   ResumeSection,
   ResumeWrap,
-  UserProfile,
+  InfoCont,
+  ProfileImgArea,
 } from '../../style/CreateResumeStyle';
-import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
-import { useRef } from 'react';
-import { ContentItem } from '../../components/resumeForm/ContentItem';
-import styled from 'styled-components';
-import addImg from '../../asset/images/icon-addCircle.svg';
-import ModalCrop from '../Modal/ModalCrop';
 
 export default function UserInfo() {
   // 상태 관리
@@ -20,6 +19,7 @@ export default function UserInfo() {
   const info = profileInfo[0];
   const [modalOpen, setModalOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
+  console.log(croppedImage);
 
   const handleOptionSelect = (sectionId, contentId, optionId) => {
     setSelectedOptions((prevOptions) => ({
@@ -88,35 +88,3 @@ export default function UserInfo() {
     </ResumeWrap>
   );
 }
-
-const InfoCont = styled.div`
-  display: flex;
-  padding: 20px 0;
-  gap: 1rem;
-  box-sizing: border-box;
-`;
-
-const ProfileImgArea = styled.button`
-  width: 150px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  border: 1px solid #acacac;
-  box-sizing: border-box;
-  margin-left: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  font-size: 1.4rem;
-  cursor: pointer;
-
-  .defaultImg {
-    width: 30px;
-  }
-
-  .profileImg {
-    width: 150px;
-  }
-`;

@@ -487,3 +487,35 @@ export const UserProfile = styled.div`
     grid-row-end: 2;
   }
 `;
+
+export const InfoCont = styled.div`
+  display: flex;
+  padding: 20px 0;
+  gap: 1rem;
+  box-sizing: border-box;
+`;
+
+export const ProfileImgArea = styled.button`
+  width: 150px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid #acacac;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  .defaultImg {
+    width: 30px;
+  }
+
+  .profileImg {
+    width: 150px;
+  }
+`;
