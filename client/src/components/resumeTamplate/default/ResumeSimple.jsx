@@ -34,12 +34,13 @@ import {
 } from './ResumeSimpleStyle';
 
 export default function ResumeSimple({ resumeDetail }) {
-  const { name, birth, email, phone, address } = resumeDetail.personalInfo;
+  console.log(resumeDetail);
+  const { name, birth, email, image, phone, address } = resumeDetail;
   const structure = resumeDetail.structure || {};
   const content = structure.content || {};
   const { activity = [], certificate = [], skills = [], career = [] } = resumeDetail;
   console.log(resumeDetail);
-  // console.log(resumeDetail.personalInfo);
+  console.log(resumeDetail.image);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -47,7 +48,11 @@ export default function ResumeSimple({ resumeDetail }) {
     <TemplateCont>
       <TitleCont>
         {structure && <H3>{structure?.title}</H3>}
-        <ProfileImg src={profileImg} alt='프로필이미지' />
+        {image? (
+          <ProfileImg src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImg src={profileImg} alt='프로필이미지' />
+        )}
       </TitleCont>
       <InfoCont>
         <H4>{name}</H4>

@@ -17,16 +17,16 @@ export const ResumeWrap = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   box-sizing: border-box;
   margin-top: 70px;
   padding: 0 10px;
+  justify-content: center;
 `;
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 155px;
   // position: ${({ isFixed }) => (isFixed ? 'sticky' : 'static')};
   // top: ${({ isFixed }) => (isFixed ? '70px' : 'auto')};
   position: sticky;
@@ -259,53 +259,6 @@ export const UserProfile = styled.div`
                     : className === 'portfolio'
                       ? '79px;'
                       : '60px 60px 60px;'};
-  // 인적사항
-  .image {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .name {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-  .birth {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-  .gender {
-    grid-column-start: 4;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-  .phone {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 2;
-  }
-  .email {
-    grid-column-start: 3;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 3;
-  }
-  .address {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row-start: 3;
-    grid-row-end: 4;
-  }
 
   // 경력
   .company {

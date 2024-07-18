@@ -99,6 +99,7 @@ export const H4 = styled.h4`
 export const ProfileImg = styled.img`
   width: 124px;
   height: 124px;
+  object-fit: cover;
   background-color: #eee;
   border-radius: 100%;
   position: absolute;

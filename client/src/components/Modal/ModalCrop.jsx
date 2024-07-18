@@ -4,7 +4,13 @@ import ImageCropper from '../../utils/ImageCropper';
 import getCroppedImg from '../../utils/getCrop';
 import { uploadImageAPI } from '../../api/resumeAPI';
 
-export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage }) {
+export default function ModalCrop({
+  croppedImage,
+  setModalOpen,
+  setCroppedImage,
+  information,
+  setInfomation,
+}) {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState('');
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -64,6 +70,7 @@ export default function ModalCrop({ croppedImage, setModalOpen, setCroppedImage 
   const handleSave = () => {
     console.log(croppedImageUrl);
     setCroppedImage(croppedImageUrl);
+    setInfomation({ ...information, ['image']: croppedImageUrl });
     setModalOpen(false);
   };
   return (
@@ -201,8 +208,8 @@ const PriviewArea = styled.div`
   div {
     box-sizing: border-box;
     background-color: white;
-    width: 150px;
-    height: 200px;
+    width: 153px;
+    height: 204px;
     object-fit: contain;
     display: flex;
     align-items: center;
@@ -215,8 +222,8 @@ const PriviewImg = styled(PriviewArea)`
   img {
     box-sizing: border-box;
     background-color: white;
-    width: 150px;
-    height: 200px;
+    width: 153px;
+    height: 204px;
     object-fit: contain;
   }
 `;
