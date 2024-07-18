@@ -259,7 +259,6 @@ export const UserProfile = styled.div`
                       ? '79px;'
                       : '60px 60px 60px;'}
 
-  margin-top: 15px;
 
   // 인적사항
   .photo {

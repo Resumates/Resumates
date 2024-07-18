@@ -13,23 +13,25 @@ export const Icon = styled.div`
 
 export function AddButton({ onClick }) {
   return (
-    <button
-      onClick={onClick}
-      style={{
-        display: 'flex',
-        width: '53px',
-        flexDirection: 'row',
-        textAlign: 'center',
-        fontSize: '1.6rem',
-        color: '#04438B',
-        alignItems: 'center',
-        margin: '30px auto 0',
-      }}
-    >
-      <Icon $marginRight='3px'>
-        <AddCircle width='20px' height='20px' fill='#04438B' />
-      </Icon>
-      <span style={{ fontWeight: '600' }}>추가</span>
-    </button>
+    <div style={{ borderTop: '1px solid #eee', marginTop: '30px' }}>
+      <button
+        onClick={onClick}
+        style={{
+          display: 'flex',
+          width: '53px',
+          flexDirection: 'row',
+          textAlign: 'center',
+          fontSize: '1.6rem',
+          color: '#04438B',
+          alignItems: 'center',
+          margin: '20px auto 0',
+        }}
+      >
+        <Icon $marginRight='3px'>
+          <AddCircle width='20px' height='20px' fill='#04438B' />
+        </Icon>
+        <span style={{ fontWeight: '600' }}>추가</span>
+      </button>
+    </div>
   );
 }
