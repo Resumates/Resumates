@@ -6,13 +6,13 @@ export const profileInfo = [
       {
         id: 1,
         fields: [
-          {
-            label: '사진 추가',
-            type: 'file',
-            name: 'photo',
-            placeholder: '',
-            required: 'required',
-          },
+          // {
+          //   label: '사진 추가',
+          //   type: 'file',
+          //   name: 'photo',
+          //   placeholder: '',
+          //   required: 'required',
+          // },
           {
             label: '이름',
             type: 'text',
