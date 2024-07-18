@@ -166,7 +166,7 @@ const ImgCont = styled.div`
   margin: 1rem 0;
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 4.5rem;
 `;
 
 const Cropper = styled.div`
@@ -201,8 +201,8 @@ const PriviewArea = styled.div`
   div {
     box-sizing: border-box;
     background-color: white;
-    width: 200px;
-    height: 280px;
+    width: 150px;
+    height: 200px;
     object-fit: contain;
     display: flex;
     align-items: center;
@@ -215,8 +215,8 @@ const PriviewImg = styled(PriviewArea)`
   img {
     box-sizing: border-box;
     background-color: white;
-    width: 200px;
-    height: 280px;
+    width: 150px;
+    height: 200px;
     object-fit: contain;
   }
 `;

@@ -23,6 +23,7 @@ import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
+import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 
 export default function CreateResume() {
@@ -140,38 +141,42 @@ export default function CreateResume() {
       </InfoContainer>
 
       <ResumeContainer>
+        <UserInfo />
         {profileInfo.map((info) => (
-          <ResumeSection key={info.id} ref={refs.current[info.id]}>
-            <InfoTitle>{info.label}</InfoTitle>
+          <>
+            {info.id !== 'personalInfo' ? (
+              <ResumeSection key={info.id} ref={refs.current[info.id]}>
+                <InfoTitle>{info.label}</InfoTitle>
 
-            {info.content.map((contentItem, index) => (
-              <div key={contentItem.id} style={{ marginTop: '20px' }}>
-                {index > 0 && (
-                  <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
+                {info.content.map((contentItem, index) => (
+                  <div key={contentItem.id} style={{ marginTop: '20px' }}>
+                    {index > 0 && (
+                      <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
+                    )}
+
+                    <ContentItem
+                      key={contentItem.id}
+                      info={info}
+                      contentItem={contentItem}
+                      getUserProfileId={getUserProfileId}
+                      handleOptionSelect={handleOptionSelect}
+                      selectedOptions={selectedOptions}
+                      skill={skill}
+                      setSkill={setSkill}
+                      skillsBox={skillsBox}
+                      setSkillsBox={setSkillsBox}
+                      handleAddSkill={handleAddSkill}
+                      handleInputChange={handleInputChange}
+                      formData={formData}
+                    />
+                  </div>
+                ))}
+                {info.id !== 'personalInfo' && info.id !== 'skills' && (
+                  <AddButton onClick={() => handleAddContent(info.id)} />
                 )}
-
-                <ContentItem
-                  key={contentItem.id}
-                  info={info}
-                  contentItem={contentItem}
-                  getUserProfileId={getUserProfileId}
-                  handleOptionSelect={handleOptionSelect}
-                  selectedOptions={selectedOptions}
-                  skill={skill}
-                  setSkill={setSkill}
-                  skillsBox={skillsBox}
-                  setSkillsBox={setSkillsBox}
-                  handleAddSkill={handleAddSkill}
-                  handleInputChange={handleInputChange}
-                  formData={formData}
-                />
-              </div>
-            ))}
-
-            {info.id !== 'personalInfo' && info.id !== 'skills' && (
-              <AddButton onClick={() => handleAddContent(info.id)} />
-            )}
-          </ResumeSection>
+              </ResumeSection>
+            ) : null}
+          </>
         ))}
       </ResumeContainer>
 

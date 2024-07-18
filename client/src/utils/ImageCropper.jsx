@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const ImageCropper = ({
   croppedImage, // crop할 이미지
   setCroppedAreaPixels, // 이미지 {width: , height: , x: , y: } setstate, 잘린 이미지 값
-  width = '200', // 이미지 비율
-  height = '280', // 이미지 비율
+  width = '150', // 이미지 비율
+  height = '200', // 이미지 비율
   cropShape = 'none', // 이미지 모양 round 설정 시 원으로 바뀜
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -25,7 +25,7 @@ const ImageCropper = ({
         image={croppedImage}
         crop={crop}
         zoom={zoom}
-        aspect={200 / 280}
+        aspect={150 / 200}
         onCropChange={setCrop}
         onCropComplete={onCropComplete}
         onZoomChange={setZoom}
