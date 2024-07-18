@@ -16,6 +16,8 @@ export function InputField({
   skillsBox,
   setSkillsBox,
   handleAddSkill,
+  handleChange,
+  value,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
@@ -41,6 +43,8 @@ export function InputField({
           id={name}
           placeholder={placeholder}
           required={required}
+          value={value}
+          onChange={handleChange}
         ></input>
       )}
 
@@ -69,6 +73,7 @@ export function InputField({
           placeholder={placeholder}
           required={required}
           readOnly
+          onChange={handleChange}
         ></input>
       )}
     </LabeledInput>

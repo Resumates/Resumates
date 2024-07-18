@@ -36,6 +36,8 @@ export default function CreateResume() {
   console.log(type);
   const [resumeDetail, setResumeDetail] = useState(null);
 
+  const [formData, setFormData] = useState({});
+
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
     setProfileInfo((prevData) =>
@@ -115,6 +117,19 @@ export default function CreateResume() {
     }
   };
 
+  const handleInputChange = (sectionId, contentId, fieldName, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [sectionId]: {
+        ...prevData[sectionId],
+        [contentId]: {
+          ...prevData[sectionId]?.[contentId],
+          [fieldName]: value,
+        },
+      },
+    }));
+  };
+
   return (
     <ResumeWrap>
       <InfoContainer>
@@ -147,6 +162,8 @@ export default function CreateResume() {
                   skillsBox={skillsBox}
                   setSkillsBox={setSkillsBox}
                   handleAddSkill={handleAddSkill}
+                  handleInputChange={handleInputChange}
+                  formData={formData}
                 />
               </div>
             ))}
@@ -163,6 +180,20 @@ export default function CreateResume() {
           {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={resumeDetail} />}
           {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={resumeDetail} />}
           {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={resumeDetail} />}
+          <div>
+            {Object.entries(formData).map(([sectionId, sectionData]) => (
+              <div key={sectionId}>
+                <h3>{sectionId}</h3>
+                {Object.entries(sectionData).map(([contentId, contentData]) => (
+                  <div key={contentId}>
+                    {Object.entries(contentData).map(([fieldName, value]) => (
+                      <p key={fieldName}>{`${fieldName}: ${value}`}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </Template>
         <TemplateBtn>
           <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
