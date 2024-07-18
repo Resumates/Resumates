@@ -31,13 +31,6 @@ const app = express();
 // CORS 허용 미들웨어
 app.use(cors());
 
-// 라우터 등록
-app.use('/', commonRouter);
-app.use('/user', userRoutes);
-app.use('/resume', resumeRouter);
-app.use('/auth', authRoutes);
-app.use('/upload', express.static(path.join(__dirname, 'upload')));
-
 app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 파싱하고, 본문에 있는 JSON 데이터를 추출해서 객체나 배열과 같이 일반적인 JavaScript 데이터 구조로 반환 한다.
 
 //네이버 로그인
@@ -54,6 +47,13 @@ mongoose.connect(
     useUnifiedTopology: true,
   },
 );
+
+// 라우터 등록
+app.use('/', commonRouter);
+app.use('/user', userRoutes);
+app.use('/resume', resumeRouter);
+app.use('/auth', authRoutes);
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 app.use((error, req, res, next) => {
   // 오류가 일어야만 실행되는 함수

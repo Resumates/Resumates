@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import ModalCrop from '../../components/Modal/ModalCrop';
+import UserInfo from '../../components/resumeForm/UserInfo';
 
 export default function SampleTemplate() {
   const [modalOpen, setModalOpen] = useState(true);
@@ -9,7 +10,7 @@ export default function SampleTemplate() {
   return (
     <div>
       <div>SampleTemplate</div>
-      <ChangeTemplate />
+      {/* <ChangeTemplate /> */}
       {/* {modalOpen && (
         <ModalCrop
           croppedImage={croppedImage}
@@ -17,6 +18,7 @@ export default function SampleTemplate() {
           setCroppedImage={setCroppedImage}
         />
       )} */}
+      <UserInfo />
     </div>
   );
 }

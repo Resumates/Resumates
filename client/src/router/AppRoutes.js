@@ -46,7 +46,7 @@ export default function AppRoutes() {
         <Route path='/list' element={<TemplateList />} />
 
         {/* 이력서 작성 */}
-        <Route path='/resume' element={<CreateResume />} />
+        <Route path='/resume/:type' element={<CreateResume />} />
 
         {/* 이력서 수정 */}
         <Route path='/resume/edit/:resumeId' element={<EditResume />} />

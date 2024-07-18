@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import profileImg from '../../asset/profile/blank-profile.webp';
+import profileImg from '../../../asset/profile/blank-profile.webp';
 import { ProfileImage } from './ResumeCasualStyle';
 import {
   A4Container,

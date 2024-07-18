@@ -7,7 +7,7 @@ import {
   ProfileInfo,
   ContactInfo,
 } from './ResumeCasualStyle.jsx';
-import profileImg from '../../asset/profile/blank-profile.webp';
+import profileImg from '../../../asset/profile/blank-profile.webp';
 import CasualLine from './CasualLine.jsx';
 
 export default function CasualResume({ resumeDetail }) {
