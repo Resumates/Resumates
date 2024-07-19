@@ -7,7 +7,7 @@ import styled from 'styled-components';
 export default function UserInfo({ setFormData, formData, setResumeDetail }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-  const [information, setInfomation] = useState({
+  const [information, setInformation] = useState({
     name: '',
     image: croppedImage,
     birth: '',
@@ -18,13 +18,15 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
   });
 
   const handleChange = (e) => {
-    setInfomation({ ...information, [e.target.name]: e.target.value });
-    setFormData((prevData) => ({ ...prevData, ...information }));
-    setResumeDetail(formData);
+    const { name, value } = e.target;
+    const updatedInfo = { ...information, [name]: value };
+    setInformation(updatedInfo);
+    setFormData((prevData) => ({ ...prevData, ...updatedInfo }));
+    setResumeDetail((prevDetail) => ({ ...prevDetail, ...updatedInfo }));
   };
 
   useEffect(() => {
-    setInfomation({ ...information, ['image']: croppedImage });
+    setInformation({ ...information, image: croppedImage });
     setFormData((prevData) => ({ ...prevData, ...information }));
     setResumeDetail(formData);
   }, [croppedImage]);
@@ -76,7 +78,7 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
           setModalOpen={setModalOpen}
           setCroppedImage={setCroppedImage}
           information={information}
-          setInfomation={setInfomation}
+          setInformation={setInformation}
         />
       )}
     </>
