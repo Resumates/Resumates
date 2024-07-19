@@ -1,0 +1,128 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '../common/Button';
+// import { DeleteButton } from '../common/DeleteButton';
+
+const SkillsSection = ({ skillsBox = '', setFormData }) => {
+  const [skill, setSkill] = useState('');
+
+  const handleAddSkill = () => {
+    if (skill.trim()) {
+      setFormData((prevData) => {
+        const newSkillsBox = prevData.skillsBox ? `${prevData.skillsBox}, ${skill}` : skill;
+        return { ...prevData, skillsBox: newSkillsBox };
+      });
+      setSkill('');
+    }
+  };
+
+  const handleDeleteSkill = (skillToDelete) => {
+    setFormData((prevData) => {
+      const updatedSkillsBox = prevData.skillsBox
+        .split(', ')
+        .filter((item) => item !== skillToDelete)
+        .join(', ');
+      return { ...prevData, skillsBox: updatedSkillsBox };
+    });
+  };
+
+  return (
+    <SectionContainer>
+      <SectionTitle>스킬</SectionTitle>
+      <TextAreaContainer>
+        <SkillTextArea
+          id='skillsBox'
+          name='skillsBox'
+          value={skillsBox}
+          placeholder='HTML, CSS, JavScript'
+          readOnly
+        />
+      </TextAreaContainer>
+
+      <InputContainer>
+        <SkillInput
+          type='text'
+          value={skill}
+          placeholder='스킬 추가'
+          onChange={(e) => setSkill(e.target.value)}
+        />
+        <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddSkill}>
+          추가
+        </Button>
+      </InputContainer>
+
+      <SkillsList>
+        {skillsBox.split(', ').map((item, index) => (
+          <SkillItem key={index}>
+            <SkillText>{item}</SkillText>
+            <DeleteButton onClick={() => handleDeleteSkill(item)}>삭제</DeleteButton>
+          </SkillItem>
+        ))}
+      </SkillsList>
+    </SectionContainer>
+  );
+};
+
+export default SkillsSection;
+
+const SectionContainer = styled.div`
+  margin-top: 20px;
+`;
+
+const SectionTitle = styled.h4`
+  font-size: 1.25em;
+  margin-bottom: 10px;
+`;
+
+const TextAreaContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
+const SkillTextArea = styled.textarea`
+  width: 100%;
+  height: 100px;
+  border: 1px solid #acacac;
+  padding: 10px;
+  border-radius: 4px;
+  resize: none;
+  box-sizing: border-box;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const SkillInput = styled.input`
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;
+
+const SkillsList = styled.div`
+  margin-top: 10px;
+`;
+
+const SkillItem = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+`;
+
+const SkillText = styled.span`
+  flex-grow: 1;
+`;
+
+const DeleteButton = styled.button`
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+`;

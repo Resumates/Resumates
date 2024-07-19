@@ -14,7 +14,7 @@ import SetEmail from '../pages/user/SetEmail';
 import Error from '../pages/error/Error';
 import EditResume from '../pages/resume/EditResume';
 import SampleTemplate from '../pages/resume/SampleTemplate';
-// import PortofolioInfo from '../components/resumeForm/PortofolioInfo';
+import SkillsSection from '../components/resumeForm/SkillsSection';
 
 export default function AppRoutes() {
   const { token, login, logout, userId } = useAuth();
@@ -68,7 +68,7 @@ export default function AppRoutes() {
         <Route path='/error' element={<Error />} />
 
         {/*Portofolio Info*/}
-        {/* <Route path='/resume/porto' element={<PortofolioInfo />} /> */}
+        <Route path='/resume/skill' element={<SkillsSection />} />
       </Routes>
     </AuthContext.Provider>
   );
