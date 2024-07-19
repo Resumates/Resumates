@@ -34,12 +34,12 @@ import {
 } from './ResumeSimpleStyle';
 
 export default function ResumeSimple({ resumeDetail }) {
-  const { name, birth, email, phone, address } = resumeDetail.personalInfo;
-  const structure = resumeDetail.structure || {};
-  const content = structure.content || {};
-  const { activity = [], certificate = [], skills = [], career = [] } = resumeDetail;
   console.log(resumeDetail);
-  // console.log(resumeDetail.personalInfo);
+  const { name, birth, email, image, phone, address, structure } = resumeDetail;
+  const content = structure?.content || {};
+  const { activity, certificate, skills, workExperience } = content || [];
+  console.log(structure);
+  console.log(workExperience);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -47,7 +47,11 @@ export default function ResumeSimple({ resumeDetail }) {
     <TemplateCont>
       <TitleCont>
         {structure && <H3>{structure?.title}</H3>}
-        <ProfileImg src={profileImg} alt='프로필이미지' />
+        {image ? (
+          <ProfileImg src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImg src={profileImg} alt='프로필이미지' />
+        )}
       </TitleCont>
       <InfoCont>
         <H4>{name}</H4>
@@ -68,14 +72,14 @@ export default function ResumeSimple({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      {career?.length > 0 && (
+      {workExperience && (
         <ContentDiv>
           <H4>경력사항</H4>
           {content && (
             <ul>
-              {career?.map((item, index) => (
+              {workExperience.map((item, index) => (
                 <WorkItem key={index}>
-                  <DurationText>{item.duration}</DurationText>
+                  <DurationText>{item.startDate + ' - ' + item.endDate}</DurationText>
                   <CompanyCont>
                     <Text>{item.company}</Text>
                     <CompanyItem>
@@ -94,7 +98,7 @@ export default function ResumeSimple({ resumeDetail }) {
           )}
         </ContentDiv>
       )}
-      {skills?.length > 0 && (
+      {skills && (
         <ContentDiv>
           <H4>스킬</H4>
           <SkillList>
@@ -104,7 +108,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </SkillList>
         </ContentDiv>
       )}
-      {activity?.length > 0 && (
+      {activity && (
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
@@ -119,7 +123,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate?.length > 0 && (
+      {certificate && (
         <ContentDiv>
           <H4>자격 어학 수상</H4>
           <ul>
