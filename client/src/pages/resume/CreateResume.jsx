@@ -26,7 +26,7 @@ import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
-
+import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 export default function CreateResume() {
   // 상태 관리
   const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
@@ -42,6 +42,8 @@ export default function CreateResume() {
       template_type: '',
       content: {},
     },
+    skillsBox: '',
+    portfolio: [],
   });
 
   // 콘텐츠 추가
@@ -164,7 +166,7 @@ export default function CreateResume() {
         </ResumeSection>
         {profileInfo.map((info) => (
           <>
-            {info.id !== 'personalInfo' ? (
+            {info.id !== 'personalInfo' && info.id !== 'portfolio' ? (
               <ResumeSection key={info.id} ref={refs.current[info.id]}>
                 <InfoTitle>{info.label}</InfoTitle>
 
@@ -198,6 +200,13 @@ export default function CreateResume() {
             ) : null}
           </>
         ))}
+        <ResumeSection>
+          <PortfolioSection
+            info={profileInfo.find((section) => section.id === 'portfolio')}
+            formData={formData}
+            handleInputChange={handleInputChange}
+          />
+        </ResumeSection>
       </ResumeContainer>
 
       <TemplateContainer>
