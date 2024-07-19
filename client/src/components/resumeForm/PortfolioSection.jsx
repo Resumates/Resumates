@@ -1,78 +1,118 @@
-import React, { useState, useEffect } from 'react';
-import { UserProfile } from '../../style/CreateResumeStyle';
-import { InputField } from './InputField';
-import { AddButton } from '../../components/common/AddButton';
-import { DeleteButton } from '../../components/common/DeleteButton';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '../common/Button';
 
-const PortfolioSection = ({ info, setFormData, setResumeDetail, formData }) => {
-  const [portfolio, setPortfolio] = useState({ portfolioURL: '' });
-  const [portfolioList, setPortfolioList] = useState(formData.structure.content.portfolio || []);
+const PortfolioSection = ({ portfolio = [], setFormData }) => {
+  const [portfolioURL, setPortfolioURL] = useState('');
 
-  const handleChange = (e) => {
-    setPortfolio({ ...portfolio, [e.target.name]: e.target.value });
+  const handleAddPortfolio = () => {
+    if (portfolioURL.trim()) {
+      setFormData((prevData) => ({
+        ...prevData,
+        structure: {
+          ...prevData.structure,
+          content: {
+            ...prevData.structure.content,
+            portfolio: [...prevData.structure.content.portfolio, { portfolioURL }],
+          },
+        },
+      }));
+      setPortfolioURL('');
+    }
   };
 
-  const addPortfolioItem = () => {
-    const updatedPortfolioList = [...portfolioList, portfolio];
-    setPortfolioList(updatedPortfolioList);
+  const handleDeletePortfolio = (index) => {
     setFormData((prevData) => ({
       ...prevData,
       structure: {
         ...prevData.structure,
         content: {
           ...prevData.structure.content,
-          portfolio: updatedPortfolioList,
-        },
-      },
-    }));
-    setPortfolio({ portfolioURL: '' });
-  };
-
-  const deletePortfolioItem = (index) => {
-    const updatedPortfolioList = portfolioList.filter((_, i) => i !== index);
-    setPortfolioList(updatedPortfolioList);
-    setFormData((prevData) => ({
-      ...prevData,
-      structure: {
-        ...prevData.structure,
-        content: {
-          ...prevData.structure.content,
-          portfolio: updatedPortfolioList,
+          portfolio: prevData.structure.content.portfolio.filter((_, i) => i !== index),
         },
       },
     }));
   };
-
-  useEffect(() => {
-    setResumeDetail(formData);
-  }, [portfolioList, formData, setResumeDetail]);
 
   return (
-    <UserProfile key={info.id} className={info.id}>
-      {portfolioList.map((item, index) => (
-        <div key={index} style={{ marginTop: '20px' }}>
-          <InputField
-            label='포트폴리오 URL'
-            type='text'
-            name='portfolioURL'
-            value={item.portfolioURL}
-            readOnly
-          />
-          <DeleteButton onClick={() => deletePortfolioItem(index)} />
-        </div>
-      ))}
-      <div style={{ marginTop: '20px' }}>
-        <InputField
-          label='포트폴리오 URL'
+    <SectionContainer>
+      <SectionTitle>포트폴리오</SectionTitle>
+      <PortfolioList>
+        {portfolio.map((item, index) => (
+          <PortfolioItem key={index}>
+            <PortfolioText>{item.portfolioURL}</PortfolioText>
+            <DeletePortfolioButton onClick={() => handleDeletePortfolio(index)}>
+              삭제
+            </DeletePortfolioButton>
+          </PortfolioItem>
+        ))}
+      </PortfolioList>
+      <InputContainer>
+        <PortfolioInput
           type='text'
-          name='portfolioURL'
-          value={portfolio.portfolioURL}
-          handleChange={handleChange}
+          value={portfolioURL}
+          placeholder='포트폴리오 추가'
+          onChange={(e) => setPortfolioURL(e.target.value)}
         />
-      </div>
-      <AddButton onClick={addPortfolioItem} />
-    </UserProfile>
+        <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddPortfolio}>
+          추가
+        </Button>
+      </InputContainer>
+    </SectionContainer>
   );
 };
 
 export default PortfolioSection;
+
+const SectionContainer = styled.div`
+  margin-top: 20px;
+`;
+
+const SectionTitle = styled.h4`
+  font-size: 1.25em;
+  margin-bottom: 10px;
+`;
+
+const PortfolioList = styled.div`
+  margin-top: 10px;
+`;
+
+const PortfolioItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  padding: 8px;
+`;
+
+const PortfolioText = styled.span`
+  flex-grow: 1;
+  margin-right: 10px;
+`;
+
+const DeletePortfolioButton = styled.button`
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const PortfolioInput = styled.input`
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;

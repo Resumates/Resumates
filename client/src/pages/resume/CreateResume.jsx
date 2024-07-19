@@ -164,7 +164,7 @@ export default function CreateResume() {
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
-        {profileInfo.map((info) => (
+ {profileInfo.map((info) => (
           <>
             {info.id !== 'personalInfo' && info.id !== 'portfolio' && info.id !== 'skills' ? (
               <ResumeSection key={info.id} ref={refs.current[info.id]}>
@@ -172,9 +172,7 @@ export default function CreateResume() {
 
                 {info.content.map((contentItem, index) => (
                   <div key={contentItem.id} style={{ marginTop: '20px' }}>
-                    {index > 0 && (
-                      <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
-                    )}
+                    {index > 0 && <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />}
 
                     <ContentItem
                       key={contentItem.id}
@@ -204,10 +202,8 @@ export default function CreateResume() {
         </ResumeSection>
         <ResumeSection>
           <PortfolioSection
-            info={profileInfo.find((section) => section.id === 'portfolio')}
-            formData={formData}
+            portfolio={formData.structure.content.portfolio}
             setFormData={setFormData}
-            setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
       </ResumeContainer>
