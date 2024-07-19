@@ -59,7 +59,7 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
 
   useEffect(() => {
     setResumeDetail(formData);
-  }, [experienceList, formData, setResumeDetail]);
+  }, [workExperience, experienceList, formData, setResumeDetail]);
 
   return (
     <>
