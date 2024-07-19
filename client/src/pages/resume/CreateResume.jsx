@@ -27,6 +27,7 @@ import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 import SkillsSection from '../../components/resumeForm/SkillsSection';
+import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 
 export default function CreateResume() {
   // 상태 관리
@@ -148,8 +149,14 @@ export default function CreateResume() {
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
-
       <ResumeContainer>
+        <ResumeSection>
+          <ResumeTitle
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
         <ResumeSection>
           <UserInfo
             formData={formData}
