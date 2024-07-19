@@ -36,7 +36,13 @@ export default function CreateResume() {
   const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
   const [resumeDetail, setResumeDetail] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    structure: {
+      title: '',
+      template_type: '',
+      content: {},
+    },
+  });
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {

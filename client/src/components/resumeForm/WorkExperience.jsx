@@ -28,16 +28,16 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
     const updatedExperienceList = [...experienceList, workExperience];
     setExperienceList(updatedExperienceList);
 
-    // setFormData({
-    //   ...formData,
-    //   structure: {
-    //     ...formData.structure,
-    //     content: {
-    //       ...formData.structure.content,
-    //       workExperience: updatedExperienceList,
-    //     },
-    //   },
-    // });
+    setFormData({
+      ...formData,
+      structure: {
+        ...formData.structure,
+        content: {
+          ...formData.structure.content,
+          workExperience: updatedExperienceList,
+        },
+      },
+    });
     console.log(formData);
 
     setWorkExperience({
