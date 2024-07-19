@@ -5,7 +5,7 @@ import addImg from '../../asset/images/icon-addCircle.svg';
 import ModalCrop from '../Modal/ModalCrop';
 import { InfoTitle, ResumeSection, InfoCont, ProfileImgArea } from '../../style/CreateResumeStyle';
 
-export default function UserInfo() {
+export default function UserInfo({ formData, setFormData }) {
   // 상태 관리
   const [profileInfo] = useState(initialProfileInfo);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -13,7 +13,15 @@ export default function UserInfo() {
   const [modalOpen, setModalOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
   console.log(croppedImage);
-  const [formData, setFormData] = useState({});
+  // const [information, setInfomation] = useState({
+  //   name: '',
+  //   image: '',
+  //   birth: '',
+  //   gender: '',
+  //   phone: '',
+  //   email: '',
+  //   address: '',
+  // });
 
   const handleOptionSelect = (sectionId, contentId, optionId) => {
     setSelectedOptions((prevOptions) => ({
@@ -46,12 +54,13 @@ export default function UserInfo() {
       ...prevData,
       [sectionId]: {
         ...prevData[sectionId],
-        [contentId]: {
+        // [contentId]: {
           ...prevData[sectionId]?.[contentId],
           [fieldName]: value,
-        },
+        // },
       },
     }));
+    console.log(formData);
   };
 
   return (
@@ -70,18 +79,16 @@ export default function UserInfo() {
             )}
           </ProfileImgArea>
           {info.content.map((contentItem) => (
-            <div style={{ marginTop: '-20px' }} key={contentItem.id}>
-              <ContentItem
-                key={contentItem.id}
-                info={info}
-                contentItem={contentItem}
-                getUserProfileId={getUserProfileId}
-                handleOptionSelect={handleOptionSelect}
-                selectedOptions={selectedOptions}
-                handleInputChange={handleInputChange}
-                formData={formData}
-              />
-            </div>
+            <ContentItem
+              key={contentItem.id}
+              info={info}
+              contentItem={contentItem}
+              getUserProfileId={getUserProfileId}
+              handleOptionSelect={handleOptionSelect}
+              selectedOptions={selectedOptions}
+              handleInputChange={handleInputChange}
+              formData={formData}
+            />
           ))}
         </InfoCont>
       </ResumeSection>

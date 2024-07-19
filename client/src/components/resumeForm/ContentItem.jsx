@@ -15,9 +15,11 @@ export function ContentItem({
   handleAddSkill,
   handleInputChange,
   formData,
+  inputValue,
 }) {
   const handleChange = (e, field) => {
     const { name, value } = e.target;
+    console.log(name, value);
     handleInputChange(info.id, contentItem, name, value);
   };
 
@@ -69,10 +71,8 @@ export function ContentItem({
               name={field.name}
               placeholder={field.placeholder}
               required={field.required}
-              value={formData[info.id]?.[contentItem.id]?.[field.name] || ''}
-              handleChange={(e) =>
-                handleInputChange(info.id, contentItem.id, field.name, e.target.value)
-              }
+              value={this}
+              handleChange={handleChange}
             />
           );
         }

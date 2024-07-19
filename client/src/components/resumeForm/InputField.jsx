@@ -60,7 +60,6 @@ export function InputField({
           type={type}
           name={name}
           value={skillsBox}
-          onChange={handleChange}
           placeholder={placeholder}
           required={required}
           readOnly

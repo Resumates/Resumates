@@ -220,7 +220,7 @@ export const UserProfile = styled.div`
 
   grid-template-columns: ${({ className }) =>
     className === 'personalInfo'
-      ? '18% 17% 29% 24%;'
+      ? '18% 15% 32% 24%;'
       : className === 'career'
         ? '27% 18% 16% 16% 14%;'
         : className === 'skills'

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { UserProfile } from '../../style/CreateResumeStyle';
 import { profileInfo } from '../../data/profileInfoData';
 import { InputField } from './InputField';
 // import { AddButton } from '../../components/common/AddButton';
 // import { DeleteButton } from '../../components/common/DeleteButton';
-import UserInfo from './UserInfo';
+// import UserInfo from './UserInfo';
 const PortfolioSection = ({ info, contentItem, handleInputChange, formData }) => {
   const handleChange = (e, field) => {
     const { name, value } = e.target;

@@ -26,7 +26,6 @@ import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 
-import PortfolioSection from '../../components/resumeForm/PortfolioSection'; // 포트폴리오 섹션 임포트
 export default function CreateResume() {
   // 상태 관리
   const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
@@ -130,6 +129,7 @@ export default function CreateResume() {
         },
       },
     }));
+    setResumeDetail(formData);
   };
 
   return (
@@ -142,50 +142,38 @@ export default function CreateResume() {
       </InfoContainer>
 
       <ResumeContainer>
-        <UserInfo />
+        <UserInfo formData={formData} setFormData={setFormData} />
         {profileInfo.map((info) => (
           <>
+          
             {info.id !== 'personalInfo' ? (
               <ResumeSection key={info.id} ref={refs.current[info.id]}>
                 <InfoTitle>{info.label}</InfoTitle>
 
-                {info.id === 'portfolio'
-                  ? info.content.map((contentItem) => (
-                      <div key={contentItem.id} style={{ marginTop: '20px' }}>
-                        <PortfolioSection
-                          info={info}
-                          contentItem={contentItem}
-                          handleInputChange={handleInputChange}
-                          formData={formData}
-                        />
-                      </div>
-                    ))
-                  : info.content.map((contentItem, index) => (
-                      <div key={contentItem.id} style={{ marginTop: '20px' }}>
-                        {index > 0 && (
-                          <DeleteButton
-                            onClick={() => handleDeleteContent(info.id, contentItem.id)}
-                          />
-                        )}
+                {info.content.map((contentItem, index) => (
+                  <div key={contentItem.id} style={{ marginTop: '20px' }}>
+                    {index > 0 && (
+                      <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
+                    )}
 
-                        <ContentItem
-                          key={contentItem.id}
-                          info={info}
-                          contentItem={contentItem}
-                          getUserProfileId={getUserProfileId}
-                          handleOptionSelect={handleOptionSelect}
-                          selectedOptions={selectedOptions}
-                          skill={skill}
-                          setSkill={setSkill}
-                          skillsBox={skillsBox}
-                          setSkillsBox={setSkillsBox}
-                          handleAddSkill={handleAddSkill}
-                          handleInputChange={handleInputChange}
-                          formData={formData}
-                        />
-                      </div>
-                    ))}
-                {info.id !== 'personalInfo' && info.id !== 'skills' && info.id !== 'portfolio' && (
+                    <ContentItem
+                      key={contentItem.id}
+                      info={info}
+                      contentItem={contentItem}
+                      getUserProfileId={getUserProfileId}
+                      handleOptionSelect={handleOptionSelect}
+                      selectedOptions={selectedOptions}
+                      skill={skill}
+                      setSkill={setSkill}
+                      skillsBox={skillsBox}
+                      setSkillsBox={setSkillsBox}
+                      handleAddSkill={handleAddSkill}
+                      handleInputChange={handleInputChange}
+                      formData={formData}
+                    />
+                  </div>
+                ))}
+                {info.id !== 'personalInfo' && info.id !== 'skills' && (
                   <AddButton onClick={() => handleAddContent(info.id)} />
                 )}
               </ResumeSection>
@@ -196,10 +184,10 @@ export default function CreateResume() {
 
       <TemplateContainer>
         <Template>
-          {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={resumeDetail} />}
-          {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={resumeDetail} />}
-          {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={resumeDetail} />}
-          <div>
+          {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={formData} />}
+          {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={formData} />}
+          {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={formData} />}
+          {/* <div>
             {Object.entries(formData).map(([sectionId, sectionData]) => (
               <div key={sectionId}>
                 <h3>{sectionId}</h3>
@@ -212,7 +200,7 @@ export default function CreateResume() {
                 ))}
               </div>
             ))}
-          </div>
+          </div> */}
         </Template>
         <TemplateBtn>
           <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
