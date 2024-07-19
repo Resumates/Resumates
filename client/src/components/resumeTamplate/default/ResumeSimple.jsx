@@ -37,7 +37,9 @@ export default function ResumeSimple({ resumeDetail }) {
   console.log(resumeDetail);
   const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
-  const { activity = [], certificate = [], skills = [], workExperience = [] } = resumeDetail;
+  const { activity, certificate, skills, workExperience } = content || [];
+  console.log(structure);
+  console.log(workExperience);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -70,14 +72,14 @@ export default function ResumeSimple({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      {workExperience.length > 0 && (
+      {workExperience && (
         <ContentDiv>
           <H4>경력사항</H4>
           {content && (
             <ul>
               {workExperience.map((item, index) => (
                 <WorkItem key={index}>
-                  <DurationText>{item.duration}</DurationText>
+                  <DurationText>{item.startDate + ' - ' + item.endDate}</DurationText>
                   <CompanyCont>
                     <Text>{item.company}</Text>
                     <CompanyItem>
@@ -96,7 +98,7 @@ export default function ResumeSimple({ resumeDetail }) {
           )}
         </ContentDiv>
       )}
-      {skills.length > 0 && (
+      {skills && (
         <ContentDiv>
           <H4>스킬</H4>
           <SkillList>
@@ -106,7 +108,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </SkillList>
         </ContentDiv>
       )}
-      {activity.length > 0 && (
+      {activity && (
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
@@ -121,7 +123,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate.length > 0 && (
+      {certificate && (
         <ContentDiv>
           <H4>자격 어학 수상</H4>
           <ul>
