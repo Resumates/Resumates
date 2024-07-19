@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserProfile } from '../../style/CreateResumeStyle';
 import { InputField } from './InputField';
 import { AddButton } from '../../components/common/AddButton';
 import { DeleteButton } from '../../components/common/DeleteButton';
 
-const PortfolioSection = ({ info, formData, handleInputChange }) => {
+const PortfolioSection = ({ info, setFormData, setResumeDetail, formData }) => {
   const [portfolio, setPortfolio] = useState({ portfolioURL: '' });
-  const [portfolioList, setPortfolioList] = useState(formData.portfolio || []);
+  const [portfolioList, setPortfolioList] = useState(formData.structure.content.portfolio || []);
 
   const handleChange = (e) => {
     setPortfolio({ ...portfolio, [e.target.name]: e.target.value });
@@ -15,15 +15,37 @@ const PortfolioSection = ({ info, formData, handleInputChange }) => {
   const addPortfolioItem = () => {
     const updatedPortfolioList = [...portfolioList, portfolio];
     setPortfolioList(updatedPortfolioList);
-    handleInputChange('portfolio', 1, 'portfolioList', updatedPortfolioList);
+    setFormData((prevData) => ({
+      ...prevData,
+      structure: {
+        ...prevData.structure,
+        content: {
+          ...prevData.structure.content,
+          portfolio: updatedPortfolioList,
+        },
+      },
+    }));
     setPortfolio({ portfolioURL: '' });
   };
 
   const deletePortfolioItem = (index) => {
     const updatedPortfolioList = portfolioList.filter((_, i) => i !== index);
     setPortfolioList(updatedPortfolioList);
-    handleInputChange('portfolio', 1, 'portfolioList', updatedPortfolioList);
+    setFormData((prevData) => ({
+      ...prevData,
+      structure: {
+        ...prevData.structure,
+        content: {
+          ...prevData.structure.content,
+          portfolio: updatedPortfolioList,
+        },
+      },
+    }));
   };
+
+  useEffect(() => {
+    setResumeDetail(formData);
+  }, [portfolioList, formData, setResumeDetail]);
 
   return (
     <UserProfile key={info.id} className={info.id}>
