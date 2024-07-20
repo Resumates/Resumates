@@ -1,23 +1,21 @@
 import styled from 'styled-components';
 
-export const BgCont = styled.div`
+export const HeaderContainer = styled.header`
+  width: 100%;
   background-color: #fff;
   height: 9.5rem;
-`;
-
-export const MainHeaderContainer = styled.header`
-  max-width: 1320px;
-  height: 9.5rem;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  position: relative;
+  position: fixed;
+  top: 0;
 `;
 
 export const HeaderInner = styled.div`
   width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
