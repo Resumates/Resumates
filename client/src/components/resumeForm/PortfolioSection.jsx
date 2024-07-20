@@ -4,9 +4,9 @@ import { InputField } from './InputField';
 import { AddButton } from '../../components/common/AddButton';
 import { DeleteButton } from '../../components/common/DeleteButton';
 
-const PortfolioSection = ({ info, setFormData, setResumeDetail, formData }) => {
+const PortfolioSection = ({ info, setFormData, formData }) => {
   const [portfolio, setPortfolio] = useState({ portfolioURL: '' });
-  const [portfolioList, setPortfolioList] = useState(formData.structure.content.portfolio || []);
+  const [portfolioList, setPortfolioList] = useState([]);
 
   const handleChange = (e) => {
     setPortfolio({ ...portfolio, [e.target.name]: e.target.value });
@@ -44,8 +44,8 @@ const PortfolioSection = ({ info, setFormData, setResumeDetail, formData }) => {
   };
 
   useEffect(() => {
-    setResumeDetail(formData);
-  }, [portfolioList, formData, setResumeDetail]);
+    setPortfolioList(formData.structure.content.portfolio);
+  }, [formData.structure.content.portfolio]);
 
   return (
     <UserProfile key={info.id} className={info.id}>
