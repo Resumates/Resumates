@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
-// import { DeleteButton } from '../common/DeleteButton';
 
-const SkillsSection = ({ skillsBox = '', setFormData }) => {
+const SkillsSection = ({ skillsBox = '', setFormData, formData }) => {
   const [skill, setSkill] = useState('');
 
   const handleAddSkill = () => {
     if (skill.trim()) {
-      setFormData((prevData) => {
-        const newSkillsBox = prevData.skillsBox ? `${prevData.skillsBox}, ${skill}` : skill;
-        return { ...prevData, skillsBox: newSkillsBox };
+      const updatedSkills = skillsBox ? `${skillsBox}, ${skill}` : skill;
+      setFormData({
+        ...formData,
+        structure: {
+          ...formData.structure,
+          content: {
+            ...formData.structure.content,
+            skills: updatedSkills.split(', '),
+          },
+        },
       });
       setSkill('');
     }
   };
 
   const handleDeleteSkill = (skillToDelete) => {
-    setFormData((prevData) => {
-      const updatedSkillsBox = prevData.skillsBox
-        .split(', ')
-        .filter((item) => item !== skillToDelete)
-        .join(', ');
-      return { ...prevData, skillsBox: updatedSkillsBox };
+    const updatedSkillsBox = skillsBox
+      .split(', ')
+      .filter((item) => item !== skillToDelete)
+      .join(', ');
+    setFormData({
+      ...formData,
+      structure: {
+        ...formData.structure,
+        content: {
+          ...formData.structure.content,
+          skills: updatedSkillsBox.split(', '),
+        },
+      },
     });
   };
 
@@ -34,7 +47,7 @@ const SkillsSection = ({ skillsBox = '', setFormData }) => {
           id='skillsBox'
           name='skillsBox'
           value={skillsBox}
-          placeholder='HTML, CSS, JavScript'
+          placeholder='HTML, CSS, JavaScript'
           readOnly
         />
       </TextAreaContainer>
