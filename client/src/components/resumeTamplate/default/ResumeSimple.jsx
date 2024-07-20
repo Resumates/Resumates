@@ -72,7 +72,7 @@ export default function ResumeSimple({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      {workExperience && (
+      {workExperience.length > 0 && (
         <ContentDiv>
           <H4>경력사항</H4>
           {content && (
@@ -98,7 +98,7 @@ export default function ResumeSimple({ resumeDetail }) {
           )}
         </ContentDiv>
       )}
-      {skills && (
+      {skills.length > 0 && (
         <ContentDiv>
           <H4>스킬</H4>
           <SkillList>
@@ -108,7 +108,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </SkillList>
         </ContentDiv>
       )}
-      {activity && (
+      {activity && activity.length > 0 && (
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
@@ -123,7 +123,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate && (
+      {certificate && certificate.length > 0 && (
         <ContentDiv>
           <H4>자격 어학 수상</H4>
           <ul>

@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import addImg from '../../asset/images/icon-addCircle.svg';
 import ModalCrop from '../Modal/ModalCrop';
 import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
+import InputArea from './UserInfoInput';
 
 export default function UserInfo({ setFormData, formData, setResumeDetail }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-  const [information, setInfomation] = useState({
+  const [information, setInformation] = useState({
     name: '',
     image: croppedImage,
     birth: '',
@@ -18,13 +19,15 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
   });
 
   const handleChange = (e) => {
-    setInfomation({ ...information, [e.target.name]: e.target.value });
-    setFormData((prevData) => ({ ...prevData, ...information }));
-    setResumeDetail(formData);
+    const { name, value } = e.target;
+    const updatedInfo = { ...information, [name]: value };
+    setInformation(updatedInfo);
+    setFormData((prevData) => ({ ...prevData, ...updatedInfo }));
+    setResumeDetail((prevDetail) => ({ ...prevDetail, ...updatedInfo }));
   };
 
   useEffect(() => {
-    setInfomation({ ...information, ['image']: croppedImage });
+    setInformation({ ...information, image: croppedImage });
     setFormData((prevData) => ({ ...prevData, ...information }));
     setResumeDetail(formData);
   }, [croppedImage]);
@@ -44,30 +47,47 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
           )}
         </ProfileImgArea>
         <Info>
-          <InputArea className='name'>
-            <UserLabel htmlFor='name'>이름</UserLabel>
-            <UserInput type='text' id='name' name='name' onChange={handleChange} />
-          </InputArea>
-          <InputArea className='birth'>
-            <UserLabel htmlFor='birth'>생년월일</UserLabel>
-            <UserInput type='text' id='birth' name='birth' onChange={handleChange} />
-          </InputArea>
-          <InputArea className='gender'>
-            <UserLabel htmlFor='gender'>성별</UserLabel>
-            <UserInput type='text' id='gender' name='gender' onChange={handleChange} />
-          </InputArea>
-          <InputArea className='phone'>
-            <UserLabel htmlFor='phone'>휴대폰 번호</UserLabel>
-            <UserInput type='text' id='phone' name='phone' onChange={handleChange} />
-          </InputArea>
-          <InputArea className='email'>
-            <UserLabel htmlFor='email'>이메일</UserLabel>
-            <UserInput type='email' id='email' name='email' onChange={handleChange} />
-          </InputArea>
-          <InputArea className='address'>
-            <UserLabel htmlFor='address'>주소</UserLabel>
-            <UserInput type='text' id='address' name='address' onChange={handleChange} />
-          </InputArea>
+          <InputArea
+            label='이름'
+            id='name'
+            name='name'
+            type='text'
+            onChange={handleChange}
+            className='name'
+          />
+          <InputArea
+            label='생년월일'
+            id='birth'
+            name='birth'
+            type='text'
+            onChange={handleChange}
+            className='birth'
+          />
+          <InputArea label='성별' id='gender' name='gender' type='text' onChange={handleChange} />
+          <InputArea
+            label='휴대폰 번호'
+            id='phone'
+            name='phone'
+            type='text'
+            onChange={handleChange}
+            className='phone'
+          />
+          <InputArea
+            label='이메일'
+            id='email'
+            name='email'
+            type='email'
+            onChange={handleChange}
+            className='email'
+          />
+          <InputArea
+            label='주소'
+            id='address'
+            name='address'
+            type='text'
+            onChange={handleChange}
+            className='address'
+          />
         </Info>
       </InfoCont>
       {modalOpen && (
@@ -76,23 +96,12 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
           setModalOpen={setModalOpen}
           setCroppedImage={setCroppedImage}
           information={information}
-          setInfomation={setInfomation}
+          setInformation={setInformation}
         />
       )}
     </>
   );
 }
-
-const InputArea = styled.div`
-  border: 1px solid #acacac;
-  padding: 10px 8px;
-  border-radius: 0.5rem;
-  height: 60px;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-  box-sizing: border-box;
-  overflow: hidden;
-`;
 
 const Info = styled.div`
   width: 340px;
@@ -152,19 +161,4 @@ const ProfileImgArea = styled.button`
   .profileImg {
     width: 153px;
   }
-`;
-
-const UserLabel = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  margin-left: 2px;
-  color: #acacac;
-`;
-
-const UserInput = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  background-color: white;
-  font-size: 1.6rem;
-  outline: none;
 `;
