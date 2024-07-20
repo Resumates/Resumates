@@ -3,6 +3,7 @@ import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
 import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
+import InputArea from './WorkInput';
 
 export default function WorkExperience({ setFormData, formData, setResumeDetail }) {
   const [workExperience, setWorkExperience] = useState({
@@ -67,141 +68,133 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
       <ul>
         {experienceList?.map((item, index) => (
           <WorkItem key={index}>
-            <InputArea className='company'>
-              <UserLabel>회사명</UserLabel>
-              <UserInput type='text' value={item.company} readOnly />
-            </InputArea>
-            <InputArea className='department'>
-              <UserLabel>부서명</UserLabel>
-              <UserInput type='text' value={item.department} readOnly />
-            </InputArea>
-            <InputArea className='position'>
-              <UserLabel>직급/직책</UserLabel>
-              <UserInput type='text' value={item.position} readOnly />
-            </InputArea>
-            <InputArea className='salary'>
-              <UserLabel>연봉</UserLabel>
-              <UserInput type='text' value={item.salary} readOnly />
-            </InputArea>
-            <InputArea className='startDate'>
-              <UserLabel>입사년월</UserLabel>
-              <UserInput type='text' value={item.startDate} readOnly />
-            </InputArea>
-            <InputArea className='endDate'>
-              <UserLabel>퇴사년월</UserLabel>
-              <UserInput type='text' value={item.endDate} readOnly />
-            </InputArea>
-            <InputArea className='workStatus'>
-              <UserLabel>재직여부</UserLabel>
-              <UserInput type='text' value={item.workStatus} readOnly />
-            </InputArea>
-            <InputArea className='desc'>
-              <UserLabel>담당업무</UserLabel>
-              <UserInput type='text' value={item.desc} readOnly />
-            </InputArea>
+            <InputArea
+              label='회사명'
+              name='company'
+              className='company'
+              value={item.company}
+              readOnly
+            />
+            <InputArea
+              label='부서명'
+              name='department'
+              className='department'
+              value={item.department}
+              readOnly
+            />
+            <InputArea
+              label='직급/직책'
+              name='position'
+              className='position'
+              value={item.position}
+              readOnly
+            />
+            <InputArea label='연봉' name='salary' className='salary' value={item.salary} readOnly />
+            <InputArea
+              label='입사년월'
+              name='startDate'
+              className='startDate'
+              value={item.startDate}
+              readOnly
+            />
+            <InputArea
+              label='퇴사년월'
+              name='endDate'
+              className='endDate'
+              value={item.endDate}
+              readOnly
+            />
+            <InputArea
+              label='재직여부'
+              name='workStatus'
+              className='workStatus'
+              value={item.workStatus}
+            />
+            <InputArea label='담당업무' name='desc' className='desc' value={item.desc} readOnly />
             <DeleteButton onClick={() => deleteWorkItem(index)}>
               <DeleteBtn width='35px' height='35px' fill='#D9D9D9' />
             </DeleteButton>
           </WorkItem>
         ))}
         <WorkItem>
-          <InputArea className='company'>
-            <UserLabel htmlFor='company'>회사명</UserLabel>
-            <UserInput
-              type='text'
-              id='company'
-              name='company'
-              value={workExperience.company}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='department'>
-            <UserLabel htmlFor='department'>부서명</UserLabel>
-            <UserInput
-              type='text'
-              id='department'
-              name='department'
-              value={workExperience.department}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='position'>
-            <UserLabel htmlFor='position'>직급/직책</UserLabel>
-            <UserInput
-              type='text'
-              id='position'
-              name='position'
-              value={workExperience.position}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='salary'>
-            <UserLabel htmlFor='salary'>연봉</UserLabel>
-            <UserInput
-              type='text'
-              id='salary'
-              name='salary'
-              value={workExperience.salary}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='startDate'>
-            <UserLabel htmlFor='startDate'>입사년월</UserLabel>
-            <UserInput
-              type='text'
-              id='startDate'
-              name='startDate'
-              value={workExperience.startDate}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='endDate'>
-            <UserLabel htmlFor='endDate'>퇴사년월</UserLabel>
-            <UserInput
-              type='text'
-              id='endDate'
-              name='endDate'
-              value={workExperience.endDate}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='workStatus'>
-            <UserLabel htmlFor='workStatus'>재직여부</UserLabel>
-            <UserInput
-              type='text'
-              id='workStatus'
-              name='workStatus'
-              value={workExperience.workStatus}
-              onChange={handleChange}
-            />
-          </InputArea>
-          <InputArea className='desc'>
-            <UserLabel htmlFor='desc'>담당업무</UserLabel>
-            <UserInput
-              type='text'
-              id='desc'
-              name='desc'
-              value={workExperience.desc}
-              onChange={handleChange}
-            />
-          </InputArea>
+          <InputArea
+            label='회사명'
+            type='text'
+            id='company'
+            name='company'
+            className='company'
+            value={workExperience.company}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='부서명'
+            type='text'
+            id='department'
+            name='department'
+            className='department'
+            value={workExperience.department}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='직급/직책'
+            type='text'
+            id='position'
+            name='position'
+            className='position'
+            value={workExperience.position}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='연봉'
+            type='text'
+            id='salary'
+            name='salary'
+            className='salary'
+            value={workExperience.salary}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='입사년월'
+            type='text'
+            id='startDate'
+            name='startDate'
+            className='startDate'
+            value={workExperience.startDate}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='퇴사년월'
+            type='text'
+            id='endDate'
+            name='endDate'
+            className='endDate'
+            value={workExperience.endDate}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='재직여부'
+            type='text'
+            id='workStatus'
+            name='workStatus'
+            className='workStatus'
+            value={workExperience.workStatus}
+            onChange={handleChange}
+          />
+          <InputArea
+            label='담당업무'
+            type='text'
+            id='desc'
+            name='desc'
+            className='desc'
+            value={workExperience.desc}
+            onChange={handleChange}
+          />
         </WorkItem>
       </ul>
       <AddButton onClick={addWorkItem} />
     </>
   );
 }
-
-const InputArea = styled.div`
-  border: 1px solid #acacac;
-  padding: 10px 8px;
-  border-radius: 0.5rem;
-  height: 60px;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-  box-sizing: border-box;
-  overflow: hidden;
-`;
 
 const WorkItem = styled.li`
   padding-top: 20px;
@@ -236,21 +229,6 @@ const WorkItem = styled.li`
   .desc {
     grid-area: 3/1/3/6;
   }
-`;
-
-const UserLabel = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  margin-left: 2px;
-  color: #acacac;
-`;
-
-const UserInput = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  background-color: white;
-  font-size: 1.6rem;
-  outline: none;
 `;
 
 const DeleteButton = styled.button`
