@@ -12,23 +12,24 @@ import {
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
+import close from '../../asset/images/icon-close.png';
+
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
-import { ModalCont } from '../../style/TemplateListStyle';
+import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
+import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
 import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
-
+import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
-import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
-import UserInfo from '../../components/resumeForm/UserInfo';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
 
@@ -47,9 +48,12 @@ export default function SampleTemplate() {
         workExperience: [],
         skills: [],
         portfolio: [],
+        qualification: [],
       },
     },
   });
+
+  const modalRef = useRef(null);
 
   useEffect(() => {
     setResumeDetail(formData);
@@ -143,13 +147,31 @@ export default function SampleTemplate() {
       },
     }));
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpenTemplateList(false);
+      }
+    };
+
+    if (openTemplateList) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openTemplateList]);
   const handleLoadContent = () => {
     alert('회원가입한 유저만 사용할 수 있습니다');
   };
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px' onClick={handleLoadContent}>
+        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
           작성 내용 불러오기
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
@@ -176,6 +198,15 @@ export default function SampleTemplate() {
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
+
+        <ResumeSection>
+          <SkillsSection
+            setFormData={setFormData}
+            formData={formData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+
         <ResumeSection>
           <Activity
             formData={formData}
@@ -191,44 +222,7 @@ export default function SampleTemplate() {
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
-        {profileInfo.map((info) => (
-          <>
-            {info.id !== 'personalInfo' && info.id !== 'portfolio' && info.id !== 'skills' ? (
-              <ResumeSection key={info.id} ref={refs.current[info.id]}>
-                <InfoTitle>{info.label}</InfoTitle>
 
-                {info.content.map((contentItem, index) => (
-                  <div key={contentItem.id} style={{ marginTop: '20px' }}>
-                    {index > 0 && (
-                      <DeleteButton onClick={() => handleDeleteContent(info.id, contentItem.id)} />
-                    )}
-
-                    <ContentItem
-                      key={contentItem.id}
-                      info={info}
-                      contentItem={contentItem}
-                      getUserProfileId={getUserProfileId}
-                      handleOptionSelect={handleOptionSelect}
-                      selectedOptions={selectedOptions}
-                      handleInputChange={handleInputChange}
-                      formData={formData}
-                    />
-                  </div>
-                ))}
-                {info.id !== 'personalInfo' && info.id !== 'skills' && (
-                  <AddButton onClick={() => handleAddContent(info.id)} />
-                )}
-              </ResumeSection>
-            ) : null}
-          </>
-        ))}
-        <ResumeSection>
-          <SkillsSection
-            setFormData={setFormData}
-            formData={formData}
-            setResumeDetail={setResumeDetail}
-          />
-        </ResumeSection>
         <ResumeSection>
           <PortfolioSection
             info={profileInfo.find((section) => section.id === 'portfolio')}
