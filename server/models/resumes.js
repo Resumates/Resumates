@@ -34,7 +34,8 @@ const resumesSchema = new mongoose.Schema(
           {
             category: String,
             organization: String,
-            duration: String,
+            startDate: String,
+            endDate: String,
             desc: String,
           },
         ],

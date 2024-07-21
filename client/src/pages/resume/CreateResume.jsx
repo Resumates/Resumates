@@ -28,6 +28,8 @@ import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
+import Activity from '../../components/resumeForm/Activity';
+import Qualification from '../../components/resumeForm/Qualification';
 
 export default function CreateResume() {
   // 상태 관리
@@ -166,6 +168,21 @@ export default function CreateResume() {
         </ResumeSection>
         <ResumeSection>
           <WorkExperience
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+        <ResumeSection>
+          <Activity
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+
+        <ResumeSection>
+          <Qualification
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
