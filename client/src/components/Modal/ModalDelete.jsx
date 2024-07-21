@@ -1,16 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { deleteResumeAPI } from '../../api/resumeAPI';
 
-export default function ModalDelete({ resumeId, setModalOpen, setSelectedResume }) {
-  const handleDelete = async () => {
-    const deleteResume = await deleteResumeAPI(resumeId);
-    if (deleteResume) {
-      alert('이력서가 삭제되었습니다.');
-      setSelectedResume(null);
-      window.scrollTo(0, 0);
-    }
-  };
+export default function ModalDelete({ setModalOpen, handleDelete }) {
   return (
     <DelCont>
       <Deltext>정말 삭제하시겠습니까?</Deltext>
