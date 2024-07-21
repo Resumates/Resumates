@@ -40,6 +40,7 @@ export default function ResumeSimple({ resumeDetail }) {
   const { activity, certificate, skills, workExperience } = content || [];
   console.log(structure);
   console.log(workExperience);
+  console.log(portfolio);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
