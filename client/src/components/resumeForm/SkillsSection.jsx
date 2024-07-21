@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
 
-const SkillsSection = ({ skillsBox = '', setFormData, formData }) => {
+const SkillsSection = ({ skillsBox = '', setFormData, formData, setResumeDetail }) => {
   const [skill, setSkill] = useState('');
 
   const handleAddSkill = () => {
@@ -38,6 +38,9 @@ const SkillsSection = ({ skillsBox = '', setFormData, formData }) => {
       },
     });
   };
+  useEffect(() => {
+    setResumeDetail(formData);
+  }, [skill, formData, setResumeDetail]);
 
   return (
     <SectionContainer>
@@ -114,6 +117,13 @@ const SkillInput = styled.input`
   border: 1px solid #acacac;
   border-radius: 4px;
   box-sizing: border-box;
+
+    &.hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 `;
 
 const SkillsList = styled.div`
@@ -124,6 +134,16 @@ const SkillItem = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  transition: opacity 0.3s ease-out;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
 `;
 
 const SkillText = styled.span`
