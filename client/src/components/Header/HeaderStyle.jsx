@@ -10,6 +10,7 @@ export const HeaderContainer = styled.header`
   box-sizing: border-box;
   position: fixed;
   top: 0;
+  z-index: 10;
 `;
 
 export const HeaderInner = styled.div`

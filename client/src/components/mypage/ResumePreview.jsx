@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
+import { deleteResumeAPI } from '../../api/resumeAPI';
 import styled from 'styled-components';
 import ResumeNormalA4 from '../../components/resumeTamplate/A4/ResumeNormalA4';
 import ResumeSimpleA4 from '../../components/resumeTamplate/A4/ResumeSimpleA4';
@@ -12,6 +13,15 @@ export default function ResumePreview({ resume, setSelectedResume }) {
   const resumeId = resume._id;
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate('');
+
+  const handleDelete = async () => {
+    const deleteResume = await deleteResumeAPI(resumeId);
+    if (deleteResume) {
+      alert('이력서가 삭제되었습니다.');
+      setSelectedResume(null);
+      window.scrollTo(0, 0);
+    }
+  };
 
   return (
     <>
@@ -36,13 +46,7 @@ export default function ResumePreview({ resume, setSelectedResume }) {
               content={() => componentRef.current}
               pageStyle='@page { size: A4; ratio:100%; }'
             />
-            {modalOpen && (
-              <ModalDelete
-                resumeId={resumeId}
-                setModalOpen={setModalOpen}
-                setSelectedResume={setSelectedResume}
-              />
-            )}
+            {modalOpen && <ModalDelete setModalOpen={setModalOpen} handleDelete={handleDelete} />}
           </ButtonContainer>
         </ResumeDetail>
       )}
