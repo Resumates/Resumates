@@ -72,7 +72,6 @@ export default function CasualResume({ resumeDetail }) {
         </ProfileInfo>
       </ProfileHeader>
       <br></br>
-      <CasualLine title={'자기소개'} content={profileDetails.structure.content.intro} />
       <CasualLine title={'기술스택'} content={resumeDetail.structure.content.skills} />
       <CasualLine title={'경력사항'} content={resumeDetail.structure.content.workExperience} />
       <CasualLine title={'학력'} />
