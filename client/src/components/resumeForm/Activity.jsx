@@ -76,7 +76,7 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
 
   return (
     <>
-      <InfoTitle>경험 / 활동</InfoTitle>
+      <InfoTitle>경험 / 활동 / 교육</InfoTitle>
       <ul>
         {activityList?.map((item, index) => (
           <ActivityItem key={index}>
@@ -87,9 +87,9 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
                 <ActivityOption value='none' selected>
                   구분
                 </ActivityOption>
-                <ActivityOption value='experience'>경험</ActivityOption>
-                <ActivityOption value='activity'>활동</ActivityOption>
-                <ActivityOption value='education'>교육</ActivityOption>
+                <ActivityOption value='경험'>경험</ActivityOption>
+                <ActivityOption value='활동'>활동</ActivityOption>
+                <ActivityOption value='교육'>교육</ActivityOption>
               </ActivitySelect>
             </SelectArea>
 
@@ -131,9 +131,9 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
               <ActivityOption value='none' disabled>
                 구분
               </ActivityOption>
-              <ActivityOption value='experience'>경험</ActivityOption>
-              <ActivityOption value='activity'>활동</ActivityOption>
-              <ActivityOption value='education'>교육</ActivityOption>
+              <ActivityOption value='경험'>경험</ActivityOption>
+              <ActivityOption value='활동'>활동</ActivityOption>
+              <ActivityOption value='교육'>교육</ActivityOption>
             </ActivitySelect>
           </SelectArea>
 
