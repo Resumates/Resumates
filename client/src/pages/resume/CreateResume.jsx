@@ -221,9 +221,9 @@ export default function CreateResume() {
         ))}
         <ResumeSection>
           <SkillsSection
-            skillsBox={formData.structure.content.skills.join(', ')}
             setFormData={setFormData}
             formData={formData}
+            setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
         <ResumeSection>
