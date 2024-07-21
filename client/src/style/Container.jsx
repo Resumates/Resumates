@@ -10,6 +10,7 @@ export const Container = styled.div`
   position: relative;
   background-color: var(--bgColor);
   max-width: var(--large);
+  padding-top: 9.5rem;
 `;
 export const ContainerVh = styled(Container)`
   height: 100vh;

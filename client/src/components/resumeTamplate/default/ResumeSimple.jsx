@@ -38,9 +38,6 @@ export default function ResumeSimple({ resumeDetail }) {
   const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
   const { activity, qualification, skills, workExperience, portfolio } = content || [];
-  console.log(structure);
-  console.log(workExperience);
-  console.log(portfolio);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 

@@ -18,6 +18,7 @@ export const TitleCont = styled.div`
 export const ContentDiv = styled.div`
   margin-bottom: 36px;
   padding: 0 40px;
+  line-height: 1.4;
   H4 {
     padding-bottom: 0.8rem;
     border-bottom: 2px solid #3482a9;
@@ -56,7 +57,8 @@ export const CompanyItem = styled.div`
 `;
 
 export const DescText = styled(Text)`
-  width: 19rem;
+  width: 17rem;
+  margin-right: 2rem;
 `;
 
 export const CategoryText = styled(Text)`

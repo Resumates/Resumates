@@ -5,7 +5,7 @@ import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
 import InputArea from './WorkInput';
 
-export default function WorkExperience({ setFormData, formData, setResumeDetail }) {
+export default function WorkExperience({ prevWork, setFormData, formData, setResumeDetail }) {
   const [workExperience, setWorkExperience] = useState({
     company: '',
     department: '',
@@ -16,9 +16,12 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
     workStatus: '',
     desc: '',
   });
+  useEffect(() => {
+    if (prevWork) {
+      setExperienceList(prevWork);
+    }
+  }, [prevWork]);
   const [experienceList, setExperienceList] = useState([]);
-  console.log(workExperience);
-  console.log(experienceList);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

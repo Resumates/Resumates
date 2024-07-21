@@ -64,7 +64,7 @@ export default function NavLinks() {
             <NavLink to={`/mypage/${userId}`}>마이페이지</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/createResume'>
+            <NavLink to='/list'>
               <Button type='button' color='#04438B' padding='14px 23px' fontSize='16px'>
                 내 이력서 만들기
               </Button>

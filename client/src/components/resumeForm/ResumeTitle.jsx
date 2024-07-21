@@ -1,19 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
-import addImg from '../../asset/images/icon-addCircle.svg';
-import ModalCrop from '../Modal/ModalCrop';
+import React, { useState, useEffect } from 'react';
 import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
 
-export default function ResumeTitle({ setFormData, formData, setResumeDetail }) {
-  const [title, setTitle] = useState('');
-
+export default function ResumeTitle({
+  prevTitle,
+  setPrevTitle,
+  setFormData,
+  formData,
+  setResumeDetail,
+}) {
+  const [title, setTitle] = useState(prevTitle);
   const handleChange = (e) => {
-    setTitle(e.target.value);
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+    setPrevTitle(newTitle);
     setFormData({
       ...formData,
       structure: {
         ...formData.structure,
-        title: title,
+        title: newTitle,
       },
     });
     setResumeDetail(formData);
@@ -35,7 +40,13 @@ export default function ResumeTitle({ setFormData, formData, setResumeDetail }) 
       <InfoTitle id='info'>이력서 제목</InfoTitle>
       <TitleArea className='title'>
         <UserLabel htmlFor='title'>이력서 제목</UserLabel>
-        <UserInput type='text' id='title' name='title' onChange={handleChange} />
+        <UserInput
+          type='text'
+          id='title'
+          name='title'
+          value={prevTitle}
+          onChange={handleChange}
+        ></UserInput>
       </TitleArea>
     </>
   );

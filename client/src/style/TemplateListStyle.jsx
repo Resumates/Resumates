@@ -4,7 +4,7 @@ export const TemplateCont = styled.div`
   box-sizing: border-box;
   max-width: 120rem;
   background-color: white;
-  margin: 7rem auto;
+  margin: 3rem auto;
   padding: 5rem 5rem;
   border-radius: 1rem;
 `;

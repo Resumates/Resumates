@@ -18,8 +18,8 @@ export const ResumeWrap = styled.div`
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  margin-top: 70px;
-  padding: 0 10px;
+  margin-top: 9.5rem;
+  padding: 9.5rem 10px;
   justify-content: center;
 `;
 

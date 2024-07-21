@@ -5,9 +5,15 @@ import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
 import InputArea from './UserInfoInput';
 
-export default function UserInfo({ setFormData, formData, setResumeDetail }) {
+export default function UserInfo({
+  prevUser,
+  setPrevUser,
+  setFormData,
+  formData,
+  setResumeDetail,
+}) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [croppedImage, setCroppedImage] = useState(null);
+  const [croppedImage, setCroppedImage] = useState('');
   const [information, setInformation] = useState({
     name: '',
     image: croppedImage,
@@ -18,10 +24,25 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
     address: '',
   });
 
+  useEffect(() => {
+    if (prevUser) {
+      setInformation({
+        name: prevUser.name,
+        image: croppedImage,
+        birth: prevUser.birth,
+        gender: prevUser.gender,
+        phone: prevUser.phone,
+        email: prevUser.email,
+        address: prevUser.address,
+      });
+    }
+  }, [prevUser]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedInfo = { ...information, [name]: value };
     setInformation(updatedInfo);
+    setPrevUser(updatedInfo);
     setFormData((prevData) => ({ ...prevData, ...updatedInfo }));
     setResumeDetail((prevDetail) => ({ ...prevDetail, ...updatedInfo }));
   };
@@ -53,6 +74,7 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
             name='name'
             type='text'
             onChange={handleChange}
+            value={prevUser?.name}
             className='name'
           />
           <InputArea
@@ -61,15 +83,24 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
             name='birth'
             type='text'
             onChange={handleChange}
+            value={prevUser?.birth.slice(0, 10).replaceAll('-', '.')}
             className='birth'
           />
-          <InputArea label='성별' id='gender' name='gender' type='text' onChange={handleChange} />
+          <InputArea
+            label='성별'
+            id='gender'
+            name='gender'
+            type='text'
+            onChange={handleChange}
+            value={prevUser?.gender}
+          />
           <InputArea
             label='휴대폰 번호'
             id='phone'
             name='phone'
             type='text'
             onChange={handleChange}
+            value={prevUser?.phone}
             className='phone'
           />
           <InputArea
@@ -78,6 +109,7 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
             name='email'
             type='email'
             onChange={handleChange}
+            value={prevUser?.email}
             className='email'
           />
           <InputArea
@@ -86,6 +118,7 @@ export default function UserInfo({ setFormData, formData, setResumeDetail }) {
             name='address'
             type='text'
             onChange={handleChange}
+            value={prevUser?.address}
             className='address'
           />
         </Info>

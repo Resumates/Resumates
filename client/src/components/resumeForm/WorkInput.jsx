@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const InputArea = ({ label, id, name, type, onChange, className, value }) => (
+const InputArea = ({ label, id, name, type, onChange = () => {}, className, value = '' }) => (
   <StyledInputArea className={className}>
     <UserLabel htmlFor={id}>{label}</UserLabel>
     <UserInput type={type} id={id} name={name} value={value} onChange={onChange} />
