@@ -36,7 +36,6 @@ import Qualification from '../../components/resumeForm/Qualification';
 export default function CreateResume() {
   // 상태 관리
   const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
-  const [selectedOptions, setSelectedOptions] = useState({});
   const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
   const [resumeDetail, setResumeDetail] = useState(null);
@@ -47,8 +46,9 @@ export default function CreateResume() {
       content: {
         workExperience: [],
         skills: [],
-        portfolio: [],
+        activity: [],
         qualification: [],
+        portfolio: [],
       },
     },
   });
@@ -58,61 +58,6 @@ export default function CreateResume() {
   useEffect(() => {
     setResumeDetail(formData);
   }, [formData]);
-
-  // 콘텐츠 추가
-  const handleAddContent = (sectionId) => {
-    setProfileInfo((prevData) =>
-      prevData.map((section) => {
-        if (section.id === sectionId) {
-          console.log('sectionId', sectionId);
-          return {
-            ...section,
-            content: [
-              ...section.content,
-              {
-                id: section.content.length + 1,
-                fields: section.content[0].fields.map((field) => ({ ...field })),
-              },
-            ],
-          };
-        }
-        return section;
-      }),
-    );
-  };
-
-  // 콘텐츠 삭제
-  const handleDeleteContent = (sectionId, contentId) => {
-    setProfileInfo((prevData) =>
-      prevData.map((section) => {
-        if (section.id === sectionId) {
-          return {
-            ...section,
-            content: section.content.filter((content) => content.id !== contentId),
-          };
-        }
-        return section;
-      }),
-    );
-  };
-
-  const handleOptionSelect = (sectionId, contentId, optionId) => {
-    setSelectedOptions((prevOptions) => ({
-      ...prevOptions,
-      [sectionId]: {
-        ...prevOptions[sectionId],
-        [contentId]: optionId,
-      },
-    }));
-  };
-
-  // 아이디 추가 함수
-  const getUserProfileId = (info, contentId) => {
-    if (info.id === 'qualification' && selectedOptions[info.id]?.[contentId]) {
-      return `${info.id} ${selectedOptions[info.id][contentId]}`;
-    }
-    return info.id;
-  };
 
   // 각 profileInfo 항목에 대한 ref를 생성
   const refs = useRef(
@@ -127,25 +72,6 @@ export default function CreateResume() {
     if (refs.current[id] && refs.current[id].current) {
       refs.current[id].current.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleInputChange = (sectionId, contentId, fieldName, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      structure: {
-        ...prevData.structure,
-        content: {
-          ...prevData.structure.content,
-          [sectionId]: {
-            ...prevData.structure.content[sectionId],
-            [contentId]: {
-              ...prevData.structure.content[sectionId]?.[contentId],
-              [fieldName]: value,
-            },
-          },
-        },
-      },
-    }));
   };
 
   useEffect(() => {
