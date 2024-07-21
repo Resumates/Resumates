@@ -26,8 +26,8 @@ import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
-import Education from '../../components/resumeForm/Activity';
 import Activity from '../../components/resumeForm/Activity';
+import Qualification from '../../components/resumeForm/Qualification';
 
 export default function CreateResume() {
   // 상태 관리
@@ -166,6 +166,14 @@ export default function CreateResume() {
         </ResumeSection>
         <ResumeSection>
           <Activity
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+
+        <ResumeSection>
+          <Qualification
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}

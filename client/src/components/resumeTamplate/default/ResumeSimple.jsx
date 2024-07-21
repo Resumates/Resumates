@@ -112,12 +112,12 @@ export default function ResumeSimple({ resumeDetail }) {
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
-            {activity?.map((itme) => (
-              <ContentItem key={itme._id}>
-                <CategoryText>{itme.category}</CategoryText>
-                <OrganizationText>{itme.organization}</OrganizationText>
-                <DescText>{itme.desc}</DescText>
-                <GetDateText>{itme.duration}</GetDateText>
+            {activity?.map((item) => (
+              <ContentItem key={item._id}>
+                <CategoryText>{item.category}</CategoryText>
+                <OrganizationText>{item.organization}</OrganizationText>
+                <DescText>{item.desc}</DescText>
+                <GetDateText>{item.startDate + ' - ' + item.endDate}</GetDateText>
               </ContentItem>
             ))}
           </ul>
