@@ -2,19 +2,36 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
 
-const SkillsSection = ({ skillsBox = '', setFormData, formData, setResumeDetail }) => {
+const SkillsSection = ({ setFormData, formData, setResumeDetail }) => {
   const [skill, setSkill] = useState('');
+  const [skillList, setSkillList] = useState([]);
+  console.log(skillList);
+
+  const handleChange = (e) => {
+    setSkill(e.target.value);
+    setFormData({
+      ...formData,
+      structure: {
+        ...formData.structure,
+        content: {
+          ...formData.structure.content,
+          skills: [...skillList, skill],
+        },
+      },
+    });
+  };
 
   const handleAddSkill = () => {
     if (skill.trim()) {
-      const updatedSkills = skillsBox ? `${skillsBox}, ${skill}` : skill;
+      const updatedSkillList = [...skillList, skill];
+      setSkillList(updatedSkillList);
       setFormData({
         ...formData,
         structure: {
           ...formData.structure,
           content: {
             ...formData.structure.content,
-            skills: updatedSkills.split(', '),
+            skills: updatedSkillList,
           },
         },
       });
@@ -23,34 +40,32 @@ const SkillsSection = ({ skillsBox = '', setFormData, formData, setResumeDetail 
   };
 
   const handleDeleteSkill = (skillToDelete) => {
-    const updatedSkillsBox = skillsBox
-      .split(', ')
-      .filter((item) => item !== skillToDelete)
-      .join(', ');
+    const updatedSkillList = skillList.filter((item) => item !== skillToDelete);
+    setSkillList(updatedSkillList);
     setFormData({
       ...formData,
       structure: {
         ...formData.structure,
         content: {
           ...formData.structure.content,
-          skills: updatedSkillsBox.split(', '),
+          skills: updatedSkillList,
         },
       },
     });
   };
   useEffect(() => {
     setResumeDetail(formData);
-  }, [skill, formData, setResumeDetail]);
+  }, [formData, setResumeDetail]);
 
   return (
     <SectionContainer>
       <SectionTitle>스킬</SectionTitle>
       <TextAreaContainer>
         <SkillTextArea
-          id='skillsBox'
-          name='skillsBox'
-          value={skillsBox}
-          placeholder='HTML, CSS, JavaScript'
+          id='skillList'
+          name='skillList'
+          value={skillList}
+          placeholder='스킬을 추가해주세요.'
           readOnly
         />
       </TextAreaContainer>
@@ -60,7 +75,7 @@ const SkillsSection = ({ skillsBox = '', setFormData, formData, setResumeDetail 
           type='text'
           value={skill}
           placeholder='스킬 추가'
-          onChange={(e) => setSkill(e.target.value)}
+          onChange={(e) => handleChange(e)}
         />
         <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddSkill}>
           추가
@@ -68,7 +83,7 @@ const SkillsSection = ({ skillsBox = '', setFormData, formData, setResumeDetail 
       </InputContainer>
 
       <SkillsList>
-        {skillsBox.split(', ').map((item, index) => (
+        {skillList.map((item, index) => (
           <SkillItem key={index}>
             <SkillText>{item}</SkillText>
             <DeleteButton onClick={() => handleDeleteSkill(item)}>삭제</DeleteButton>
