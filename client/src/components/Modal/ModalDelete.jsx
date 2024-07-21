@@ -1,39 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import { deleteResumeAPI } from '../../api/resumeAPI';
+import { ModalWrapper } from './ModalStyle';
 
-export default function ModalDelete({ resumeId, setModalOpen, setSelectedResume }) {
-  const handleDelete = async () => {
-    const deleteResume = await deleteResumeAPI(resumeId);
-    if (deleteResume) {
-      alert('이력서가 삭제되었습니다.');
-      setSelectedResume(null);
-      window.scrollTo(0, 0);
-    }
-  };
+export default function ModalDelete({ setModalOpen, handleDelete }) {
   return (
-    <DelCont>
-      <Deltext>정말 삭제하시겠습니까?</Deltext>
-      <Btn>
-        <BtnDel onClick={() => handleDelete()}>삭제</BtnDel>
-        <BtnCancel
-          onClick={() => {
-            setModalOpen(false);
-          }}
-        >
-          취소
-        </BtnCancel>
-      </Btn>
-    </DelCont>
+    <ModalWrapper>
+      <DelCont>
+        <Deltext>정말 삭제하시겠습니까?</Deltext>
+        <Btn>
+          <BtnDel onClick={() => handleDelete()}>삭제</BtnDel>
+          <BtnCancel
+            onClick={() => {
+              setModalOpen(false);
+            }}
+          >
+            취소
+          </BtnCancel>
+        </Btn>
+      </DelCont>
+    </ModalWrapper>
   );
 }
 
 const DelCont = styled.div`
-  width: 200px;
-  height: 120px;
-  position: absolute;
-  top: -125px;
-  left: 115px;
+  width: 400px;
+  height: 175px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: #000;
   background-color: white;
   border: 1px solid #eee;
@@ -42,7 +37,8 @@ const DelCont = styled.div`
   box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
-  padding: 3rem 0 0;
+  padding: 5rem 0 0;
+  font-size: 1.6rem;
 `;
 
 const Btn = styled.div`
@@ -51,9 +47,8 @@ const Btn = styled.div`
 `;
 
 const BtnCancel = styled.button`
-  width: 12.5rem;
-  height: 4.5rem;
-  font-size: 1.4rem;
+  width: 20rem;
+  height: 8rem;
   &:hover {
     font-weight: bold;
   }
@@ -66,7 +61,6 @@ const BtnDel = styled(BtnCancel)`
 
 const Deltext = styled.p`
   text-align: center;
-  font-size: 1.4rem;
   font-weight: 500;
   padding-bottom: 3rem;
   border-bottom: 1px solid #dbdbdb;

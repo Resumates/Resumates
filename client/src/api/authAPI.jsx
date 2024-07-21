@@ -7,6 +7,7 @@ import {
   confirmPassword,
   setUserEmail,
   setUserPassword,
+  deleteAccount,
 } from './APIRoutes';
 
 // 아이디 검증
@@ -107,5 +108,17 @@ export const resetPasswordAPI = async (userId, currentPw, userPw, confirmPw) => 
     return data;
   } catch (error) {
     return error.response.data;
+  }
+};
+
+// 계정 삭제
+export const deleteAccountAPI = async (userId) => {
+  try {
+    const { data } = await axios.delete(`${deleteAccount}/${userId}`, {
+      data: { userId },
+    });
+    return data;
+  } catch (error) {
+    console.error('계정 삭제 오류', error);
   }
 };

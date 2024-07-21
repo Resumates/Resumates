@@ -61,13 +61,7 @@ const resumeController = {
       const { resumeId } = req.body;
       if (!mongoose.isValidObjectId(resumeId))
         return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
-      // deleteOne
-      const resume = await Resumes.findOneAndDelete({
-        _id: resumeId,
-      }).collection({
-        locale: 'en',
-        strength: 2,
-      });
+      const resume = await Resumes.findOneAndDelete({ _id: resumeId });
       return res.status(200).send({ '이력서 삭제': resume });
     } catch (err) {
       console.log('error: ', err);

@@ -37,9 +37,10 @@ export default function ResumeSimple({ resumeDetail }) {
   console.log(resumeDetail);
   const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
-  const { activity, certificate, skills, workExperience } = content || [];
+  const { activity, certificate, skills, workExperience, portfolio } = content || [];
   console.log(structure);
   console.log(workExperience);
+  console.log(portfolio);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -72,7 +73,7 @@ export default function ResumeSimple({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      {workExperience && (
+      {workExperience.length > 0 && (
         <ContentDiv>
           <H4>경력사항</H4>
           {content && (
@@ -98,7 +99,7 @@ export default function ResumeSimple({ resumeDetail }) {
           )}
         </ContentDiv>
       )}
-      {skills && (
+      {skills.length > 0 && (
         <ContentDiv>
           <H4>스킬</H4>
           <SkillList>
@@ -108,7 +109,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </SkillList>
         </ContentDiv>
       )}
-      {activity && (
+      {activity && activity.length > 0 && (
         <ContentDiv>
           <H4>경험/활동/교육</H4>
           <ul>
@@ -123,7 +124,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate && (
+      {certificate && certificate.length > 0 && (
         <ContentDiv>
           <H4>자격 어학 수상</H4>
           <ul>
@@ -135,6 +136,19 @@ export default function ResumeSimple({ resumeDetail }) {
                 <ScoreText>{itme.score}</ScoreText>
                 <ScoreText>{itme.rank}</ScoreText>
                 <GetDateText>{itme.getDate}</GetDateText>
+              </ContentItem>
+            ))}
+          </ul>
+        </ContentDiv>
+      )}
+      {portfolio && portfolio.length > 0 && (
+        <ContentDiv>
+          <H4>포트폴리오</H4>
+          <ul>
+            {portfolio.map((item, index) => (
+              <ContentItem key={index}>
+                <CategoryText>포트폴리오 URL</CategoryText>
+                <Text>{item.portfolioURL}</Text>
               </ContentItem>
             ))}
           </ul>

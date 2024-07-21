@@ -9,7 +9,7 @@ export default function ModalCrop({
   setModalOpen,
   setCroppedImage,
   information,
-  setInfomation,
+  setInformation,
 }) {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState('');
@@ -70,7 +70,7 @@ export default function ModalCrop({
   const handleSave = () => {
     console.log(croppedImageUrl);
     setCroppedImage(croppedImageUrl);
-    setInfomation({ ...information, ['image']: croppedImageUrl });
+    setInformation({ ...information, ['image']: croppedImageUrl });
     setModalOpen(false);
   };
   return (

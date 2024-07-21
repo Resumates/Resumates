@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const { Resumes } = require('../models/resumes');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodeMailer = require('nodemailer');
@@ -250,6 +251,31 @@ const passwordreset = async (req, res) => {
   }
 };
 
+// 계정 삭제
+const deleteUser = async (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ message: 'userId는 필수입니다.' });
+  }
+
+  try {
+    const user = await User.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+    }
+
+    await User.findOneAndDelete({ userId });
+    await Resumes.deleteMany({ userId });
+
+    return res.status(200).json({ message: '계정 삭제 완료', valid: true });
+  } catch (error) {
+    console.error('서버 연결 에러', error);
+    return res.status(500).json({ message: '서버 연결 실패' });
+  }
+};
+
 exports.login = login;
 exports.useridvaild = useridvaild;
 exports.emailvalid = emailvalid;
@@ -258,3 +284,4 @@ exports.signup = signup;
 exports.userpwvaild = userpwvaild;
 exports.emailreset = emailreset;
 exports.passwordreset = passwordreset;
+exports.deleteUser = deleteUser;

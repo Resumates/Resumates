@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   InfoContainer,
   InfoTitle,
@@ -13,7 +13,6 @@ import {
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
-import { useRef } from 'react';
 import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
@@ -26,6 +25,9 @@ import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
+import PortfolioSection from '../../components/resumeForm/PortfolioSection';
+import SkillsSection from '../../components/resumeForm/SkillsSection';
+import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
 
@@ -33,8 +35,6 @@ export default function CreateResume() {
   // 상태 관리
   const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [skill, setSkill] = useState('');
-  const [skillsBox, setSkillsBox] = useState('');
   const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
   const [resumeDetail, setResumeDetail] = useState(null);
@@ -42,9 +42,17 @@ export default function CreateResume() {
     structure: {
       title: '',
       template_type: '',
-      content: {},
+      content: {
+        workExperience: [],
+        skills: [],
+        portfolio: [],
+      },
     },
   });
+
+  useEffect(() => {
+    setResumeDetail(formData);
+  }, [formData]);
 
   // 콘텐츠 추가
   const handleAddContent = (sectionId) => {
@@ -69,10 +77,9 @@ export default function CreateResume() {
   };
 
   // 콘텐츠 삭제
-
   const handleDeleteContent = (sectionId, contentId) => {
-    setProfileInfo((preveData) =>
-      preveData.map((section) => {
+    setProfileInfo((prevData) =>
+      prevData.map((section) => {
         if (section.id === sectionId) {
           return {
             ...section,
@@ -82,14 +89,6 @@ export default function CreateResume() {
         return section;
       }),
     );
-  };
-
-  // 스킬 추가
-  const handleAddSkill = () => {
-    if (skill.trim() && setSkillsBox) {
-      setSkillsBox((prev) => (prev ? `${prev}, ${skill}` : skill));
-      setSkill('');
-    }
   };
 
   const handleOptionSelect = (sectionId, contentId, optionId) => {
@@ -128,16 +127,20 @@ export default function CreateResume() {
   const handleInputChange = (sectionId, contentId, fieldName, value) => {
     setFormData((prevData) => ({
       ...prevData,
-      [sectionId]: {
-        ...prevData[sectionId],
-        [contentId]: {
-          ...prevData[sectionId]?.[contentId],
-          [fieldName]: value,
+      structure: {
+        ...prevData.structure,
+        content: {
+          ...prevData.structure.content,
+          [sectionId]: {
+            ...prevData.structure.content[sectionId],
+            [contentId]: {
+              ...prevData.structure.content[sectionId]?.[contentId],
+              [fieldName]: value,
+            },
+          },
         },
       },
     }));
-    setResumeDetail(formData);
-    console.log(sectionId);
   };
 
   return (
@@ -148,8 +151,14 @@ export default function CreateResume() {
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
-
       <ResumeContainer>
+        <ResumeSection>
+          <ResumeTitle
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
         <ResumeSection>
           <UserInfo
             formData={formData}
@@ -181,7 +190,7 @@ export default function CreateResume() {
         </ResumeSection>
         {profileInfo.map((info) => (
           <>
-            {info.id !== 'personalInfo' ? (
+            {info.id !== 'personalInfo' && info.id !== 'portfolio' && info.id !== 'skills' ? (
               <ResumeSection key={info.id} ref={refs.current[info.id]}>
                 <InfoTitle>{info.label}</InfoTitle>
 
@@ -198,11 +207,6 @@ export default function CreateResume() {
                       getUserProfileId={getUserProfileId}
                       handleOptionSelect={handleOptionSelect}
                       selectedOptions={selectedOptions}
-                      skill={skill}
-                      setSkill={setSkill}
-                      skillsBox={skillsBox}
-                      setSkillsBox={setSkillsBox}
-                      handleAddSkill={handleAddSkill}
                       handleInputChange={handleInputChange}
                       formData={formData}
                     />
@@ -215,6 +219,21 @@ export default function CreateResume() {
             ) : null}
           </>
         ))}
+        <ResumeSection>
+          <SkillsSection
+            skillsBox={formData.structure.content.skills.join(', ')}
+            setFormData={setFormData}
+            formData={formData}
+          />
+        </ResumeSection>
+        <ResumeSection>
+          <PortfolioSection
+            info={profileInfo.find((section) => section.id === 'portfolio')}
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
       </ResumeContainer>
 
       <TemplateContainer>
@@ -222,20 +241,6 @@ export default function CreateResume() {
           {type === 'normal' && resumeDetail && <ResumeNormal resumeDetail={formData} />}
           {type === 'simple' && resumeDetail && <ResumeSimple resumeDetail={formData} />}
           {type === 'casual' && resumeDetail && <ResumeCasual resumeDetail={formData} />}
-          {/* <div>
-            {Object.entries(formData).map(([sectionId, sectionData]) => (
-              <div key={sectionId}>
-                <h3>{sectionId}</h3>
-                {Object.entries(sectionData).map(([contentId, contentData]) => (
-                  <div key={contentId}>
-                    {Object.entries(contentData).map(([fieldName, value]) => (
-                      <p key={fieldName}>{`${fieldName}: ${value}`}</p>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div> */}
         </Template>
         <TemplateBtn>
           <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
