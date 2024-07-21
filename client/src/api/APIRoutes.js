@@ -52,4 +52,4 @@ export const setUserEmail = `${host}/user/emailreset`;
 export const setUserPassword = `${host}/user/passwordreset`;
 
 // 회원 탈퇴
-export const deleteAccount = `${host}/user/`;
+export const deleteAccount = `${host}/user/delete`;
