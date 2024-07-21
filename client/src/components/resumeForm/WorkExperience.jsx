@@ -22,8 +22,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
     }
   }, [prevWork]);
   const [experienceList, setExperienceList] = useState([]);
-  console.log(workExperience);
-  console.log(experienceList);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

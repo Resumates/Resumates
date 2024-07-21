@@ -19,7 +19,6 @@ export default function ChangeTemplate({ setOpenTemplateList }) {
 
   const handleClick = (e) => {
     const type = e.target.dataset.name;
-    console.log(e.target.dataset.name);
     if (setOpenTemplateList) setOpenTemplateList(false);
     navigate(`/resume/${type}`);
     window.scrollTo(0, 0);
