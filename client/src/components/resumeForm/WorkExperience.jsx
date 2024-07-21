@@ -21,7 +21,19 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
   console.log(experienceList);
 
   const handleChange = (e) => {
-    setWorkExperience({ ...workExperience, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const newWorkExperience = { ...workExperience, [name]: value };
+    setWorkExperience(newWorkExperience);
+    setFormData((prevData) => ({
+      ...prevData,
+      structure: {
+        ...prevData.structure,
+        content: {
+          ...prevData.structure.content,
+          workExperience: [...experienceList, newWorkExperience],
+        },
+      },
+    }));
   };
 
   const addWorkItem = () => {
@@ -56,6 +68,16 @@ export default function WorkExperience({ setFormData, formData, setResumeDetail 
   const deleteWorkItem = (index) => {
     const updatedExperienceList = experienceList.filter((_, i) => i !== index);
     setExperienceList(updatedExperienceList);
+    setFormData({
+      ...formData,
+      structure: {
+        ...formData.structure,
+        content: {
+          ...formData.structure.content,
+          workExperience: updatedExperienceList,
+        },
+      },
+    });
   };
 
   useEffect(() => {
