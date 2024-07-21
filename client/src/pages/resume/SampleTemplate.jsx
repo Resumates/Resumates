@@ -29,12 +29,15 @@ import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import UserInfo from '../../components/resumeForm/UserInfo';
+import Activity from '../../components/resumeForm/Activity';
+import Qualification from '../../components/resumeForm/Qualification';
 
 export default function SampleTemplate() {
   // 상태 관리
   const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [openTemplateList, setOpenTemplateList] = useState(false);
+  const { type } = useParams();
   const [resumeDetail, setResumeDetail] = useState(null);
   const [formData, setFormData] = useState({
     structure: {
@@ -171,6 +174,21 @@ export default function SampleTemplate() {
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
+        <ResumeSection>
+          <Activity
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
+
+        <ResumeSection>
+          <Qualification
+            formData={formData}
+            setFormData={setFormData}
+            setResumeDetail={setResumeDetail}
+          />
+        </ResumeSection>
         {profileInfo.map((info) => (
           <>
             {info.id !== 'personalInfo' && info.id !== 'portfolio' && info.id !== 'skills' ? (
@@ -204,9 +222,9 @@ export default function SampleTemplate() {
         ))}
         <ResumeSection>
           <SkillsSection
-            skillsBox={formData.structure.content.skills.join(', ')}
             setFormData={setFormData}
             formData={formData}
+            setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
         <ResumeSection>
