@@ -12,12 +12,14 @@ import {
   TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
+import close from '../../asset/images/icon-close.png';
+
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
 import { ContentItem } from '../../components/resumeForm/ContentItem';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
-import { ModalCont } from '../../style/TemplateListStyle';
+import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
 import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
@@ -49,6 +51,8 @@ export default function CreateResume() {
       },
     },
   });
+
+  const modalRef = useRef(null);
 
   useEffect(() => {
     setResumeDetail(formData);
@@ -142,6 +146,24 @@ export default function CreateResume() {
       },
     }));
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpenTemplateList(false);
+      }
+    };
+
+    if (openTemplateList) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openTemplateList]);
 
   return (
     <ResumeWrap>
@@ -247,7 +269,10 @@ export default function CreateResume() {
             ⎌ 템플릿 변경
           </TemplateChangeBtn>
           {openTemplateList && (
-            <ModalCont>
+            <ModalCont ref={modalRef}>
+              <CloseBtn onClick={() => setOpenTemplateList(false)}>
+                <img src={close} alt='닫기' />
+              </CloseBtn>
               <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
             </ModalCont>
           )}

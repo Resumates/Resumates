@@ -5,7 +5,7 @@ export const A4Container = styled.form`
   min-height: 1130px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem;
   background-color: #fff;
 `;
 
@@ -14,25 +14,36 @@ export const ProfileHeader = styled.header`
 `;
 
 export const ProfileImage = styled.img`
-  width: 130px;
-  height: 130px;
+  width: 153px;
+  height: 204px;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const Title = styled.h2`
-  font-size: 2.4rem;
+  font-size: 3rem;
   line-height: 1.3;
   font-weight: bold;
   color: #637dcb;
+  margin-top: 1rem;
 `;
 export const ProfileInfo = styled.div`
   margin-left: 29px;
 `;
 
-export const ContactInfo = styled.div`
+export const UserInfo = styled.div`
   margin-top: 24px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #454545;
+  .name {
+    color: #637dcb;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  p {
+    margin-bottom: 0.8rem;
+  }
 `;
 
 export const GradientLine = styled.div`

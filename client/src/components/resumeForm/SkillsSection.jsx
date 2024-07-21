@@ -134,12 +134,13 @@ const SkillInput = styled.input`
   border-radius: 4px;
   box-sizing: border-box;
 
-    &.hidden {
+  &.hidden {
     opacity: 0;
     height: 0;
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
 `;
 
 const SkillsList = styled.div`
