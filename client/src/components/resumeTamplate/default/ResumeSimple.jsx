@@ -37,7 +37,7 @@ export default function ResumeSimple({ resumeDetail }) {
   console.log(resumeDetail);
   const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
-  const { activity, certificate, skills, workExperience, portfolio } = content || [];
+  const { activity, qualification, skills, workExperience, portfolio } = content || [];
   console.log(structure);
   console.log(workExperience);
   console.log(portfolio);
@@ -111,7 +111,7 @@ export default function ResumeSimple({ resumeDetail }) {
       )}
       {activity && activity.length > 0 && (
         <ContentDiv>
-          <H4>경험/활동/교육</H4>
+          <H4>경험 / 활동 / 교육</H4>
           <ul>
             {activity?.map((item) => (
               <ContentItem key={item._id}>
@@ -124,18 +124,37 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {certificate && certificate.length > 0 && (
+      {qualification && qualification.length > 0 && (
         <ContentDiv>
-          <H4>자격 어학 수상</H4>
+          <H4>자격 / 어학 / 수상</H4>
           <ul>
-            {certificate?.map((itme) => (
-              <ContentItem key={itme._id}>
-                <CategoryText>{itme.category}</CategoryText>
-                <CertificateText>{itme.subject}</CertificateText>
-                <OrganizationText>{itme.organization}</OrganizationText>
-                <ScoreText>{itme.score}</ScoreText>
-                <ScoreText>{itme.rank}</ScoreText>
-                <GetDateText>{itme.getDate}</GetDateText>
+            {qualification?.map((item) => (
+              <ContentItem key={item._id}>
+                <CategoryText>{item.category}</CategoryText>
+                {item.category === '자격증' && (
+                  <>
+                    <CertificateText>{item.certificateName}</CertificateText>
+                    <OrganizationText>{item.organization}</OrganizationText>
+                    <GetDateText>{item.getDate}</GetDateText>
+                  </>
+                )}
+                {item.category === '어학시험' && (
+                  <>
+                    <CertificateText>{item.language}</CertificateText>
+                    <CertificateText>{item.testName}</CertificateText>
+                    <OrganizationText>{item.organization}</OrganizationText>
+                    <ScoreText>{item.score}</ScoreText>
+                    <ScoreText>{item.level}</ScoreText>
+                    <GetDateText>{item.getyear}</GetDateText>
+                  </>
+                )}
+                {item.category === '수상내역' && (
+                  <>
+                    <CertificateText>{item.awardName}</CertificateText>
+                    <OrganizationText>{item.issuer}</OrganizationText>
+                    <GetDateText>{item.awardDate}</GetDateText>
+                  </>
+                )}
               </ContentItem>
             ))}
           </ul>

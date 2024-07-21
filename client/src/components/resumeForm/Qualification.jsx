@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { InfoTitle } from '../../style/CreateResumeStyle';
 import styled from 'styled-components';
 import { AddButton } from '../common/AddButton';
+import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
+
 export default function Qualification({ formData, setFormData, setResumeDetail }) {
   const [qualification, setQualification] = useState({
     category: 'none',
@@ -55,7 +57,6 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
       },
     });
 
-    console.log('세현 formData ', formData);
     setQualification({
       category: 'none',
       certification: '',
@@ -75,9 +76,24 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
     });
   };
 
+  const deleteActivityItem = (index) => {
+    const updateQualificationList = qualificationList.filter((_, i) => i !== index);
+    setQualificationList(updateQualificationList);
+    setFormData((prevData) => ({
+      ...prevData,
+      structure: {
+        ...prevData.structure,
+        content: {
+          ...prevData.structure.content,
+          qualification: updateQualificationList,
+        },
+      },
+    }));
+  };
+
   return (
     <>
-      <InfoTitle>자격 / 어학 /</InfoTitle>
+      <InfoTitle>자격 / 어학 / 수상</InfoTitle>
       <ul>
         {qualificationList?.map((item, index) => (
           <QualItem key={index} category={item.category}>
@@ -87,13 +103,19 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
                 <QualOption value='none' selected>
                   구분
                 </QualOption>
-                <QualOption value='certification'>자격증</QualOption>
-                <QualOption value='languageTest'>어학시험</QualOption>
-                <QualOption value='wards'>수상내역</QualOption>
+                <QualOption className='certification' value='자격증'>
+                  자격증
+                </QualOption>
+                <QualOption className='languageTest' value='어학시험'>
+                  어학시험
+                </QualOption>
+                <QualOption className='wards' value='수상내역'>
+                  수상내역
+                </QualOption>
               </QualSelect>
             </SelectArea>
 
-            {item.category === 'certification' && (
+            {item.category === '자격증' && (
               <>
                 <InputArea className='certificateName'>
                   <UserLabel htmlFor='certificateName'>자격증명</UserLabel>
@@ -114,7 +136,7 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
               </>
             )}
 
-            {item.category === 'languageTest' && (
+            {item.category === '어학시험' && (
               <>
                 <InputArea className='language'>
                   <UserLabel htmlFor='language'>언어</UserLabel>
@@ -139,7 +161,7 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
               </>
             )}
 
-            {item.category === 'wards' && (
+            {item.category === '수상내역' && (
               <>
                 <InputArea className='awardName'>
                   <UserLabel htmlFor='awardName'>수상 · 공모전명</UserLabel>
@@ -155,19 +177,31 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
                 </InputArea>
               </>
             )}
+
+            <DeleteButton onClick={() => deleteActivityItem(index)}>
+              <DeleteBtn width='35px' height='35px' fill='#D9D9D9' />
+            </DeleteButton>
           </QualItem>
         ))}
         <QualItem category={qualification.category}>
           <SelectArea className='category'>
             <QualLabel htmlFor='category'>활동구분 선택</QualLabel>
             <QualSelect name='category' value={qualification.category} onChange={handleChange}>
-              <QualOption value='none'>구분</QualOption>
-              <QualOption value='certification'>자격증</QualOption>
-              <QualOption value='languageTest'>어학시험</QualOption>
-              <QualOption value='wards'>수상내역</QualOption>
+              <QualOption className='none' value='none'>
+                구분
+              </QualOption>
+              <QualOption className='certification' value='자격증'>
+                자격증
+              </QualOption>
+              <QualOption className='languageTest' value='어학시험'>
+                어학시험
+              </QualOption>
+              <QualOption className='wards' value='수상내역'>
+                수상내역
+              </QualOption>
             </QualSelect>
           </SelectArea>
-          {qualification.category === 'certification' && (
+          {qualification.category === '자격증' && (
             <>
               <InputArea className='certificateName'>
                 <UserLabel htmlFor='certificateName'>자격증명</UserLabel>
@@ -202,7 +236,7 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
             </>
           )}
 
-          {qualification.category === 'languageTest' && (
+          {qualification.category === '어학시험' && (
             <>
               <InputArea className='language'>
                 <UserLabel htmlFor='language'>언어</UserLabel>
@@ -256,7 +290,7 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
               </InputArea>
             </>
           )}
-          {qualification.category === 'wards' && (
+          {qualification.category === '수상내역' && (
             <>
               <InputArea className='awardName'>
                 <UserLabel htmlFor='awardName'>수상 · 공모전명</UserLabel>
@@ -299,23 +333,24 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
 
 const QualItem = styled.li`
   padding-top: 20px;
-  height: 60px;
+  /* height: 60px; */
   display: grid;
   font-size: 1.2rem;
   gap: 12px;
   grid-template-columns: ${({ category }) =>
-    category === 'certification'
+    category === '자격증'
       ? '1fr 2fr 2fr 1fr'
-      : category === 'languageTest'
+      : category === '어학시험'
         ? '1fr 2fr 2fr 2fr 2fr 2fr'
-        : category === 'wards'
+        : category === '수상내역'
           ? '1fr 3fr 3fr 2fr'
           : '1fr 2fr 2fr 2fr 2fr'};
 
-  grid-template-rows: auto;
+  grid-template-rows: repeat(2, auto);
 `;
 
 const SelectArea = styled.div`
+  grid-row: 2;
   border: 1px solid #acacac;
   padding: 10px 8px 10px;
   border-radius: 5px;
@@ -330,6 +365,7 @@ const QualSelect = styled.select``;
 const QualOption = styled.option``;
 
 const InputArea = styled.div`
+  grid-row: 2;
   border: 1px solid #acacac;
   padding: 10px 8px;
   border-radius: 0.5rem;
@@ -353,4 +389,16 @@ const UserInput = styled.input`
   background-color: white;
   font-size: 1.6rem;
   outline: none;
+`;
+
+const DeleteButton = styled.div`
+  grid-row: 1;
+  grid-column: -1 / -2;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 `;
