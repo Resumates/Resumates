@@ -9,13 +9,14 @@ const SkillsSection = ({ setFormData, formData, setResumeDetail }) => {
 
   const handleChange = (e) => {
     setSkill(e.target.value);
+
     setFormData({
       ...formData,
       structure: {
         ...formData.structure,
         content: {
           ...formData.structure.content,
-          skills: [...skillList, skill],
+          skills: [...skillList, e.target.value],
         },
       },
     });
