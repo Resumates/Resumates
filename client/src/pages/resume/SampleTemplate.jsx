@@ -143,11 +143,13 @@ export default function SampleTemplate() {
       },
     }));
   };
-
+  const handleLoadContent = () => {
+    alert('회원가입한 유저만 사용할 수 있습니다');
+  };
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
+        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px' onClick={handleLoadContent}>
           작성 내용 불러오기
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
