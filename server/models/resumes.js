@@ -8,14 +8,14 @@ const resumesSchema = new mongoose.Schema(
     userId: { type: String, required: true },
     name: { type: String, required: true },
     image: { type: String, default: '' },
-    birth: { type: Date, required: true },
-    gender: { type: String, enum: ['M', 'F'], required: true },
+    birth: { type: String, required: true },
+    gender: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String, required: true },
     address: { type: String, required: true },
     structure: {
       title: String,
-      template_type: String,
+      template_type: { type: String, required: true },
 
       content: {
         workExperience: [
@@ -24,8 +24,9 @@ const resumesSchema = new mongoose.Schema(
             department: String,
             position: String,
             salary: String,
-            duration: String,
-            workStatus: Boolean,
+            startDate: String,
+            endDate: String,
+            workStatus: String,
             desc: String,
           },
         ],
@@ -39,24 +40,27 @@ const resumesSchema = new mongoose.Schema(
             desc: String,
           },
         ],
-        certificate: [
+        qualification: [
           {
+            awardDate: String,
+            awardName: String,
             category: String,
-            subject: String,
-            organization: String,
+            certificateName: String,
+            certification: String,
             getDate: String,
-            rank: String,
+            getyear: String,
+            issuer: String,
+            language: String,
+            languageTest: String,
+            level: String,
+            organization: String,
             score: String,
-            Award: [
-              {
-                name: String,
-                level: String,
-              },
-            ],
+            testName: String,
+            wards: String,
           },
         ],
         portfolio: {
-          url: String,
+          portfolioURL: String,
         },
       },
     },
