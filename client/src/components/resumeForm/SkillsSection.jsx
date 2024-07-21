@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
 
-const SkillsSection = ({ setFormData, formData, setResumeDetail }) => {
+const SkillsSection = ({ setFormData, formData, setResumeDetail, prevSkills }) => {
   const [skill, setSkill] = useState('');
   const [skillList, setSkillList] = useState([]);
-  console.log(skillList);
+
+  useEffect(() => {
+    if (prevSkills) setSkillList(prevSkills);
+  }, [prevSkills]);
 
   const handleChange = (e) => {
     setSkill(e.target.value);
@@ -84,7 +87,7 @@ const SkillsSection = ({ setFormData, formData, setResumeDetail }) => {
       </InputContainer>
 
       <SkillsList>
-        {skillList.map((item, index) => (
+        {skillList?.map((item, index) => (
           <SkillItem key={index}>
             <SkillText>{item}</SkillText>
             <DeleteButton onClick={() => handleDeleteSkill(item)}>삭제</DeleteButton>
