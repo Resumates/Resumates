@@ -16,6 +16,6 @@ router.post('/signup', usersControllers.signup);
 router.post('/userpwvaild', usersControllers.userpwvaild);
 router.post('/emailreset', usersControllers.emailreset);
 router.post('/passwordreset', usersControllers.passwordreset);
-
+router.delete('/delete/:userId', usersControllers.deleteUser);
 
 module.exports = router;
