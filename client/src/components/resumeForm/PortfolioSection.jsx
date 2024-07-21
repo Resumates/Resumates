@@ -5,46 +5,47 @@ import { AddButton } from '../../components/common/AddButton';
 import { DeleteButton } from '../../components/common/DeleteButton';
 
 const PortfolioSection = ({ info, setFormData, formData }) => {
-  const [portfolio, setPortfolio] = useState({ portfolioURL: '' });
-  const [portfolioList, setPortfolioList] = useState([]);
+  const [portfolioList, setPortfolioList] = useState([
+    ...formData.structure.content.portfolio,
+    { portfolioURL: '' },
+  ]);
 
-  const handleChange = (e) => {
-    setPortfolio({ ...portfolio, [e.target.name]: e.target.value });
+  const handleChange = (e, index) => {
+    const updatedPortfolioList = portfolioList.map((item, i) =>
+      i === index ? { ...item, [e.target.name]: e.target.value } : item,
+    );
+    setPortfolioList(updatedPortfolioList);
+    updateFormData(updatedPortfolioList);
   };
 
   const addPortfolioItem = () => {
-    const updatedPortfolioList = [...portfolioList, portfolio];
+    const newPortfolio = { portfolioURL: '' };
+    const updatedPortfolioList = [...portfolioList, newPortfolio];
     setPortfolioList(updatedPortfolioList);
-    setFormData((prevData) => ({
-      ...prevData,
-      structure: {
-        ...prevData.structure,
-        content: {
-          ...prevData.structure.content,
-          portfolio: updatedPortfolioList,
-        },
-      },
-    }));
-    setPortfolio({ portfolioURL: '' });
+    updateFormData(updatedPortfolioList);
   };
 
   const deletePortfolioItem = (index) => {
     const updatedPortfolioList = portfolioList.filter((_, i) => i !== index);
     setPortfolioList(updatedPortfolioList);
+    updateFormData(updatedPortfolioList);
+  };
+
+  const updateFormData = (updatedPortfolioList) => {
     setFormData((prevData) => ({
       ...prevData,
       structure: {
         ...prevData.structure,
         content: {
           ...prevData.structure.content,
-          portfolio: updatedPortfolioList,
+          portfolio: updatedPortfolioList.filter((item) => item.portfolioURL !== ''), // 빈 항목 제외
         },
       },
     }));
   };
 
   useEffect(() => {
-    setPortfolioList(formData.structure.content.portfolio);
+    setPortfolioList([...formData.structure.content.portfolio, { portfolioURL: '' }]);
   }, [formData.structure.content.portfolio]);
 
   return (
@@ -56,20 +57,11 @@ const PortfolioSection = ({ info, setFormData, formData }) => {
             type='text'
             name='portfolioURL'
             value={item.portfolioURL}
-            readOnly
+            handleChange={(e) => handleChange(e, index)}
           />
-          <DeleteButton onClick={() => deletePortfolioItem(index)} />
+          {portfolioList.length > 1 && <DeleteButton onClick={() => deletePortfolioItem(index)} />}
         </div>
       ))}
-      <div style={{ marginTop: '20px' }}>
-        <InputField
-          label='포트폴리오 URL'
-          type='text'
-          name='portfolioURL'
-          value={portfolio.portfolioURL}
-          handleChange={handleChange}
-        />
-      </div>
       <AddButton onClick={addPortfolioItem} />
     </UserProfile>
   );

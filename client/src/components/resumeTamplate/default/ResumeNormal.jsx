@@ -89,7 +89,7 @@ export default function ResumeNormal({ resumeDetail }) {
                 <ExperienceDetail>{item.category}</ExperienceDetail>
                 <ExperienceDetail>{item.organization}</ExperienceDetail>
                 <ExperienceDetail>{item.desc}</ExperienceDetail>
-                <ExperienceDetail>{item.duration}</ExperienceDetail>
+                <ExperienceDetail>{item.startDate + ' - ' + item.endDate}</ExperienceDetail>
               </ExperienceItem>
             ))}
           </ExperienceList>
@@ -106,7 +106,7 @@ export default function ResumeNormal({ resumeDetail }) {
                 <ExperienceDetail>{item.subject}</ExperienceDetail>
                 <ExperienceDetail>{item.organization}</ExperienceDetail>
                 <ExperienceDetail>{item.score}</ExperienceDetail>
-                <ExperienceDetail>{item.getDate}</ExperienceDetail>
+                <ExperienceDetail>{item.startDate + ' - ' + item.endDate}</ExperienceDetail>
               </ExperienceItem>
             ))}
           </ExperienceList>

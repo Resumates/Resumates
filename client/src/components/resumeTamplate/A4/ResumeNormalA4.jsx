@@ -13,6 +13,7 @@ import {
   ExperienceList,
   ExperienceItem,
   ExperienceDetail,
+  Title,
 } from './ResumeNormalA4Style';
 
 export default function ResumeNormalA4({ resumeDetail }) {
@@ -28,7 +29,7 @@ export default function ResumeNormalA4({ resumeDetail }) {
         <Name>
           <img src='' alt='' />
           {name}
-          <p>{structure.title}</p>
+          <Title>{structure.title}</Title>
         </Name>
         <ContactInfo>
           <div>{phone}</div>
@@ -37,9 +38,9 @@ export default function ResumeNormalA4({ resumeDetail }) {
           <div>{birth}</div>
         </ContactInfo>
       </Header>
-      <Section>
+      {/* <Section>
         <SectionTitle>자기소개</SectionTitle>
-      </Section>
+      </Section> */}
       <Section>
         <SectionTitle>기술</SectionTitle>
         <SkillsList>
