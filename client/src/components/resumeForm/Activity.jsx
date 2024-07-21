@@ -15,8 +15,6 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
 
   const [activityList, setActivityList] = useState([]);
 
-  console.log('세현 activity ', activity);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newActivity = { ...activity, [name]: value };
@@ -54,7 +52,6 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
       endDate: '',
       desc: '',
     });
-    console.log('세현 formData ', formData);
   };
 
   const deleteActivityItem = (index) => {
