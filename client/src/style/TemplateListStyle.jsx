@@ -72,3 +72,13 @@ export const TemplateImg = styled.img`
   object-fit: contain;
   border: 1px solid #dddddd;
 `;
+
+export const CloseBtn = styled.button`
+  position: absolute;
+  padding: 1rem;
+  top: 2rem;
+  right: 2rem;
+  img {
+    width: 16px;
+  }
+`;

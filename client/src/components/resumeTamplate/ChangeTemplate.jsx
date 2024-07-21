@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import simple from '../../asset/images/simple.png';
 import casual from '../../asset/images/casual.png';
 import normal from '../../asset/images/normal.png';
-import styled from 'styled-components';
+
 import {
   ListContainer,
   ListItem,
@@ -11,17 +11,18 @@ import {
   CasualTemplate,
   NormalTemplate,
   SimpleTemplate,
-  TemplateCont,
   TemplateText,
 } from '../../style/TemplateListStyle';
 
-export default function ChangeTemplate() {
+export default function ChangeTemplate({ setOpenTemplateList }) {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     const type = e.target.dataset.name;
     console.log(e.target.dataset.name);
+    if (setOpenTemplateList) setOpenTemplateList(false);
     navigate(`/resume/${type}`);
+    window.scrollTo(0, 0);
   };
   return (
     <>
