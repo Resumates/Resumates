@@ -78,8 +78,6 @@ export const ExperienceItem = styled.li`
   flex-wrap: wrap;
   margin-bottom: 15px;
   padding: 0.05rem;
-
-  background-color: #f9f9f9;
 `;
 export const ExperienceDetail = styled.p`
   margin: 0 10px 0 0;

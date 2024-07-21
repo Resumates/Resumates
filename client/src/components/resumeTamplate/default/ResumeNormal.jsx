@@ -16,9 +16,10 @@ import {
 } from './ResumeNormalStyle';
 
 export default function ResumeNormal({ resumeDetail }) {
-  const { name, birth, email, phone, address } = resumeDetail;
+  const { name, birth, email, image, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure || {};
   const content = structure.content || {};
+
   const {
     activity = [],
     certificate = [],
@@ -30,7 +31,12 @@ export default function ResumeNormal({ resumeDetail }) {
   return (
     <A4Container>
       <Header>
-        <ProfileImage src={profileImg} alt='프로필 이미지' />
+        {image ? (
+          <ProfileImage src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImage src={profileImg} alt='프로필이미지' />
+        )}
+        {/* <ProfileImage src={profileImg} alt='프로필 이미지' /> */}
         <Name>
           <img src='' alt='' />
           {name}
@@ -43,10 +49,6 @@ export default function ResumeNormal({ resumeDetail }) {
           <div>{birth}</div>
         </ContactInfo>
       </Header>
-
-      <Section>
-        <SectionTitle>자기소개</SectionTitle>
-      </Section>
 
       {skills.length > 0 && (
         <Section>
@@ -105,6 +107,19 @@ export default function ResumeNormal({ resumeDetail }) {
                 <ExperienceDetail>{item.organization}</ExperienceDetail>
                 <ExperienceDetail>{item.score}</ExperienceDetail>
                 <ExperienceDetail>{item.getDate}</ExperienceDetail>
+              </ExperienceItem>
+            ))}
+          </ExperienceList>
+        </Section>
+      )}
+      {portfolio.length > 0 && (
+        <Section>
+          <SectionTitle>포트폴리오</SectionTitle>
+          <ExperienceList>
+            {portfolio.map((item, index) => (
+              <ExperienceItem key={index}>
+                <ExperienceDetail>포트폴리오 URL</ExperienceDetail>
+                <ExperienceDetail>{item.portfolioURL}</ExperienceDetail>
               </ExperienceItem>
             ))}
           </ExperienceList>

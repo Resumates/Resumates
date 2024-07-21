@@ -21,7 +21,6 @@ import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
-
 import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
@@ -47,6 +46,7 @@ export default function SampleTemplate() {
       },
     },
   });
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     setResumeDetail(formData);
@@ -141,10 +141,23 @@ export default function SampleTemplate() {
     }));
   };
 
+  const handleShowMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 8000); // 경고 메세지 8초 동안 표시
+  };
+
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
+        <Button
+          type='button'
+          color='#3D79BF'
+          padding='9px 0px'
+          fontSize='16px'
+          onClick={handleShowMessage}
+        >
           작성 내용 불러오기
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
@@ -230,14 +243,19 @@ export default function SampleTemplate() {
               <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
             </ModalCont>
           )}
-          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
+          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE' onClick={handleShowMessage}>
             저장
           </Button>
-          <Button marginLeft='12px' padding='8px 33px' color='#3D79BF'>
+          <Button marginLeft='12px' padding='8px 33px' color='#3D79BF' onClick={handleShowMessage}>
             인쇄
           </Button>
         </TemplateBtn>
         <TemplateText>*저장 및 인쇄는 로그인 후 이용가능합니다.</TemplateText>
+        {showMessage && (
+          <div style={{ color: 'red', marginTop: '13px' }}>
+            회원가입 사용자만 이용 가능한 기능입니다.
+          </div>
+        )}
       </TemplateContainer>
     </ResumeWrap>
   );

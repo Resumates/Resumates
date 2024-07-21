@@ -35,9 +35,9 @@ import {
 
 export default function ResumeSimple({ resumeDetail }) {
   console.log(resumeDetail);
-  const { name, birth, email, image, phone, address, structure, portfolio } = resumeDetail;
+  const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
-  const { activity, certificate, skills, workExperience } = content || [];
+  const { activity, certificate, skills, workExperience, portfolio } = content || [];
   console.log(structure);
   console.log(workExperience);
   console.log(portfolio);
@@ -141,7 +141,7 @@ export default function ResumeSimple({ resumeDetail }) {
           </ul>
         </ContentDiv>
       )}
-      {portfolio && (
+      {portfolio && portfolio.length > 0 && (
         <ContentDiv>
           <H4>포트폴리오</H4>
           <ul>
