@@ -36,6 +36,7 @@ export const InfoCont = styled.div`
 
 export const Text = styled.p`
   font-size: 1.1rem;
+  word-wrap: break-word;
 `;
 export const DurationText = styled(Text)`
   width: 10rem;
@@ -48,17 +49,26 @@ export const CompanyCont = styled.div`
   flex-direction: column;
   gap: 0.6rem;
   margin-right: 1rem;
+  white-space: normal; /* 글이 자동으로 줄바꿈되도록 설정 */
+  word-wrap: break-word;
 `;
 
 export const CompanyItem = styled.div`
   display: flex;
-  flex-direction: row;
+  //   flex-direction: row;
+  flex-direction: column;
   gap: 0.4rem;
+  width: 180px;
+  white-space: normal;
+  word-wrap: break-word;
 `;
 
 export const DescText = styled(Text)`
-  width: 17rem;
+  width: 180px;
   margin-right: 2rem;
+  white-space: normal;
+  word-wrap: break-word;
+  flex-grow: 1;
 `;
 
 export const CategoryText = styled(Text)`
