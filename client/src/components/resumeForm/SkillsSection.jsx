@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import { InfoTitle } from '../../style/CreateResumeStyle';
 
 const SkillsSection = ({ setFormData, formData, setResumeDetail, prevSkills }) => {
   const [skill, setSkill] = useState('');
@@ -63,17 +64,15 @@ const SkillsSection = ({ setFormData, formData, setResumeDetail, prevSkills }) =
 
   return (
     <SectionContainer>
-      <SectionTitle>스킬</SectionTitle>
-      <TextAreaContainer>
-        <SkillTextArea
-          id='skillList'
-          name='skillList'
-          value={skillList}
-          placeholder='스킬을 추가해주세요.'
-          readOnly
-        />
-      </TextAreaContainer>
-
+      <InfoTitle>스킬</InfoTitle>
+      <SkillsList>
+        {skillList?.map((item, index) => (
+          <SkillItem key={index}>
+            <SkillText>{item}</SkillText>
+            <DeleteButton onClick={() => handleDeleteSkill(item)}>X</DeleteButton>
+          </SkillItem>
+        ))}
+      </SkillsList>
       <InputContainer>
         <SkillInput
           type='text'
@@ -81,19 +80,10 @@ const SkillsSection = ({ setFormData, formData, setResumeDetail, prevSkills }) =
           placeholder='스킬 추가'
           onChange={(e) => handleChange(e)}
         />
-        <Button type='button' padding='8px 8px' fontSize='16px' onClick={handleAddSkill}>
+        <Button type='button' padding='16px 20px' fontSize='16px' onClick={handleAddSkill}>
           추가
         </Button>
       </InputContainer>
-
-      <SkillsList>
-        {skillList?.map((item, index) => (
-          <SkillItem key={index}>
-            <SkillText>{item}</SkillText>
-            <DeleteButton onClick={() => handleDeleteSkill(item)}>삭제</DeleteButton>
-          </SkillItem>
-        ))}
-      </SkillsList>
     </SectionContainer>
   );
 };
@@ -104,78 +94,56 @@ const SectionContainer = styled.div`
   margin-top: 20px;
 `;
 
-const SectionTitle = styled.h4`
-  font-size: 1.25em;
-  margin-bottom: 10px;
-`;
-
-const TextAreaContainer = styled.div`
-  margin-bottom: 20px;
-`;
-
-const SkillTextArea = styled.textarea`
-  width: 100%;
-  height: 100px;
-  border: 1px solid #acacac;
-  padding: 10px;
-  border-radius: 4px;
-  resize: none;
-  box-sizing: border-box;
-`;
-
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  min-height: 5rem;
+  box-sizing: border-box;
 `;
 
 const SkillInput = styled.input`
-  flex: 1;
+  flex-grow: 1;
   padding: 8px;
   margin-right: 10px;
   border: 1px solid #acacac;
   border-radius: 4px;
+  min-height: 5rem;
   box-sizing: border-box;
-
-  &.hidden {
-    opacity: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
 `;
 
 const SkillsList = styled.div`
-  margin-top: 10px;
+  margin: 10px 0;
+  min-height: 5rem;
+  box-sizing: border-box;
+  border: 1px solid #acacac;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
 `;
 
 const SkillItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+  font-size: 1.4rem;
   transition: opacity 0.3s ease-out;
   opacity: 1;
-
-  &.hidden {
-    opacity: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
 `;
 
 const SkillText = styled.span`
-  flex-grow: 1;
+  margin-right: 0.6rem;
 `;
 
 const DeleteButton = styled.button`
-  background-color: #04438b;
-  color: white;
+  color: #acacac;
   border: none;
-  padding: 4px 8px;
+  border: 1px solid #acacac;
+  padding: 0.6rem;
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+  margin-right: 2rem;
+  &:hover {
+    background-color: #acacac;
+    color: black;
+  }
 `;
