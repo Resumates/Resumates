@@ -28,6 +28,7 @@ import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
 import { useResume } from '../../hooks/useResume';
+import ModalPortal from '../../components/Modal/ModalPortal';
 
 export default function CreateResume() {
   const { type } = useParams();
@@ -50,6 +51,8 @@ export default function CreateResume() {
   const [prevUser, setPrevUser] = useState(null);
   const [prevWork, setPrevWork] = useState(null);
   const [prevSkills, setPrevSkills] = useState(null);
+
+  const [openMyResumes, setOpenMyResumes] = useState(false);
 
   useEffect(() => {
     setResumeDetail(formData);
@@ -76,9 +79,16 @@ export default function CreateResume() {
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
+        <Button
+          type='button'
+          color='#3D79BF'
+          padding='9px 0px'
+          fontSize='16px'
+          onClick={() => setOpenMyResumes(true)}
+        >
           작성 내용 불러오기
         </Button>
+        <ModalPortal isOpen={openMyResumes} onClose={() => setOpenMyResumes(false)}></ModalPortal>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
       <ResumeContainer>
