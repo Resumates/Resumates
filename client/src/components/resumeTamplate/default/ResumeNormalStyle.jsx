@@ -63,7 +63,6 @@ export const SkillItem = styled.li`
   padding: 5px 10px;
   border: 1px solid #007bff;
   border-radius: 5px;
-  background-color: #f9f9f9;
   color: #007bff;
   font-size: 1em;
 `;
