@@ -49,6 +49,7 @@ const PortfolioSection = ({ setFormData, formData, setResumeDetail }) => {
 
   useEffect(() => {
     setResumeDetail(formData);
+    setFormData(formData);
   }, [portfolio, portfolioList, formData, setResumeDetail]);
 
   return (

@@ -56,7 +56,7 @@ export default function ModalCrop({
     const cropped = await getCroppedImg(croppedImage, croppedAreaPixels);
     setCroppedImageUrl(cropped);
     const formData = new FormData();
-    formData.append('image', dataURLtoFile(cropped, 'profileImg.png'));
+    formData.append('image', dataURLtoFile(cropped, 'profileImg.webp'));
     await uploadImageAPI(formData);
   };
 
@@ -103,8 +103,14 @@ export default function ModalCrop({
         </CropNoticeText>
         <ImgCont>
           <Cropper>
-            <ImageCropper croppedImage={croppedImage} setCroppedAreaPixels={setCroppedAreaPixels} />
-            <button onClick={handleCropImage}>자르기</button>
+            <ImageCropper
+              croppedImage={croppedImage}
+              setCroppedAreaPixels={setCroppedAreaPixels}
+              croppedAreaPixels={croppedAreaPixels}
+              setCroppedImage={setCroppedImage}
+              handleCropImage={handleCropImage}
+            />
+            {/* <button onClick={handleCropImage}>자르기</button> */}
           </Cropper>
 
           {croppedImageUrl ? (

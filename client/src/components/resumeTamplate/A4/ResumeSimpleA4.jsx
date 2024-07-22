@@ -39,7 +39,7 @@ export default function ResumeSimpleA4({ resumeDetail }) {
     console.log(resumeDetail?.structure.content);
     console.log(resumeDetail?.structure.content.portfolio);
   }, []);
-  const { name, birth, email, phone, address } = resumeDetail;
+  const { name, birth, email, phone, address, image } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
   const { activity, qualification, portfolio, skills, workExperience } = content;
@@ -49,8 +49,12 @@ export default function ResumeSimpleA4({ resumeDetail }) {
   return (
     <TemplateCont>
       <TitleCont>
-        <H3>{structure.title}</H3>
-        <ProfileImg src={profileImg} alt='프로필이미지' />
+        {structure && <H3>{structure?.title}</H3>}
+        {image ? (
+          <ProfileImg src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImg src={profileImg} alt='프로필이미지' />
+        )}
       </TitleCont>
       <InfoCont>
         <H4>{name}</H4>

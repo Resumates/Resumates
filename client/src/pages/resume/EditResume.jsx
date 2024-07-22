@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getResumeDetail } from '../../api/commonAPI';
 import {
   InfoContainer,
@@ -24,6 +24,7 @@ import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
+import { editResumeAPI } from '../../api/resumeAPI';
 
 export default function EditResume() {
   const { resumeId } = useParams();
@@ -46,6 +47,9 @@ export default function EditResume() {
   const [prevUser, setPrevUser] = useState(null);
   const [prevWork, setPrevWork] = useState(null);
   const [prevSkills, setPrevSkills] = useState(null);
+  const [prevActivity, setPrevActivity] = useState(null);
+  const [prevQualification, setPrevQualification] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +61,8 @@ export default function EditResume() {
       setPrevUser(resumeData);
       setPrevWork(resumeData.structure.content.workExperience);
       setPrevSkills(resumeData.structure.content.skills);
+      setPrevActivity(resumeData.structure.content.activity);
+      setPrevQualification(resumeData.structure.content.qualification);
     };
     fetchData();
   }, [resumeId]);
@@ -102,6 +108,17 @@ export default function EditResume() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [openTemplateList]);
+
+  const handleEdit = async () => {
+    console.log('클릭');
+    console.log(formData);
+    const { valid } = await editResumeAPI(resumeId, formData);
+    console.log(valid);
+    if (valid) {
+      alert('이력서 수정이 완료되었습니다.');
+      navigate(`/mypage/${formData.userId}`);
+    }
+  };
 
   return (
     <ResumeWrap>
@@ -150,6 +167,7 @@ export default function EditResume() {
 
         <ResumeSection>
           <Activity
+            prevActivity={prevActivity}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
@@ -158,6 +176,7 @@ export default function EditResume() {
 
         <ResumeSection>
           <Qualification
+            prevQualification={prevQualification}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
@@ -182,7 +201,7 @@ export default function EditResume() {
           </Template>
         )}
         <TemplateBtn>
-          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
+          <Button marginLeft='12px' padding='12px 30px' onClick={handleEdit}>
             수정
           </Button>
         </TemplateBtn>

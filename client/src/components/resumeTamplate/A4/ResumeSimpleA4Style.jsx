@@ -117,6 +117,7 @@ export const ProfileImg = styled.img`
   right: 0;
   top: 10rem;
   transform: translate(-50%, 0);
+  object-fit: cover;
 `;
 
 export const InfoItem = styled.div`
@@ -162,6 +163,7 @@ export const SkillItem = styled.li`
   border: 1px solid #cfe0e9;
   border-radius: 5px;
   margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
 `;
 
 export const ContentItem = styled(WorkItem)`

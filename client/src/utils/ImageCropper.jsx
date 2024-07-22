@@ -3,10 +3,13 @@ import Cropper from 'react-easy-crop';
 import styled from 'styled-components';
 
 const ImageCropper = ({
-  croppedImage, // crop할 이미지
+  croppedImage,
+  setCroppedImage, // crop할 이미지
+  croppedAreaPixels,
   setCroppedAreaPixels, // 이미지 {width: , height: , x: , y: } setstate, 잘린 이미지 값
-  width = '150', // 이미지 비율
-  height = '200', // 이미지 비율
+  handleCropImage,
+  width = '153', // 이미지 비율
+  height = '204', // 이미지 비율
   cropShape = 'none', // 이미지 모양 round 설정 시 원으로 바뀜
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -19,33 +22,77 @@ const ImageCropper = ({
     [setCroppedAreaPixels],
   );
 
+  const getCroppedImg = useCallback(async () => {
+    const image = new Image();
+    image.src = croppedImage;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+
+    canvas.width = croppedAreaPixels.width;
+    canvas.height = croppedAreaPixels.height;
+
+    ctx.drawImage(
+      image,
+      croppedAreaPixels.x * scaleX,
+      croppedAreaPixels.y * scaleY,
+      croppedAreaPixels.width * scaleX,
+      croppedAreaPixels.height * scaleY,
+      0,
+      0,
+      croppedAreaPixels.width,
+      croppedAreaPixels.height,
+    );
+
+    return new Promise((resolve) => {
+      canvas.toBlob(
+        (blob) => {
+          resolve(blob);
+        },
+        'image/webp',
+        0.2, // 압축 품질 조절 (0.0 ~ 1.0)
+      );
+    });
+  }, [croppedAreaPixels, croppedImage]);
+
+  const handleCrop = async (e) => {
+    handleCropImage(e);
+    const croppedBlob = await getCroppedImg();
+    setCroppedImage(URL.createObjectURL(croppedBlob));
+  };
+
   return (
-    <Container>
-      <Cropper
-        image={croppedImage}
-        crop={crop}
-        zoom={zoom}
-        aspect={153 / 204}
-        onCropChange={setCrop}
-        onCropComplete={onCropComplete}
-        onZoomChange={setZoom}
-        cropShape={cropShape}
-      />
-      <ZoomBox>
-        <ZoomInput
-          type='range'
-          value={zoom}
-          min={1}
-          max={3}
-          step={0.1}
-          aria-labelledby='Zoom'
-          onChange={(e) => {
-            setZoom(e.target.value);
-          }}
-          className='zoom-range'
+    <>
+      <Container>
+        <Cropper
+          image={croppedImage}
+          crop={crop}
+          zoom={zoom}
+          aspect={width / height}
+          onCropChange={setCrop}
+          onCropComplete={onCropComplete}
+          onZoomChange={setZoom}
+          cropShape={cropShape}
         />
-      </ZoomBox>
-    </Container>
+        <ZoomBox>
+          <ZoomInput
+            type='range'
+            value={zoom}
+            min={1}
+            max={3}
+            step={0.1}
+            aria-labelledby='Zoom'
+            onChange={(e) => {
+              setZoom(e.target.value);
+            }}
+            className='zoom-range'
+          />
+        </ZoomBox>
+      </Container>
+      <button onClick={handleCrop}>Crop & Compress Image</button>
+    </>
   );
 };
 
