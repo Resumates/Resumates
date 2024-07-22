@@ -34,7 +34,7 @@ import {
 } from './ResumeSimpleStyle';
 
 export default function ResumeSimple({ resumeDetail }) {
-  console.log(resumeDetail);
+  // console.log(resumeDetail);
   const { name, birth, email, image, phone, address, structure } = resumeDetail;
   const content = structure?.content || {};
   const { activity, qualification, skills, workExperience, portfolio } = content || [];
@@ -87,8 +87,7 @@ export default function ResumeSimple({ resumeDetail }) {
                   </CompanyCont>
                   <DescText>{item.desc}</DescText>
                   <SalaryCont>
-                    <Text>연봉</Text>
-                    <Text>{item.salary}만원</Text>
+                    <Text>{item.salary}</Text>
                   </SalaryCont>
                 </WorkItem>
               ))}
@@ -163,8 +162,11 @@ export default function ResumeSimple({ resumeDetail }) {
           <ul>
             {portfolio.map((item, index) => (
               <ContentItem key={index}>
-                <CategoryText>포트폴리오 URL</CategoryText>
-                <Text>{item.portfolioURL}</Text>
+                <Text>
+                  <a href={item} target='blank'>
+                    {item}
+                  </a>
+                </Text>
               </ContentItem>
             ))}
           </ul>

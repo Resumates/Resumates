@@ -151,6 +151,7 @@ export const SkillItem = styled.li`
   border: 1px solid #cfe0e9;
   border-radius: 5px;
   margin-right: 0.6rem;
+  margin-bottom: 0.6rem;
 `;
 
 export const ContentItem = styled(WorkItem)`
