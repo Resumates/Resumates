@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InfoTitle } from '../../style/CreateResumeStyle';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
 
@@ -79,7 +79,7 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
       <InfoTitle>경험 / 활동 / 교육</InfoTitle>
       <ul>
         {activityList?.map((item, index) => (
-          <ActivityItem key={index}>
+          <ActivityItem key={index} hasDeleteButton>
             <SelectArea className='category'>
               <ActivityLabel htmlFor='category'>활동구분 선택</ActivityLabel>
 
@@ -110,12 +110,10 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
               <UserLabel className='desc'>활동 설명</UserLabel>
               <UserTextarea value={item.desc} name='desc' rows='5' cols='50'></UserTextarea>
             </InputArea>
-            <DeleteButtonArea>
-              <DeleteButton onClick={() => deleteActivityItem(index)}>
-                <DeleteBtn width='35px' height='35px' fill='#D9D9D9' />
-              </DeleteButton>
-              {/* <DeleteButton className='delete' onClick={() => deleteActivityItem(index)} /> */}
-            </DeleteButtonArea>
+
+            <DeleteButton onClick={() => deleteActivityItem(index)}>
+              <DeleteBtn width='35px' height='35px' fill='#D9D9D9' />
+            </DeleteButton>
           </ActivityItem>
         ))}
 
@@ -187,34 +185,43 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
 }
 
 const ActivityItem = styled.li`
-  padding-top: 20px;
-  height: 204px;
+  padding-top: 8px;
   display: grid;
   font-size: 1.2rem;
   gap: 12px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr 3fr;
 
+  ${({ hasDeleteButton }) =>
+    hasDeleteButton
+      ? css`
+          height: 240px;
+          margin-bottom: 10px;
+        `
+      : css`
+          height: 220px;
+        `}
   .category {
-    grid-area: 1/1/2/2;
+    grid-area: 2/1/2/2;
   }
 
   .organization {
-    grid-area: 1/2/2/4;
+    grid-area: 2/2/2/4;
   }
   .startDate {
-    grid-area: 1/4/2/5;
+    grid-area: 2/4/2/5;
   }
   .endDate {
-    grid-area: 1/5/2/6;
+    grid-area: 2/5/2/6;
   }
   .desc {
     height: fit-content;
-    grid-area: 2/1/4/6;
+    grid-area: 3/1/4/6;
   }
 `;
 
 const SelectArea = styled.div`
+  grid-row: 2;
   border: 1px solid #acacac;
   padding: 10px 8px 10px;
   border-radius: 5px;
@@ -230,6 +237,8 @@ const ActivitySelect = styled.select``;
 
 const ActivityOption = styled.option``;
 const InputArea = styled.div`
+  grid-row: 2;
+
   border: 1px solid #acacac;
   padding: 10px 8px;
   border-radius: 0.5rem;
@@ -265,15 +274,27 @@ const UserTextarea = styled.textarea`
   border: none;
 `;
 
-const DeleteButtonArea = styled.div`
+// const DeleteButtonArea = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// const DeleteButton = styled.button`
+//   font-size: 1.6rem;
+//   padding: 8px 12px;
+//   border: none;
+//   border-radius: 4px;
+// `;
+
+const DeleteButton = styled.div`
+  grid-row: 1;
+  grid-column: -1 / -2;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-`;
-
-const DeleteButton = styled.button`
-  font-size: 1.6rem;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
+  justify-content: end;
 `;
