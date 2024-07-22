@@ -4,7 +4,12 @@ import styled, { css } from 'styled-components';
 import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
 
-export default function Qualification({ formData, setFormData, setResumeDetail }) {
+export default function Qualification({
+  formData,
+  setFormData,
+  setResumeDetail,
+  prevQualification,
+}) {
   const [qualification, setQualification] = useState({
     category: 'none',
     certification: '',
@@ -24,6 +29,11 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
   });
 
   const [qualificationList, setQualificationList] = useState([]);
+
+  useEffect(() => {
+    console.log(prevQualification);
+    if (prevQualification) setQualificationList(prevQualification);
+  }, [prevQualification]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
 
-export default function Activity({ formData, setFormData, setResumeDetail }) {
+export default function Activity({ prevActivity, formData, setFormData, setResumeDetail }) {
   const [activity, setActivity] = useState({
     category: 'none',
     organization: '',
@@ -12,8 +12,12 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
     endDate: '',
     desc: '',
   });
-
   const [activityList, setActivityList] = useState([]);
+
+  useEffect(() => {
+    console.log(prevActivity);
+    if (prevActivity) setActivityList(prevActivity);
+  }, [prevActivity]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +49,7 @@ export default function Activity({ formData, setFormData, setResumeDetail }) {
         },
       },
     });
+
     setActivity({
       category: 'none',
       organization: '',

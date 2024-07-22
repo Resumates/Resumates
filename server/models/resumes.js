@@ -58,9 +58,7 @@ const resumesSchema = new mongoose.Schema(
             wards: String,
           },
         ],
-        portfolio: {
-          portfolioURL: String,
-        },
+        portfolio: Array,
       },
     },
   },

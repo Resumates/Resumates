@@ -19,36 +19,29 @@ const resumeController = {
 
   // 이력서 수정
   async editResume(req, res) {
+    console.log(req.params);
     try {
-      const { resumeId } = req.params;
+      const { resumeId, formData } = req.body;
+      console.log(resumeId);
+      console.log(formData);
 
       if (!mongoose.isValidObjectId(resumeId))
         return res.status(400).send({ err: '유효한 ObjectId가 아닙니다.' });
 
-      const { name, image, birth, gender, phone } = req.body;
+      const resume = await Resumes.findById(resumeId);
+      console.log(resume);
 
-      // 문자열을 Date 객체로 변환
-      const birthDate = new Date(req.body.birth);
-      birthDate.setHours(0, 0, 0, 0);
+      if (!resume) {
+        return res.status(404).send({ message: '이력서를 찾을 수 없습니다.', valid: false });
+      }
 
-      req.body.birth = birthDate;
+      Object.assign(resume, formData);
+      await resume.save();
 
-      if (!name && !image && !birth && !gender && !phone)
-        return res.status(400).send({ err: '정보를 수정하지 않았습니다.' });
-
-      let updateBody = {};
-      if (name) updateBody.name = name;
-      if (image) updateBody.image = image;
-      if (birth) updateBody.birth = birth;
-      if (gender) updateBody.gender = gender;
-      if (phone) updateBody.phone = phone;
-
-      // 사용자 정보 업데이트
-      const resume = await Resumes.findByIdAndUpdate(resumeId, updateBody, { new: true });
-      return res.status(200).send({ '이력서 수정': resume });
+      return res.status(200).send({ message: '이력서 수정 성공', valid: true });
     } catch (err) {
       console.log(err);
-      return res.status(500).send({ '이력서 수정 실패': err.message });
+      return res.status(500).send({ message: '이력서 수정 실패', valid: false });
     }
   },
 

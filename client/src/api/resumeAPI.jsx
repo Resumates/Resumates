@@ -14,10 +14,11 @@ export const createResumeAPI = async () => {
 };
 
 // 이력서 수정
-export const editResumeAPI = async (resumeId) => {
+export const editResumeAPI = async (resumeId, formData) => {
   try {
-    const { data } = await axios.patch(`${editResume}/${resumeId}`, {
-      // 요청할사항...
+    const { data } = await axios.post(`${editResume}/${resumeId}`, {
+      resumeId,
+      formData,
     });
     return data;
   } catch (error) {
