@@ -8,6 +8,7 @@ const path = require('path');
 require('dotenv').config();
 const { PORT, MONGO_URL } = process.env;
 
+// MongoURI 연결
 mongoose
   .connect(MONGO_URL)
   .then(() => {

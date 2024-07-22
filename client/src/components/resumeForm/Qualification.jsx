@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InfoTitle } from '../../style/CreateResumeStyle';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AddButton } from '../common/AddButton';
 import { ReactComponent as DeleteBtn } from '../../asset/images/icon-deleteBtn.svg';
 
@@ -93,10 +93,10 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
 
   return (
     <>
-      <InfoTitle>자격 / 어학 / 수상</InfoTitle>
+      <InfoTitle style={{ paddingBottom: '12px' }}>자격 / 어학 / 수상</InfoTitle>
       <ul>
         {qualificationList?.map((item, index) => (
-          <QualItem key={index} category={item.category}>
+          <QualItem key={index} category={item.category} hasDeleteButton>
             <SelectArea className='category'>
               <QualLabel htmlFor='category'>활동구분 선택</QualLabel>
               <QualSelect name='category' value={item.category} disabled>
@@ -332,8 +332,9 @@ export default function Qualification({ formData, setFormData, setResumeDetail }
 }
 
 const QualItem = styled.li`
-  padding-top: 20px;
+  // padding-top: 20px;
   /* height: 60px; */
+  padding-bottom: 12px;
   display: grid;
   font-size: 1.2rem;
   gap: 12px;
@@ -347,6 +348,8 @@ const QualItem = styled.li`
           : '1fr 2fr 2fr 2fr 2fr'};
 
   grid-template-rows: repeat(2, auto);
+
+  ${({ hasDeleteButton }) => hasDeleteButton && css``}
 `;
 
 const SelectArea = styled.div`

@@ -6,11 +6,8 @@ const resumeController = {
   async insertResume(req, res) {
     try {
       let data = { ...req.body };
-      // 문자열을 Date객체로 변환
-      const birthData = new Date(data.birth);
-      birthData.setHours(0, 0, 0, 0);
 
-      if (!data.name) return res.status(400).send({ err: 'name is required' });
+      // if (!data.name) return res.status(400).send({ err: 'name is required' });
 
       const newResume = new Resumes(data);
       await newResume.save();
