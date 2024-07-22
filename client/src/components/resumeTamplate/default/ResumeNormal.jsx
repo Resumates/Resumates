@@ -13,6 +13,7 @@ import {
   ExperienceList,
   ExperienceItem,
   ExperienceDetail,
+  Title,
 } from './ResumeNormalStyle';
 
 export default function ResumeNormal({ resumeDetail }) {
@@ -40,7 +41,7 @@ export default function ResumeNormal({ resumeDetail }) {
         <Name>
           <img src='' alt='' />
           {name}
-          <p>{structure.title}</p>
+          <Title>{structure.title}</Title>
         </Name>
         <ContactInfo>
           <div>{phone}</div>

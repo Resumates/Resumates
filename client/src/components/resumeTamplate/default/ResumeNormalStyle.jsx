@@ -28,14 +28,21 @@ export const ImagePro = styled.div`
 
 export const Name = styled.h2`
   margin: 0;
+  margin-left: 20px;
   font-size: 2em;
   line-height: 2;
 `;
 
+export const Title = styled.h2`
+  font-size: 20px;
+`;
+
 export const ContactInfo = styled.div`
-  font-size: 0.9em;
+  font-size: 14px;
   text-align: right;
   line-height: 2;
+  width: 200px;
+  flex-grow: 1; /* 공간을 채울 수 있도록 확장 */
 `;
 
 export const Section = styled.section`
@@ -43,7 +50,7 @@ export const Section = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-  font-size: 1.5em;
+  font-size: 16px;
   border-bottom: 2px solid #007bff;
   padding-bottom: 5px;
   color: #333;
@@ -80,7 +87,7 @@ export const ExperienceItem = styled.li`
 `;
 export const ExperienceDetail = styled.p`
   margin: 0 10px 0 0;
-  font-size: 0.9em;
+  font-size: 14px;
   color: #555;
   white-space: nowrap;
 `;
