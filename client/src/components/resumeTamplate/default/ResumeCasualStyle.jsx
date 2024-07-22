@@ -106,6 +106,7 @@ export const SkillsSection = styled.div`
     flex-direction: row;
     list-style: none;
     padding: 0;
+    flex-wrap: wrap;
   }
   margin-bottom: 4rem;
 `;
@@ -113,7 +114,8 @@ export const SkillsSection = styled.div`
 export const SkillItem = styled.li`
   background-color: #637dcb;
   color: white;
-  margin-right: 0.4rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
   border-radius: 5px;
   padding: 0.8rem 1.6rem;
 `;
@@ -142,6 +144,8 @@ export const ListItem = styled.div`
   .desc {
     width: 18rem;
     margin-right: 2rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
   .category {
     width: 5rem;

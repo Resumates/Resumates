@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import birthImg from '../../../asset/images/icon-birth.png';
 import EmailImg from '../../../asset/images/icon-email.png';
 import PhoneImg from '../../../asset/images/icon-phone.png';
@@ -34,10 +34,15 @@ import {
 } from './ResumeSimpleA4Style';
 
 export default function ResumeSimpleA4({ resumeDetail }) {
+  useEffect(() => {
+    console.log(resumeDetail);
+    console.log(resumeDetail?.structure.content);
+    console.log(resumeDetail?.structure.content.portfolio);
+  }, []);
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
-  const { activity, certificate, portfolio, skills, workExperience } = content;
+  const { activity, qualification, portfolio, skills, workExperience } = content;
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 
@@ -66,74 +71,86 @@ export default function ResumeSimpleA4({ resumeDetail }) {
           <Text>{address}</Text>
         </InfoItem>
       </InfoCont>
-      <ContentDiv>
-        <H4>경력사항</H4>
-        <ul>
-          {workExperience.map((item, index) => (
-            <WorkItem key={index}>
-              <DurationText>{item.duration}</DurationText>
-              <CompanyCont>
-                <Text>{item.company}</Text>
-                <Text>{item.department}</Text>
-                <Text>{item.position}</Text>
-              </CompanyCont>
-              <DescText>{item.desc}</DescText>
-              <SalaryCont>
-                <LastText>연봉</LastText>
-                <LastText>{item.salary}만원</LastText>
-              </SalaryCont>
-            </WorkItem>
-          ))}
-        </ul>
-      </ContentDiv>
-      <ContentDiv>
-        <H4>스킬</H4>
-        <SkillList>
-          {skills.map((item, index) => (
-            <SkillItem key={index}>{item}</SkillItem>
-          ))}
-        </SkillList>
-      </ContentDiv>
-      <ContentDiv>
-        <H4>경험/활동/교육</H4>
-        <ul>
-          {activity.map((item) => (
-            <ContentItem key={item._id}>
-              <CategoryText>{item.category}</CategoryText>
-              <OrganizationText>{item.organization}</OrganizationText>
-              <DescText>{item.desc}</DescText>
-              <LastText>{item.duration}</LastText>
-            </ContentItem>
-          ))}
-        </ul>
-      </ContentDiv>
-      <ContentDiv>
-        <H4>자격/어학/수상</H4>
-        <ul>
-          {certificate.map((item) => (
-            <ContentItem key={item._id}>
-              <CategoryText>{item.category}</CategoryText>
-              <CertificateText>{item.subject}</CertificateText>
-              <OrganizationText>{item.organization}</OrganizationText>
-              <ScoreText>{item.score}</ScoreText>
-              <ScoreText>{item.rank}</ScoreText>
-              <GetDateText>{item.getDate}</GetDateText>
-            </ContentItem>
-          ))}
-        </ul>
-      </ContentDiv>
-      <ContentDiv>
-        <H4>포트폴리오</H4>
-        <ul>
-          <ContentItem>
-            <CategoryText>
-              <a href={portfolio.url} target='blank'>
-                {portfolio.url}
-              </a>
-            </CategoryText>
-          </ContentItem>
-        </ul>
-      </ContentDiv>
+      {workExperience && workExperience.length > 0 && (
+        <ContentDiv>
+          <H4>경력사항</H4>
+          <ul>
+            {workExperience.map((item, index) => (
+              <WorkItem key={index}>
+                <DurationText>{item.duration}</DurationText>
+                <CompanyCont>
+                  <Text>{item.company}</Text>
+                  <Text>{item.department}</Text>
+                  <Text>{item.position}</Text>
+                </CompanyCont>
+                <DescText>{item.desc}</DescText>
+                <SalaryCont>
+                  {/* <LastText>연봉</LastText> */}
+                  <LastText>{item.salary}</LastText>
+                </SalaryCont>
+              </WorkItem>
+            ))}
+          </ul>
+        </ContentDiv>
+      )}
+      {skills && skills.length > 0 && (
+        <ContentDiv>
+          <H4>스킬</H4>
+          <SkillList>
+            {skills.map((item, index) => (
+              <SkillItem key={index}>{item}</SkillItem>
+            ))}
+          </SkillList>
+        </ContentDiv>
+      )}
+      {activity && activity.length > 0 && (
+        <ContentDiv>
+          <H4>경험/활동/교육</H4>
+          <ul>
+            {activity.map((item) => (
+              <ContentItem key={item._id}>
+                <CategoryText>{item.category}</CategoryText>
+                <OrganizationText>{item.organization}</OrganizationText>
+                <DescText>{item.desc}</DescText>
+                <LastText>{item.duration}</LastText>
+              </ContentItem>
+            ))}
+          </ul>
+        </ContentDiv>
+      )}
+      {qualification && qualification.length > 0 && (
+        <ContentDiv>
+          <H4>자격/어학/수상</H4>
+          <ul>
+            {qualification.map((item) => (
+              <ContentItem key={item._id}>
+                <CategoryText>{item.category}</CategoryText>
+                <CertificateText>{item.subject}</CertificateText>
+                <OrganizationText>{item.organization}</OrganizationText>
+                <ScoreText>{item.score}</ScoreText>
+                <ScoreText>{item.rank}</ScoreText>
+                <GetDateText>{item.getDate}</GetDateText>
+              </ContentItem>
+            ))}
+          </ul>
+        </ContentDiv>
+      )}
+      {portfolio && portfolio.length > 0 && (
+        <ContentDiv>
+          <H4>포트폴리오 URL</H4>
+          <ul>
+            {portfolio.map((item, index) => (
+              <ContentItem key={index}>
+                <CategoryText>
+                  <a href={item} target='blank'>
+                    {item}
+                  </a>
+                </CategoryText>
+              </ContentItem>
+            ))}
+          </ul>
+        </ContentDiv>
+      )}
     </TemplateCont>
   );
 }

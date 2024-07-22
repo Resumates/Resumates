@@ -57,7 +57,7 @@ export default function CasualResume({ resumeDetail }) {
       <CasualLineA4 title={'경력사항'} content={workExperience} />
       <CasualLineA4 title={'경험/활동/교육'} content={activity} />
       <CasualLineA4 title={'자격/어학/수상'} content={certificate} />
-      <CasualLineA4 title={'포트폴리오'} content={portfolio.url} />
+      <CasualLineA4 title={'포트폴리오 URL'} content={portfolio} />
     </A4Container>
   );
 }

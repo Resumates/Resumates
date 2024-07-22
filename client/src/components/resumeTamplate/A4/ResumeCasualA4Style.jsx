@@ -170,6 +170,8 @@ export const ListItem = styled.div`
   .rank {
     width: 6rem;
   }
+  .duration {
+  }
 `;
 
 export const Company = styled.div`
