@@ -18,13 +18,12 @@ export default function CasualResume({ resumeDetail }) {
   const { name, birth, email, phone, address, image } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
-  const { activity, certificate, portfolio, skills, workExperience } = content;
+  const { activity, qualification, portfolio, skills, workExperience } = content;
   useEffect(() => {
     console.log(content);
   }, []);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
-  console.log(resumeDetail);
 
   return (
     <A4Container>
@@ -61,8 +60,8 @@ export default function CasualResume({ resumeDetail }) {
       <CasualLine title={'기술스택'} content={skills} />
       <CasualLine title={'경력사항'} content={workExperience} />
       <CasualLine title={'경험/활동/교육'} content={activity} />
-      <CasualLine title={'자격/어학/수상'} content={certificate} />
-      <CasualLine title={'포트폴리오'} content={portfolio.url} />
+      <CasualLine title={'자격/어학/수상'} content={qualification} />
+      <CasualLine title={'포트폴리오'} content={portfolio} />
     </A4Container>
   );
 }

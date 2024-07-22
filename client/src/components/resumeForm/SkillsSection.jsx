@@ -123,6 +123,7 @@ const SkillsList = styled.div`
   align-items: center;
   padding: 1rem;
   gap: 1rem;
+
 `;
 
 const SkillItem = styled.div`

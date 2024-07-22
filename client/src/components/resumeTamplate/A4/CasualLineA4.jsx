@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ProfileTitle,
   LineContainer,
@@ -16,13 +16,20 @@ import {
 } from './ResumeCasualA4Style.jsx';
 
 export default function CasualLineA4({ title, content }) {
+  useEffect(() => {
+    console.log(content);
+  }, []);
   return (
     <>
-      <ProfileTitle>{title}</ProfileTitle>
-      <LineContainer>
-        <ThickLine />
-        <ThinLine />
-      </LineContainer>
+      {content && content.length > 0 && (
+        <>
+          <ProfileTitle>{title}</ProfileTitle>
+          <LineContainer>
+            <ThickLine />
+            <ThinLine />
+          </LineContainer>
+        </>
+      )}
       {title === '기술스택' && (
         <SkillsSection>
           <ul>
@@ -35,7 +42,7 @@ export default function CasualLineA4({ title, content }) {
       {title === '경력사항' && (
         <WorkExperienceSection>
           <ul>
-            {content.map((experience, index) => (
+            {content?.map((experience, index) => (
               <ListItem key={index}>
                 <Company className='company'>
                   <ExperienceDesc>{experience.company}</ExperienceDesc>
@@ -45,7 +52,9 @@ export default function CasualLineA4({ title, content }) {
                   </CompanyDesc>
                 </Company>
                 <ExperienceDesc className='desc'>{experience.desc}</ExperienceDesc>
-                <ExperienceDesc className='duration'>{experience.duration}</ExperienceDesc>
+                <ExperienceDesc className='duration'>
+                  {experience.startDate}-{experience.endDate}
+                </ExperienceDesc>
               </ListItem>
             ))}
           </ul>
@@ -54,7 +63,7 @@ export default function CasualLineA4({ title, content }) {
       {title === '경험/활동/교육' && (
         <ExperienceSection>
           <ul>
-            {content.map((activity, index) => (
+            {content?.map((activity, index) => (
               <ListItem key={index}>
                 <ExperienceDesc className='category'>{activity.category}</ExperienceDesc>
                 <ExperienceDesc className='organization'>{activity.organization}</ExperienceDesc>
@@ -68,7 +77,7 @@ export default function CasualLineA4({ title, content }) {
       {title === '자격/어학/수상' && (
         <ExperienceSection>
           <ul>
-            {content.map((certificate, index) => (
+            {content?.map((certificate, index) => (
               <ListItem key={index}>
                 <ExperienceDesc className='category'>{certificate.category}</ExperienceDesc>
                 <ExperienceDesc className='subject'>{certificate.subject}</ExperienceDesc>
@@ -81,7 +90,19 @@ export default function CasualLineA4({ title, content }) {
           </ul>
         </ExperienceSection>
       )}
-      {title === '포트폴리오' && <PortfolioSection>{content}</PortfolioSection>}
+      {title === '포트폴리오 URL' && (
+        <PortfolioSection>
+          <ul>
+            {content?.map((portfolio, index) => (
+              <ListItem key={index}>
+                <a href={portfolio} target='blank'>
+                  <ExperienceDesc className='portfolio'>{portfolio}</ExperienceDesc>
+                </a>
+              </ListItem>
+            ))}
+          </ul>
+        </PortfolioSection>
+      )}
     </>
   );
 }

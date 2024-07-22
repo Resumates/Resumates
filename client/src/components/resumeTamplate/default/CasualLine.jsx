@@ -49,7 +49,9 @@ export default function CasualLine({ title, content }) {
                   </CompanyDesc>
                 </Company>
                 <ExperienceDesc className='desc'>{experience.desc}</ExperienceDesc>
-                <ExperienceDesc className='duration'>{experience.duration}</ExperienceDesc>
+                <ExperienceDesc className='duration'>
+                  {experience.startDate}-{experience.endDate}
+                </ExperienceDesc>
               </ListItem>
             ))}
           </ul>
@@ -63,7 +65,9 @@ export default function CasualLine({ title, content }) {
                 <ExperienceDesc className='category'>{activity.category}</ExperienceDesc>
                 <ExperienceDesc className='organization'>{activity.organization}</ExperienceDesc>
                 <ExperienceDesc className='desc'>{activity.desc}</ExperienceDesc>
-                <ExperienceDesc className='duration'>{activity.duration}</ExperienceDesc>
+                <ExperienceDesc className='duration'>
+                  {activity.startDate}-{activity.endDate}
+                </ExperienceDesc>
               </ListItem>
             ))}
           </ul>
@@ -72,14 +76,16 @@ export default function CasualLine({ title, content }) {
       {title === '자격/어학/수상' && (
         <ExperienceSection>
           <ul>
-            {content?.map((certificate, index) => (
+            {content?.map((qualification, index) => (
               <ListItem key={index}>
-                <ExperienceDesc className='category'>{certificate.category}</ExperienceDesc>
-                <ExperienceDesc className='subject'>{certificate.subject}</ExperienceDesc>
-                <ExperienceDesc className='organization'>{certificate.organization}</ExperienceDesc>
-                <ExperienceDesc className='score'>{certificate.score}</ExperienceDesc>
-                <ExperienceDesc className='rank'>{certificate.rank}</ExperienceDesc>
-                <ExperienceDesc className='getDate'>{certificate.getDate}</ExperienceDesc>
+                <ExperienceDesc className='category'>{qualification.category}</ExperienceDesc>
+                <ExperienceDesc className='subject'>{qualification.subject}</ExperienceDesc>
+                <ExperienceDesc className='organization'>
+                  {qualification.organization}
+                </ExperienceDesc>
+                <ExperienceDesc className='score'>{qualification.score}</ExperienceDesc>
+                <ExperienceDesc className='rank'>{qualification.rank}</ExperienceDesc>
+                <ExperienceDesc className='getDate'>{qualification.getDate}</ExperienceDesc>
               </ListItem>
             ))}
           </ul>
