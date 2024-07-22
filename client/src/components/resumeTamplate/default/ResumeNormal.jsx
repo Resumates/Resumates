@@ -13,6 +13,7 @@ import {
   ExperienceList,
   ExperienceItem,
   ExperienceDetail,
+  Title,
 } from './ResumeNormalStyle';
 
 export default function ResumeNormal({ resumeDetail }) {
@@ -22,12 +23,13 @@ export default function ResumeNormal({ resumeDetail }) {
 
   const {
     activity = [],
+    qualification = [],
     certificate = [],
     portfolio = [],
     skills = [],
     workExperience = [],
   } = content;
-
+  console.log();
   return (
     <A4Container>
       <Header>
@@ -40,7 +42,7 @@ export default function ResumeNormal({ resumeDetail }) {
         <Name>
           <img src='' alt='' />
           {name}
-          <p>{structure.title}</p>
+          <Title>{structure.title}</Title>
         </Name>
         <ContactInfo>
           <div>{phone}</div>
@@ -67,12 +69,14 @@ export default function ResumeNormal({ resumeDetail }) {
           <ExperienceList>
             {workExperience.map((item) => (
               <ExperienceItem key={item._id}>
-                <ExperienceDetail>{item.duration}</ExperienceDetail>
+                <ExperienceDetail>
+                  {item.startDate}-{item.endDate}
+                </ExperienceDetail>
                 <ExperienceDetail>{item.company}</ExperienceDetail>
                 <ExperienceDetail>{item.department}</ExperienceDetail>
                 <ExperienceDetail>{item.position}</ExperienceDetail>
                 <ExperienceDetail>{item.desc}</ExperienceDetail>
-                <ExperienceDetail>연봉</ExperienceDetail>
+                {/* <ExperienceDetail>연봉</ExperienceDetail> */}
                 <ExperienceDetail>{item.salary}</ExperienceDetail>
               </ExperienceItem>
             ))}
@@ -89,24 +93,46 @@ export default function ResumeNormal({ resumeDetail }) {
                 <ExperienceDetail>{item.category}</ExperienceDetail>
                 <ExperienceDetail>{item.organization}</ExperienceDetail>
                 <ExperienceDetail>{item.desc}</ExperienceDetail>
-                <ExperienceDetail>{item.startDate + ' - ' + item.endDate}</ExperienceDetail>
+                <ExperienceDetail>
+                  {item.startDate}-{item.endDate}
+                </ExperienceDetail>
               </ExperienceItem>
             ))}
           </ExperienceList>
         </Section>
       )}
 
-      {certificate.length > 0 && (
+      {qualification && qualification.length > 0 && (
         <Section>
           <SectionTitle>자격 어학 수상</SectionTitle>
           <ExperienceList>
-            {certificate.map((item) => (
+            {qualification?.map((item) => (
               <ExperienceItem key={item._id}>
                 <ExperienceDetail>{item.category}</ExperienceDetail>
-                <ExperienceDetail>{item.subject}</ExperienceDetail>
-                <ExperienceDetail>{item.organization}</ExperienceDetail>
-                <ExperienceDetail>{item.score}</ExperienceDetail>
-                <ExperienceDetail>{item.startDate + ' - ' + item.endDate}</ExperienceDetail>
+                {item.category === '자격증' && (
+                  <>
+                    <ExperienceDetail>{item.certificateName}</ExperienceDetail>
+                    <ExperienceDetail>{item.organization}</ExperienceDetail>
+                    <ExperienceDetail>{item.getDate}</ExperienceDetail>
+                  </>
+                )}
+                {item.category === '어학시험' && (
+                  <>
+                    <ExperienceDetail>{item.language}</ExperienceDetail>
+                    <ExperienceDetail>{item.testName}</ExperienceDetail>
+                    <ExperienceDetail>{item.organization}</ExperienceDetail>
+                    <ExperienceDetail>{item.score}</ExperienceDetail>
+                    <ExperienceDetail>{item.level}</ExperienceDetail>
+                    <ExperienceDetail>{item.getyear}</ExperienceDetail>
+                  </>
+                )}
+                {item.category === '수상내역' && (
+                  <>
+                    <ExperienceDetail>{item.awardName}</ExperienceDetail>
+                    <ExperienceDetail>{item.issuer}</ExperienceDetail>
+                    <ExperienceDetail>{item.awardDate}</ExperienceDetail>
+                  </>
+                )}
               </ExperienceItem>
             ))}
           </ExperienceList>

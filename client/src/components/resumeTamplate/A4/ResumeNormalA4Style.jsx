@@ -86,7 +86,6 @@ export const ExperienceItem = styled.li`
   margin-top: 15px;
   padding: 0.05rem;
   font-size: 16px;
-  // white-space: pre-wrap;
 `;
 
 export const ExperienceDetail = styled.p`
@@ -111,5 +110,5 @@ export const ListItem = styled.li`
   border-radius: 5px;
   position: relative;
  
-  }
+  
 `;
