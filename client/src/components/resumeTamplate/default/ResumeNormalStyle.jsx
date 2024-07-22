@@ -5,6 +5,7 @@ export const A4Container = styled.form`
   height: 752px;
   margin: 0 auto;
   background-color: #fff;
+  overflow-y: auto; /* 컨테이너를 넘어가는 내용이 있을 때 스크롤 가능하게 함 */
 `;
 
 export const Header = styled.header`
@@ -22,7 +23,7 @@ export const ImagePro = styled.div`
   width: 50px;
   height: 50px;
   display: flex;
-  background-color: whilte;
+  background-color: white;
   justify-content: space-between;
 `;
 
@@ -85,15 +86,18 @@ export const ExperienceItem = styled.li`
   margin-bottom: 15px;
   padding: 0.05rem;
 `;
+
 export const ExperienceDetail = styled.p`
   margin: 0 10px 0 0;
   font-size: 14px;
+  max-width: 150px;
   color: #555;
-  white-space: nowrap;
+  white-space: normal; /* 글이 자동으로 줄바꿈되도록 설정 */
+  word-wrap: break-word; /* 길게 이어지는 단어가 있을 때 줄바꿈되도록 설정 */
 `;
+
 export const List = styled.ul`
   list-style: none;
-
   padding: 0;
 `;
 
@@ -101,6 +105,7 @@ export const ListItem = styled.li`
   margin-bottom: 10px;
   position: relative;
   padding-left: 20px;
+  width: 200px;
   &:before {
     content: '•';
     position: absolute;
