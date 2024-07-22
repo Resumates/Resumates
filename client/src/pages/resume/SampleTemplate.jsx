@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   InfoContainer,
-  InfoTitle,
   ResumeContainer,
   ResumeSection,
   ResumeWrap,
@@ -13,11 +12,8 @@ import {
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
 import close from '../../asset/images/icon-close.png';
-
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
-import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
-import { ContentItem } from '../../components/resumeForm/ContentItem';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
 import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
@@ -25,128 +21,40 @@ import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
-import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
+import { useResume } from '../../hooks/useResume';
 
 export default function SampleTemplate() {
   // 상태 관리
-  const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
-  const [resumeDetail, setResumeDetail] = useState(null);
-  const [formData, setFormData] = useState({
-    structure: {
-      title: '',
-      template_type: '',
-      content: {
-        workExperience: [],
-        skills: [],
-        portfolio: [],
-        qualification: [],
-      },
-    },
-  });
+  const {
+    profileInfo,
+    openTemplateList,
+    resumeDetail,
+    formData,
+    modalRef,
+    refs,
+    setProfileInfo,
+    setOpenTemplateList,
+    setResumeDetail,
+    setFormData,
+    scrollToItem,
+    saveResume,
+  } = useResume(initialProfileInfo, type);
 
-  const modalRef = useRef(null);
+  const [prevTitle, setPrevTitle] = useState('');
+  const [prevUser, setPrevUser] = useState(null);
+  const [prevWork, setPrevWork] = useState(null);
+  const [prevSkills, setPrevSkills] = useState(null);
 
   useEffect(() => {
     setResumeDetail(formData);
   }, [formData]);
-
-  // 콘텐츠 추가
-  const handleAddContent = (sectionId) => {
-    setProfileInfo((prevData) =>
-      prevData.map((section) => {
-        if (section.id === sectionId) {
-          console.log('sectionId', sectionId);
-          return {
-            ...section,
-            content: [
-              ...section.content,
-              {
-                id: section.content.length + 1,
-                fields: section.content[0].fields.map((field) => ({ ...field })),
-              },
-            ],
-          };
-        }
-        return section;
-      }),
-    );
-  };
-
-  // 콘텐츠 삭제
-  const handleDeleteContent = (sectionId, contentId) => {
-    setProfileInfo((prevData) =>
-      prevData.map((section) => {
-        if (section.id === sectionId) {
-          return {
-            ...section,
-            content: section.content.filter((content) => content.id !== contentId),
-          };
-        }
-        return section;
-      }),
-    );
-  };
-
-  const handleOptionSelect = (sectionId, contentId, optionId) => {
-    setSelectedOptions((prevOptions) => ({
-      ...prevOptions,
-      [sectionId]: {
-        ...prevOptions[sectionId],
-        [contentId]: optionId,
-      },
-    }));
-  };
-
-  // 아이디 추가 함수
-  const getUserProfileId = (info, contentId) => {
-    if (info.id === 'qualification' && selectedOptions[info.id]?.[contentId]) {
-      return `${info.id} ${selectedOptions[info.id][contentId]}`;
-    }
-    return info.id;
-  };
-
-  // 각 profileInfo 항목에 대한 ref를 생성
-  const refs = useRef(
-    profileInfo.reduce((acc, info) => {
-      acc[info.id] = React.createRef();
-      return acc;
-    }, {}),
-  );
-
-  // 특정 스크롤로 이동
-  const scrollToItem = (id) => {
-    if (refs.current[id] && refs.current[id].current) {
-      refs.current[id].current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleInputChange = (sectionId, contentId, fieldName, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      structure: {
-        ...prevData.structure,
-        content: {
-          ...prevData.structure.content,
-          [sectionId]: {
-            ...prevData.structure.content[sectionId],
-            [contentId]: {
-              ...prevData.structure.content[sectionId]?.[contentId],
-              [fieldName]: value,
-            },
-          },
-        },
-      },
-    }));
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -171,7 +79,13 @@ export default function SampleTemplate() {
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
+        <Button
+          type='button'
+          color='#3D79BF'
+          padding='9px 0px'
+          fontSize='16px'
+          onClick={handleLoadContent}
+        >
           작성 내용 불러오기
         </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
@@ -179,16 +93,20 @@ export default function SampleTemplate() {
       <ResumeContainer>
         <ResumeSection>
           <ResumeTitle
+            prevTitle={prevTitle}
             formData={formData}
             setFormData={setFormData}
+            setPrevTitle={setPrevTitle}
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
         <ResumeSection>
           <UserInfo
+            prevUser={prevUser}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
+            setPrevUser={setPrevUser}
           />
         </ResumeSection>
         <ResumeSection>
@@ -225,7 +143,6 @@ export default function SampleTemplate() {
 
         <ResumeSection>
           <PortfolioSection
-            info={profileInfo.find((section) => section.id === 'portfolio')}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
