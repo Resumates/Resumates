@@ -119,8 +119,10 @@ const SkillsList = styled.div`
   border: 1px solid #acacac;
   border-radius: 5px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   padding: 1rem;
+  gap: 1rem;
 `;
 
 const SkillItem = styled.div`
@@ -130,7 +132,7 @@ const SkillItem = styled.div`
 `;
 
 const SkillText = styled.span`
-  margin-right: 0.6rem;
+  margin-right: 0.4rem;
 `;
 
 const DeleteButton = styled.button`
@@ -141,7 +143,7 @@ const DeleteButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
-  margin-right: 2rem;
+  margin-right: 1rem;
   &:hover {
     background-color: #acacac;
     color: black;

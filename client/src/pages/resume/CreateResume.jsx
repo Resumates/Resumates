@@ -157,7 +157,6 @@ export default function CreateResume() {
 
         <ResumeSection>
           <PortfolioSection
-            info={profileInfo.find((section) => section.id === 'portfolio')}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}

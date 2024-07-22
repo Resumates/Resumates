@@ -472,3 +472,9 @@ export const ProfileImgArea = styled.button`
     width: 150px;
   }
 `;
+
+export const PortfolioItem = styled.div`
+  padding-top: 20px;
+  display: flex;
+  gap: 1rem;
+`;
