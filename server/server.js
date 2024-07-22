@@ -27,8 +27,8 @@ const app = express();
 // CORS 허용 미들웨어
 app.use(cors());
 
-app.use(bodyParser.json()); // 이 파서는 요청이 들어오면 본문을 파싱하고, 본문에 있는 JSON 데이터를 추출해서 객체나 배열과 같이 일반적인 JavaScript 데이터 구조로 반환 한다.
-
+app.use(bodyParser.json({ limit: '100mb' })); // 이 파서는 요청이 들어오면 본문을 파싱하고, 본문에 있는 JSON 데이터를 추출해서 객체나 배열과 같이 일반적인 JavaScript 데이터 구조로 반환 한다.
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 //네이버 로그인
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
