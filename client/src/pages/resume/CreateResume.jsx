@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import {
   InfoContainer,
-  InfoTitle,
   ResumeContainer,
   ResumeSection,
   ResumeWrap,
@@ -13,11 +12,8 @@ import {
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
 import close from '../../asset/images/icon-close.png';
-
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
-import { AddButton } from '../../components/common/AddButton';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
-import { ContentItem } from '../../components/resumeForm/ContentItem';
 import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
 import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
 import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
@@ -25,73 +21,30 @@ import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
-import { DeleteButton } from '../../components/common/DeleteButton';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
 import SkillsSection from '../../components/resumeForm/SkillsSection';
 import ResumeTitle from '../../components/resumeForm/ResumeTitle';
 import Activity from '../../components/resumeForm/Activity';
 import Qualification from '../../components/resumeForm/Qualification';
+import { useResume } from '../../hooks/useResume';
 
 export default function CreateResume() {
-  // 상태 관리
-  const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
-  const [openTemplateList, setOpenTemplateList] = useState(false);
   const { type } = useParams();
-  const [resumeDetail, setResumeDetail] = useState(null);
-  const [formData, setFormData] = useState({
-    structure: {
-      title: '',
-      template_type: '',
-      content: {
-        workExperience: [],
-        skills: [],
-        activity: [],
-        qualification: [],
-        portfolio: [],
-      },
-    },
-  });
-
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    setResumeDetail(formData);
-  }, [formData]);
-
-  // 각 profileInfo 항목에 대한 ref를 생성
-  const refs = useRef(
-    profileInfo.reduce((acc, info) => {
-      acc[info.id] = React.createRef();
-      return acc;
-    }, {}),
-  );
-
-  // 특정 스크롤로 이동
-  const scrollToItem = (id) => {
-    if (refs.current[id] && refs.current[id].current) {
-      refs.current[id].current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setOpenTemplateList(false);
-      }
-    };
-
-    if (openTemplateList) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [openTemplateList]);
-
+  const {
+    profileInfo,
+    openTemplateList,
+    resumeDetail,
+    formData,
+    modalRef,
+    refs,
+    setProfileInfo,
+    setOpenTemplateList,
+    setResumeDetail,
+    setFormData,
+    scrollToItem,
+    saveResume,
+  } = useResume(initialProfileInfo, type);
   return (
     <ResumeWrap>
       <InfoContainer>
@@ -175,7 +128,7 @@ export default function CreateResume() {
               <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
             </ModalCont>
           )}
-          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
+          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE' onClick={saveResume}>
             저장
           </Button>
           <Button marginLeft='12px' padding='8px 33px' color='#3D79BF'>
