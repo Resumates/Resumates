@@ -76,7 +76,7 @@ export const TemplateContainer = styled.div`
 `;
 export const Template = styled.div`
   background-color: #ffff;
-  height: 800px;
+  min-height: 800px;
 `;
 export const TemplateBtn = styled.div`
   display: flex;
@@ -471,4 +471,10 @@ export const ProfileImgArea = styled.button`
   .profileImg {
     width: 150px;
   }
+`;
+
+export const PortfolioItem = styled.div`
+  padding-top: 20px;
+  display: flex;
+  gap: 1rem;
 `;

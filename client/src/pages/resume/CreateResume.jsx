@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   InfoContainer,
   ResumeContainer,
@@ -45,6 +45,34 @@ export default function CreateResume() {
     scrollToItem,
     saveResume,
   } = useResume(initialProfileInfo, type);
+
+  const [prevTitle, setPrevTitle] = useState('');
+  const [prevUser, setPrevUser] = useState(null);
+  const [prevWork, setPrevWork] = useState(null);
+  const [prevSkills, setPrevSkills] = useState(null);
+
+  useEffect(() => {
+    setResumeDetail(formData);
+  }, [formData]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpenTemplateList(false);
+      }
+    };
+
+    if (openTemplateList) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openTemplateList]);
+
   return (
     <ResumeWrap>
       <InfoContainer>
@@ -56,16 +84,20 @@ export default function CreateResume() {
       <ResumeContainer>
         <ResumeSection>
           <ResumeTitle
+            prevTitle={prevTitle}
             formData={formData}
             setFormData={setFormData}
+            setPrevTitle={setPrevTitle}
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
         <ResumeSection>
           <UserInfo
+            prevUser={prevUser}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
+            setPrevUser={setPrevUser}
           />
         </ResumeSection>
         <ResumeSection>
@@ -102,7 +134,6 @@ export default function CreateResume() {
 
         <ResumeSection>
           <PortfolioSection
-            info={profileInfo.find((section) => section.id === 'portfolio')}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
