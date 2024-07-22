@@ -7,7 +7,7 @@ const resumesSchema = new mongoose.Schema(
     //user_id: { type: Schema.Types.ObjectId, ref: 'User', require: true },
     userId: { type: String, required: true },
     name: { type: String, required: true },
-    image: { type: String, default: '' },
+    image: { type: String },
     birth: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String, required: true },
