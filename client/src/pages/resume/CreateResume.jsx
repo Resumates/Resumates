@@ -42,7 +42,7 @@ export default function CreateResume() {
   const [formData, setFormData] = useState({
     structure: {
       title: '',
-      template_type: '',
+      template_type: type,
       content: {
         workExperience: [],
         skills: [],
@@ -53,6 +53,10 @@ export default function CreateResume() {
     },
   });
 
+  const [prevTitle, setPrevTitle] = useState('');
+  const [prevUser, setPrevUser] = useState(null);
+  const [prevWork, setPrevWork] = useState(null);
+  const [prevSkills, setPrevSkills] = useState(null);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -103,16 +107,20 @@ export default function CreateResume() {
       <ResumeContainer>
         <ResumeSection>
           <ResumeTitle
+            prevTitle={prevTitle}
             formData={formData}
             setFormData={setFormData}
+            setPrevTitle={setPrevTitle}
             setResumeDetail={setResumeDetail}
           />
         </ResumeSection>
         <ResumeSection>
           <UserInfo
+            prevUser={prevUser}
             formData={formData}
             setFormData={setFormData}
             setResumeDetail={setResumeDetail}
+            setPrevUser={setPrevUser}
           />
         </ResumeSection>
         <ResumeSection>

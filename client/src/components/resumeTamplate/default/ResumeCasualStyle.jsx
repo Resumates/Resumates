@@ -5,34 +5,51 @@ export const A4Container = styled.form`
   min-height: 752px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem;
   background-color: #fff;
+  font-size: 1.2rem;
 `;
 
 export const ProfileHeader = styled.header`
   display: flex;
+  margin-bottom: 1rem;
 `;
 
 export const ProfileImage = styled.img`
-  width: 130px;
-  height: 130px;
+  width: 128px;
+  height: 171px;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const Title = styled.h2`
-  font-size: 2.4rem;
+  font-size: 2rem;
   line-height: 1.3;
   font-weight: bold;
   color: #637dcb;
+  margin-top: 0.5rem;
 `;
 export const ProfileInfo = styled.div`
   margin-left: 29px;
 `;
 
-export const ContactInfo = styled.div`
-  margin-top: 24px;
-  font-size: 1.4rem;
+export const UserInfo = styled.div`
+  margin-top: 16px;
+  font-size: 1.2rem;
   color: #454545;
+  .name {
+    color: #637dcb;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  p {
+    margin-bottom: 0.4rem;
+    img {
+      width: 1.2rem;
+      margin-right: 0.8rem;
+    }
+  }
 `;
 
 export const GradientLine = styled.div`
@@ -56,19 +73,19 @@ export const ProfileTitle = styled.h2`
   font-size: 1.6rem;
   font-weight: bold;
   color: #637dcb;
-  margin: 11px 0 7px 0;
+  margin: 14px 0 3px 0;
 `;
 
 export const LineContainer = styled.div`
   position: relative;
   width: 100%;
   height: 6px;
-  margin: 11px 0;
+  margin: 7px 0;
 `;
 
 export const ThickLine = styled.div`
   width: 30px;
-  height: 6px;
+  height: 4px;
   background-color: #6380d2;
   border-radius: 3px;
 `;
@@ -83,48 +100,86 @@ export const ThinLine = styled.div`
   transform: translateY(-50%);
 `;
 
-export const ContentSection = styled.section`
-  /* color: #d9d9d9; */
-  font-size: 1.4rem;
-  line-height: 1.3;
-`;
-
 export const SkillsSection = styled.div`
   ul {
     display: flex;
     flex-direction: row;
     list-style: none;
     padding: 0;
+  }
+  margin-bottom: 4rem;
+`;
+
+export const SkillItem = styled.li`
+  background-color: #637dcb;
+  color: white;
+  margin-right: 0.4rem;
+  border-radius: 5px;
+  padding: 0.8rem 1.6rem;
+`;
+
+export const WorkExperienceSection = styled.div`
+  ul {
     li {
-      font-size: 1.4rem;
-      margin-bottom: 5px;
-      padding-right: 8px;
+      margin-bottom: 10px;
     }
+  }
+  margin-bottom: 4rem;
+`;
+
+export const ListItem = styled.div`
+  margin: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #637dcb;
+  line-height: 1.2;
+
+  vertical-align: calc();
+  .company {
+    width: 13rem;
+  }
+  .desc {
+    width: 18rem;
+    margin-right: 2rem;
+  }
+  .category {
+    width: 5rem;
+  }
+  .organization {
+    width: 9rem;
+  }
+  .subject {
+    width: 16rem;
+  }
+  .score {
+    width: 4rem;
+  }
+  .rank {
+    width: 4rem;
+  }
+`;
+
+export const Company = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+`;
+
+export const CompanyDesc = styled.div`
+  display: flex;
+  .department {
+    margin: 0 0.3rem;
   }
 `;
 
 export const ExperienceSection = styled.div`
-  ul {
-    li {
-      font-size: 1.4rem;
-      margin-bottom: 14px;
-      h2 {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      h3 {
-      }
-    }
-  }
-`;
-export const EducationSection = styled.div`
-  color: green;
+  margin-bottom: 4rem;
 `;
 export const PortfolioSection = styled.div`
-  font-size: 1.4rem;
+  margin-bottom: 3rem;
 `;
 
 export const ExperienceDesc = styled.p`
-  margin-top: 0.5rem;
-  padding-left: 0.6rem;
+  /* padding-left: 0.6rem; */
 `;

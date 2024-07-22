@@ -1,81 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   A4Container,
   ProfileHeader,
   ProfileImage,
   Title,
   ProfileInfo,
-  ContactInfo,
+  UserInfo,
 } from './ResumeCasualStyle.jsx';
+import birthImg from '../../../asset/images/icon-birth-casual.png';
+import EmailImg from '../../../asset/images/icon-email-casual.png';
+import PhoneImg from '../../../asset/images/icon-phone-casual.png';
+import HomeImg from '../../../asset/images/icon-addr-casual.png';
 import profileImg from '../../../asset/profile/blank-profile.webp';
 import CasualLine from './CasualLine.jsx';
 
 export default function CasualResume({ resumeDetail }) {
-  const profileDetails = {
-    image: '',
+  const { name, birth, email, phone, address, image } = resumeDetail;
+  const structure = resumeDetail?.structure;
+  const content = resumeDetail?.structure.content;
+  const { activity, certificate, portfolio, skills, workExperience } = content;
+  useEffect(() => {
+    console.log(content);
+  }, []);
 
-    structure: {
-      content: {
-        intro: `안녕하세요, 저는 최신 웹 기술에 열정을 가진 신입 개발자입니다. 팀과의 협업을 통해 문제를
-        해결하고, 사용자의 경험을 개선하는 것을 즐깁니다. 지속적인 학습을 통해 성장하며, 혁신적인
-        솔루션을 제공하고자 합니다.`,
-        skills: ['JavaScript', 'React', 'Node.js'],
-        portfolio: 'https://github.com/Resumates',
-        experience: [
-          {
-            company: '구글 회사1',
-            position: '프론트엔드 개발자',
-            period: '2020.01 ~ 2020.12',
-            description:
-              '사용자가 웹사이트 또는 애플리케이션을 사용할 때 보이는 부분을 만들고 관리하는 역할을 담당',
-          },
-          {
-            company: '아마존 회사2',
-            position: '백엔드 개발자',
-            period: '2021.01 ~ 2021.12',
-            description:
-              '사용자가 웹사이트 또는 애플리케이션을 사용할 때 보이는 부분을 만들고 관리하는 역할을 담당',
-          },
-        ],
-        education: [
-          {
-            school: 'Kosta 대학교',
-            major: '컴퓨터공학과',
-            period: '2018.01 ~ 2021.12',
-            description: '컴터공학과 학사, 우수 학생으로 졸업',
-          },
-          //   {
-          //     school: '학교',
-          //   },
-        ],
-      },
-    },
-  };
+  const birthday = birth?.slice(0, 10).replaceAll('-', '.');
+  console.log(resumeDetail);
 
   return (
     <A4Container>
       <ProfileHeader>
-        <ProfileImage src={profileImg} alt='프로필 이미지' />
+        {image ? (
+          <ProfileImage src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImage src={profileImg} alt='프로필이미지' />
+        )}
         <ProfileInfo>
-          <Title>{resumeDetail.structure.title}</Title>
-          <ContactInfo>
+          <Title>{structure.title}</Title>
+          <UserInfo>
+            <p className='name'>{name}</p>
             <p>
-              <span>✉️</span>
-              {resumeDetail.email}
+              <img src={birthImg} alt='' />
+              {birthday}
             </p>
-            <br />
             <p>
-              <span>📞</span>
-              {resumeDetail.phone}
+              <img src={EmailImg} alt='' />
+              {email}
             </p>
-          </ContactInfo>
+            <p>
+              <img src={PhoneImg} alt='' />
+              {phone}
+            </p>
+            <p>
+              <img src={HomeImg} alt='' />
+              {address}
+            </p>
+          </UserInfo>
         </ProfileInfo>
       </ProfileHeader>
       <br></br>
-      <CasualLine title={'기술스택'} content={resumeDetail.structure.content.skills} />
-      <CasualLine title={'경력사항'} content={resumeDetail.structure.content.workExperience} />
-      <CasualLine title={'학력'} />
-      <CasualLine title={'포트폴리오'} content={resumeDetail.structure.content.portfolio.url} />
+      <CasualLine title={'기술스택'} content={skills} />
+      <CasualLine title={'경력사항'} content={workExperience} />
+      <CasualLine title={'경험/활동/교육'} content={activity} />
+      <CasualLine title={'자격/어학/수상'} content={certificate} />
+      <CasualLine title={'포트폴리오'} content={portfolio.url} />
     </A4Container>
   );
 }

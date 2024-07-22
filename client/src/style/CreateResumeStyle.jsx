@@ -76,7 +76,7 @@ export const TemplateContainer = styled.div`
 `;
 export const Template = styled.div`
   background-color: #ffff;
-  height: 800px;
+  min-height: 800px;
 `;
 export const TemplateBtn = styled.div`
   display: flex;
