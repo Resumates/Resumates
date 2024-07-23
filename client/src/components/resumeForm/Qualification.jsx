@@ -103,7 +103,9 @@ export default function Qualification({
 
   return (
     <>
-      <InfoTitle style={{ paddingBottom: '12px' }}>자격 / 어학 / 수상</InfoTitle>
+      <InfoTitle id='qualificationArea' style={{ paddingBottom: '12px' }}>
+        자격 / 어학 / 수상
+      </InfoTitle>
       <ul>
         {qualificationList?.map((item, index) => (
           <QualItem key={index} category={item.category} hasDeleteButton>

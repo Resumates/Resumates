@@ -64,7 +64,7 @@ const SkillsSection = ({ setFormData, formData, setResumeDetail, prevSkills }) =
 
   return (
     <SectionContainer>
-      <InfoTitle>스킬</InfoTitle>
+      <InfoTitle id='skillArea'>스킬</InfoTitle>
       <SkillsList>
         {skillList?.map((item, index) => (
           <SkillItem key={index}>
@@ -123,7 +123,6 @@ const SkillsList = styled.div`
   align-items: center;
   padding: 1rem;
   gap: 1rem;
-
 `;
 
 const SkillItem = styled.div`

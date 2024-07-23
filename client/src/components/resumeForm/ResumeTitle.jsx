@@ -37,7 +37,7 @@ export default function ResumeTitle({
 
   return (
     <>
-      <InfoTitle id='info'>이력서 제목</InfoTitle>
+      <InfoTitle id='titleArea'>이력서 제목</InfoTitle>
       <TitleArea className='title'>
         <UserLabel htmlFor='title'>이력서 제목</UserLabel>
         <UserInput
