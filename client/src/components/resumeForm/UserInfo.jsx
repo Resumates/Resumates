@@ -55,7 +55,7 @@ export default function UserInfo({
 
   return (
     <>
-      <InfoTitle id='info'>인적사항</InfoTitle>
+      <InfoTitle id='infoArea'>인적사항</InfoTitle>
       <InfoCont>
         <ProfileImgArea onClick={() => setModalOpen(!modalOpen)}>
           {croppedImage ? (

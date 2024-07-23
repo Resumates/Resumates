@@ -81,7 +81,7 @@ export default function Activity({ prevActivity, formData, setFormData, setResum
 
   return (
     <>
-      <InfoTitle>경험 / 활동 / 교육</InfoTitle>
+      <InfoTitle id='activityArea'>경험 / 활동 / 교육</InfoTitle>
       <ul>
         {activityList?.map((item, index) => (
           <ActivityItem key={index} hasDeleteButton>

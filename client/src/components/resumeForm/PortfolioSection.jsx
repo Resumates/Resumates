@@ -54,7 +54,7 @@ const PortfolioSection = ({ setFormData, formData, setResumeDetail }) => {
 
   return (
     <>
-      <InfoTitle>포트폴리오</InfoTitle>
+      <InfoTitle id='portfolioArea'>포트폴리오</InfoTitle>
       {portfolioList?.length > 0 && (
         <>
           {portfolioList.map((item, index) => (

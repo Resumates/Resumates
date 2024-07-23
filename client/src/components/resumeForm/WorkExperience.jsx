@@ -16,7 +16,7 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
     workStatus: '',
     desc: '',
   });
-  
+
   useEffect(() => {
     if (prevWork) {
       setExperienceList(prevWork);
@@ -90,7 +90,7 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
 
   return (
     <>
-      <InfoTitle>경력</InfoTitle>
+      <InfoTitle id='workArea'>경력</InfoTitle>
       <ul>
         {experienceList?.map((item, index) => (
           <WorkItem key={index}>
