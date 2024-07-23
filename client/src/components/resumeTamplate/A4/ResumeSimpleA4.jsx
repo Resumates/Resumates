@@ -34,11 +34,6 @@ import {
 } from './ResumeSimpleA4Style';
 
 export default function ResumeSimpleA4({ resumeDetail }) {
-  useEffect(() => {
-    console.log(resumeDetail);
-    console.log(resumeDetail?.structure.content);
-    console.log(resumeDetail?.structure.content.portfolio);
-  }, []);
   const { name, birth, email, phone, address, image } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;

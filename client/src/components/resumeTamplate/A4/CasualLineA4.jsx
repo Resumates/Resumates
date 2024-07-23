@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   ProfileTitle,
   LineContainer,
@@ -16,9 +16,6 @@ import {
 } from './ResumeCasualA4Style.jsx';
 
 export default function CasualLineA4({ title, content }) {
-  useEffect(() => {
-    console.log(content);
-  }, []);
   return (
     <>
       {content && content.length > 0 && (

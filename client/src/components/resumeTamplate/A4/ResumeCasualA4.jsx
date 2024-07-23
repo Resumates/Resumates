@@ -19,9 +19,6 @@ export default function CasualResume({ resumeDetail }) {
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
   const { activity, certificate, portfolio, skills, workExperience } = content;
-  useEffect(() => {
-    console.log(content);
-  }, []);
 
   const birthday = birth?.slice(0, 10).replaceAll('-', '.');
 

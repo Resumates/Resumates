@@ -15,7 +15,6 @@ export default function Activity({ prevActivity, formData, setFormData, setResum
   const [activityList, setActivityList] = useState([]);
 
   useEffect(() => {
-    console.log(prevActivity);
     if (prevActivity) setActivityList(prevActivity);
   }, [prevActivity]);
 

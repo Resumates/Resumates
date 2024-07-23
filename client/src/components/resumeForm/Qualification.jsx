@@ -31,7 +31,6 @@ export default function Qualification({
   const [qualificationList, setQualificationList] = useState([]);
 
   useEffect(() => {
-    console.log(prevQualification);
     if (prevQualification) setQualificationList(prevQualification);
   }, [prevQualification]);
 

@@ -29,7 +29,6 @@ export default function ResumeNormal({ resumeDetail }) {
     skills = [],
     workExperience = [],
   } = content;
-  console.log();
   return (
     <A4Container>
       <Header>
@@ -38,7 +37,6 @@ export default function ResumeNormal({ resumeDetail }) {
         ) : (
           <ProfileImage src={profileImg} alt='프로필이미지' />
         )}
-        {/* <ProfileImage src={profileImg} alt='프로필 이미지' /> */}
         <Name>
           <img src='' alt='' />
           {name}

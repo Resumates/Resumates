@@ -48,6 +48,7 @@ export default function MainLogin() {
             padding='1.8rem 2.4rem'
             fontSize='1.8rem'
             fontWeight='bold'
+            onClick={() => navigate('/list')}
           >
             나만의 이력서 만들기
           </Button>

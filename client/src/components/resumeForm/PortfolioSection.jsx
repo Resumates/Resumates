@@ -15,9 +15,6 @@ const PortfolioSection = ({ setFormData, formData, setResumeDetail }) => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    const newPortfolio = e.target.value;
-    console.log(newPortfolio);
-    console.log([...prevPortfolio, newPortfolio]);
     setPortfolio(e.target.value);
   };
 
