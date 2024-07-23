@@ -17,7 +17,7 @@ import {
 } from './ResumeNormalA4Style';
 
 export default function ResumeNormalA4({ resumeDetail }) {
-  const { name, birth, email, phone, address } = resumeDetail;
+  const { name, birth, email, phone, address, image } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
   const {
@@ -31,7 +31,11 @@ export default function ResumeNormalA4({ resumeDetail }) {
   return (
     <A4Container>
       <Header>
-        <ProfileImage src={profileImg} alt='프로필 이미지' />
+        {image ? (
+          <ProfileImage src={image} alt='프로필이미지' />
+        ) : (
+          <ProfileImage src={profileImg} alt='프로필이미지' />
+        )}
         <Name>
           <img src='' alt='' />
           {name}
