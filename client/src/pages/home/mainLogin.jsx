@@ -14,27 +14,33 @@ import {
   IConContainer,
   StepContainer,
   StepOne,
-  Number,
-  StepOneDes,
   StepTwo,
   StepThree,
+  Number,
+  StepOneDes,
   SectDiv,
 } from '../../style/MainLoginStyle';
 import Button from '../../components/common/Button';
 
 import ResumeImages from '../../asset/images/ResumeImages.png';
 import CordingIcon from '../../asset/images/CordingIcon.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainLogin() {
+  const navigate = useNavigate();
   return (
     <>
       <Section>
         <TextContainer>
-          <Title>이력서 작성, Resumates에서 간편하게!</Title>
+          <Title>
+            이력서 작성,
+            <br />
+            Resumates에서 간편하게!
+          </Title>
           <Paragraph>
             지금 바로 나만의 맞춤형 이력서를 손쉽게 작성해보세요! 간편한 템플릿과 자동 완성 기능을
-            통해 프로페셔널한 이력서를 신속하고 간편하게 만들 수 있습니다. Resumates는 누구나 쉽게
-            이력서를 작성할 수 있도록 설계되었습니다. 개인의 경력을 채워 넣고 스타일을 적용하세요!
+            통해 프로페셔널한 이력서를 신속하고 간편하게 만들 수 있습니다. 누구나 쉽게 이력서를
+            작성할 수 있도록 설계된 Resumates, 개인의 경력을 채워 넣고 스타일을 적용하세요!
           </Paragraph>
           <Button
             type='button'
@@ -51,10 +57,9 @@ export default function MainLogin() {
         </ImageContainer>
       </Section>
       <Sections>
-        <SectDiv>
-          <TitleTwo>Resumate &nbsp;</TitleTwo>
-          <TitleThree> 에서 이력서 작성하기</TitleThree>
-        </SectDiv>
+        <TitleThree>
+          <TitleTwo>Resumate </TitleTwo>에서 이력서 작성하기
+        </TitleThree>
         <SectDiv>
           <IConContainer>
             <Image src={CordingIcon} alt='Resumates Example Resumes' />
@@ -87,7 +92,8 @@ export default function MainLogin() {
           padding='1.8rem 2.4rem'
           fontSize='1.8rem'
           fontWeight='bold'
-          margin-top='20rem'
+          margintop='4rem'
+          onClick={() => navigate('/list')}
         >
           내 이력서 만들기
         </Button>

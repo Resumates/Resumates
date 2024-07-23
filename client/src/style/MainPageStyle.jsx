@@ -35,16 +35,18 @@ export const TextSection = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 4rem;
-  font-weight: bold;
-  color: #04438b;
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--mainColor);
+  line-height: 1.2;
 `;
 
 export const Description = styled.p`
-  font-size: 3.2rem;
-  font-weight: bold;
-  color: #333;
-  margin: 1rem 0;
+  font-size: 2rem;
+  color: var(--mainColor);
+  margin: 4rem 0;
+  font-weight: 500;
+  line-height: 1.2;
 `;
 
 export const ButtonGroup = styled.div`
@@ -56,4 +58,8 @@ export const ImageSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  img {
+    width: 62rem;
+    height: 52rem;
+  }
 `;

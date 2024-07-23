@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/common/input';
 import { VALIDATOR_MINLENGTH } from '../../utils/validator';
 import { useForm } from '../../hooks/FormHook';
-import Resumes from '../../asset/images/resumes.png';
+import resumes from '../../asset/images/resumes.png';
 import { AuthContext } from '../../components/common/context/auth-context';
 // import { useLocation } from 'react-router-dom';
 import Error from '../error/Error';
@@ -76,7 +76,7 @@ const Login = () => {
       <LoginPage>
         <LoginContainer>
           <LoginImage>
-            <img src={Resumes} alt='Login illustration' />
+            <img src={resumes} alt='Login illustration' />
           </LoginImage>
           <LoginForm>
             <Title>로그인</Title>

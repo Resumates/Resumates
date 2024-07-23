@@ -16,11 +16,10 @@ export const Section = styled.section`
 export const TextContainer = styled.div`
   text-align: left;
   margin-right: 50px;
-  max-width: 400px;
 `;
 
-export const Title = styled.h1`
-  color: #0056b3;
+export const Title = styled.h3`
+  color: var(--mainColor);
   font-size: 3.8rem;
   font-weight: bold;
   margin-bottom: 2rem;
@@ -28,10 +27,10 @@ export const Title = styled.h1`
 
 export const Paragraph = styled.p`
   font-size: 1.6rem;
-  color: #04438b;
-  font-weight: bold;
+  color: var(--mainColor);
+  font-weight: 500;
   margin-bottom: 2rem;
-  line-height: 1.5;
+  line-height: 1.2;
 `;
 
 export const ImageContainer = styled.div`
@@ -41,7 +40,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  max-width: 100%;
+  width: 67rem;
   height: auto;
   margin-left: 20px;
 `;
@@ -53,24 +52,25 @@ export const Sections = styled.div`
   align-items: center;
   background-color: #e2ecfa;
   height: 880px;
-  padding: 20px;
+  padding: 10rem 0;
 `;
 
 export const SectDiv = styled.div`
   display: flex;
+  gap: 7rem;
 `;
 
-export const TitleTwo = styled.h1`
+export const TitleTwo = styled.span`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #1e81ce;
+  color: var(--mainColor);
 `;
 
-export const TitleThree = styled.h1`
+export const TitleThree = styled.h3`
   font-size: 2.4rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 5rem 0;
   color: #000000;
 `;
 
@@ -83,8 +83,8 @@ export const IConContainer = styled.div`
 export const StepContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 20px;
+  gap: rem;
+  margin-top: 10rem;
   position: relative;
 `;
 
@@ -93,7 +93,9 @@ export const StepOne = styled.div`
   height: 11.2rem;
   background-color: #fff;
   border-radius: 20px;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
 `;
 export const NumberContainer = styled.div`
   display: flex;
@@ -107,26 +109,18 @@ export const Number = styled.h1`
   margin: 20px;
 `;
 export const StepOneDes = styled.h1`
-  color: #00000;
+  color: #000000;
   font-size: 2.4rem;
   font-weight: bold;
-  text-aline: center;
+  text-align: center;
 `;
 
-export const StepTwo = styled.div`
-  width: 60rem;
-  height: 11.2rem;
-  background-color: #d4e6ff;
-  border-radius: 20px;
+export const StepTwo = styled(StepOne)`
   margin-left: 60px;
-  margin-bottom: 3rem;
+  background-color: #d4e6ff;
 `;
 
-export const StepThree = styled.div`
-  width: 60rem;
-  height: 11.2rem;
-  background-color: #a3c9ff;
-  border-radius: 20px;
+export const StepThree = styled(StepOne)`
   margin-left: 100px;
-  margin-bottom: 3rem;
+  background-color: #a3c9ff;
 `;

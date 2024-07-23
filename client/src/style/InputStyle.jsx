@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 export const StyledFormControl = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
   &.form-control--invalid input,
   &.form-control--invalid textarea {
     border-color: red;
@@ -13,8 +13,8 @@ export const StyledFormControl = styled.div`
 
 export const StyledLabel = styled.label`
   display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const StyledInput = styled.input`
