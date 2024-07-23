@@ -21,8 +21,8 @@ export default function Main() {
           <img src={MainPicture} alt='Resume Example' />
         </ImageSection>
         <TextSection>
-          <Title>Resumates에서 전문가적인 이력서를 작성해보세요 :)</Title>
-          <Description>단 15분만에 전문가적인 이력서를 작성하고, 다운로드 받으세요!</Description>
+          <Title>Resumates에서 전문적인 이력서를 작성해보세요 :)</Title>
+          <Description>단 15분만에 전문적인 이력서를 작성하고, 다운로드 받으세요!</Description>
           <ButtonGroup>
             <Link to='/user/login'>
               <Button color='#3D79BF' padding='16px 90px' fontSize='20px' fontWeight='bold'>

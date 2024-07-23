@@ -20,7 +20,13 @@ export default function ResumeNormalA4({ resumeDetail }) {
   const { name, birth, email, phone, address } = resumeDetail;
   const structure = resumeDetail?.structure;
   const content = resumeDetail?.structure.content;
-  const { activity, certificate, portfolio, skills, workExperience } = content;
+  const {
+    activity = [],
+    certificate = [],
+    portfolio = [],
+    skills = [],
+    workExperience = [],
+  } = content;
 
   return (
     <A4Container>
