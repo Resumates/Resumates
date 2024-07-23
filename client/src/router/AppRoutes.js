@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AuthContext } from '../components/common/context/auth-context';
 import { useAuth } from '../hooks/hookAuth';
 import Header from '../components/Header/Header';

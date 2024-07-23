@@ -41,7 +41,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
   };
 
   const addWorkItem = () => {
-    console.log(formData);
     const updatedExperienceList = [...experienceList, workExperience];
     setExperienceList(updatedExperienceList);
 
@@ -55,7 +54,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
         },
       },
     });
-    console.log(formData);
 
     setWorkExperience({
       company: '',

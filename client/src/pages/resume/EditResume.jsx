@@ -54,7 +54,6 @@ export default function EditResume() {
   useEffect(() => {
     const fetchData = async () => {
       const resumeData = await getResumeDetail(resumeId);
-      console.log(resumeData);
       setResume(resumeData);
       setFormData(resumeData);
       setPrevTitle(resumeData.structure.title);
@@ -67,7 +66,6 @@ export default function EditResume() {
     fetchData();
   }, [resumeId]);
 
-  const [profileInfo, setProfileInfo] = useState(initialProfileInfo);
   const [openTemplateList, setOpenTemplateList] = useState(false);
 
   const modalRef = useRef(null);
@@ -75,21 +73,6 @@ export default function EditResume() {
   useEffect(() => {
     setResumeDetail(formData);
   }, [formData]);
-
-  // 각 profileInfo 항목에 대한 ref를 생성
-  const refs = useRef(
-    profileInfo.reduce((acc, info) => {
-      acc[info.id] = React.createRef();
-      return acc;
-    }, {}),
-  );
-
-  // 특정 스크롤로 이동
-  const scrollToItem = (id) => {
-    if (refs.current[id] && refs.current[id].current) {
-      refs.current[id].current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -110,10 +93,7 @@ export default function EditResume() {
   }, [openTemplateList]);
 
   const handleEdit = async () => {
-    console.log('클릭');
-    console.log(formData);
     const { valid } = await editResumeAPI(resumeId, formData);
-    console.log(valid);
     if (valid) {
       alert('이력서 수정이 완료되었습니다.');
       navigate(`/mypage/${formData.userId}`);
@@ -123,10 +103,7 @@ export default function EditResume() {
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button type='button' color='#3D79BF' padding='9px 0px' fontSize='16px'>
-          작성 내용 불러오기
-        </Button>
-        <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
+        <ResumeMenu />
       </InfoContainer>
       <ResumeContainer>
         <ResumeSection>

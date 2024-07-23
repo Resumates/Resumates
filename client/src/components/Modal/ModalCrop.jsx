@@ -68,7 +68,6 @@ export default function ModalCrop({
   };
 
   const handleSave = () => {
-    console.log(croppedImageUrl);
     setCroppedImage(croppedImageUrl);
     setInformation({ ...information, ['image']: croppedImageUrl });
     setModalOpen(false);

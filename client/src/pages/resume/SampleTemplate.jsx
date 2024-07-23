@@ -7,18 +7,11 @@ import {
   TemplateContainer,
   Template,
   TemplateText,
-  TemplateBtn,
-  TemplateChangeBtn,
 } from '../../style/CreateResumeStyle';
 import Button from '../../components/common/Button';
-import close from '../../asset/images/icon-close.png';
 import { profileInfo as initialProfileInfo } from '../../data/profileInfoData';
 import { ResumeMenu } from '../../components/resumeForm/ResumeMenu';
-import ChangeTemplate from '../../components/resumeTamplate/ChangeTemplate';
-import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
-import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
-import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
 import { useParams } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
@@ -39,18 +32,14 @@ export default function SampleTemplate() {
     formData,
     modalRef,
     refs,
-    setProfileInfo,
     setOpenTemplateList,
     setResumeDetail,
     setFormData,
     scrollToItem,
-    saveResume,
   } = useResume(initialProfileInfo, type);
 
   const [prevTitle, setPrevTitle] = useState('');
   const [prevUser, setPrevUser] = useState(null);
-  const [prevWork, setPrevWork] = useState(null);
-  const [prevSkills, setPrevSkills] = useState(null);
 
   useEffect(() => {
     setResumeDetail(formData);
@@ -79,15 +68,6 @@ export default function SampleTemplate() {
   return (
     <ResumeWrap>
       <InfoContainer>
-        <Button
-          type='button'
-          color='#3D79BF'
-          padding='9px 0px'
-          fontSize='16px'
-          onClick={handleLoadContent}
-        >
-          작성 내용 불러오기
-        </Button>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
       </InfoContainer>
       <ResumeContainer>
@@ -152,22 +132,6 @@ export default function SampleTemplate() {
 
       <TemplateContainer>
         <Template>{resumeDetail && <ResumeSimple resumeDetail={formData} />}</Template>
-        <TemplateBtn>
-          <TemplateChangeBtn onClick={() => setOpenTemplateList(true)}>
-            ⎌ 템플릿 변경
-          </TemplateChangeBtn>
-          {openTemplateList && (
-            <ModalCont>
-              <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
-            </ModalCont>
-          )}
-          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE'>
-            저장
-          </Button>
-          <Button marginLeft='12px' padding='8px 33px' color='#3D79BF'>
-            인쇄
-          </Button>
-        </TemplateBtn>
         <TemplateText>*저장 및 인쇄는 로그인 후 이용가능합니다.</TemplateText>
       </TemplateContainer>
     </ResumeWrap>
