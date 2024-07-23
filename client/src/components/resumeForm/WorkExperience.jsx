@@ -115,7 +115,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
               value={item.position}
               readOnly
             />
-            <InputArea label='연봉' name='salary' className='salary' value={item.salary} readOnly />
             <InputArea
               label='입사년월'
               name='startDate'
@@ -129,12 +128,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
               className='endDate'
               value={item.endDate}
               readOnly
-            />
-            <InputArea
-              label='재직여부'
-              name='workStatus'
-              className='workStatus'
-              value={item.workStatus}
             />
             <InputArea label='담당업무' name='desc' className='desc' value={item.desc} readOnly />
             <DeleteButton onClick={() => deleteWorkItem(index)}>
@@ -171,15 +164,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
             onChange={handleChange}
           />
           <InputArea
-            label='연봉'
-            type='text'
-            id='salary'
-            name='salary'
-            className='salary'
-            value={workExperience.salary}
-            onChange={handleChange}
-          />
-          <InputArea
             label='입사년월'
             type='text'
             id='startDate'
@@ -195,15 +179,6 @@ export default function WorkExperience({ prevWork, setFormData, formData, setRes
             name='endDate'
             className='endDate'
             value={workExperience.endDate}
-            onChange={handleChange}
-          />
-          <InputArea
-            label='재직여부'
-            type='text'
-            id='workStatus'
-            name='workStatus'
-            className='workStatus'
-            value={workExperience.workStatus}
             onChange={handleChange}
           />
           <InputArea
@@ -228,37 +203,31 @@ const WorkItem = styled.li`
   display: grid;
   font-size: 1.2rem;
   gap: 12px;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(3, 1fr);
 
   .company {
     grid-area: 1/1/2/4;
   }
   .department {
-    grid-area: 1/4/2/6;
+    grid-area: 1/4/2/7;
   }
   .position {
-    grid-area: 2/1/3/2;
-  }
-  .salary {
-    grid-area: 2/2/3/3;
+    grid-area: 2/1/3/3;
   }
   .startDate {
-    grid-area: 2/3/3/4;
+    grid-area: 2/3/3/5;
   }
   .endDate {
-    grid-area: 2/4/3/5;
-  }
-  .workStatus {
-    grid-area: 2/5/3/6;
+    grid-area: 2/5/3/7;
   }
   .desc {
-    grid-area: 3/1/3/6;
+    grid-area: 3/1/3/7;
   }
 `;
 
 const DeleteButton = styled.button`
-  grid-area: 1/6/1/7;
+  grid-area: 1/7/1/8;
   color: white;
   border: none;
   border-radius: 0.5rem;
