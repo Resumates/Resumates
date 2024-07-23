@@ -144,8 +144,7 @@ export default function ResumeNormal({ resumeDetail }) {
           <ExperienceList>
             {portfolio.map((item, index) => (
               <ExperienceItem key={index}>
-                <ExperienceDetail>포트폴리오 URL</ExperienceDetail>
-                <ExperienceDetail>{item.portfolioURL}</ExperienceDetail>
+                <ExperienceDetail>{item}</ExperienceDetail>
               </ExperienceItem>
             ))}
           </ExperienceList>
