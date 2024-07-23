@@ -90,7 +90,7 @@ export const ExperienceItem = styled.li`
 export const ExperienceDetail = styled.p`
   margin: 0 10px 0 0;
   font-size: 14px;
-  max-width: 150px;
+  // max-width: 150px;
   color: #555;
   white-space: normal; /* 글이 자동으로 줄바꿈되도록 설정 */
   word-wrap: break-word; /* 길게 이어지는 단어가 있을 때 줄바꿈되도록 설정 */
