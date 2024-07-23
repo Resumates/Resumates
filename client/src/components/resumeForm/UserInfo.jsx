@@ -18,7 +18,6 @@ export default function UserInfo({
     name: '',
     image: croppedImage,
     birth: '',
-    gender: '',
     phone: '',
     email: '',
     address: '',
@@ -87,14 +86,6 @@ export default function UserInfo({
             className='birth'
           />
           <InputArea
-            label='성별'
-            id='gender'
-            name='gender'
-            type='text'
-            onChange={handleChange}
-            value={prevUser?.gender}
-          />
-          <InputArea
             label='휴대폰 번호'
             id='phone'
             name='phone'
@@ -146,10 +137,10 @@ const Info = styled.div`
   grid-template-rows: repeat(3, 1fr);
 
   .name {
-    grid-area: 1/1/2/3;
+    grid-area: 1/1/2/4;
   }
   .birth {
-    grid-area: 1/3/2/5;
+    grid-area: 1/4/2/6;
   }
   .gender {
     grid-area: 1/5/2/6;

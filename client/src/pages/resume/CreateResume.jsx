@@ -19,7 +19,7 @@ import { ModalCont, CloseBtn } from '../../style/TemplateListStyle';
 import ResumeNormal from '../../components/resumeTamplate/default/ResumeNormal';
 import ResumeSimple from '../../components/resumeTamplate/default/ResumeSimple';
 import ResumeCasual from '../../components/resumeTamplate/default/ResumeCasual';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/resumeForm/UserInfo';
 import WorkExperience from '../../components/resumeForm/WorkExperience';
 import PortfolioSection from '../../components/resumeForm/PortfolioSection';
@@ -53,6 +53,8 @@ export default function CreateResume() {
     saveResume,
   } = useResume(initialProfileInfo, type);
   const userId = localStorage.getItem('userId');
+  const Navigate = useNavigate();
+
   const [prevTitle, setPrevTitle] = useState('');
   const [prevUser, setPrevUser] = useState(null);
   const [prevWork, setPrevWork] = useState(null);
@@ -97,6 +99,7 @@ export default function CreateResume() {
   const handleClickResum = (item) => {
     setResumeDetail(item);
     console.log('선택한 이력서', item);
+    Navigate(`/resume/edit/${item._id}`);
     window.scrollTo(0, 0);
   };
 
@@ -105,7 +108,10 @@ export default function CreateResume() {
   };
 
   const slideRight = () => {
-    setSlideIndex((prev) => (resume && prev < Math.ceil(resume.length / 3) - 1 ? prev + 1 : prev));
+    setSlideIndex((prev) => {
+      const maxIndex = Math.ceil(resume.length / 3) - 1;
+      return resume && prev < maxIndex ? prev + 1 : prev;
+    });
   };
 
   const getTemplateImage = (templateType) => {
@@ -269,8 +275,8 @@ export default function CreateResume() {
 
 const StyledModalCont = styled.div`
   position: relative;
-  width: 900px;
-  height: 500px;
+  width: 800px;
+  height: 400px;
   z-index: 9999;
   border: 1px solid #eee;
   box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
@@ -298,7 +304,7 @@ const StyledResumeItem = styled('div').withConfig({
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   min-width: 33.3333%;
   cursor: pointer;
 `;
@@ -347,10 +353,10 @@ const ResumeTitleText = styled.p`
 const SlideContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
   overflow: hidden;
   position: relative;
-  padding: 0 60px;
+  /* padding: 0 60px; */
 `;
 
 const SlideButton = styled.button`
@@ -370,7 +376,7 @@ const SlideButton = styled.button`
 const SlideWrapper = styled.ul.attrs((props) => ({
   style: {
     transform: `translateX(-${props.$slideIndex * 100}%)`,
-    width: `${Math.ceil(props.$totalItems / 3) * 100}%`,
+    width: `${(props.$totalItems / 3) * 100}%`,
   },
 }))`
   display: flex;
