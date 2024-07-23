@@ -108,7 +108,10 @@ export default function CreateResume() {
   };
 
   const slideRight = () => {
-    setSlideIndex((prev) => (resume && prev < Math.ceil(resume.length / 3) - 1 ? prev + 1 : prev));
+    setSlideIndex((prev) => {
+      const maxIndex = Math.ceil(resume.length / 3) - 1;
+      return resume && prev < maxIndex ? prev + 1 : prev;
+    });
   };
 
   const getTemplateImage = (templateType) => {
@@ -373,7 +376,7 @@ const SlideButton = styled.button`
 const SlideWrapper = styled.ul.attrs((props) => ({
   style: {
     transform: `translateX(-${props.$slideIndex * 100}%)`,
-    width: `${Math.ceil(props.$totalItems / 3) * 100}%`,
+    width: `${(props.$totalItems / 3) * 100}%`,
   },
 }))`
   display: flex;
