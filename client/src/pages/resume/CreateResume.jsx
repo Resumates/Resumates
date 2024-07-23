@@ -134,42 +134,44 @@ export default function CreateResume() {
         </Button>
         <ModalPortal isOpen={openMyResumes} onClose={() => setOpenMyResumes(false)}>
           <StyledModalCont ref={modalRef}>
-            <SlideButton direction='left' onClick={slideLeft}>
-              &lt;
-            </SlideButton>
-            <SlideContainer>
-              <SlideWrapper $slideIndex={slideIndex} $totalItems={resume ? resume.length : 0}>
-                {resume ? (
-                  resume?.map((item) => {
-                    if (!item || !item.structure) return null;
-                    const templateType = item.structure.template_type;
-                    const resumeTitle = item.structure.title;
-                    const templateImage = getTemplateImage(templateType);
-                    return (
-                      <li key={item._id}>
-                        <ResumeItem
-                          onClick={() => handleClickResum(item)}
-                          templateType={templateType}
-                        >
-                          {templateImage && (
-                            <TemplateImage src={templateImage} alt={templateType} />
-                          )}
-                          <TemplateTypeBadge templateType={templateType}>
-                            {templateType.toUpperCase()}
-                          </TemplateTypeBadge>
-                          <ResumeTitleText>{resumeTitle}</ResumeTitleText>
-                        </ResumeItem>
-                      </li>
-                    );
-                  })
-                ) : (
-                  <div>Loading...</div>
-                )}
-              </SlideWrapper>
-            </SlideContainer>
-            <SlideButton direction='right' onClick={slideRight}>
-              &gt;
-            </SlideButton>
+            {resume && resume.length > 0 ? (
+              <>
+                <SlideButton direction='left' onClick={slideLeft}>
+                  &lt;
+                </SlideButton>
+                <SlideContainer>
+                  <SlideWrapper $slideIndex={slideIndex} $totalItems={resume.length}>
+                    {resume.map((item) => {
+                      if (!item || !item.structure) return null;
+                      const templateType = item.structure.template_type;
+                      const resumeTitle = item.structure.title;
+                      const templateImage = getTemplateImage(templateType);
+                      return (
+                        <li key={item._id}>
+                          <ResumeItem
+                            onClick={() => handleClickResum(item)}
+                            templateType={templateType}
+                          >
+                            {templateImage && (
+                              <TemplateImage src={templateImage} alt={templateType} />
+                            )}
+                            <TemplateTypeBadge $templateType={templateType}>
+                              {templateType.toUpperCase()}
+                            </TemplateTypeBadge>
+                            <ResumeTitleText>{resumeTitle}</ResumeTitleText>
+                          </ResumeItem>
+                        </li>
+                      );
+                    })}
+                  </SlideWrapper>
+                </SlideContainer>
+                <SlideButton direction='right' onClick={slideRight}>
+                  &gt;
+                </SlideButton>
+              </>
+            ) : (
+              <NoResumeMessage>작성한 이력서가 없습니다.</NoResumeMessage>
+            )}
           </StyledModalCont>
         </ModalPortal>
         <ResumeMenu profileInfo={profileInfo} scrollToItem={scrollToItem} />
@@ -267,23 +269,20 @@ export default function CreateResume() {
 
 const StyledModalCont = styled.div`
   position: relative;
-  width: 800px;
-  height: 400px;
+  width: 900px;
+  height: 500px;
   z-index: 9999;
   border: 1px solid #eee;
   box-shadow: 5px 5px 14px -7px rgba(0, 0, 0, 0.35);
   background: white;
   padding: 1rem;
-  overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;
 const ResumeItem = ({ templateType, children, onClick }) => {
-  return (
-    <StyledResumeItem templateType={templateType} onClick={onClick}>
-      {children}
-    </StyledResumeItem>
-  );
+  return <StyledResumeItem onClick={onClick}>{children}</StyledResumeItem>;
 };
 const shouldForwardProp = createShouldForwardProp(['color']);
 
@@ -300,7 +299,7 @@ const StyledResumeItem = styled('div').withConfig({
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  min-width: 180px;
+  min-width: 33.3333%;
   cursor: pointer;
 `;
 
@@ -309,9 +308,9 @@ const TemplateTypeBadge = styled.div`
   top: 10px;
   left: 10px;
   background-color: ${(props) =>
-    props.templateType === 'casual'
+    props.$templateType === 'casual'
       ? '#637DCB'
-      : props.templateType === 'normal'
+      : props.$templateType === 'normal'
         ? '#027BFF'
         : '#3582A9'};
   color: white;
@@ -319,6 +318,16 @@ const TemplateTypeBadge = styled.div`
   border-radius: 0.5rem;
   font-size: 1.2rem;
   font-weight: bold;
+`;
+
+const NoResumeMessage = styled.div`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const TemplateType = styled.p`
@@ -340,12 +349,28 @@ const SlideContainer = styled.div`
   align-items: center;
   width: 100%;
   overflow: hidden;
+  position: relative;
+  padding: 0 60px;
+`;
+
+const SlideButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10001;
+  ${(props) => (props.direction === 'left' ? 'left: 0;' : 'right: 0;')}
+  padding: 10px;
+  border-radius: 50%;
 `;
 
 const SlideWrapper = styled.ul.attrs((props) => ({
   style: {
     transform: `translateX(-${props.$slideIndex * 100}%)`,
-    width: `${props.$totalItems * 200}px`,
+    width: `${Math.ceil(props.$totalItems / 3) * 100}%`,
   },
 }))`
   display: flex;
@@ -353,16 +378,7 @@ const SlideWrapper = styled.ul.attrs((props) => ({
   list-style: none;
   padding: 0;
   margin: 0;
-`;
-
-const SlideButton = styled.button`
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  ${(props) => (props.direction === 'left' ? 'left: 10px;' : 'right: 10px;')}
+  z-index: 1;
 `;
 
 const TemplateImage = styled.img`
