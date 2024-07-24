@@ -56,7 +56,7 @@ export default function ModalCrop({
     const cropped = await getCroppedImg(croppedImage, croppedAreaPixels);
     setCroppedImageUrl(cropped);
     const formData = new FormData();
-    formData.append('image', dataURLtoFile(cropped, 'profileImg.webp'));
+    formData.append('image', dataURLtoFile(cropped, 'profileImg.jpeg'));
     await uploadImageAPI(formData);
   };
 

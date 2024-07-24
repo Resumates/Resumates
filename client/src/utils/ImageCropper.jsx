@@ -51,7 +51,7 @@ const ImageCropper = ({
         (blob) => {
           resolve(blob);
         },
-        'image/webp',
+        'image/jpeg',
         0.2, // 압축 품질 조절 (0.0 ~ 1.0)
       );
     });
