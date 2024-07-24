@@ -65,6 +65,7 @@ export const useResume = (initialProfileInfo, type) => {
     try {
       const response = await axios.post('http://localhost:5000/resume', formData);
       console.log('Resume saved:', response.data);
+      alert('이력서 작성이 완료되었습니다.');
     } catch (error) {
       console.error('Error saving resume:', error);
     }

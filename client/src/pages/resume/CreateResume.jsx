@@ -260,14 +260,14 @@ export default function CreateResume() {
               <ChangeTemplate setOpenTemplateList={setOpenTemplateList} />
             </ModalCont>
           )}
-          <Button marginLeft='12px' padding='8px 33px' color='#C2BABE' onClick={saveResume}>
+          <Button marginLeft='12px' padding='8px 33px' color='#3D79BF' onClick={saveResume}>
             저장
           </Button>
-          <Button marginLeft='12px' padding='8px 33px' color='#3D79BF'>
+          {/* <Button marginLeft='12px' padding='8px 33px' color='#3D79BF'>
             인쇄
-          </Button>
+          </Button> */}
         </TemplateBtn>
-        <TemplateText>*저장 및 인쇄는 로그인 후 이용가능합니다.</TemplateText>
+        <TemplateText>* 인쇄는 마이페이지에서 가능합니다.</TemplateText>
       </TemplateContainer>
     </ResumeWrap>
   );
