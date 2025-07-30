@@ -8,19 +8,7 @@ const path = require('path');
 require('dotenv').config();
 const { PORT, MONGO_URL } = process.env;
 
-// MongoURI 연결
-mongoose
-  .connect(MONGO_URL)
-  .then(() => {
-    app.listen(PORT);
-    console.log(`Connecting MongoDB ${PORT}포트 실행`);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 const HttpError = require('./models/http-error');
-
 const userRoutes = require('./routes/userRoute');
 const app = express();
 
@@ -35,14 +23,6 @@ app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 // // app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 // app.use(passport.initialize());
 // app.use(passport.session());
-
-// mongoose.connect(
-//   'mongodb+srv://SuccessOmen:M3hEQdH1qf5LoXsi@resumatescluster.qk9v1ms.mongodb.net/?retryWrites=true&w=majority&appName=resumatesCluster',
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   },
-// );
 
 // 라우터 등록
 app.use('/', commonRouter);
@@ -60,3 +40,14 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500); // 응답이 아직 전송되지 않은경우 상태 코드 설정 다른 미들웨어 중에서 발생한 오류 객체 상태 코드를 설정할수 있게함
   res.json({ message: error.message || 'An unkown error occurred!' }); //메세지 프로퍼티 추가
 });
+
+// MongoURI 연결
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    app.listen(PORT);
+    console.log(`Connecting MongoDB ${PORT}포트 실행`);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
