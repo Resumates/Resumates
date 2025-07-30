@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { host } from '../api/APIRoutes';
 
 export const useResume = (initialProfileInfo, type) => {
   const userId = localStorage.getItem('userId');
@@ -63,7 +64,7 @@ export const useResume = (initialProfileInfo, type) => {
 
   const saveResume = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/resume', formData);
+      const response = await axios.post(`${host}/resume`, formData);
       console.log('Resume saved:', response.data);
       alert('이력서 작성이 완료되었습니다.');
     } catch (error) {

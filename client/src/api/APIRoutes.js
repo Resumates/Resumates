@@ -1,4 +1,8 @@
-export const host = 'http://localhost:5000';
+// 환경에 따른 API URL 설정
+const isDevelopment = process.env.NODE_ENV === 'development';
+export const host = isDevelopment 
+  ? 'http://localhost:5000' 
+  : 'https://resumates-backend.onrender.com';
 
 // 로그인
 export const loginRoute = `${host}/user/login`;
