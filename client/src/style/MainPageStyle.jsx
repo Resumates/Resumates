@@ -28,6 +28,18 @@ export const MainContent = styled.div`
   align-items: center;
   flex: 1;
   padding: 2rem;
+
+  @media (max-width: 1024px) {
+    gap: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    padding-top: 18rem;
+    gap: 9rem;
+  }
 `;
 
 export const TextSection = styled.div`
@@ -52,6 +64,14 @@ export const Description = styled.p`
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export const ImageSection = styled.div`
@@ -61,5 +81,12 @@ export const ImageSection = styled.div`
   img {
     width: 62rem;
     height: 52rem;
+  }
+
+  @media (max-width: 1024px) {
+    img {
+      width: 45rem;
+      height: 38rem;
+    }
   }
 `;
