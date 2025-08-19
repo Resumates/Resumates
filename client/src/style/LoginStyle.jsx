@@ -15,6 +15,15 @@ export const LoginContainer = styled.div`
   width: 1320px;
   height: 800px;
   gap: 20.8rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    width: 100%;
+    min-height: 100vh;
+    gap: 2rem;
+    padding: 2rem;
+    padding-top: 50.5rem;
+  }
 `;
 export const LoginImage = styled.div`
   display: flex;
@@ -31,6 +40,19 @@ export const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 40rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+  
+    
+    /* LoginForm 내부의 모든 버튼에 스타일 적용 */
+    button {
+      padding: 1.8rem 14.4rem;
+      
+    }
+  }
 `;
 
 export const Title = styled.h2`
@@ -45,4 +67,28 @@ export const Title = styled.h2`
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 35rem;
+    
+    /* input 요소들 중앙 정렬 */
+    input {
+      width: 100%;
+      padding: 1.5rem;
+      font-size: 1.6rem;
+    }
+    
+    /* label 중앙 정렬 */
+    label {
+      text-align: left;
+      font-size: 1.6rem;
+    }
+
+    button {
+        padding: 1.8rem 14.4rem;
+        width: 100%;
+    }
+  }
 `;
